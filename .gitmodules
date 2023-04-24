@@ -4,3 +4,6 @@
 [submodule "pv-guest"]
 	path = pv-guest
 	url = https://github.com/columbia/osdi23-paper114-pv-guest.git
+[submodule "qemu-rpi4"]
+	path = qemu-rpi4
+	url = https://github.com/columbia/osdi23-paper114-qemu.git
