@@ -1,0 +1,6 @@
+[submodule "sekvm"]
+	path = sekvm
+	url = https://github.com/columbia/osdi23-paper114-sekvm.git
+[submodule "pv-guest"]
+	path = pv-guest
+	url = https://github.com/columbia/osdi23-paper114-pv-guest.git
