@@ -7585,735 +7585,735 @@ if.end:                                           ; preds = %entry
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc %struct.shared_data* @get_shared_data_start() unnamed_addr #0 !dbg !11997 {
+define internal fastcc %struct.shared_data* @get_shared_data_start() unnamed_addr #0 !dbg !11998 {
 entry:
-  %call = call fastcc i1 @is_kernel_in_hyp_mode(), !dbg !12007
-  %0 = load i64, i64* @kimage_voffset, align 8, !dbg !12008
-  %1 = load i64, i64* @physvirt_offset, align 8, !dbg !12008
-  %2 = add i64 %0, %1, !dbg !12008
-  %sub1 = sub i64 ptrtoint ([0 x i8]* @shared_data_start to i64), %2, !dbg !12008
-  call void @llvm.dbg.value(metadata i8* undef, metadata !12002, metadata !DIExpression()), !dbg !12009
-  %3 = select i1 %call, i64 ptrtoint ([0 x i8]* @shared_data_start to i64), i64 %sub1, !dbg !12010
-  %call3 = call fastcc i64 @__kern_hyp_va(i64 noundef %3), !dbg !12010
-  %4 = inttoptr i64 %call3 to %struct.shared_data*, !dbg !12010
-  call void @llvm.dbg.value(metadata %struct.shared_data* %4, metadata !12001, metadata !DIExpression()), !dbg !12011
-  ret %struct.shared_data* %4, !dbg !12012
+  %call = call fastcc i1 @is_kernel_in_hyp_mode(), !dbg !12008
+  %0 = load i64, i64* @kimage_voffset, align 8, !dbg !12009
+  %1 = load i64, i64* @physvirt_offset, align 8, !dbg !12009
+  %2 = add i64 %0, %1, !dbg !12009
+  %sub1 = sub i64 ptrtoint ([0 x i8]* @shared_data_start to i64), %2, !dbg !12009
+  call void @llvm.dbg.value(metadata i8* undef, metadata !12003, metadata !DIExpression()), !dbg !12010
+  %3 = select i1 %call, i64 ptrtoint ([0 x i8]* @shared_data_start to i64), i64 %sub1, !dbg !12011
+  %call3 = call fastcc i64 @__kern_hyp_va(i64 noundef %3), !dbg !12011
+  %4 = inttoptr i64 %call3 to %struct.shared_data*, !dbg !12011
+  call void @llvm.dbg.value(metadata %struct.shared_data* %4, metadata !12002, metadata !DIExpression()), !dbg !12012
+  ret %struct.shared_data* %4, !dbg !12013
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local %struct.kvm* @hypsec_vmid_to_kvm(i32 noundef %vmid) local_unnamed_addr #0 section ".hyp.text" !dbg !12013 {
+define dso_local %struct.kvm* @hypsec_vmid_to_kvm(i32 noundef %vmid) local_unnamed_addr #0 section ".hyp.text" !dbg !12014 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12015, metadata !DIExpression()), !dbg !12018
-  call void @llvm.dbg.value(metadata %struct.kvm* null, metadata !12016, metadata !DIExpression()), !dbg !12018
-  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12019
-  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12017, metadata !DIExpression()), !dbg !12018
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i32 %vmid), metadata !12016, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_LLVM_convert, 32, DW_ATE_unsigned, DW_OP_LLVM_convert, 64, DW_ATE_unsigned, DW_OP_constu, 8824, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12018
-  %tobool.not = icmp eq %struct.shared_data* %call, null, !dbg !12020
-  br i1 %tobool.not, label %if.then, label %if.end, !dbg !12022
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12016, metadata !DIExpression()), !dbg !12019
+  call void @llvm.dbg.value(metadata %struct.kvm* null, metadata !12017, metadata !DIExpression()), !dbg !12019
+  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12020
+  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12018, metadata !DIExpression()), !dbg !12019
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i32 %vmid), metadata !12017, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_LLVM_convert, 32, DW_ATE_unsigned, DW_OP_LLVM_convert, 64, DW_ATE_unsigned, DW_OP_constu, 8824, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12019
+  %tobool.not = icmp eq %struct.shared_data* %call, null, !dbg !12021
+  br i1 %tobool.not, label %if.then, label %if.else, !dbg !12023
 
 if.then:                                          ; preds = %entry
-  call void @__hyp_panic() #22, !dbg !12023
-  unreachable, !dbg !12023
+  call void @__hyp_panic() #22, !dbg !12024
+  unreachable, !dbg !12024
 
-if.end:                                           ; preds = %entry
-  %idxprom = zext i32 %vmid to i64, !dbg !12024
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !12016, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 8824, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12018
-  %arrayidx = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 0, i64 %idxprom, !dbg !12024
-  call void @llvm.dbg.value(metadata %struct.kvm* %arrayidx, metadata !12016, metadata !DIExpression()), !dbg !12018
-  ret %struct.kvm* %arrayidx, !dbg !12025
+if.else:                                          ; preds = %entry
+  %idxprom = zext i32 %vmid to i64, !dbg !12025
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !12017, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 8824, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12019
+  %arrayidx = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 0, i64 %idxprom, !dbg !12025
+  call void @llvm.dbg.value(metadata %struct.kvm* %arrayidx, metadata !12017, metadata !DIExpression()), !dbg !12019
+  ret %struct.kvm* %arrayidx, !dbg !12026
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local nonnull %struct.shadow_vcpu_context* @hypsec_vcpu_id_to_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpu_id) local_unnamed_addr #0 section ".hyp.text" !dbg !12026 {
+define dso_local nonnull %struct.shadow_vcpu_context* @hypsec_vcpu_id_to_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpu_id) local_unnamed_addr #0 section ".hyp.text" !dbg !12027 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12030, metadata !DIExpression()), !dbg !12035
-  call void @llvm.dbg.value(metadata i32 %vcpu_id, metadata !12031, metadata !DIExpression()), !dbg !12035
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12036
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12032, metadata !DIExpression()), !dbg !12035
-  call void @llvm.dbg.value(metadata %struct.shadow_vcpu_context* null, metadata !12033, metadata !DIExpression()), !dbg !12035
-  %cmp = icmp sgt i32 %vcpu_id, 3, !dbg !12037
-  br i1 %cmp, label %if.then, label %if.end2, !dbg !12039
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12031, metadata !DIExpression()), !dbg !12036
+  call void @llvm.dbg.value(metadata i32 %vcpu_id, metadata !12032, metadata !DIExpression()), !dbg !12036
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12037
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12033, metadata !DIExpression()), !dbg !12036
+  call void @llvm.dbg.value(metadata %struct.shadow_vcpu_context* null, metadata !12034, metadata !DIExpression()), !dbg !12036
+  %cmp = icmp sgt i32 %vcpu_id, 3, !dbg !12038
+  br i1 %cmp, label %if.then, label %if.else, !dbg !12040
 
 if.then:                                          ; preds = %entry
-  call void @__hyp_panic() #22, !dbg !12040
-  unreachable, !dbg !12040
+  call void @__hyp_panic() #22, !dbg !12041
+  unreachable, !dbg !12041
 
-if.end2:                                          ; preds = %entry
-  call void @llvm.dbg.value(metadata !DIArgList(i32 %vmid, i32 %vcpu_id), metadata !12034, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_constu, 2, DW_OP_shl, DW_OP_LLVM_arg, 1, DW_OP_plus, DW_OP_stack_value)), !dbg !12035
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i32 %vmid, i32 %vcpu_id), metadata !12033, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_plus_uconst, 33555568, DW_OP_LLVM_arg, 1, DW_OP_constu, 2, DW_OP_shl, DW_OP_LLVM_arg, 2, DW_OP_plus, DW_OP_LLVM_convert, 32, DW_ATE_signed, DW_OP_LLVM_convert, 64, DW_ATE_signed, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12035
-  %mul = shl i32 %vmid, 2, !dbg !12041
-  call void @llvm.dbg.value(metadata !DIArgList(i32 %mul, i32 %vcpu_id), metadata !12034, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_plus, DW_OP_stack_value)), !dbg !12035
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i32 %mul, i32 %vcpu_id), metadata !12033, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_plus_uconst, 33555568, DW_OP_LLVM_arg, 1, DW_OP_LLVM_arg, 2, DW_OP_plus, DW_OP_LLVM_convert, 32, DW_ATE_signed, DW_OP_LLVM_convert, 64, DW_ATE_signed, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12035
-  %add = add i32 %mul, %vcpu_id, !dbg !12041
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12034, metadata !DIExpression()), !dbg !12035
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i32 %add), metadata !12033, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_plus_uconst, 33555568, DW_OP_LLVM_arg, 1, DW_OP_LLVM_convert, 32, DW_ATE_signed, DW_OP_LLVM_convert, 64, DW_ATE_signed, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12035
-  %idxprom = sext i32 %add to i64, !dbg !12042
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12033, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_plus_uconst, 33555568, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12035
-  %arrayidx = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, !dbg !12042
-  call void @llvm.dbg.value(metadata %struct.shadow_vcpu_context* %arrayidx, metadata !12033, metadata !DIExpression()), !dbg !12035
-  ret %struct.shadow_vcpu_context* %arrayidx, !dbg !12043
+if.else:                                          ; preds = %entry
+  call void @llvm.dbg.value(metadata !DIArgList(i32 %vmid, i32 %vcpu_id), metadata !12035, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_constu, 2, DW_OP_shl, DW_OP_LLVM_arg, 1, DW_OP_plus, DW_OP_stack_value)), !dbg !12036
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i32 %vmid, i32 %vcpu_id), metadata !12034, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_plus_uconst, 33555568, DW_OP_LLVM_arg, 1, DW_OP_constu, 2, DW_OP_shl, DW_OP_LLVM_arg, 2, DW_OP_plus, DW_OP_LLVM_convert, 32, DW_ATE_signed, DW_OP_LLVM_convert, 64, DW_ATE_signed, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12036
+  %mul = shl i32 %vmid, 2, !dbg !12042
+  call void @llvm.dbg.value(metadata !DIArgList(i32 %mul, i32 %vcpu_id), metadata !12035, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_plus, DW_OP_stack_value)), !dbg !12036
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i32 %mul, i32 %vcpu_id), metadata !12034, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_plus_uconst, 33555568, DW_OP_LLVM_arg, 1, DW_OP_LLVM_arg, 2, DW_OP_plus, DW_OP_LLVM_convert, 32, DW_ATE_signed, DW_OP_LLVM_convert, 64, DW_ATE_signed, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12036
+  %add = add i32 %mul, %vcpu_id, !dbg !12042
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12035, metadata !DIExpression()), !dbg !12036
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i32 %add), metadata !12034, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_plus_uconst, 33555568, DW_OP_LLVM_arg, 1, DW_OP_LLVM_convert, 32, DW_ATE_signed, DW_OP_LLVM_convert, 64, DW_ATE_signed, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12036
+  %idxprom = sext i32 %add to i64, !dbg !12043
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12034, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_plus_uconst, 33555568, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_stack_value)), !dbg !12036
+  %arrayidx = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, !dbg !12043
+  call void @llvm.dbg.value(metadata %struct.shadow_vcpu_context* %arrayidx, metadata !12034, metadata !DIExpression()), !dbg !12036
+  ret %struct.shadow_vcpu_context* %arrayidx, !dbg !12044
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local void @hypsec_set_vcpu_state(i32 noundef %vmid, i32 noundef %vcpu_id, i32 noundef %state) local_unnamed_addr #0 section ".hyp.text" !dbg !12044 {
+define dso_local void @hypsec_set_vcpu_state(i32 noundef %vmid, i32 noundef %vcpu_id, i32 noundef %state) local_unnamed_addr #0 section ".hyp.text" !dbg !12046 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12048, metadata !DIExpression()), !dbg !12051
-  call void @llvm.dbg.value(metadata i32 %vcpu_id, metadata !12049, metadata !DIExpression()), !dbg !12051
-  call void @llvm.dbg.value(metadata i32 %state, metadata !12050, metadata !DIExpression()), !dbg !12051
-  call fastcc void @acquire_lock_vm(i32 noundef %vmid), !dbg !12052
-  call fastcc void @set_vcpu_state(i32 noundef %vmid, i32 noundef %vcpu_id, i32 noundef %state), !dbg !12053
-  call fastcc void @release_lock_vm(i32 noundef %vmid), !dbg !12054
-  ret void, !dbg !12055
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12050, metadata !DIExpression()), !dbg !12053
+  call void @llvm.dbg.value(metadata i32 %vcpu_id, metadata !12051, metadata !DIExpression()), !dbg !12053
+  call void @llvm.dbg.value(metadata i32 %state, metadata !12052, metadata !DIExpression()), !dbg !12053
+  call fastcc void @acquire_lock_vm(i32 noundef %vmid), !dbg !12054
+  call fastcc void @set_vcpu_state(i32 noundef %vmid, i32 noundef %vcpu_id, i32 noundef %state), !dbg !12055
+  call fastcc void @release_lock_vm(i32 noundef %vmid), !dbg !12056
+  ret void, !dbg !12057
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local void @stage2_inject_el1_fault(i64 noundef %addr) local_unnamed_addr #0 section ".hyp.text" !dbg !12056 {
+define dso_local void @stage2_inject_el1_fault(i64 noundef %addr) local_unnamed_addr #0 section ".hyp.text" !dbg !12058 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %addr, metadata !12058, metadata !DIExpression()), !dbg !12081
-  %0 = call i64 asm sideeffect "mrs $0, spsr_el2", "=r"() #18, !dbg !12082, !srcloc !12083
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12060, metadata !DIExpression()), !dbg !12084
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12059, metadata !DIExpression()), !dbg !12081
-  call void @llvm.dbg.value(metadata i32 0, metadata !12062, metadata !DIExpression()), !dbg !12081
-  call void @llvm.dbg.value(metadata i8 0, metadata !12064, metadata !DIExpression()), !dbg !12081
-  %1 = call i64 asm sideeffect "mrs $0, elr_el2", "=r"() #18, !dbg !12085, !srcloc !12086
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12067, metadata !DIExpression()), !dbg !12087
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12065, metadata !DIExpression()), !dbg !12088
-  call void asm sideeffect "msr elr_el1, ${0:x}", "rZ"(i64 %1) #18, !dbg !12089, !srcloc !12090
-  %call = call fastcc i64 @stage2_get_exception_vector(i64 noundef %0), !dbg !12091
-  call void @llvm.dbg.value(metadata i64 %call, metadata !12069, metadata !DIExpression()), !dbg !12092
-  call void asm sideeffect "msr elr_el2, ${0:x}", "rZ"(i64 %call) #18, !dbg !12091, !srcloc !12093
-  call void @llvm.dbg.value(metadata i64 %addr, metadata !12071, metadata !DIExpression()), !dbg !12094
-  call void asm sideeffect "msr far_el1, ${0:x}", "rZ"(i64 %addr) #18, !dbg !12095, !srcloc !12096
-  call void @llvm.dbg.value(metadata i64 11, metadata !12073, metadata !DIExpression()), !dbg !12097
-  call void asm sideeffect "msr spsr_el2, ${0:x}", "rZ"(i64 11) #18, !dbg !12098, !srcloc !12099
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12075, metadata !DIExpression()), !dbg !12100
-  call void asm sideeffect "msr spsr_el1, ${0:x}", "rZ"(i64 %0) #18, !dbg !12101, !srcloc !12102
-  %2 = call i64 asm sideeffect "mrs $0, esr_el2", "=r"() #18, !dbg !12103, !srcloc !12104
-  call void @llvm.dbg.value(metadata i64 %2, metadata !12077, metadata !DIExpression()), !dbg !12105
-  call void @llvm.dbg.value(metadata i64 %2, metadata !12063, metadata !DIExpression(DW_OP_LLVM_convert, 64, DW_ATE_unsigned, DW_OP_LLVM_convert, 32, DW_ATE_unsigned, DW_OP_stack_value)), !dbg !12081
-  call void @llvm.dbg.value(metadata i8 0, metadata !12064, metadata !DIExpression()), !dbg !12081
-  %and = and i64 %0, 15, !dbg !12106
-  %cmp23 = icmp eq i64 %and, 0, !dbg !12108
-  %esr.0 = select i1 %cmp23, i64 2415919120, i64 2483027984, !dbg !12109
-  call void @llvm.dbg.value(metadata i32 undef, metadata !12062, metadata !DIExpression()), !dbg !12081
-  call void @llvm.dbg.value(metadata i32 undef, metadata !12062, metadata !DIExpression(DW_OP_constu, 18446744071830503424, DW_OP_or, DW_OP_stack_value)), !dbg !12081
-  call void @llvm.dbg.value(metadata i32 undef, metadata !12062, metadata !DIExpression()), !dbg !12081
-  call void @llvm.dbg.value(metadata i32 undef, metadata !12062, metadata !DIExpression(DW_OP_constu, 18446744071830503424, DW_OP_or, DW_OP_stack_value)), !dbg !12081
-  call void @llvm.dbg.value(metadata i32 undef, metadata !12062, metadata !DIExpression()), !dbg !12081
-  call void @llvm.dbg.value(metadata i64 %esr.0, metadata !12079, metadata !DIExpression()), !dbg !12110
-  call void asm sideeffect "msr esr_el1, ${0:x}", "rZ"(i64 %esr.0) #18, !dbg !12111, !srcloc !12112
-  ret void, !dbg !12113
+  call void @llvm.dbg.value(metadata i64 %addr, metadata !12060, metadata !DIExpression()), !dbg !12083
+  %0 = call i64 asm sideeffect "mrs $0, spsr_el2", "=r"() #18, !dbg !12084, !srcloc !12085
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12062, metadata !DIExpression()), !dbg !12086
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12061, metadata !DIExpression()), !dbg !12083
+  call void @llvm.dbg.value(metadata i32 0, metadata !12064, metadata !DIExpression()), !dbg !12083
+  call void @llvm.dbg.value(metadata i8 0, metadata !12066, metadata !DIExpression()), !dbg !12083
+  %1 = call i64 asm sideeffect "mrs $0, elr_el2", "=r"() #18, !dbg !12087, !srcloc !12088
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12069, metadata !DIExpression()), !dbg !12089
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12067, metadata !DIExpression()), !dbg !12090
+  call void asm sideeffect "msr elr_el1, ${0:x}", "rZ"(i64 %1) #18, !dbg !12091, !srcloc !12092
+  %call = call fastcc i64 @stage2_get_exception_vector(i64 noundef %0), !dbg !12093
+  call void @llvm.dbg.value(metadata i64 %call, metadata !12071, metadata !DIExpression()), !dbg !12094
+  call void asm sideeffect "msr elr_el2, ${0:x}", "rZ"(i64 %call) #18, !dbg !12093, !srcloc !12095
+  call void @llvm.dbg.value(metadata i64 %addr, metadata !12073, metadata !DIExpression()), !dbg !12096
+  call void asm sideeffect "msr far_el1, ${0:x}", "rZ"(i64 %addr) #18, !dbg !12097, !srcloc !12098
+  call void @llvm.dbg.value(metadata i64 11, metadata !12075, metadata !DIExpression()), !dbg !12099
+  call void asm sideeffect "msr spsr_el2, ${0:x}", "rZ"(i64 11) #18, !dbg !12100, !srcloc !12101
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12077, metadata !DIExpression()), !dbg !12102
+  call void asm sideeffect "msr spsr_el1, ${0:x}", "rZ"(i64 %0) #18, !dbg !12103, !srcloc !12104
+  %2 = call i64 asm sideeffect "mrs $0, esr_el2", "=r"() #18, !dbg !12105, !srcloc !12106
+  call void @llvm.dbg.value(metadata i64 %2, metadata !12079, metadata !DIExpression()), !dbg !12107
+  call void @llvm.dbg.value(metadata i64 %2, metadata !12065, metadata !DIExpression(DW_OP_LLVM_convert, 64, DW_ATE_unsigned, DW_OP_LLVM_convert, 32, DW_ATE_unsigned, DW_OP_stack_value)), !dbg !12083
+  call void @llvm.dbg.value(metadata i8 0, metadata !12066, metadata !DIExpression()), !dbg !12083
+  %and = and i64 %0, 15, !dbg !12108
+  %cmp23 = icmp eq i64 %and, 0, !dbg !12110
+  %esr.0 = select i1 %cmp23, i64 2415919120, i64 2483027984, !dbg !12111
+  call void @llvm.dbg.value(metadata i32 undef, metadata !12064, metadata !DIExpression()), !dbg !12083
+  call void @llvm.dbg.value(metadata i32 undef, metadata !12064, metadata !DIExpression(DW_OP_constu, 18446744071830503424, DW_OP_or, DW_OP_stack_value)), !dbg !12083
+  call void @llvm.dbg.value(metadata i32 undef, metadata !12064, metadata !DIExpression()), !dbg !12083
+  call void @llvm.dbg.value(metadata i32 undef, metadata !12064, metadata !DIExpression(DW_OP_constu, 18446744071830503424, DW_OP_or, DW_OP_stack_value)), !dbg !12083
+  call void @llvm.dbg.value(metadata i32 undef, metadata !12064, metadata !DIExpression()), !dbg !12083
+  call void @llvm.dbg.value(metadata i64 %esr.0, metadata !12081, metadata !DIExpression()), !dbg !12112
+  call void asm sideeffect "msr esr_el1, ${0:x}", "rZ"(i64 %esr.0) #18, !dbg !12113, !srcloc !12114
+  ret void, !dbg !12115
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @stage2_get_exception_vector(i64 noundef %pstate) unnamed_addr #0 section ".hyp.text" !dbg !12114 {
+define internal fastcc i64 @stage2_get_exception_vector(i64 noundef %pstate) unnamed_addr #0 section ".hyp.text" !dbg !12116 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %pstate, metadata !12116, metadata !DIExpression()), !dbg !12120
-  %and = and i64 %pstate, 31, !dbg !12121
-  %0 = icmp ult i64 %and, 6, !dbg !12122
-  br i1 %0, label %switch.lookup, label %sw.epilog, !dbg !12122
+  call void @llvm.dbg.value(metadata i64 %pstate, metadata !12118, metadata !DIExpression()), !dbg !12122
+  %and = and i64 %pstate, 31, !dbg !12123
+  %0 = icmp ult i64 %and, 6, !dbg !12124
+  br i1 %0, label %switch.lookup, label %sw.epilog, !dbg !12124
 
 switch.lookup:                                    ; preds = %entry
-  %switch.gep = getelementptr inbounds [6 x i64], [6 x i64]* @switch.table.stage2_get_exception_vector, i64 0, i64 %and, !dbg !12122
-  %switch.load = load i64, i64* %switch.gep, align 8, !dbg !12122
-  br label %sw.epilog, !dbg !12122
+  %switch.gep = getelementptr inbounds [6 x i64], [6 x i64]* @switch.table.stage2_get_exception_vector, i64 0, i64 %and, !dbg !12124
+  %switch.load = load i64, i64* %switch.gep, align 8, !dbg !12124
+  br label %sw.epilog, !dbg !12124
 
 sw.epilog:                                        ; preds = %entry, %switch.lookup
-  %exc_offset.0 = phi i64 [ %switch.load, %switch.lookup ], [ 1536, %entry ], !dbg !12123
-  call void @llvm.dbg.value(metadata i64 %exc_offset.0, metadata !12117, metadata !DIExpression()), !dbg !12120
-  %1 = call i64 asm sideeffect "mrs $0, vbar_el1", "=r"() #18, !dbg !12125, !srcloc !12126
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12118, metadata !DIExpression()), !dbg !12127
-  %add = add i64 %1, %exc_offset.0, !dbg !12128
-  ret i64 %add, !dbg !12129
+  %exc_offset.0 = phi i64 [ %switch.load, %switch.lookup ], [ 1536, %entry ], !dbg !12125
+  call void @llvm.dbg.value(metadata i64 %exc_offset.0, metadata !12119, metadata !DIExpression()), !dbg !12122
+  %1 = call i64 asm sideeffect "mrs $0, vbar_el1", "=r"() #18, !dbg !12127, !srcloc !12128
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12120, metadata !DIExpression()), !dbg !12129
+  %add = add i64 %1, %exc_offset.0, !dbg !12130
+  ret i64 %add, !dbg !12131
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local void @reject_invalid_mem_access(i64 noundef %addr) local_unnamed_addr #0 section ".hyp.text" !dbg !12130 {
+define dso_local void @reject_invalid_mem_access(i64 noundef %addr) local_unnamed_addr #0 section ".hyp.text" !dbg !12132 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %addr, metadata !12132, metadata !DIExpression()), !dbg !12135
-  call void @print_string(i8* noundef getelementptr inbounds ([34 x i8], [34 x i8]* @.str.58, i64 0, i64 0)), !dbg !12136
-  call void @print_string(i8* noundef getelementptr inbounds ([7 x i8], [7 x i8]* @.str.59, i64 0, i64 0)), !dbg !12137
-  %0 = call i64 asm sideeffect "mrs $0, elr_el2", "=r"() #18, !dbg !12138, !srcloc !12139
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12133, metadata !DIExpression()), !dbg !12140
-  call void @printhex_ul(i64 noundef %0), !dbg !12141
-  call void @print_string(i8* noundef getelementptr inbounds ([7 x i8], [7 x i8]* @.str.60, i64 0, i64 0)), !dbg !12142
-  call void @printhex_ul(i64 noundef %addr), !dbg !12143
-  call void @stage2_inject_el1_fault(i64 noundef %addr), !dbg !12144
-  ret void, !dbg !12145
+  call void @llvm.dbg.value(metadata i64 %addr, metadata !12134, metadata !DIExpression()), !dbg !12137
+  call void @print_string(i8* noundef getelementptr inbounds ([34 x i8], [34 x i8]* @.str.58, i64 0, i64 0)), !dbg !12138
+  call void @print_string(i8* noundef getelementptr inbounds ([7 x i8], [7 x i8]* @.str.59, i64 0, i64 0)), !dbg !12139
+  %0 = call i64 asm sideeffect "mrs $0, elr_el2", "=r"() #18, !dbg !12140, !srcloc !12141
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12135, metadata !DIExpression()), !dbg !12142
+  call void @printhex_ul(i64 noundef %0), !dbg !12143
+  call void @print_string(i8* noundef getelementptr inbounds ([7 x i8], [7 x i8]* @.str.60, i64 0, i64 0)), !dbg !12144
+  call void @printhex_ul(i64 noundef %addr), !dbg !12145
+  call void @stage2_inject_el1_fault(i64 noundef %addr), !dbg !12146
+  ret void, !dbg !12147
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local i32 @__init_stage2_translation() local_unnamed_addr #0 section ".hyp.text" !dbg !12146 {
+define dso_local i32 @__init_stage2_translation() local_unnamed_addr #0 section ".hyp.text" !dbg !12148 {
 entry:
-  call void @llvm.dbg.value(metadata i64 2147497344, metadata !12148, metadata !DIExpression()), !dbg !12159
-  %0 = call i64 asm sideeffect "mrs $0, id_aa64mmfr0_el1", "=r"() #18, !dbg !12160, !srcloc !12161
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12151, metadata !DIExpression()), !dbg !12162
-  %and = and i64 %0, 7, !dbg !12163
-  call void @llvm.dbg.value(metadata i64 %and, metadata !12149, metadata !DIExpression()), !dbg !12159
-  %1 = icmp ult i64 %and, 5, !dbg !12164
-  %spec.store.select = select i1 %1, i64 %and, i64 5, !dbg !12164
-  call void @llvm.dbg.value(metadata i64 %spec.store.select, metadata !12149, metadata !DIExpression()), !dbg !12159
-  call void @llvm.dbg.value(metadata i64 %spec.store.select, metadata !12148, metadata !DIExpression(DW_OP_constu, 16, DW_OP_shl, DW_OP_constu, 2147497344, DW_OP_or, DW_OP_stack_value)), !dbg !12159
-  br i1 %1, label %switch.lookup, label %sw.epilog, !dbg !12165
+  call void @llvm.dbg.value(metadata i64 2147497344, metadata !12150, metadata !DIExpression()), !dbg !12161
+  %0 = call i64 asm sideeffect "mrs $0, id_aa64mmfr0_el1", "=r"() #18, !dbg !12162, !srcloc !12163
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12153, metadata !DIExpression()), !dbg !12164
+  %and = and i64 %0, 7, !dbg !12165
+  call void @llvm.dbg.value(metadata i64 %and, metadata !12151, metadata !DIExpression()), !dbg !12161
+  %1 = icmp ult i64 %and, 5, !dbg !12166
+  %spec.store.select = select i1 %1, i64 %and, i64 5, !dbg !12166
+  call void @llvm.dbg.value(metadata i64 %spec.store.select, metadata !12151, metadata !DIExpression()), !dbg !12161
+  call void @llvm.dbg.value(metadata i64 %spec.store.select, metadata !12150, metadata !DIExpression(DW_OP_constu, 16, DW_OP_shl, DW_OP_constu, 2147497344, DW_OP_or, DW_OP_stack_value)), !dbg !12161
+  br i1 %1, label %switch.lookup, label %sw.epilog, !dbg !12167
 
 switch.lookup:                                    ; preds = %entry
-  %switch.gep = getelementptr inbounds [5 x i64], [5 x i64]* @switch.table.__init_stage2_translation, i64 0, i64 %spec.store.select, !dbg !12165
-  %switch.load = load i64, i64* %switch.gep, align 8, !dbg !12165
-  %switch.gep41 = getelementptr inbounds [5 x i32], [5 x i32]* @switch.table.__init_stage2_translation.63, i64 0, i64 %spec.store.select, !dbg !12165
-  %switch.load42 = load i32, i32* %switch.gep41, align 4, !dbg !12165
-  br label %sw.epilog, !dbg !12165
+  %switch.gep = getelementptr inbounds [5 x i64], [5 x i64]* @switch.table.__init_stage2_translation, i64 0, i64 %spec.store.select, !dbg !12167
+  %switch.load = load i64, i64* %switch.gep, align 8, !dbg !12167
+  %switch.gep41 = getelementptr inbounds [5 x i32], [5 x i32]* @switch.table.__init_stage2_translation.63, i64 0, i64 %spec.store.select, !dbg !12167
+  %switch.load42 = load i32, i32* %switch.gep41, align 4, !dbg !12167
+  br label %sw.epilog, !dbg !12167
 
 sw.epilog:                                        ; preds = %entry, %switch.lookup
   %cmp7.neg = phi i64 [ %switch.load, %switch.lookup ], [ 24, %entry ]
   %parange.0 = phi i32 [ %switch.load42, %switch.lookup ], [ 48, %entry ]
-  %shl = shl nuw nsw i64 %spec.store.select, 16, !dbg !12166
-  call void @llvm.dbg.value(metadata i64 %shl, metadata !12148, metadata !DIExpression(DW_OP_constu, 2147497344, DW_OP_or, DW_OP_stack_value)), !dbg !12159
-  call void @llvm.dbg.value(metadata i64 undef, metadata !12149, metadata !DIExpression()), !dbg !12159
-  %or = or i64 %cmp7.neg, %shl, !dbg !12167
-  call void @llvm.dbg.value(metadata i64 %or, metadata !12148, metadata !DIExpression(DW_OP_constu, 2147497344, DW_OP_or, DW_OP_stack_value)), !dbg !12159
-  %2 = call i64 asm sideeffect "mrs $0, id_aa64mmfr1_el1", "=r"() #18, !dbg !12168, !srcloc !12169
-  call void @llvm.dbg.value(metadata i64 %2, metadata !12153, metadata !DIExpression()), !dbg !12170
-  %and11 = and i64 %2, 15, !dbg !12171
-  call void @llvm.dbg.value(metadata i64 %and11, metadata !12150, metadata !DIExpression()), !dbg !12159
-  %tobool.not = icmp eq i64 %and11, 0, !dbg !12172
-  %spec.select.v = select i1 %tobool.not, i64 2147497344, i64 2149594496, !dbg !12174
-  %spec.select = or i64 %spec.select.v, %or, !dbg !12174
-  call void @llvm.dbg.value(metadata i64 %spec.select, metadata !12148, metadata !DIExpression()), !dbg !12159
-  %3 = call i64 asm sideeffect "mrs $0, id_aa64mmfr1_el1", "=r"() #18, !dbg !12175, !srcloc !12176
-  call void @llvm.dbg.value(metadata i64 %3, metadata !12155, metadata !DIExpression()), !dbg !12177
-  call void @llvm.dbg.value(metadata i64 %3, metadata !12150, metadata !DIExpression(DW_OP_constu, 4, DW_OP_shr, DW_OP_constu, 15, DW_OP_and, DW_OP_stack_value)), !dbg !12159
-  %4 = and i64 %3, 240, !dbg !12178
-  %cmp19 = icmp eq i64 %4, 32, !dbg !12178
-  %5 = select i1 %cmp19, i64 524288, i64 0, !dbg !12179
-  %or21 = or i64 %spec.select, %5, !dbg !12180
-  call void @llvm.dbg.value(metadata i64 %or21, metadata !12148, metadata !DIExpression()), !dbg !12159
-  call void @llvm.dbg.value(metadata i64 %or21, metadata !12157, metadata !DIExpression()), !dbg !12181
-  call void asm sideeffect "msr vtcr_el2, ${0:x}", "rZ"(i64 %or21) #18, !dbg !12182, !srcloc !12183
-  ret i32 %parange.0, !dbg !12184
+  %shl = shl nuw nsw i64 %spec.store.select, 16, !dbg !12168
+  call void @llvm.dbg.value(metadata i64 %shl, metadata !12150, metadata !DIExpression(DW_OP_constu, 2147497344, DW_OP_or, DW_OP_stack_value)), !dbg !12161
+  call void @llvm.dbg.value(metadata i64 undef, metadata !12151, metadata !DIExpression()), !dbg !12161
+  %or = or i64 %cmp7.neg, %shl, !dbg !12169
+  call void @llvm.dbg.value(metadata i64 %or, metadata !12150, metadata !DIExpression(DW_OP_constu, 2147497344, DW_OP_or, DW_OP_stack_value)), !dbg !12161
+  %2 = call i64 asm sideeffect "mrs $0, id_aa64mmfr1_el1", "=r"() #18, !dbg !12170, !srcloc !12171
+  call void @llvm.dbg.value(metadata i64 %2, metadata !12155, metadata !DIExpression()), !dbg !12172
+  %and11 = and i64 %2, 15, !dbg !12173
+  call void @llvm.dbg.value(metadata i64 %and11, metadata !12152, metadata !DIExpression()), !dbg !12161
+  %tobool.not = icmp eq i64 %and11, 0, !dbg !12174
+  %spec.select.v = select i1 %tobool.not, i64 2147497344, i64 2149594496, !dbg !12176
+  %spec.select = or i64 %spec.select.v, %or, !dbg !12176
+  call void @llvm.dbg.value(metadata i64 %spec.select, metadata !12150, metadata !DIExpression()), !dbg !12161
+  %3 = call i64 asm sideeffect "mrs $0, id_aa64mmfr1_el1", "=r"() #18, !dbg !12177, !srcloc !12178
+  call void @llvm.dbg.value(metadata i64 %3, metadata !12157, metadata !DIExpression()), !dbg !12179
+  call void @llvm.dbg.value(metadata i64 %3, metadata !12152, metadata !DIExpression(DW_OP_constu, 4, DW_OP_shr, DW_OP_constu, 15, DW_OP_and, DW_OP_stack_value)), !dbg !12161
+  %4 = and i64 %3, 240, !dbg !12180
+  %cmp19 = icmp eq i64 %4, 32, !dbg !12180
+  %5 = select i1 %cmp19, i64 524288, i64 0, !dbg !12181
+  %or21 = or i64 %spec.select, %5, !dbg !12182
+  call void @llvm.dbg.value(metadata i64 %or21, metadata !12150, metadata !DIExpression()), !dbg !12161
+  call void @llvm.dbg.value(metadata i64 %or21, metadata !12159, metadata !DIExpression()), !dbg !12183
+  call void asm sideeffect "msr vtcr_el2, ${0:x}", "rZ"(i64 %or21) #18, !dbg !12184, !srcloc !12185
+  ret i32 %parange.0, !dbg !12186
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local void @__vm_sysreg_restore_state_nvhe_opt(i32 noundef %vmid, i32 noundef %vcpuid) local_unnamed_addr #0 section ".hyp.text" !dbg !12185 {
+define dso_local void @__vm_sysreg_restore_state_nvhe_opt(i32 noundef %vmid, i32 noundef %vcpuid) local_unnamed_addr #0 section ".hyp.text" !dbg !12187 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12187, metadata !DIExpression()), !dbg !12189
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12188, metadata !DIExpression()), !dbg !12189
-  call fastcc void @__vm_sysreg_restore_el1_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12190
-  call fastcc void @__vm_sysreg_restore_common_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12191
-  call fastcc void @__vm_sysreg_restore_user_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12192
-  call fastcc void @__vm_sysreg_restore_el2_return_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12193
-  ret void, !dbg !12194
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12189, metadata !DIExpression()), !dbg !12191
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12190, metadata !DIExpression()), !dbg !12191
+  call fastcc void @__vm_sysreg_restore_el1_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12192
+  call fastcc void @__vm_sysreg_restore_common_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12193
+  call fastcc void @__vm_sysreg_restore_user_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12194
+  call fastcc void @__vm_sysreg_restore_el2_return_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12195
+  ret void, !dbg !12196
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__vm_sysreg_restore_el1_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12195 {
+define internal fastcc void @__vm_sysreg_restore_el1_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12197 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12197, metadata !DIExpression()), !dbg !12246
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12198, metadata !DIExpression()), !dbg !12246
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12247
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12199, metadata !DIExpression()), !dbg !12246
-  %mul = shl i32 %vmid, 2, !dbg !12248
-  %add = add i32 %mul, %vcpuid, !dbg !12248
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12200, metadata !DIExpression()), !dbg !12246
-  %idxprom = sext i32 %add to i64, !dbg !12249
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12201, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12246
-  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 1, !dbg !12250
-  %0 = load i64, i64* %arrayidx1, align 8, !dbg !12250, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12202, metadata !DIExpression()), !dbg !12251
-  call void asm sideeffect "msr vmpidr_el2, ${0:x}", "rZ"(i64 %0) #18, !dbg !12250, !srcloc !12252
-  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 2, !dbg !12253
-  %1 = load i64, i64* %arrayidx5, align 8, !dbg !12253, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12204, metadata !DIExpression()), !dbg !12254
-  call void asm sideeffect "msr csselr_el1, ${0:x}", "rZ"(i64 %1) #18, !dbg !12253, !srcloc !12255
-  %arrayidx11 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 3, !dbg !12256
-  %2 = load i64, i64* %arrayidx11, align 8, !dbg !12256, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %2, metadata !12206, metadata !DIExpression()), !dbg !12257
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((1) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((1) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %2) #18, !dbg !12256, !srcloc !12258
-  %arrayidx17 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 4, !dbg !12259
-  %3 = load i64, i64* %arrayidx17, align 8, !dbg !12259, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %3, metadata !12208, metadata !DIExpression()), !dbg !12260
-  call void asm sideeffect "msr actlr_el1, ${0:x}", "rZ"(i64 %3) #18, !dbg !12259, !srcloc !12261
-  %arrayidx23 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 5, !dbg !12262
-  %4 = load i64, i64* %arrayidx23, align 8, !dbg !12262, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %4, metadata !12210, metadata !DIExpression()), !dbg !12263
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((1) << 12) | ((0) << 8) | ((2) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((1) << 12) | ((0) << 8) | ((2) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %4) #18, !dbg !12262, !srcloc !12264
-  %arrayidx29 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 7, !dbg !12265
-  %5 = load i64, i64* %arrayidx29, align 8, !dbg !12265, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %5, metadata !12212, metadata !DIExpression()), !dbg !12266
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %5) #18, !dbg !12265, !srcloc !12267
-  %arrayidx35 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 8, !dbg !12268
-  %6 = load i64, i64* %arrayidx35, align 8, !dbg !12268, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %6, metadata !12214, metadata !DIExpression()), !dbg !12269
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %6) #18, !dbg !12268, !srcloc !12270
-  %arrayidx41 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 9, !dbg !12271
-  %7 = load i64, i64* %arrayidx41, align 8, !dbg !12271, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %7, metadata !12216, metadata !DIExpression()), !dbg !12272
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((2) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((2) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %7) #18, !dbg !12271, !srcloc !12273
-  %arrayidx47 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 10, !dbg !12274
-  %8 = load i64, i64* %arrayidx47, align 8, !dbg !12274, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %8, metadata !12218, metadata !DIExpression()), !dbg !12275
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((5) << 12) | ((2) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((5) << 12) | ((2) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %8) #18, !dbg !12274, !srcloc !12276
-  %arrayidx53 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 11, !dbg !12277
-  %9 = load i64, i64* %arrayidx53, align 8, !dbg !12277, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %9, metadata !12220, metadata !DIExpression()), !dbg !12278
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((5) << 12) | ((1) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((5) << 12) | ((1) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %9) #18, !dbg !12277, !srcloc !12279
-  %arrayidx59 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 12, !dbg !12280
-  %10 = load i64, i64* %arrayidx59, align 8, !dbg !12280, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %10, metadata !12222, metadata !DIExpression()), !dbg !12281
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((5) << 12) | ((1) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((5) << 12) | ((1) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %10) #18, !dbg !12280, !srcloc !12282
-  %arrayidx65 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 13, !dbg !12283
-  %11 = load i64, i64* %arrayidx65, align 8, !dbg !12283, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %11, metadata !12224, metadata !DIExpression()), !dbg !12284
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((6) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((6) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %11) #18, !dbg !12283, !srcloc !12285
-  %arrayidx71 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 14, !dbg !12286
-  %12 = load i64, i64* %arrayidx71, align 8, !dbg !12286, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %12, metadata !12226, metadata !DIExpression()), !dbg !12287
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((10) << 12) | ((2) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((10) << 12) | ((2) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %12) #18, !dbg !12286, !srcloc !12288
-  %arrayidx77 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 15, !dbg !12289
-  %13 = load i64, i64* %arrayidx77, align 8, !dbg !12289, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %13, metadata !12228, metadata !DIExpression()), !dbg !12290
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((12) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((12) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %13) #18, !dbg !12289, !srcloc !12291
-  %arrayidx83 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 16, !dbg !12292
-  %14 = load i64, i64* %arrayidx83, align 8, !dbg !12292, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %14, metadata !12230, metadata !DIExpression()), !dbg !12293
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((13) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((13) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %14) #18, !dbg !12292, !srcloc !12294
-  %arrayidx89 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 20, !dbg !12295
-  %15 = load i64, i64* %arrayidx89, align 8, !dbg !12295, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %15, metadata !12232, metadata !DIExpression()), !dbg !12296
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((10) << 12) | ((3) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((10) << 12) | ((3) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %15) #18, !dbg !12295, !srcloc !12297
-  %arrayidx95 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 21, !dbg !12298
-  %16 = load i64, i64* %arrayidx95, align 8, !dbg !12298, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %16, metadata !12234, metadata !DIExpression()), !dbg !12299
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((14) << 12) | ((1) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((14) << 12) | ((1) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %16) #18, !dbg !12298, !srcloc !12300
-  %arrayidx101 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 22, !dbg !12301
-  %17 = load i64, i64* %arrayidx101, align 8, !dbg !12301, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %17, metadata !12236, metadata !DIExpression()), !dbg !12302
-  call void asm sideeffect "msr par_el1, ${0:x}", "rZ"(i64 %17) #18, !dbg !12301, !srcloc !12303
-  %arrayidx107 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 19, !dbg !12304
-  %18 = load i64, i64* %arrayidx107, align 8, !dbg !12304, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %18, metadata !12238, metadata !DIExpression()), !dbg !12305
-  call void asm sideeffect "msr tpidr_el1, ${0:x}", "rZ"(i64 %18) #18, !dbg !12304, !srcloc !12306
-  %arrayidx112 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 34, !dbg !12307
-  %19 = load i64, i64* %arrayidx112, align 16, !dbg !12307, !tbaa !6675
-  call void @llvm.dbg.value(metadata i64 %19, metadata !12240, metadata !DIExpression()), !dbg !12308
-  call void asm sideeffect "msr sp_el1, ${0:x}", "rZ"(i64 %19) #18, !dbg !12307, !srcloc !12309
-  %arrayidx118 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 35, !dbg !12310
-  %20 = load i64, i64* %arrayidx118, align 8, !dbg !12310, !tbaa !6675
-  call void @llvm.dbg.value(metadata i64 %20, metadata !12242, metadata !DIExpression()), !dbg !12311
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %20) #18, !dbg !12310, !srcloc !12312
-  %arrayidx124 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 36, !dbg !12313
-  %21 = load i64, i64* %arrayidx124, align 16, !dbg !12313, !tbaa !6675
-  call void @llvm.dbg.value(metadata i64 %21, metadata !12244, metadata !DIExpression()), !dbg !12314
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %21) #18, !dbg !12313, !srcloc !12315
-  ret void, !dbg !12316
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12199, metadata !DIExpression()), !dbg !12248
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12200, metadata !DIExpression()), !dbg !12248
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12249
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12201, metadata !DIExpression()), !dbg !12248
+  %mul = shl i32 %vmid, 2, !dbg !12250
+  %add = add i32 %mul, %vcpuid, !dbg !12250
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12202, metadata !DIExpression()), !dbg !12248
+  %idxprom = sext i32 %add to i64, !dbg !12251
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12203, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12248
+  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 1, !dbg !12252
+  %0 = load i64, i64* %arrayidx1, align 8, !dbg !12252, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12204, metadata !DIExpression()), !dbg !12253
+  call void asm sideeffect "msr vmpidr_el2, ${0:x}", "rZ"(i64 %0) #18, !dbg !12252, !srcloc !12254
+  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 2, !dbg !12255
+  %1 = load i64, i64* %arrayidx5, align 8, !dbg !12255, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12206, metadata !DIExpression()), !dbg !12256
+  call void asm sideeffect "msr csselr_el1, ${0:x}", "rZ"(i64 %1) #18, !dbg !12255, !srcloc !12257
+  %arrayidx11 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 3, !dbg !12258
+  %2 = load i64, i64* %arrayidx11, align 8, !dbg !12258, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %2, metadata !12208, metadata !DIExpression()), !dbg !12259
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((1) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((1) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %2) #18, !dbg !12258, !srcloc !12260
+  %arrayidx17 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 4, !dbg !12261
+  %3 = load i64, i64* %arrayidx17, align 8, !dbg !12261, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %3, metadata !12210, metadata !DIExpression()), !dbg !12262
+  call void asm sideeffect "msr actlr_el1, ${0:x}", "rZ"(i64 %3) #18, !dbg !12261, !srcloc !12263
+  %arrayidx23 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 5, !dbg !12264
+  %4 = load i64, i64* %arrayidx23, align 8, !dbg !12264, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %4, metadata !12212, metadata !DIExpression()), !dbg !12265
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((1) << 12) | ((0) << 8) | ((2) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((1) << 12) | ((0) << 8) | ((2) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %4) #18, !dbg !12264, !srcloc !12266
+  %arrayidx29 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 7, !dbg !12267
+  %5 = load i64, i64* %arrayidx29, align 8, !dbg !12267, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %5, metadata !12214, metadata !DIExpression()), !dbg !12268
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %5) #18, !dbg !12267, !srcloc !12269
+  %arrayidx35 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 8, !dbg !12270
+  %6 = load i64, i64* %arrayidx35, align 8, !dbg !12270, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %6, metadata !12216, metadata !DIExpression()), !dbg !12271
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %6) #18, !dbg !12270, !srcloc !12272
+  %arrayidx41 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 9, !dbg !12273
+  %7 = load i64, i64* %arrayidx41, align 8, !dbg !12273, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %7, metadata !12218, metadata !DIExpression()), !dbg !12274
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((2) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((2) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %7) #18, !dbg !12273, !srcloc !12275
+  %arrayidx47 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 10, !dbg !12276
+  %8 = load i64, i64* %arrayidx47, align 8, !dbg !12276, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %8, metadata !12220, metadata !DIExpression()), !dbg !12277
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((5) << 12) | ((2) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((5) << 12) | ((2) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %8) #18, !dbg !12276, !srcloc !12278
+  %arrayidx53 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 11, !dbg !12279
+  %9 = load i64, i64* %arrayidx53, align 8, !dbg !12279, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %9, metadata !12222, metadata !DIExpression()), !dbg !12280
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((5) << 12) | ((1) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((5) << 12) | ((1) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %9) #18, !dbg !12279, !srcloc !12281
+  %arrayidx59 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 12, !dbg !12282
+  %10 = load i64, i64* %arrayidx59, align 8, !dbg !12282, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %10, metadata !12224, metadata !DIExpression()), !dbg !12283
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((5) << 12) | ((1) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((5) << 12) | ((1) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %10) #18, !dbg !12282, !srcloc !12284
+  %arrayidx65 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 13, !dbg !12285
+  %11 = load i64, i64* %arrayidx65, align 8, !dbg !12285, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %11, metadata !12226, metadata !DIExpression()), !dbg !12286
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((6) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((6) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %11) #18, !dbg !12285, !srcloc !12287
+  %arrayidx71 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 14, !dbg !12288
+  %12 = load i64, i64* %arrayidx71, align 8, !dbg !12288, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %12, metadata !12228, metadata !DIExpression()), !dbg !12289
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((10) << 12) | ((2) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((10) << 12) | ((2) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %12) #18, !dbg !12288, !srcloc !12290
+  %arrayidx77 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 15, !dbg !12291
+  %13 = load i64, i64* %arrayidx77, align 8, !dbg !12291, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %13, metadata !12230, metadata !DIExpression()), !dbg !12292
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((12) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((12) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %13) #18, !dbg !12291, !srcloc !12293
+  %arrayidx83 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 16, !dbg !12294
+  %14 = load i64, i64* %arrayidx83, align 8, !dbg !12294, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %14, metadata !12232, metadata !DIExpression()), !dbg !12295
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((13) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((13) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %14) #18, !dbg !12294, !srcloc !12296
+  %arrayidx89 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 20, !dbg !12297
+  %15 = load i64, i64* %arrayidx89, align 8, !dbg !12297, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %15, metadata !12234, metadata !DIExpression()), !dbg !12298
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((10) << 12) | ((3) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((10) << 12) | ((3) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %15) #18, !dbg !12297, !srcloc !12299
+  %arrayidx95 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 21, !dbg !12300
+  %16 = load i64, i64* %arrayidx95, align 8, !dbg !12300, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %16, metadata !12236, metadata !DIExpression()), !dbg !12301
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((14) << 12) | ((1) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((14) << 12) | ((1) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %16) #18, !dbg !12300, !srcloc !12302
+  %arrayidx101 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 22, !dbg !12303
+  %17 = load i64, i64* %arrayidx101, align 8, !dbg !12303, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %17, metadata !12238, metadata !DIExpression()), !dbg !12304
+  call void asm sideeffect "msr par_el1, ${0:x}", "rZ"(i64 %17) #18, !dbg !12303, !srcloc !12305
+  %arrayidx107 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 19, !dbg !12306
+  %18 = load i64, i64* %arrayidx107, align 8, !dbg !12306, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %18, metadata !12240, metadata !DIExpression()), !dbg !12307
+  call void asm sideeffect "msr tpidr_el1, ${0:x}", "rZ"(i64 %18) #18, !dbg !12306, !srcloc !12308
+  %arrayidx112 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 34, !dbg !12309
+  %19 = load i64, i64* %arrayidx112, align 16, !dbg !12309, !tbaa !6675
+  call void @llvm.dbg.value(metadata i64 %19, metadata !12242, metadata !DIExpression()), !dbg !12310
+  call void asm sideeffect "msr sp_el1, ${0:x}", "rZ"(i64 %19) #18, !dbg !12309, !srcloc !12311
+  %arrayidx118 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 35, !dbg !12312
+  %20 = load i64, i64* %arrayidx118, align 8, !dbg !12312, !tbaa !6675
+  call void @llvm.dbg.value(metadata i64 %20, metadata !12244, metadata !DIExpression()), !dbg !12313
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %20) #18, !dbg !12312, !srcloc !12314
+  %arrayidx124 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 36, !dbg !12315
+  %21 = load i64, i64* %arrayidx124, align 16, !dbg !12315, !tbaa !6675
+  call void @llvm.dbg.value(metadata i64 %21, metadata !12246, metadata !DIExpression()), !dbg !12316
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((5) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %21) #18, !dbg !12315, !srcloc !12317
+  ret void, !dbg !12318
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__vm_sysreg_restore_common_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12317 {
+define internal fastcc void @__vm_sysreg_restore_common_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12319 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12319, metadata !DIExpression()), !dbg !12328
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12320, metadata !DIExpression()), !dbg !12328
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12329
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12321, metadata !DIExpression()), !dbg !12328
-  %mul = shl i32 %vmid, 2, !dbg !12330
-  %add = add i32 %mul, %vcpuid, !dbg !12330
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12322, metadata !DIExpression()), !dbg !12328
-  %idxprom = sext i32 %add to i64, !dbg !12331
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12323, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12328
-  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 23, !dbg !12332
-  %0 = load i64, i64* %arrayidx1, align 8, !dbg !12332, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12324, metadata !DIExpression()), !dbg !12333
-  call void asm sideeffect "msr mdscr_el1, ${0:x}", "rZ"(i64 %0) #18, !dbg !12332, !srcloc !12334
-  %arrayidx4 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 31, !dbg !12335
-  %1 = load i64, i64* %arrayidx4, align 8, !dbg !12335, !tbaa !6675
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12326, metadata !DIExpression()), !dbg !12336
-  call void asm sideeffect "msr sp_el0, ${0:x}", "rZ"(i64 %1) #18, !dbg !12335, !srcloc !12337
-  ret void, !dbg !12338
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12321, metadata !DIExpression()), !dbg !12330
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12322, metadata !DIExpression()), !dbg !12330
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12331
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12323, metadata !DIExpression()), !dbg !12330
+  %mul = shl i32 %vmid, 2, !dbg !12332
+  %add = add i32 %mul, %vcpuid, !dbg !12332
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12324, metadata !DIExpression()), !dbg !12330
+  %idxprom = sext i32 %add to i64, !dbg !12333
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12325, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12330
+  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 23, !dbg !12334
+  %0 = load i64, i64* %arrayidx1, align 8, !dbg !12334, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12326, metadata !DIExpression()), !dbg !12335
+  call void asm sideeffect "msr mdscr_el1, ${0:x}", "rZ"(i64 %0) #18, !dbg !12334, !srcloc !12336
+  %arrayidx4 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 31, !dbg !12337
+  %1 = load i64, i64* %arrayidx4, align 8, !dbg !12337, !tbaa !6675
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12328, metadata !DIExpression()), !dbg !12338
+  call void asm sideeffect "msr sp_el0, ${0:x}", "rZ"(i64 %1) #18, !dbg !12337, !srcloc !12339
+  ret void, !dbg !12340
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__vm_sysreg_restore_user_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12339 {
+define internal fastcc void @__vm_sysreg_restore_user_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12341 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12341, metadata !DIExpression()), !dbg !12350
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12342, metadata !DIExpression()), !dbg !12350
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12351
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12343, metadata !DIExpression()), !dbg !12350
-  %mul = shl i32 %vmid, 2, !dbg !12352
-  %add = add i32 %mul, %vcpuid, !dbg !12352
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12344, metadata !DIExpression()), !dbg !12350
-  %idxprom = sext i32 %add to i64, !dbg !12353
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12345, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12350
-  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 17, !dbg !12354
-  %0 = load i64, i64* %arrayidx1, align 8, !dbg !12354, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12346, metadata !DIExpression()), !dbg !12355
-  call void asm sideeffect "msr tpidr_el0, ${0:x}", "rZ"(i64 %0) #18, !dbg !12354, !srcloc !12356
-  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 18, !dbg !12357
-  %1 = load i64, i64* %arrayidx5, align 8, !dbg !12357, !tbaa !6589
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12348, metadata !DIExpression()), !dbg !12358
-  call void asm sideeffect "msr tpidrro_el0, ${0:x}", "rZ"(i64 %1) #18, !dbg !12357, !srcloc !12359
-  ret void, !dbg !12360
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12343, metadata !DIExpression()), !dbg !12352
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12344, metadata !DIExpression()), !dbg !12352
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12353
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12345, metadata !DIExpression()), !dbg !12352
+  %mul = shl i32 %vmid, 2, !dbg !12354
+  %add = add i32 %mul, %vcpuid, !dbg !12354
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12346, metadata !DIExpression()), !dbg !12352
+  %idxprom = sext i32 %add to i64, !dbg !12355
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12347, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12352
+  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 17, !dbg !12356
+  %0 = load i64, i64* %arrayidx1, align 8, !dbg !12356, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12348, metadata !DIExpression()), !dbg !12357
+  call void asm sideeffect "msr tpidr_el0, ${0:x}", "rZ"(i64 %0) #18, !dbg !12356, !srcloc !12358
+  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 18, !dbg !12359
+  %1 = load i64, i64* %arrayidx5, align 8, !dbg !12359, !tbaa !6589
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12350, metadata !DIExpression()), !dbg !12360
+  call void asm sideeffect "msr tpidrro_el0, ${0:x}", "rZ"(i64 %1) #18, !dbg !12359, !srcloc !12361
+  ret void, !dbg !12362
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__vm_sysreg_restore_el2_return_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12361 {
+define internal fastcc void @__vm_sysreg_restore_el2_return_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12363 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12363, metadata !DIExpression()), !dbg !12372
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12364, metadata !DIExpression()), !dbg !12372
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12373
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12365, metadata !DIExpression()), !dbg !12372
-  %mul = shl i32 %vmid, 2, !dbg !12374
-  %add = add i32 %mul, %vcpuid, !dbg !12374
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12366, metadata !DIExpression()), !dbg !12372
-  %idxprom = sext i32 %add to i64, !dbg !12375
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12367, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12372
-  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 32, !dbg !12376
-  %0 = load i64, i64* %arrayidx1, align 16, !dbg !12376, !tbaa !6675
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12368, metadata !DIExpression()), !dbg !12377
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((4) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %0) #18, !dbg !12376, !srcloc !12378
-  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 33, !dbg !12379
-  %1 = load i64, i64* %arrayidx5, align 8, !dbg !12379, !tbaa !6675
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12370, metadata !DIExpression()), !dbg !12380
-  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((4) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %1) #18, !dbg !12379, !srcloc !12381
-  ret void, !dbg !12382
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12365, metadata !DIExpression()), !dbg !12374
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12366, metadata !DIExpression()), !dbg !12374
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12375
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12367, metadata !DIExpression()), !dbg !12374
+  %mul = shl i32 %vmid, 2, !dbg !12376
+  %add = add i32 %mul, %vcpuid, !dbg !12376
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12368, metadata !DIExpression()), !dbg !12374
+  %idxprom = sext i32 %add to i64, !dbg !12377
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12369, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12374
+  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 32, !dbg !12378
+  %0 = load i64, i64* %arrayidx1, align 16, !dbg !12378, !tbaa !6675
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12370, metadata !DIExpression()), !dbg !12379
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((4) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %0) #18, !dbg !12378, !srcloc !12380
+  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 33, !dbg !12381
+  %1 = load i64, i64* %arrayidx5, align 8, !dbg !12381, !tbaa !6675
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12372, metadata !DIExpression()), !dbg !12382
+  call void asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((4) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09msr_s, sreg, rt\0A.inst (0xd5000000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09msr_s (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5)), ${0:x}\0A\09.purgem\09msr_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "rZ"(i64 %1) #18, !dbg !12381, !srcloc !12383
+  ret void, !dbg !12384
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local void @__vm_sysreg_save_state_nvhe_opt(i32 noundef %vmid, i32 noundef %vcpuid) local_unnamed_addr #0 section ".hyp.text" !dbg !12383 {
+define dso_local void @__vm_sysreg_save_state_nvhe_opt(i32 noundef %vmid, i32 noundef %vcpuid) local_unnamed_addr #0 section ".hyp.text" !dbg !12385 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12385, metadata !DIExpression()), !dbg !12387
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12386, metadata !DIExpression()), !dbg !12387
-  call fastcc void @__vm_sysreg_save_el1_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12388
-  call fastcc void @__vm_sysreg_save_common_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12389
-  call fastcc void @__vm_sysreg_save_user_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12390
-  call fastcc void @__vm_sysreg_save_el2_return_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12391
-  ret void, !dbg !12392
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12387, metadata !DIExpression()), !dbg !12389
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12388, metadata !DIExpression()), !dbg !12389
+  call fastcc void @__vm_sysreg_save_el1_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12390
+  call fastcc void @__vm_sysreg_save_common_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12391
+  call fastcc void @__vm_sysreg_save_user_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12392
+  call fastcc void @__vm_sysreg_save_el2_return_state(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12393
+  ret void, !dbg !12394
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__vm_sysreg_save_el1_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12393 {
+define internal fastcc void @__vm_sysreg_save_el1_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12395 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12395, metadata !DIExpression()), !dbg !12444
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12396, metadata !DIExpression()), !dbg !12444
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12445
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12397, metadata !DIExpression()), !dbg !12444
-  %mul = shl i32 %vmid, 2, !dbg !12446
-  %add = add i32 %mul, %vcpuid, !dbg !12446
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12398, metadata !DIExpression()), !dbg !12444
-  %idxprom = sext i32 %add to i64, !dbg !12447
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12399, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12444
-  %0 = call i64 asm sideeffect "mrs $0, vmpidr_el2", "=r"() #18, !dbg !12448, !srcloc !12449
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12400, metadata !DIExpression()), !dbg !12450
-  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 1, !dbg !12451
-  store i64 %0, i64* %arrayidx1, align 8, !dbg !12452, !tbaa !6589
-  %1 = call i64 asm sideeffect "mrs $0, csselr_el1", "=r"() #18, !dbg !12453, !srcloc !12454
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12402, metadata !DIExpression()), !dbg !12455
-  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 2, !dbg !12456
-  store i64 %1, i64* %arrayidx5, align 8, !dbg !12457, !tbaa !6589
-  %2 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((1) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((1) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12458, !srcloc !12459
-  call void @llvm.dbg.value(metadata i64 %2, metadata !12404, metadata !DIExpression()), !dbg !12460
-  %arrayidx8 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 3, !dbg !12461
-  store i64 %2, i64* %arrayidx8, align 8, !dbg !12462, !tbaa !6589
-  %3 = call i64 asm sideeffect "mrs $0, actlr_el1", "=r"() #18, !dbg !12463, !srcloc !12464
-  call void @llvm.dbg.value(metadata i64 %3, metadata !12406, metadata !DIExpression()), !dbg !12465
-  %arrayidx12 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 4, !dbg !12466
-  store i64 %3, i64* %arrayidx12, align 8, !dbg !12467, !tbaa !6589
-  %4 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((1) << 12) | ((0) << 8) | ((2) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((1) << 12) | ((0) << 8) | ((2) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12468, !srcloc !12469
-  call void @llvm.dbg.value(metadata i64 %4, metadata !12408, metadata !DIExpression()), !dbg !12470
-  %arrayidx16 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 5, !dbg !12471
-  store i64 %4, i64* %arrayidx16, align 8, !dbg !12472, !tbaa !6589
-  %5 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12473, !srcloc !12474
-  call void @llvm.dbg.value(metadata i64 %5, metadata !12410, metadata !DIExpression()), !dbg !12475
-  %arrayidx20 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 7, !dbg !12476
-  store i64 %5, i64* %arrayidx20, align 8, !dbg !12477, !tbaa !6589
-  %6 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12478, !srcloc !12479
-  call void @llvm.dbg.value(metadata i64 %6, metadata !12412, metadata !DIExpression()), !dbg !12480
-  %arrayidx24 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 8, !dbg !12481
-  store i64 %6, i64* %arrayidx24, align 8, !dbg !12482, !tbaa !6589
-  %7 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((2) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((2) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12483, !srcloc !12484
-  call void @llvm.dbg.value(metadata i64 %7, metadata !12414, metadata !DIExpression()), !dbg !12485
-  %arrayidx28 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 9, !dbg !12486
-  store i64 %7, i64* %arrayidx28, align 8, !dbg !12487, !tbaa !6589
-  %8 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((5) << 12) | ((2) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((5) << 12) | ((2) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12488, !srcloc !12489
-  call void @llvm.dbg.value(metadata i64 %8, metadata !12416, metadata !DIExpression()), !dbg !12490
-  %arrayidx32 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 10, !dbg !12491
-  store i64 %8, i64* %arrayidx32, align 8, !dbg !12492, !tbaa !6589
-  %9 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((5) << 12) | ((1) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((5) << 12) | ((1) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12493, !srcloc !12494
-  call void @llvm.dbg.value(metadata i64 %9, metadata !12418, metadata !DIExpression()), !dbg !12495
-  %arrayidx36 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 11, !dbg !12496
-  store i64 %9, i64* %arrayidx36, align 8, !dbg !12497, !tbaa !6589
-  %10 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((5) << 12) | ((1) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((5) << 12) | ((1) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12498, !srcloc !12499
-  call void @llvm.dbg.value(metadata i64 %10, metadata !12420, metadata !DIExpression()), !dbg !12500
-  %arrayidx40 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 12, !dbg !12501
-  store i64 %10, i64* %arrayidx40, align 8, !dbg !12502, !tbaa !6589
-  %11 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((6) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((6) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12503, !srcloc !12504
-  call void @llvm.dbg.value(metadata i64 %11, metadata !12422, metadata !DIExpression()), !dbg !12505
-  %arrayidx44 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 13, !dbg !12506
-  store i64 %11, i64* %arrayidx44, align 8, !dbg !12507, !tbaa !6589
-  %12 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((10) << 12) | ((2) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((10) << 12) | ((2) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12508, !srcloc !12509
-  call void @llvm.dbg.value(metadata i64 %12, metadata !12424, metadata !DIExpression()), !dbg !12510
-  %arrayidx48 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 14, !dbg !12511
-  store i64 %12, i64* %arrayidx48, align 8, !dbg !12512, !tbaa !6589
-  %13 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((12) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((12) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12513, !srcloc !12514
-  call void @llvm.dbg.value(metadata i64 %13, metadata !12426, metadata !DIExpression()), !dbg !12515
-  %arrayidx52 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 15, !dbg !12516
-  store i64 %13, i64* %arrayidx52, align 8, !dbg !12517, !tbaa !6589
-  %14 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((13) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((13) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12518, !srcloc !12519
-  call void @llvm.dbg.value(metadata i64 %14, metadata !12428, metadata !DIExpression()), !dbg !12520
-  %arrayidx56 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 16, !dbg !12521
-  store i64 %14, i64* %arrayidx56, align 8, !dbg !12522, !tbaa !6589
-  %15 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((10) << 12) | ((3) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((10) << 12) | ((3) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12523, !srcloc !12524
-  call void @llvm.dbg.value(metadata i64 %15, metadata !12430, metadata !DIExpression()), !dbg !12525
-  %arrayidx60 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 20, !dbg !12526
-  store i64 %15, i64* %arrayidx60, align 8, !dbg !12527, !tbaa !6589
-  %16 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((14) << 12) | ((1) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((14) << 12) | ((1) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12528, !srcloc !12529
-  call void @llvm.dbg.value(metadata i64 %16, metadata !12432, metadata !DIExpression()), !dbg !12530
-  %arrayidx64 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 21, !dbg !12531
-  store i64 %16, i64* %arrayidx64, align 8, !dbg !12532, !tbaa !6589
-  %17 = call i64 asm sideeffect "mrs $0, par_el1", "=r"() #18, !dbg !12533, !srcloc !12534
-  call void @llvm.dbg.value(metadata i64 %17, metadata !12434, metadata !DIExpression()), !dbg !12535
-  %arrayidx68 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 22, !dbg !12536
-  store i64 %17, i64* %arrayidx68, align 8, !dbg !12537, !tbaa !6589
-  %18 = call i64 asm sideeffect "mrs $0, tpidr_el1", "=r"() #18, !dbg !12538, !srcloc !12539
-  call void @llvm.dbg.value(metadata i64 %18, metadata !12436, metadata !DIExpression()), !dbg !12540
-  %arrayidx72 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 19, !dbg !12541
-  store i64 %18, i64* %arrayidx72, align 8, !dbg !12542, !tbaa !6589
-  %19 = call i64 asm sideeffect "mrs $0, sp_el1", "=r"() #18, !dbg !12543, !srcloc !12544
-  call void @llvm.dbg.value(metadata i64 %19, metadata !12438, metadata !DIExpression()), !dbg !12545
-  %arrayidx75 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 34, !dbg !12546
-  store i64 %19, i64* %arrayidx75, align 16, !dbg !12547, !tbaa !6675
-  %20 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12548, !srcloc !12549
-  call void @llvm.dbg.value(metadata i64 %20, metadata !12440, metadata !DIExpression()), !dbg !12550
-  %arrayidx79 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 35, !dbg !12551
-  store i64 %20, i64* %arrayidx79, align 8, !dbg !12552, !tbaa !6675
-  %21 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12553, !srcloc !12554
-  call void @llvm.dbg.value(metadata i64 %21, metadata !12442, metadata !DIExpression()), !dbg !12555
-  %arrayidx83 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 36, !dbg !12556
-  store i64 %21, i64* %arrayidx83, align 16, !dbg !12557, !tbaa !6675
-  ret void, !dbg !12558
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12397, metadata !DIExpression()), !dbg !12446
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12398, metadata !DIExpression()), !dbg !12446
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12447
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12399, metadata !DIExpression()), !dbg !12446
+  %mul = shl i32 %vmid, 2, !dbg !12448
+  %add = add i32 %mul, %vcpuid, !dbg !12448
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12400, metadata !DIExpression()), !dbg !12446
+  %idxprom = sext i32 %add to i64, !dbg !12449
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12401, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12446
+  %0 = call i64 asm sideeffect "mrs $0, vmpidr_el2", "=r"() #18, !dbg !12450, !srcloc !12451
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12402, metadata !DIExpression()), !dbg !12452
+  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 1, !dbg !12453
+  store i64 %0, i64* %arrayidx1, align 8, !dbg !12454, !tbaa !6589
+  %1 = call i64 asm sideeffect "mrs $0, csselr_el1", "=r"() #18, !dbg !12455, !srcloc !12456
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12404, metadata !DIExpression()), !dbg !12457
+  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 2, !dbg !12458
+  store i64 %1, i64* %arrayidx5, align 8, !dbg !12459, !tbaa !6589
+  %2 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((1) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((1) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12460, !srcloc !12461
+  call void @llvm.dbg.value(metadata i64 %2, metadata !12406, metadata !DIExpression()), !dbg !12462
+  %arrayidx8 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 3, !dbg !12463
+  store i64 %2, i64* %arrayidx8, align 8, !dbg !12464, !tbaa !6589
+  %3 = call i64 asm sideeffect "mrs $0, actlr_el1", "=r"() #18, !dbg !12465, !srcloc !12466
+  call void @llvm.dbg.value(metadata i64 %3, metadata !12408, metadata !DIExpression()), !dbg !12467
+  %arrayidx12 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 4, !dbg !12468
+  store i64 %3, i64* %arrayidx12, align 8, !dbg !12469, !tbaa !6589
+  %4 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((1) << 12) | ((0) << 8) | ((2) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((1) << 12) | ((0) << 8) | ((2) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12470, !srcloc !12471
+  call void @llvm.dbg.value(metadata i64 %4, metadata !12410, metadata !DIExpression()), !dbg !12472
+  %arrayidx16 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 5, !dbg !12473
+  store i64 %4, i64* %arrayidx16, align 8, !dbg !12474, !tbaa !6589
+  %5 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12475, !srcloc !12476
+  call void @llvm.dbg.value(metadata i64 %5, metadata !12412, metadata !DIExpression()), !dbg !12477
+  %arrayidx20 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 7, !dbg !12478
+  store i64 %5, i64* %arrayidx20, align 8, !dbg !12479, !tbaa !6589
+  %6 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12480, !srcloc !12481
+  call void @llvm.dbg.value(metadata i64 %6, metadata !12414, metadata !DIExpression()), !dbg !12482
+  %arrayidx24 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 8, !dbg !12483
+  store i64 %6, i64* %arrayidx24, align 8, !dbg !12484, !tbaa !6589
+  %7 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((2) << 12) | ((0) << 8) | ((2) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((2) << 12) | ((0) << 8) | ((2) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12485, !srcloc !12486
+  call void @llvm.dbg.value(metadata i64 %7, metadata !12416, metadata !DIExpression()), !dbg !12487
+  %arrayidx28 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 9, !dbg !12488
+  store i64 %7, i64* %arrayidx28, align 8, !dbg !12489, !tbaa !6589
+  %8 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((5) << 12) | ((2) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((5) << 12) | ((2) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12490, !srcloc !12491
+  call void @llvm.dbg.value(metadata i64 %8, metadata !12418, metadata !DIExpression()), !dbg !12492
+  %arrayidx32 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 10, !dbg !12493
+  store i64 %8, i64* %arrayidx32, align 8, !dbg !12494, !tbaa !6589
+  %9 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((5) << 12) | ((1) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((5) << 12) | ((1) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12495, !srcloc !12496
+  call void @llvm.dbg.value(metadata i64 %9, metadata !12420, metadata !DIExpression()), !dbg !12497
+  %arrayidx36 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 11, !dbg !12498
+  store i64 %9, i64* %arrayidx36, align 8, !dbg !12499, !tbaa !6589
+  %10 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((5) << 12) | ((1) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((5) << 12) | ((1) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12500, !srcloc !12501
+  call void @llvm.dbg.value(metadata i64 %10, metadata !12422, metadata !DIExpression()), !dbg !12502
+  %arrayidx40 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 12, !dbg !12503
+  store i64 %10, i64* %arrayidx40, align 8, !dbg !12504, !tbaa !6589
+  %11 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((6) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((6) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12505, !srcloc !12506
+  call void @llvm.dbg.value(metadata i64 %11, metadata !12424, metadata !DIExpression()), !dbg !12507
+  %arrayidx44 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 13, !dbg !12508
+  store i64 %11, i64* %arrayidx44, align 8, !dbg !12509, !tbaa !6589
+  %12 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((10) << 12) | ((2) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((10) << 12) | ((2) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12510, !srcloc !12511
+  call void @llvm.dbg.value(metadata i64 %12, metadata !12426, metadata !DIExpression()), !dbg !12512
+  %arrayidx48 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 14, !dbg !12513
+  store i64 %12, i64* %arrayidx48, align 8, !dbg !12514, !tbaa !6589
+  %13 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((12) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((12) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12515, !srcloc !12516
+  call void @llvm.dbg.value(metadata i64 %13, metadata !12428, metadata !DIExpression()), !dbg !12517
+  %arrayidx52 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 15, !dbg !12518
+  store i64 %13, i64* %arrayidx52, align 8, !dbg !12519, !tbaa !6589
+  %14 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((13) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((13) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12520, !srcloc !12521
+  call void @llvm.dbg.value(metadata i64 %14, metadata !12430, metadata !DIExpression()), !dbg !12522
+  %arrayidx56 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 16, !dbg !12523
+  store i64 %14, i64* %arrayidx56, align 8, !dbg !12524, !tbaa !6589
+  %15 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((10) << 12) | ((3) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((10) << 12) | ((3) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12525, !srcloc !12526
+  call void @llvm.dbg.value(metadata i64 %15, metadata !12432, metadata !DIExpression()), !dbg !12527
+  %arrayidx60 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 20, !dbg !12528
+  store i64 %15, i64* %arrayidx60, align 8, !dbg !12529, !tbaa !6589
+  %16 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((14) << 12) | ((1) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((14) << 12) | ((1) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12530, !srcloc !12531
+  call void @llvm.dbg.value(metadata i64 %16, metadata !12434, metadata !DIExpression()), !dbg !12532
+  %arrayidx64 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 21, !dbg !12533
+  store i64 %16, i64* %arrayidx64, align 8, !dbg !12534, !tbaa !6589
+  %17 = call i64 asm sideeffect "mrs $0, par_el1", "=r"() #18, !dbg !12535, !srcloc !12536
+  call void @llvm.dbg.value(metadata i64 %17, metadata !12436, metadata !DIExpression()), !dbg !12537
+  %arrayidx68 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 22, !dbg !12538
+  store i64 %17, i64* %arrayidx68, align 8, !dbg !12539, !tbaa !6589
+  %18 = call i64 asm sideeffect "mrs $0, tpidr_el1", "=r"() #18, !dbg !12540, !srcloc !12541
+  call void @llvm.dbg.value(metadata i64 %18, metadata !12438, metadata !DIExpression()), !dbg !12542
+  %arrayidx72 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 19, !dbg !12543
+  store i64 %18, i64* %arrayidx72, align 8, !dbg !12544, !tbaa !6589
+  %19 = call i64 asm sideeffect "mrs $0, sp_el1", "=r"() #18, !dbg !12545, !srcloc !12546
+  call void @llvm.dbg.value(metadata i64 %19, metadata !12440, metadata !DIExpression()), !dbg !12547
+  %arrayidx75 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 34, !dbg !12548
+  store i64 %19, i64* %arrayidx75, align 16, !dbg !12549, !tbaa !6675
+  %20 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12550, !srcloc !12551
+  call void @llvm.dbg.value(metadata i64 %20, metadata !12442, metadata !DIExpression()), !dbg !12552
+  %arrayidx79 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 35, !dbg !12553
+  store i64 %20, i64* %arrayidx79, align 8, !dbg !12554, !tbaa !6675
+  %21 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((5) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12555, !srcloc !12556
+  call void @llvm.dbg.value(metadata i64 %21, metadata !12444, metadata !DIExpression()), !dbg !12557
+  %arrayidx83 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 36, !dbg !12558
+  store i64 %21, i64* %arrayidx83, align 16, !dbg !12559, !tbaa !6675
+  ret void, !dbg !12560
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__vm_sysreg_save_common_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12559 {
+define internal fastcc void @__vm_sysreg_save_common_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12561 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12561, metadata !DIExpression()), !dbg !12570
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12562, metadata !DIExpression()), !dbg !12570
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12571
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12563, metadata !DIExpression()), !dbg !12570
-  %mul = shl i32 %vmid, 2, !dbg !12572
-  %add = add i32 %mul, %vcpuid, !dbg !12572
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12564, metadata !DIExpression()), !dbg !12570
-  %idxprom = sext i32 %add to i64, !dbg !12573
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12565, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12570
-  %0 = call i64 asm sideeffect "mrs $0, mdscr_el1", "=r"() #18, !dbg !12574, !srcloc !12575
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12566, metadata !DIExpression()), !dbg !12576
-  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 23, !dbg !12577
-  store i64 %0, i64* %arrayidx1, align 8, !dbg !12578, !tbaa !6589
-  %1 = call i64 asm sideeffect "mrs $0, sp_el0", "=r"() #18, !dbg !12579, !srcloc !12580
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12568, metadata !DIExpression()), !dbg !12581
-  %arrayidx4 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 31, !dbg !12582
-  store i64 %1, i64* %arrayidx4, align 8, !dbg !12583, !tbaa !6675
-  ret void, !dbg !12584
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12563, metadata !DIExpression()), !dbg !12572
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12564, metadata !DIExpression()), !dbg !12572
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12573
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12565, metadata !DIExpression()), !dbg !12572
+  %mul = shl i32 %vmid, 2, !dbg !12574
+  %add = add i32 %mul, %vcpuid, !dbg !12574
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12566, metadata !DIExpression()), !dbg !12572
+  %idxprom = sext i32 %add to i64, !dbg !12575
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12567, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12572
+  %0 = call i64 asm sideeffect "mrs $0, mdscr_el1", "=r"() #18, !dbg !12576, !srcloc !12577
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12568, metadata !DIExpression()), !dbg !12578
+  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 23, !dbg !12579
+  store i64 %0, i64* %arrayidx1, align 8, !dbg !12580, !tbaa !6589
+  %1 = call i64 asm sideeffect "mrs $0, sp_el0", "=r"() #18, !dbg !12581, !srcloc !12582
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12570, metadata !DIExpression()), !dbg !12583
+  %arrayidx4 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 31, !dbg !12584
+  store i64 %1, i64* %arrayidx4, align 8, !dbg !12585, !tbaa !6675
+  ret void, !dbg !12586
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__vm_sysreg_save_user_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12585 {
+define internal fastcc void @__vm_sysreg_save_user_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12587 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12587, metadata !DIExpression()), !dbg !12596
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12588, metadata !DIExpression()), !dbg !12596
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12597
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12589, metadata !DIExpression()), !dbg !12596
-  %mul = shl i32 %vmid, 2, !dbg !12598
-  %add = add i32 %mul, %vcpuid, !dbg !12598
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12590, metadata !DIExpression()), !dbg !12596
-  %idxprom = sext i32 %add to i64, !dbg !12599
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12591, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12596
-  %0 = call i64 asm sideeffect "mrs $0, tpidr_el0", "=r"() #18, !dbg !12600, !srcloc !12601
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12592, metadata !DIExpression()), !dbg !12602
-  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 17, !dbg !12603
-  store i64 %0, i64* %arrayidx1, align 8, !dbg !12604, !tbaa !6589
-  %1 = call i64 asm sideeffect "mrs $0, tpidrro_el0", "=r"() #18, !dbg !12605, !srcloc !12606
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12594, metadata !DIExpression()), !dbg !12607
-  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 18, !dbg !12608
-  store i64 %1, i64* %arrayidx5, align 8, !dbg !12609, !tbaa !6589
-  ret void, !dbg !12610
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12589, metadata !DIExpression()), !dbg !12598
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12590, metadata !DIExpression()), !dbg !12598
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12599
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12591, metadata !DIExpression()), !dbg !12598
+  %mul = shl i32 %vmid, 2, !dbg !12600
+  %add = add i32 %mul, %vcpuid, !dbg !12600
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12592, metadata !DIExpression()), !dbg !12598
+  %idxprom = sext i32 %add to i64, !dbg !12601
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12593, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12598
+  %0 = call i64 asm sideeffect "mrs $0, tpidr_el0", "=r"() #18, !dbg !12602, !srcloc !12603
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12594, metadata !DIExpression()), !dbg !12604
+  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 17, !dbg !12605
+  store i64 %0, i64* %arrayidx1, align 8, !dbg !12606, !tbaa !6589
+  %1 = call i64 asm sideeffect "mrs $0, tpidrro_el0", "=r"() #18, !dbg !12607, !srcloc !12608
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12596, metadata !DIExpression()), !dbg !12609
+  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 7, i32 0, i64 18, !dbg !12610
+  store i64 %1, i64* %arrayidx5, align 8, !dbg !12611, !tbaa !6589
+  ret void, !dbg !12612
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__vm_sysreg_save_el2_return_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12611 {
+define internal fastcc void @__vm_sysreg_save_el2_return_state(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 section ".hyp.text" !dbg !12613 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12613, metadata !DIExpression()), !dbg !12622
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12614, metadata !DIExpression()), !dbg !12622
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12623
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12615, metadata !DIExpression()), !dbg !12622
-  %mul = shl i32 %vmid, 2, !dbg !12624
-  %add = add i32 %mul, %vcpuid, !dbg !12624
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12616, metadata !DIExpression()), !dbg !12622
-  %idxprom = sext i32 %add to i64, !dbg !12625
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12617, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12622
-  %0 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((4) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12626, !srcloc !12627
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12618, metadata !DIExpression()), !dbg !12628
-  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 32, !dbg !12629
-  store i64 %0, i64* %arrayidx1, align 16, !dbg !12630, !tbaa !6675
-  %1 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((4) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12631, !srcloc !12632
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12620, metadata !DIExpression()), !dbg !12633
-  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 33, !dbg !12634
-  store i64 %1, i64* %arrayidx5, align 8, !dbg !12635, !tbaa !6675
-  ret void, !dbg !12636
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12615, metadata !DIExpression()), !dbg !12624
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12616, metadata !DIExpression()), !dbg !12624
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12625
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12617, metadata !DIExpression()), !dbg !12624
+  %mul = shl i32 %vmid, 2, !dbg !12626
+  %add = add i32 %mul, %vcpuid, !dbg !12626
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12618, metadata !DIExpression()), !dbg !12624
+  %idxprom = sext i32 %add to i64, !dbg !12627
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.el2_data* %call, i64 %idxprom), metadata !12619, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 1808, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 33555568, DW_OP_stack_value)), !dbg !12624
+  %0 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((4) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((1) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12628, !srcloc !12629
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12620, metadata !DIExpression()), !dbg !12630
+  %arrayidx1 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 32, !dbg !12631
+  store i64 %0, i64* %arrayidx1, align 16, !dbg !12632, !tbaa !6675
+  %1 = call i64 asm sideeffect ".if 1 == 1\0A661:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((4) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A662:\0A.pushsection .altinstructions,\22a\22\0A .word 661b - .\0A .word 663f - .\0A .hword 11\0A .byte 662b-661b\0A .byte 664f-663f\0A.popsection\0A.subsection 1\0A663:\0A\09\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((4) << 12) | ((0) << 8) | ((0) << 5))\0A\09.purgem\09mrs_s\0A\0A664:\0A\09.previous\0A\09.org\09. - (664b-663b) + (662b-661b)\0A\09.org\09. - (662b-661b) + (664b-663b)\0A.endif\0A", "=r"() #18, !dbg !12633, !srcloc !12634
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12622, metadata !DIExpression()), !dbg !12635
+  %arrayidx5 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 0, i64 33, !dbg !12636
+  store i64 %1, i64* %arrayidx5, align 8, !dbg !12637, !tbaa !6675
+  ret void, !dbg !12638
 }
 
 ; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
-define dso_local void @activate_traps_vhe_load(%struct.kvm_vcpu* nocapture noundef %vcpu) local_unnamed_addr #4 !dbg !12637 {
+define dso_local void @activate_traps_vhe_load(%struct.kvm_vcpu* nocapture noundef %vcpu) local_unnamed_addr #4 !dbg !12639 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %vcpu, metadata !12639, metadata !DIExpression()), !dbg !12640
-  ret void, !dbg !12641
-}
-
-; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
-define dso_local void @deactivate_traps_vhe_put() local_unnamed_addr #4 !dbg !12642 {
-entry:
+  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %vcpu, metadata !12641, metadata !DIExpression()), !dbg !12642
   ret void, !dbg !12643
 }
 
 ; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
-define dso_local i32 @kvm_vcpu_run_vhe(%struct.kvm_vcpu* nocapture noundef readnone %vcpu) local_unnamed_addr #4 !dbg !12644 {
+define dso_local void @deactivate_traps_vhe_put() local_unnamed_addr #4 !dbg !12644 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %vcpu, metadata !12648, metadata !DIExpression()), !dbg !12649
-  ret i32 0, !dbg !12650
+  ret void, !dbg !12645
+}
+
+; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
+define dso_local i32 @kvm_vcpu_run_vhe(%struct.kvm_vcpu* nocapture noundef readnone %vcpu) local_unnamed_addr #4 !dbg !12646 {
+entry:
+  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %vcpu, metadata !12650, metadata !DIExpression()), !dbg !12651
+  ret i32 0, !dbg !12652
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_per_cpu(i32 noundef %vmid, i32 noundef %vcpu_id) unnamed_addr #0 !dbg !12651 {
+define internal fastcc void @set_per_cpu(i32 noundef %vmid, i32 noundef %vcpu_id) unnamed_addr #0 !dbg !12653 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12655, metadata !DIExpression()), !dbg !12659
-  call void @llvm.dbg.value(metadata i32 %vcpu_id, metadata !12656, metadata !DIExpression()), !dbg !12659
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12660
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12657, metadata !DIExpression()), !dbg !12659
-  %call1 = call fastcc i32 @get_cpuid(), !dbg !12661
-  call void @llvm.dbg.value(metadata i32 %call1, metadata !12658, metadata !DIExpression()), !dbg !12659
-  %idxprom = sext i32 %call1 to i64, !dbg !12662
-  %vmid2 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 30, i64 %idxprom, i32 0, !dbg !12663
-  store i32 %vmid, i32* %vmid2, align 16, !dbg !12664, !tbaa !6554
-  %vcpu_id6 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 30, i64 %idxprom, i32 1, !dbg !12665
-  store i32 %vcpu_id, i32* %vcpu_id6, align 4, !dbg !12666, !tbaa !6575
-  ret void, !dbg !12667
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12657, metadata !DIExpression()), !dbg !12661
+  call void @llvm.dbg.value(metadata i32 %vcpu_id, metadata !12658, metadata !DIExpression()), !dbg !12661
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12662
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12659, metadata !DIExpression()), !dbg !12661
+  %call1 = call fastcc i32 @get_cpuid(), !dbg !12663
+  call void @llvm.dbg.value(metadata i32 %call1, metadata !12660, metadata !DIExpression()), !dbg !12661
+  %idxprom = sext i32 %call1 to i64, !dbg !12664
+  %vmid2 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 30, i64 %idxprom, i32 0, !dbg !12665
+  store i32 %vmid, i32* %vmid2, align 16, !dbg !12666, !tbaa !6554
+  %vcpu_id6 = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 30, i64 %idxprom, i32 1, !dbg !12667
+  store i32 %vcpu_id, i32* %vcpu_id6, align 4, !dbg !12668, !tbaa !6575
+  ret void, !dbg !12669
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc %struct.kvm_cpu_context* @get_vcpu_host_cpu_context(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 !dbg !12668 {
+define internal fastcc %struct.kvm_cpu_context* @get_vcpu_host_cpu_context(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 !dbg !12670 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12672, metadata !DIExpression()), !dbg !12677
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12673, metadata !DIExpression()), !dbg !12677
-  %mul = shl i32 %vmid, 2, !dbg !12678
-  %add = add i32 %mul, %vcpuid, !dbg !12678
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12675, metadata !DIExpression()), !dbg !12677
-  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12679
-  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12674, metadata !DIExpression()), !dbg !12677
-  %idxprom = sext i32 %add to i64, !dbg !12680
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !12676, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 9056, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 158832, DW_OP_stack_value)), !dbg !12677
-  %host_cpu_context = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 14, !dbg !12681
-  %0 = load %struct.kvm_cpu_context*, %struct.kvm_cpu_context** %host_cpu_context, align 8, !dbg !12681, !tbaa !12682
-  %1 = ptrtoint %struct.kvm_cpu_context* %0 to i64, !dbg !12681
-  %call1 = call fastcc i64 @__kern_hyp_va(i64 noundef %1), !dbg !12681
-  %2 = inttoptr i64 %call1 to %struct.kvm_cpu_context*, !dbg !12681
-  ret %struct.kvm_cpu_context* %2, !dbg !12683
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12674, metadata !DIExpression()), !dbg !12679
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12675, metadata !DIExpression()), !dbg !12679
+  %mul = shl i32 %vmid, 2, !dbg !12680
+  %add = add i32 %mul, %vcpuid, !dbg !12680
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12677, metadata !DIExpression()), !dbg !12679
+  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12681
+  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12676, metadata !DIExpression()), !dbg !12679
+  %idxprom = sext i32 %add to i64, !dbg !12682
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !12678, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 9056, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 158832, DW_OP_stack_value)), !dbg !12679
+  %host_cpu_context = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 14, !dbg !12683
+  %0 = load %struct.kvm_cpu_context*, %struct.kvm_cpu_context** %host_cpu_context, align 8, !dbg !12683, !tbaa !12684
+  %1 = ptrtoint %struct.kvm_cpu_context* %0 to i64, !dbg !12683
+  %call1 = call fastcc i64 @__kern_hyp_va(i64 noundef %1), !dbg !12683
+  %2 = inttoptr i64 %call1 to %struct.kvm_cpu_context*, !dbg !12683
+  ret %struct.kvm_cpu_context* %2, !dbg !12685
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_host_running_vcpu(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 !dbg !12684 {
+define internal fastcc void @set_host_running_vcpu(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 !dbg !12686 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12688, metadata !DIExpression()), !dbg !12693
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12689, metadata !DIExpression()), !dbg !12693
-  %mul = shl i32 %vmid, 2, !dbg !12694
-  %add = add i32 %mul, %vcpuid, !dbg !12694
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12691, metadata !DIExpression()), !dbg !12693
-  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12695
-  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12690, metadata !DIExpression()), !dbg !12693
-  %idxprom = sext i32 %add to i64, !dbg !12696
-  %arrayidx = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, !dbg !12696
-  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %arrayidx, metadata !12692, metadata !DIExpression()), !dbg !12693
-  %host_cpu_context = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 14, !dbg !12697
-  %0 = load %struct.kvm_cpu_context*, %struct.kvm_cpu_context** %host_cpu_context, align 8, !dbg !12697, !tbaa !12682
-  %1 = ptrtoint %struct.kvm_cpu_context* %0 to i64, !dbg !12697
-  %call1 = call fastcc i64 @__kern_hyp_va(i64 noundef %1), !dbg !12697
-  %2 = inttoptr i64 %call1 to %struct.kvm_cpu_context*, !dbg !12697
-  %__hyp_running_vcpu = getelementptr inbounds %struct.kvm_cpu_context, %struct.kvm_cpu_context* %2, i64 0, i32 2, !dbg !12698
-  store %struct.kvm_vcpu* %arrayidx, %struct.kvm_vcpu** %__hyp_running_vcpu, align 8, !dbg !12699, !tbaa !12700
-  ret void, !dbg !12701
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12690, metadata !DIExpression()), !dbg !12695
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12691, metadata !DIExpression()), !dbg !12695
+  %mul = shl i32 %vmid, 2, !dbg !12696
+  %add = add i32 %mul, %vcpuid, !dbg !12696
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12693, metadata !DIExpression()), !dbg !12695
+  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12697
+  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12692, metadata !DIExpression()), !dbg !12695
+  %idxprom = sext i32 %add to i64, !dbg !12698
+  %arrayidx = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, !dbg !12698
+  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %arrayidx, metadata !12694, metadata !DIExpression()), !dbg !12695
+  %host_cpu_context = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 14, !dbg !12699
+  %0 = load %struct.kvm_cpu_context*, %struct.kvm_cpu_context** %host_cpu_context, align 8, !dbg !12699, !tbaa !12684
+  %1 = ptrtoint %struct.kvm_cpu_context* %0 to i64, !dbg !12699
+  %call1 = call fastcc i64 @__kern_hyp_va(i64 noundef %1), !dbg !12699
+  %2 = inttoptr i64 %call1 to %struct.kvm_cpu_context*, !dbg !12699
+  %__hyp_running_vcpu = getelementptr inbounds %struct.kvm_cpu_context, %struct.kvm_cpu_context* %2, i64 0, i32 2, !dbg !12700
+  store %struct.kvm_vcpu* %arrayidx, %struct.kvm_vcpu** %__hyp_running_vcpu, align 8, !dbg !12701, !tbaa !12702
+  ret void, !dbg !12703
 }
 
 declare dso_local void @__sysreg_save_state_nvhe(%struct.kvm_cpu_context* noundef) local_unnamed_addr #9
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_tpidr_el2(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !12702 {
+define internal fastcc void @set_tpidr_el2(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !12704 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %val, metadata !12705, metadata !DIExpression()), !dbg !12708
-  call void @llvm.dbg.value(metadata i64 %val, metadata !12706, metadata !DIExpression()), !dbg !12709
-  call void asm sideeffect "msr tpidr_el2, ${0:x}", "rZ"(i64 %val) #18, !dbg !12710, !srcloc !12711
-  ret void, !dbg !12712
+  call void @llvm.dbg.value(metadata i64 %val, metadata !12707, metadata !DIExpression()), !dbg !12710
+  call void @llvm.dbg.value(metadata i64 %val, metadata !12708, metadata !DIExpression()), !dbg !12711
+  call void asm sideeffect "msr tpidr_el2, ${0:x}", "rZ"(i64 %val) #18, !dbg !12712, !srcloc !12713
+  ret void, !dbg !12714
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__activate_traps(%struct.kvm_vcpu* nocapture noundef readonly %vcpu) unnamed_addr #0 section ".hyp.text" !dbg !12713 {
+define internal fastcc void @__activate_traps(%struct.kvm_vcpu* nocapture noundef readonly %vcpu) unnamed_addr #0 section ".hyp.text" !dbg !12715 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %vcpu, metadata !12715, metadata !DIExpression()), !dbg !12717
-  call void @llvm.dbg.value(metadata i64 36515112507, metadata !12716, metadata !DIExpression()), !dbg !12717
-  %hcr_el2 = getelementptr inbounds %struct.kvm_vcpu, %struct.kvm_vcpu* %vcpu, i64 0, i32 29, i32 6, !dbg !12718
-  %0 = load i64, i64* %hcr_el2, align 16, !dbg !12718, !tbaa !12720
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12716, metadata !DIExpression(DW_OP_constu, 128, DW_OP_and, DW_OP_constu, 36515112507, DW_OP_or, DW_OP_stack_value)), !dbg !12717
-  %1 = and i64 %0, 192, !dbg !12721
-  %hcr.1 = or i64 %1, 36515112507, !dbg !12721
-  call void @llvm.dbg.value(metadata i64 %hcr.1, metadata !12716, metadata !DIExpression()), !dbg !12717
-  call fastcc void @set_hcr_el2(i64 noundef %hcr.1), !dbg !12722
-  call fastcc void @__activate_traps_nvhe(), !dbg !12723
-  ret void, !dbg !12724
+  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %vcpu, metadata !12717, metadata !DIExpression()), !dbg !12719
+  call void @llvm.dbg.value(metadata i64 36515112507, metadata !12718, metadata !DIExpression()), !dbg !12719
+  %hcr_el2 = getelementptr inbounds %struct.kvm_vcpu, %struct.kvm_vcpu* %vcpu, i64 0, i32 29, i32 6, !dbg !12720
+  %0 = load i64, i64* %hcr_el2, align 16, !dbg !12720, !tbaa !12722
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12718, metadata !DIExpression(DW_OP_constu, 128, DW_OP_and, DW_OP_constu, 36515112507, DW_OP_or, DW_OP_stack_value)), !dbg !12719
+  %1 = and i64 %0, 192, !dbg !12723
+  %hcr.1 = or i64 %1, 36515112507, !dbg !12723
+  call void @llvm.dbg.value(metadata i64 %hcr.1, metadata !12718, metadata !DIExpression()), !dbg !12719
+  call fastcc void @set_hcr_el2(i64 noundef %hcr.1), !dbg !12724
+  call fastcc void @__activate_traps_nvhe(), !dbg !12725
+  ret void, !dbg !12726
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__activate_vm(i64 noundef %vmid) unnamed_addr #0 section ".hyp.text" !dbg !12725 {
+define internal fastcc void @__activate_vm(i64 noundef %vmid) unnamed_addr #0 section ".hyp.text" !dbg !12727 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %vmid, metadata !12727, metadata !DIExpression()), !dbg !12729
-  %conv = trunc i64 %vmid to i32, !dbg !12730
-  %call = call fastcc i64 @get_pt_vttbr(i32 noundef %conv), !dbg !12731
-  call void @llvm.dbg.value(metadata i64 %call, metadata !12728, metadata !DIExpression()), !dbg !12729
-  call fastcc void @set_vttbr_el2(i64 noundef %call), !dbg !12732
-  ret void, !dbg !12733
+  call void @llvm.dbg.value(metadata i64 %vmid, metadata !12729, metadata !DIExpression()), !dbg !12731
+  %conv = trunc i64 %vmid to i32, !dbg !12732
+  %call = call fastcc i64 @get_pt_vttbr(i32 noundef %conv), !dbg !12733
+  call void @llvm.dbg.value(metadata i64 %call, metadata !12730, metadata !DIExpression()), !dbg !12731
+  call fastcc void @set_vttbr_el2(i64 noundef %call), !dbg !12734
+  ret void, !dbg !12735
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i1 @get_vcpu_was_preempted(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 !dbg !12734 {
+define internal fastcc i1 @get_vcpu_was_preempted(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 !dbg !12736 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12738, metadata !DIExpression()), !dbg !12743
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12739, metadata !DIExpression()), !dbg !12743
-  %mul = shl i32 %vmid, 2, !dbg !12744
-  %add = add i32 %mul, %vcpuid, !dbg !12744
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12741, metadata !DIExpression()), !dbg !12743
-  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12745
-  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12740, metadata !DIExpression()), !dbg !12743
-  %idxprom = sext i32 %add to i64, !dbg !12746
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !12742, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 9056, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 158832, DW_OP_stack_value)), !dbg !12743
-  %was_preempted = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 1, !dbg !12747
-  %0 = load i8, i8* %was_preempted, align 4, !dbg !12747, !tbaa !12748, !range !7290
-  %tobool = icmp ne i8 %0, 0, !dbg !12747
-  ret i1 %tobool, !dbg !12749
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12740, metadata !DIExpression()), !dbg !12745
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12741, metadata !DIExpression()), !dbg !12745
+  %mul = shl i32 %vmid, 2, !dbg !12746
+  %add = add i32 %mul, %vcpuid, !dbg !12746
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12743, metadata !DIExpression()), !dbg !12745
+  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12747
+  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12742, metadata !DIExpression()), !dbg !12745
+  %idxprom = sext i32 %add to i64, !dbg !12748
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !12744, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 9056, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 158832, DW_OP_stack_value)), !dbg !12745
+  %was_preempted = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 1, !dbg !12749
+  %0 = load i8, i8* %was_preempted, align 4, !dbg !12749, !tbaa !12750, !range !7290
+  %tobool = icmp ne i8 %0, 0, !dbg !12749
+  ret i1 %tobool, !dbg !12751
 }
 
-declare !dbg !12750 dso_local void @hypsec_tlb_flush_local_vmid() local_unnamed_addr #9
+declare !dbg !12752 dso_local void @hypsec_tlb_flush_local_vmid() local_unnamed_addr #9
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_vcpu_was_preempted(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 !dbg !12751 {
+define internal fastcc void @set_vcpu_was_preempted(i32 noundef %vmid, i32 noundef %vcpuid) unnamed_addr #0 !dbg !12753 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12755, metadata !DIExpression()), !dbg !12761
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12756, metadata !DIExpression()), !dbg !12761
-  call void @llvm.dbg.value(metadata i8 0, metadata !12757, metadata !DIExpression()), !dbg !12761
-  %mul = shl i32 %vmid, 2, !dbg !12762
-  %add = add i32 %mul, %vcpuid, !dbg !12762
-  call void @llvm.dbg.value(metadata i32 %add, metadata !12759, metadata !DIExpression()), !dbg !12761
-  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12763
-  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12758, metadata !DIExpression()), !dbg !12761
-  %idxprom = sext i32 %add to i64, !dbg !12764
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !12760, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 9056, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 158832, DW_OP_stack_value)), !dbg !12761
-  %was_preempted = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 1, !dbg !12765
-  store i8 0, i8* %was_preempted, align 4, !dbg !12766, !tbaa !12748
-  ret void, !dbg !12767
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12757, metadata !DIExpression()), !dbg !12763
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12758, metadata !DIExpression()), !dbg !12763
+  call void @llvm.dbg.value(metadata i8 0, metadata !12759, metadata !DIExpression()), !dbg !12763
+  %mul = shl i32 %vmid, 2, !dbg !12764
+  %add = add i32 %mul, %vcpuid, !dbg !12764
+  call void @llvm.dbg.value(metadata i32 %add, metadata !12761, metadata !DIExpression()), !dbg !12763
+  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !12765
+  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !12760, metadata !DIExpression()), !dbg !12763
+  %idxprom = sext i32 %add to i64, !dbg !12766
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !12762, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 9056, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 158832, DW_OP_stack_value)), !dbg !12763
+  %was_preempted = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 1, !dbg !12767
+  store i8 0, i8* %was_preempted, align 4, !dbg !12768, !tbaa !12750
+  ret void, !dbg !12769
 }
 
 declare dso_local void @__timer_enable_traps(%struct.kvm_vcpu* noundef) local_unnamed_addr #9
@@ -8327,82 +8327,82 @@ declare dso_local void @__fpsimd_restore_state(%struct.user_fpsimd_state* nounde
 declare dso_local i64 @__guest_enter(%struct.kvm_cpu_context* noundef, %struct.kvm_cpu_context* noundef) local_unnamed_addr #9
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc nonnull %struct.kvm_cpu_context* @get_core_context() unnamed_addr #0 !dbg !12768 {
+define internal fastcc nonnull %struct.kvm_cpu_context* @get_core_context() unnamed_addr #0 !dbg !12770 {
 entry:
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12774
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12772, metadata !DIExpression()), !dbg !12775
-  %call1 = call fastcc i32 @get_cpuid(), !dbg !12776
-  call void @llvm.dbg.value(metadata i32 %call1, metadata !12773, metadata !DIExpression()), !dbg !12775
-  %idxprom = sext i32 %call1 to i64, !dbg !12777
-  %core_ctxt = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 30, i64 %idxprom, i32 2, !dbg !12778
-  ret %struct.kvm_cpu_context* %core_ctxt, !dbg !12779
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12776
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12774, metadata !DIExpression()), !dbg !12777
+  %call1 = call fastcc i32 @get_cpuid(), !dbg !12778
+  call void @llvm.dbg.value(metadata i32 %call1, metadata !12775, metadata !DIExpression()), !dbg !12777
+  %idxprom = sext i32 %call1 to i64, !dbg !12779
+  %core_ctxt = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 30, i64 %idxprom, i32 2, !dbg !12780
+  ret %struct.kvm_cpu_context* %core_ctxt, !dbg !12781
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i1 @fixup_guest_exit(i32 noundef %vmid, i32 noundef %vcpuid, i64 noundef %exit_code) unnamed_addr #0 section ".hyp.text" !dbg !12780 {
+define internal fastcc i1 @fixup_guest_exit(i32 noundef %vmid, i32 noundef %vcpuid, i64 noundef %exit_code) unnamed_addr #0 section ".hyp.text" !dbg !12782 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12784, metadata !DIExpression()), !dbg !12799
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12785, metadata !DIExpression()), !dbg !12799
-  call void @llvm.dbg.value(metadata i64 %exit_code, metadata !12786, metadata !DIExpression()), !dbg !12799
-  call void @llvm.dbg.value(metadata i32 0, metadata !12787, metadata !DIExpression()), !dbg !12799
-  %and = and i64 %exit_code, 2147483647, !dbg !12800
-  %cmp.not = icmp eq i64 %and, 0, !dbg !12802
-  br i1 %cmp.not, label %if.end, label %if.then, !dbg !12803
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12786, metadata !DIExpression()), !dbg !12801
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12787, metadata !DIExpression()), !dbg !12801
+  call void @llvm.dbg.value(metadata i64 %exit_code, metadata !12788, metadata !DIExpression()), !dbg !12801
+  call void @llvm.dbg.value(metadata i32 0, metadata !12789, metadata !DIExpression()), !dbg !12801
+  %and = and i64 %exit_code, 2147483647, !dbg !12802
+  %cmp.not = icmp eq i64 %and, 0, !dbg !12804
+  br i1 %cmp.not, label %if.end, label %if.then, !dbg !12805
 
 if.then:                                          ; preds = %entry
-  %call = call fastcc i64 @get_esr_el2(), !dbg !12804
-  %conv = trunc i64 %call to i32, !dbg !12804
-  call void @llvm.dbg.value(metadata i32 %conv, metadata !12787, metadata !DIExpression()), !dbg !12799
-  call fastcc void @set_vcpu_esr_el2(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %conv), !dbg !12806
-  call fastcc void @set_shadow_ctxt_esr(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %conv), !dbg !12807
-  br label %if.end, !dbg !12808
+  %call = call fastcc i64 @get_esr_el2(), !dbg !12806
+  %conv = trunc i64 %call to i32, !dbg !12806
+  call void @llvm.dbg.value(metadata i32 %conv, metadata !12789, metadata !DIExpression()), !dbg !12801
+  call fastcc void @set_vcpu_esr_el2(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %conv), !dbg !12808
+  call fastcc void @set_shadow_ctxt_esr(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %conv), !dbg !12809
+  br label %if.end, !dbg !12810
 
 if.end:                                           ; preds = %if.then, %entry
-  %esr_el2.0 = phi i32 [ %conv, %if.then ], [ 0, %entry ], !dbg !12799
-  call void @llvm.dbg.value(metadata i32 %esr_el2.0, metadata !12787, metadata !DIExpression()), !dbg !12799
-  %cmp1.not = icmp eq i64 %exit_code, 2, !dbg !12809
-  br i1 %cmp1.not, label %if.end4, label %exit, !dbg !12811
+  %esr_el2.0 = phi i32 [ %conv, %if.then ], [ 0, %entry ], !dbg !12801
+  call void @llvm.dbg.value(metadata i32 %esr_el2.0, metadata !12789, metadata !DIExpression()), !dbg !12801
+  %cmp1.not = icmp eq i64 %exit_code, 2, !dbg !12811
+  br i1 %cmp1.not, label %if.end4, label %exit, !dbg !12813
 
 if.end4:                                          ; preds = %if.end
-  %0 = lshr i32 %esr_el2.0, 26, !dbg !12812
-  call void @llvm.dbg.value(metadata i32 %0, metadata !12788, metadata !DIExpression()), !dbg !12799
-  %cmp9 = icmp eq i32 %0, 22, !dbg !12813
-  br i1 %cmp9, label %if.then11, label %if.else16, !dbg !12814
+  %0 = lshr i32 %esr_el2.0, 26, !dbg !12814
+  call void @llvm.dbg.value(metadata i32 %0, metadata !12790, metadata !DIExpression()), !dbg !12801
+  %cmp9 = icmp eq i32 %0, 22, !dbg !12815
+  br i1 %cmp9, label %if.then11, label %if.else16, !dbg !12816
 
 if.then11:                                        ; preds = %if.end4
-  %call12 = call i32 @handle_pvops(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12815
-  %cmp13 = icmp sgt i32 %call12, 0, !dbg !12818
-  br label %cleanup, !dbg !12819
+  %call12 = call i32 @handle_pvops(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !12817
+  %cmp13 = icmp sgt i32 %call12, 0, !dbg !12820
+  br label %cleanup, !dbg !12821
 
 if.else16:                                        ; preds = %if.end4
-  %1 = and i32 %esr_el2.0, -335544320, !dbg !12820
-  %2 = icmp eq i32 %1, -2147483648, !dbg !12820
-  br i1 %2, label %if.then23, label %if.else27, !dbg !12820
+  %1 = and i32 %esr_el2.0, -335544320, !dbg !12822
+  %2 = icmp eq i32 %1, -2147483648, !dbg !12822
+  br i1 %2, label %if.then23, label %if.else27, !dbg !12822
 
 if.then23:                                        ; preds = %if.else16
-  %call24 = call fastcc i1 @__populate_fault_info(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %esr_el2.0), !dbg !12821
-  br i1 %call24, label %exit, label %cleanup, !dbg !12824
+  %call24 = call fastcc i1 @__populate_fault_info(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %esr_el2.0), !dbg !12823
+  br i1 %call24, label %exit, label %cleanup, !dbg !12826
 
 if.else27:                                        ; preds = %if.else16
-  %cmp29 = icmp eq i32 %0, 24, !dbg !12825
-  br i1 %cmp29, label %if.then31, label %exit, !dbg !12826
+  %cmp29 = icmp eq i32 %0, 24, !dbg !12827
+  br i1 %cmp29, label %if.then31, label %exit, !dbg !12828
 
 if.then31:                                        ; preds = %if.else27
-  %3 = call i64 asm sideeffect "mrs $0, elr_el2", "=r"() #18, !dbg !12827, !srcloc !12828
-  call void @llvm.dbg.value(metadata i64 %3, metadata !12794, metadata !DIExpression()), !dbg !12829
-  call void @llvm.dbg.value(metadata i64 %3, metadata !12789, metadata !DIExpression()), !dbg !12830
-  %add = add i64 %3, 4, !dbg !12831
-  call void @llvm.dbg.value(metadata i64 %add, metadata !12796, metadata !DIExpression()), !dbg !12832
-  call void asm sideeffect "msr elr_el2, ${0:x}", "rZ"(i64 %add) #18, !dbg !12831, !srcloc !12833
+  %3 = call i64 asm sideeffect "mrs $0, elr_el2", "=r"() #18, !dbg !12829, !srcloc !12830
+  call void @llvm.dbg.value(metadata i64 %3, metadata !12796, metadata !DIExpression()), !dbg !12831
+  call void @llvm.dbg.value(metadata i64 %3, metadata !12791, metadata !DIExpression()), !dbg !12832
+  %add = add i64 %3, 4, !dbg !12833
+  call void @llvm.dbg.value(metadata i64 %add, metadata !12798, metadata !DIExpression()), !dbg !12834
+  call void asm sideeffect "msr elr_el2, ${0:x}", "rZ"(i64 %add) #18, !dbg !12833, !srcloc !12835
   br label %cleanup
 
 exit:                                             ; preds = %if.else27, %if.then23, %if.end
-  call void @llvm.dbg.label(metadata !12798), !dbg !12834
-  br label %cleanup, !dbg !12835
+  call void @llvm.dbg.label(metadata !12800), !dbg !12836
+  br label %cleanup, !dbg !12837
 
 cleanup:                                          ; preds = %if.then23, %if.then11, %exit, %if.then31
-  %retval.0 = phi i1 [ false, %exit ], [ true, %if.then31 ], [ %cmp13, %if.then11 ], [ true, %if.then23 ], !dbg !12799
-  ret i1 %retval.0, !dbg !12836
+  %retval.0 = phi i1 [ false, %exit ], [ true, %if.then31 ], [ %cmp13, %if.then11 ], [ true, %if.then23 ], !dbg !12801
+  ret i1 %retval.0, !dbg !12838
 }
 
 declare dso_local void @__sysreg32_save_state(%struct.kvm_vcpu* noundef) local_unnamed_addr #9
@@ -8410,432 +8410,432 @@ declare dso_local void @__sysreg32_save_state(%struct.kvm_vcpu* noundef) local_u
 declare dso_local void @__timer_disable_traps(%struct.kvm_vcpu* noundef) local_unnamed_addr #9
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__deactivate_traps() unnamed_addr #0 section ".hyp.text" !dbg !12837 {
+define internal fastcc void @__deactivate_traps() unnamed_addr #0 section ".hyp.text" !dbg !12839 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* undef, metadata !12839, metadata !DIExpression()), !dbg !12840
-  call fastcc void @__deactivate_traps_nvhe(), !dbg !12841
-  ret void, !dbg !12842
+  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* undef, metadata !12841, metadata !DIExpression()), !dbg !12842
+  call fastcc void @__deactivate_traps_nvhe(), !dbg !12843
+  ret void, !dbg !12844
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__host_el2_restore_state() unnamed_addr #0 section ".hyp.text" !dbg !12843 {
+define internal fastcc void @__host_el2_restore_state() unnamed_addr #0 section ".hyp.text" !dbg !12845 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.el2_data* undef, metadata !12847, metadata !DIExpression()), !dbg !12848
-  %call = call fastcc i64 @get_host_vttbr(), !dbg !12849
-  call fastcc void @set_vttbr_el2(i64 noundef %call), !dbg !12850
-  call fastcc void @set_hcr_el2(i64 noundef 2147483681), !dbg !12851
-  call fastcc void @set_tpidr_el2(i64 noundef 0), !dbg !12852
-  ret void, !dbg !12853
+  call void @llvm.dbg.value(metadata %struct.el2_data* undef, metadata !12849, metadata !DIExpression()), !dbg !12850
+  %call = call fastcc i64 @get_host_vttbr(), !dbg !12851
+  call fastcc void @set_vttbr_el2(i64 noundef %call), !dbg !12852
+  call fastcc void @set_hcr_el2(i64 noundef 2147483681), !dbg !12853
+  call fastcc void @set_tpidr_el2(i64 noundef 0), !dbg !12854
+  ret void, !dbg !12855
 }
 
 declare dso_local void @__sysreg_restore_state_nvhe(%struct.kvm_cpu_context* noundef) local_unnamed_addr #9
 
 ; Function Attrs: mustprogress nofree noinline norecurse noreturn nosync nounwind readnone uwtable willreturn
-define dso_local void @hyp_panic(%struct.kvm_cpu_context* nocapture noundef %host_ctxt) local_unnamed_addr #16 section ".hyp.text" !dbg !12854 {
+define dso_local void @hyp_panic(%struct.kvm_cpu_context* nocapture noundef %host_ctxt) local_unnamed_addr #16 section ".hyp.text" !dbg !12856 {
 entry:
-  unreachable, !dbg !12859
+  unreachable, !dbg !12861
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define dso_local i32 @handle_pvops(i32 noundef %vmid, i32 noundef %vcpuid) local_unnamed_addr #0 section ".hyp.text" !dbg !12861 {
+define dso_local i32 @handle_pvops(i32 noundef %vmid, i32 noundef %vcpuid) local_unnamed_addr #0 section ".hyp.text" !dbg !12863 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12863, metadata !DIExpression()), !dbg !12868
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12864, metadata !DIExpression()), !dbg !12868
-  %call = call fastcc i64 @get_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef 0), !dbg !12869
-  call void @llvm.dbg.value(metadata i64 %call, metadata !12865, metadata !DIExpression()), !dbg !12868
-  %call1 = call fastcc i64 @get_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef 1), !dbg !12870
-  call void @llvm.dbg.value(metadata i64 %call1, metadata !12866, metadata !DIExpression()), !dbg !12868
-  %call2 = call fastcc i64 @get_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef 2), !dbg !12871
-  call void @llvm.dbg.value(metadata i64 %call2, metadata !12867, metadata !DIExpression()), !dbg !12868
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !12865, metadata !DIExpression()), !dbg !12870
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !12866, metadata !DIExpression()), !dbg !12870
+  %call = call fastcc i64 @get_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef 0), !dbg !12871
+  call void @llvm.dbg.value(metadata i64 %call, metadata !12867, metadata !DIExpression()), !dbg !12870
+  %call1 = call fastcc i64 @get_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef 1), !dbg !12872
+  call void @llvm.dbg.value(metadata i64 %call1, metadata !12868, metadata !DIExpression()), !dbg !12870
+  %call2 = call fastcc i64 @get_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef 2), !dbg !12873
+  call void @llvm.dbg.value(metadata i64 %call2, metadata !12869, metadata !DIExpression()), !dbg !12870
   switch i64 %call, label %cleanup [
     i64 528384, label %sw.bb
     i64 532480, label %sw.bb3
-  ], !dbg !12872
+  ], !dbg !12874
 
 sw.bb:                                            ; preds = %entry
-  call void @v_grant_stage2_sg_gpa(i32 noundef %vmid, i64 noundef %call1, i64 noundef %call2), !dbg !12873
-  br label %cleanup, !dbg !12875
-
-sw.bb3:                                           ; preds = %entry
-  call void @v_revoke_stage2_sg_gpa(i32 noundef %vmid, i64 noundef %call1, i64 noundef %call2), !dbg !12876
+  call void @v_grant_stage2_sg_gpa(i32 noundef %vmid, i64 noundef %call1, i64 noundef %call2), !dbg !12875
   br label %cleanup, !dbg !12877
 
+sw.bb3:                                           ; preds = %entry
+  call void @v_revoke_stage2_sg_gpa(i32 noundef %vmid, i64 noundef %call1, i64 noundef %call2), !dbg !12878
+  br label %cleanup, !dbg !12879
+
 cleanup:                                          ; preds = %sw.bb, %sw.bb3, %entry
-  %retval.0 = phi i32 [ -22, %entry ], [ 1, %sw.bb3 ], [ 1, %sw.bb ], !dbg !12868
-  ret i32 %retval.0, !dbg !12878
+  %retval.0 = phi i32 [ -22, %entry ], [ 1, %sw.bb3 ], [ 1, %sw.bb ], !dbg !12870
+  ret i32 %retval.0, !dbg !12880
 }
 
 ; Function Attrs: mustprogress nofree noinline nosync nounwind readnone uwtable willreturn
-define internal fastcc i64 @read_cpuid_mpidr() unnamed_addr #7 !dbg !12879 {
+define internal fastcc i64 @read_cpuid_mpidr() unnamed_addr #7 !dbg !12881 {
 entry:
-  %0 = call i64 asm sideeffect "\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((0) << 12) | ((0) << 8) | ((5) << 5))\0A\09.purgem\09mrs_s\0A", "=r"() #18, !dbg !12884, !srcloc !12885
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12882, metadata !DIExpression()), !dbg !12886
-  ret i64 %0, !dbg !12887
+  %0 = call i64 asm sideeffect "\09.irp\09num,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30\0A\09.equ\09.L__reg_num_x\\num, \\num\0A\09.endr\0A\09.equ\09.L__reg_num_xzr, 31\0A\09.macro\09mrs_s, rt, sreg\0A.inst (0xd5200000|(\\sreg)|(.L__reg_num_\\rt))\0A\09\09.endm\0A\09mrs_s $0, (((3) << 19) | ((0) << 16) | ((0) << 12) | ((0) << 8) | ((5) << 5))\0A\09.purgem\09mrs_s\0A", "=r"() #18, !dbg !12886, !srcloc !12887
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12884, metadata !DIExpression()), !dbg !12888
+  ret i64 %0, !dbg !12889
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @_arch_spin_lock(%struct.b_arch_spinlock_t* noundef %lock) unnamed_addr #0 !dbg !12888 {
+define internal fastcc void @_arch_spin_lock(%struct.b_arch_spinlock_t* noundef %lock) unnamed_addr #0 !dbg !12890 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.b_arch_spinlock_t* %lock, metadata !12890, metadata !DIExpression()), !dbg !12892
-  %lock1 = getelementptr inbounds %struct.b_arch_spinlock_t, %struct.b_arch_spinlock_t* %lock, i64 0, i32 0, !dbg !12893
-  %0 = call i32 asm sideeffect "\09sevl\0A1:\09wfe\0A2:\09ldaxr\09${0:w}, $1\0A\09cbnz\09${0:w}, 1b\0A\09stxr\09${0:w}, ${2:w}, $1\0A\09cbnz\09${0:w}, 2b\0A", "=&r,=*Q,r,*Q,~{cc},~{memory}"(i32* elementtype(i32) %lock1, i32 1, i32* elementtype(i32) %lock1) #18, !dbg !12894, !srcloc !12895
-  call void @llvm.dbg.value(metadata i32 %0, metadata !12891, metadata !DIExpression()), !dbg !12892
-  ret void, !dbg !12896
+  call void @llvm.dbg.value(metadata %struct.b_arch_spinlock_t* %lock, metadata !12892, metadata !DIExpression()), !dbg !12894
+  %lock1 = getelementptr inbounds %struct.b_arch_spinlock_t, %struct.b_arch_spinlock_t* %lock, i64 0, i32 0, !dbg !12895
+  %0 = call i32 asm sideeffect "\09sevl\0A1:\09wfe\0A2:\09ldaxr\09${0:w}, $1\0A\09cbnz\09${0:w}, 1b\0A\09stxr\09${0:w}, ${2:w}, $1\0A\09cbnz\09${0:w}, 2b\0A", "=&r,=*Q,r,*Q,~{cc},~{memory}"(i32* elementtype(i32) %lock1, i32 1, i32* elementtype(i32) %lock1) #18, !dbg !12896, !srcloc !12897
+  call void @llvm.dbg.value(metadata i32 %0, metadata !12893, metadata !DIExpression()), !dbg !12894
+  ret void, !dbg !12898
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @waituart() unnamed_addr #0 section ".hyp.text" !dbg !12897 {
+define internal fastcc i64 @waituart() unnamed_addr #0 section ".hyp.text" !dbg !12899 {
 entry:
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12905
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12904, metadata !DIExpression()), !dbg !12906
-  %pl011_base = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 8, !dbg !12907
-  %0 = load i64, i64* %pl011_base, align 8, !dbg !12907, !tbaa !8103
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12902, metadata !DIExpression()), !dbg !12906
-  call void @llvm.dbg.value(metadata i64 24, metadata !12903, metadata !DIExpression()), !dbg !12906
-  %1 = call i64 asm sideeffect "ldrb   w26, [$1, $2]\0A\09dsb\09ld\0A\09mov\09$0, x26\0A\09", "=r,r,r,~{x26},~{cc}"(i64 %0, i64 24) #18, !dbg !12908, !srcloc !12909
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12901, metadata !DIExpression()), !dbg !12906
-  ret i64 %1, !dbg !12910
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12907
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12906, metadata !DIExpression()), !dbg !12908
+  %pl011_base = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 8, !dbg !12909
+  %0 = load i64, i64* %pl011_base, align 8, !dbg !12909, !tbaa !8103
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12904, metadata !DIExpression()), !dbg !12908
+  call void @llvm.dbg.value(metadata i64 24, metadata !12905, metadata !DIExpression()), !dbg !12908
+  %1 = call i64 asm sideeffect "ldrb   w26, [$1, $2]\0A\09dsb\09ld\0A\09mov\09$0, x26\0A\09", "=r,r,r,~{x26},~{cc}"(i64 %0, i64 24) #18, !dbg !12910, !srcloc !12911
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12903, metadata !DIExpression()), !dbg !12908
+  ret i64 %1, !dbg !12912
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @cpu_relax() unnamed_addr #0 !dbg !12911 {
+define internal fastcc void @cpu_relax() unnamed_addr #0 !dbg !12913 {
 entry:
-  call void asm sideeffect "yield", "~{memory}"() #18, !dbg !12912, !srcloc !12913
-  ret void, !dbg !12914
+  call void asm sideeffect "yield", "~{memory}"() #18, !dbg !12914, !srcloc !12915
+  ret void, !dbg !12916
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @_arch_spin_unlock(%struct.b_arch_spinlock_t* noundef %lock) unnamed_addr #0 !dbg !12915 {
+define internal fastcc void @_arch_spin_unlock(%struct.b_arch_spinlock_t* noundef %lock) unnamed_addr #0 !dbg !12917 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.b_arch_spinlock_t* %lock, metadata !12917, metadata !DIExpression()), !dbg !12918
-  %lock1 = getelementptr inbounds %struct.b_arch_spinlock_t, %struct.b_arch_spinlock_t* %lock, i64 0, i32 0, !dbg !12919
-  call void asm sideeffect "\09stlr\09${1:w}, $0\0A", "=*Q,r,~{memory}"(i32* elementtype(i32) %lock1, i32 0) #18, !dbg !12920, !srcloc !12921
-  ret void, !dbg !12922
+  call void @llvm.dbg.value(metadata %struct.b_arch_spinlock_t* %lock, metadata !12919, metadata !DIExpression()), !dbg !12920
+  %lock1 = getelementptr inbounds %struct.b_arch_spinlock_t, %struct.b_arch_spinlock_t* %lock, i64 0, i32 0, !dbg !12921
+  call void asm sideeffect "\09stlr\09${1:w}, $0\0A", "=*Q,r,~{memory}"(i32* elementtype(i32) %lock1, i32 0) #18, !dbg !12922, !srcloc !12923
+  ret void, !dbg !12924
 }
 
 ; Function Attrs: mustprogress nofree noinline nounwind uwtable willreturn
-define internal fastcc i32 @atomic_read() unnamed_addr #14 !dbg !12923 {
+define internal fastcc i32 @atomic_read() unnamed_addr #14 !dbg !12925 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.atomic_t* @__num_online_cpus, metadata !12930, metadata !DIExpression()), !dbg !12938
-  call void @llvm.dbg.value(metadata i8* undef, metadata !12939, metadata !DIExpression()), !dbg !12947
-  call void @llvm.dbg.value(metadata i32 4, metadata !12946, metadata !DIExpression()), !dbg !12947
-  %0 = load volatile i32, i32* getelementptr inbounds (%struct.atomic_t, %struct.atomic_t* @__num_online_cpus, i64 0, i32 0), align 4, !dbg !12950, !tbaa !9075
-  call void @llvm.dbg.value(metadata i32 %0, metadata !12931, metadata !DIExpression()), !dbg !12953
-  ret i32 %0, !dbg !12954
+  call void @llvm.dbg.value(metadata %struct.atomic_t* @__num_online_cpus, metadata !12932, metadata !DIExpression()), !dbg !12940
+  call void @llvm.dbg.value(metadata i8* undef, metadata !12941, metadata !DIExpression()), !dbg !12949
+  call void @llvm.dbg.value(metadata i32 4, metadata !12948, metadata !DIExpression()), !dbg !12949
+  %0 = load volatile i32, i32* getelementptr inbounds (%struct.atomic_t, %struct.atomic_t* @__num_online_cpus, i64 0, i32 0), align 4, !dbg !12952, !tbaa !9075
+  call void @llvm.dbg.value(metadata i32 %0, metadata !12933, metadata !DIExpression()), !dbg !12955
+  ret i32 %0, !dbg !12956
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @protect_el2_mem() unnamed_addr #0 section ".hyp.text" !dbg !12955 {
+define internal fastcc void @protect_el2_mem() unnamed_addr #0 section ".hyp.text" !dbg !12957 {
 entry:
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12961
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12960, metadata !DIExpression()), !dbg !12962
-  %core_start = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 31, !dbg !12963
-  %0 = load i64, i64* %core_start, align 16, !dbg !12963, !tbaa !11189
-  call void @llvm.dbg.value(metadata i64 %0, metadata !12957, metadata !DIExpression()), !dbg !12962
-  %core_end = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 32, !dbg !12964
-  %1 = load i64, i64* %core_end, align 8, !dbg !12964, !tbaa !11194
-  call void @llvm.dbg.value(metadata i64 %1, metadata !12958, metadata !DIExpression()), !dbg !12962
-  br label %do.body, !dbg !12965
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !12963
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !12962, metadata !DIExpression()), !dbg !12964
+  %core_start = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 31, !dbg !12965
+  %0 = load i64, i64* %core_start, align 16, !dbg !12965, !tbaa !11189
+  call void @llvm.dbg.value(metadata i64 %0, metadata !12959, metadata !DIExpression()), !dbg !12964
+  %core_end = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 32, !dbg !12966
+  %1 = load i64, i64* %core_end, align 8, !dbg !12966, !tbaa !11194
+  call void @llvm.dbg.value(metadata i64 %1, metadata !12960, metadata !DIExpression()), !dbg !12964
+  br label %do.body, !dbg !12967
 
 do.body:                                          ; preds = %do.body, %entry
-  %addr.0 = phi i64 [ %0, %entry ], [ %add, %do.body ], !dbg !12962
-  call void @llvm.dbg.value(metadata i64 %addr.0, metadata !12957, metadata !DIExpression()), !dbg !12962
-  %call1 = call i64 @get_s2_page_index(i64 noundef %addr.0), !dbg !12966
-  call void @llvm.dbg.value(metadata i64 %call1, metadata !12959, metadata !DIExpression()), !dbg !12962
-  call fastcc void @set_s2_page_vmid(i64 noundef %call1, i32 noundef 18), !dbg !12968
-  %add = add i64 %addr.0, 4096, !dbg !12969
-  call void @llvm.dbg.value(metadata i64 %add, metadata !12957, metadata !DIExpression()), !dbg !12962
-  %cmp = icmp ult i64 %add, %1, !dbg !12970
-  br i1 %cmp, label %do.body, label %do.end, !dbg !12971, !llvm.loop !12972
+  %addr.0 = phi i64 [ %0, %entry ], [ %add, %do.body ], !dbg !12964
+  call void @llvm.dbg.value(metadata i64 %addr.0, metadata !12959, metadata !DIExpression()), !dbg !12964
+  %call1 = call i64 @get_s2_page_index(i64 noundef %addr.0), !dbg !12968
+  call void @llvm.dbg.value(metadata i64 %call1, metadata !12961, metadata !DIExpression()), !dbg !12964
+  call fastcc void @set_s2_page_vmid(i64 noundef %call1, i32 noundef 18), !dbg !12970
+  %add = add i64 %addr.0, 4096, !dbg !12971
+  call void @llvm.dbg.value(metadata i64 %add, metadata !12959, metadata !DIExpression()), !dbg !12964
+  %cmp = icmp ult i64 %add, %1, !dbg !12972
+  br i1 %cmp, label %do.body, label %do.end, !dbg !12973, !llvm.loop !12974
 
 do.end:                                           ; preds = %do.body
-  ret void, !dbg !12974
+  ret void, !dbg !12976
 }
 
 declare dso_local void @__kvm_flush_vm_context() local_unnamed_addr #9
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_hcr_el2(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !12975 {
+define internal fastcc void @set_hcr_el2(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !12977 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %val, metadata !12977, metadata !DIExpression()), !dbg !12980
-  call void @llvm.dbg.value(metadata i64 %val, metadata !12978, metadata !DIExpression()), !dbg !12981
-  call void asm sideeffect "msr hcr_el2, ${0:x}", "rZ"(i64 %val) #18, !dbg !12982, !srcloc !12983
-  ret void, !dbg !12984
+  call void @llvm.dbg.value(metadata i64 %val, metadata !12979, metadata !DIExpression()), !dbg !12982
+  call void @llvm.dbg.value(metadata i64 %val, metadata !12980, metadata !DIExpression()), !dbg !12983
+  call void asm sideeffect "msr hcr_el2, ${0:x}", "rZ"(i64 %val) #18, !dbg !12984, !srcloc !12985
+  ret void, !dbg !12986
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__activate_traps_nvhe() unnamed_addr #0 section ".hyp.text" !dbg !12985 {
+define internal fastcc void @__activate_traps_nvhe() unnamed_addr #0 section ".hyp.text" !dbg !12987 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* undef, metadata !12987, metadata !DIExpression()), !dbg !12989
-  call fastcc void @__activate_traps_common(), !dbg !12990
-  call void @llvm.dbg.value(metadata i64 13055, metadata !12988, metadata !DIExpression()), !dbg !12989
-  call void @llvm.dbg.value(metadata i64 1061887, metadata !12988, metadata !DIExpression()), !dbg !12989
-  call fastcc void @set_cptr_el2(i64 noundef 1061887), !dbg !12991
-  ret void, !dbg !12992
+  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* undef, metadata !12989, metadata !DIExpression()), !dbg !12991
+  call fastcc void @__activate_traps_common(), !dbg !12992
+  call void @llvm.dbg.value(metadata i64 13055, metadata !12990, metadata !DIExpression()), !dbg !12991
+  call void @llvm.dbg.value(metadata i64 1061887, metadata !12990, metadata !DIExpression()), !dbg !12991
+  call fastcc void @set_cptr_el2(i64 noundef 1061887), !dbg !12993
+  ret void, !dbg !12994
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__activate_traps_common() unnamed_addr #0 section ".hyp.text" !dbg !12993 {
+define internal fastcc void @__activate_traps_common() unnamed_addr #0 section ".hyp.text" !dbg !12995 {
 entry:
-  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* undef, metadata !12995, metadata !DIExpression()), !dbg !12996
-  call fastcc void @set_pmselr_el0(), !dbg !12997
-  call fastcc void @set_pmuserenr_el0(i64 noundef 15), !dbg !12998
-  call fastcc void @set_mdcr_el2(), !dbg !12999
-  ret void, !dbg !13000
+  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* undef, metadata !12997, metadata !DIExpression()), !dbg !12998
+  call fastcc void @set_pmselr_el0(), !dbg !12999
+  call fastcc void @set_pmuserenr_el0(i64 noundef 15), !dbg !13000
+  call fastcc void @set_mdcr_el2(), !dbg !13001
+  ret void, !dbg !13002
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_cptr_el2(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !13001 {
+define internal fastcc void @set_cptr_el2(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !13003 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %val, metadata !13003, metadata !DIExpression()), !dbg !13006
-  call void @llvm.dbg.value(metadata i64 %val, metadata !13004, metadata !DIExpression()), !dbg !13007
-  call void asm sideeffect "msr cptr_el2, ${0:x}", "rZ"(i64 %val) #18, !dbg !13008, !srcloc !13009
-  ret void, !dbg !13010
+  call void @llvm.dbg.value(metadata i64 %val, metadata !13005, metadata !DIExpression()), !dbg !13008
+  call void @llvm.dbg.value(metadata i64 %val, metadata !13006, metadata !DIExpression()), !dbg !13009
+  call void asm sideeffect "msr cptr_el2, ${0:x}", "rZ"(i64 %val) #18, !dbg !13010, !srcloc !13011
+  ret void, !dbg !13012
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_pmselr_el0() unnamed_addr #0 section ".hyp.text" !dbg !13011 {
+define internal fastcc void @set_pmselr_el0() unnamed_addr #0 section ".hyp.text" !dbg !13013 {
 entry:
-  call void @llvm.dbg.value(metadata i64 0, metadata !13013, metadata !DIExpression()), !dbg !13016
-  call void @llvm.dbg.value(metadata i64 0, metadata !13014, metadata !DIExpression()), !dbg !13017
-  call void asm sideeffect "msr pmselr_el0, ${0:x}", "rZ"(i64 0) #18, !dbg !13018, !srcloc !13019
-  ret void, !dbg !13020
+  call void @llvm.dbg.value(metadata i64 0, metadata !13015, metadata !DIExpression()), !dbg !13018
+  call void @llvm.dbg.value(metadata i64 0, metadata !13016, metadata !DIExpression()), !dbg !13019
+  call void asm sideeffect "msr pmselr_el0, ${0:x}", "rZ"(i64 0) #18, !dbg !13020, !srcloc !13021
+  ret void, !dbg !13022
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_pmuserenr_el0(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !13021 {
+define internal fastcc void @set_pmuserenr_el0(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !13023 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %val, metadata !13023, metadata !DIExpression()), !dbg !13026
-  call void @llvm.dbg.value(metadata i64 %val, metadata !13024, metadata !DIExpression()), !dbg !13027
-  call void asm sideeffect "msr pmuserenr_el0, ${0:x}", "rZ"(i64 %val) #18, !dbg !13028, !srcloc !13029
-  ret void, !dbg !13030
+  call void @llvm.dbg.value(metadata i64 %val, metadata !13025, metadata !DIExpression()), !dbg !13028
+  call void @llvm.dbg.value(metadata i64 %val, metadata !13026, metadata !DIExpression()), !dbg !13029
+  call void asm sideeffect "msr pmuserenr_el0, ${0:x}", "rZ"(i64 %val) #18, !dbg !13030, !srcloc !13031
+  ret void, !dbg !13032
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_mdcr_el2() unnamed_addr #0 section ".hyp.text" !dbg !13031 {
+define internal fastcc void @set_mdcr_el2() unnamed_addr #0 section ".hyp.text" !dbg !13033 {
 entry:
-  call void @llvm.dbg.value(metadata i64 0, metadata !13033, metadata !DIExpression()), !dbg !13036
-  call void @llvm.dbg.value(metadata i64 0, metadata !13034, metadata !DIExpression()), !dbg !13037
-  call void asm sideeffect "msr mdcr_el2, ${0:x}", "rZ"(i64 0) #18, !dbg !13038, !srcloc !13039
-  ret void, !dbg !13040
+  call void @llvm.dbg.value(metadata i64 0, metadata !13035, metadata !DIExpression()), !dbg !13038
+  call void @llvm.dbg.value(metadata i64 0, metadata !13036, metadata !DIExpression()), !dbg !13039
+  call void asm sideeffect "msr mdcr_el2, ${0:x}", "rZ"(i64 0) #18, !dbg !13040, !srcloc !13041
+  ret void, !dbg !13042
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_vttbr_el2(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !13041 {
+define internal fastcc void @set_vttbr_el2(i64 noundef %val) unnamed_addr #0 section ".hyp.text" !dbg !13043 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %val, metadata !13043, metadata !DIExpression()), !dbg !13046
-  call void @llvm.dbg.value(metadata i64 %val, metadata !13044, metadata !DIExpression()), !dbg !13047
-  call void asm sideeffect "msr vttbr_el2, ${0:x}", "rZ"(i64 %val) #18, !dbg !13048, !srcloc !13049
-  ret void, !dbg !13050
+  call void @llvm.dbg.value(metadata i64 %val, metadata !13045, metadata !DIExpression()), !dbg !13048
+  call void @llvm.dbg.value(metadata i64 %val, metadata !13046, metadata !DIExpression()), !dbg !13049
+  call void asm sideeffect "msr vttbr_el2, ${0:x}", "rZ"(i64 %val) #18, !dbg !13050, !srcloc !13051
+  ret void, !dbg !13052
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @get_esr_el2() unnamed_addr #0 section ".hyp.text" !dbg !13051 {
+define internal fastcc i64 @get_esr_el2() unnamed_addr #0 section ".hyp.text" !dbg !13053 {
 entry:
-  %0 = call i64 asm sideeffect "mrs $0, esr_el2", "=r"() #18, !dbg !13055, !srcloc !13056
-  call void @llvm.dbg.value(metadata i64 %0, metadata !13053, metadata !DIExpression()), !dbg !13057
-  ret i64 %0, !dbg !13058
+  %0 = call i64 asm sideeffect "mrs $0, esr_el2", "=r"() #18, !dbg !13057, !srcloc !13058
+  call void @llvm.dbg.value(metadata i64 %0, metadata !13055, metadata !DIExpression()), !dbg !13059
+  ret i64 %0, !dbg !13060
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_vcpu_esr_el2(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %esr_el2) unnamed_addr #0 !dbg !13059 {
+define internal fastcc void @set_vcpu_esr_el2(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %esr_el2) unnamed_addr #0 !dbg !13061 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !13063, metadata !DIExpression()), !dbg !13069
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !13064, metadata !DIExpression()), !dbg !13069
-  call void @llvm.dbg.value(metadata i32 %esr_el2, metadata !13065, metadata !DIExpression()), !dbg !13069
-  %mul = shl i32 %vmid, 2, !dbg !13070
-  %add = add i32 %mul, %vcpuid, !dbg !13070
-  call void @llvm.dbg.value(metadata i32 %add, metadata !13067, metadata !DIExpression()), !dbg !13069
-  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !13071
-  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !13066, metadata !DIExpression()), !dbg !13069
-  %idxprom = sext i32 %add to i64, !dbg !13072
-  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !13068, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 9056, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 158832, DW_OP_stack_value)), !dbg !13069
-  %esr_el21 = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 8, i32 0, !dbg !13073
-  store i32 %esr_el2, i32* %esr_el21, align 16, !dbg !13074, !tbaa !10884
-  ret void, !dbg !13075
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !13065, metadata !DIExpression()), !dbg !13071
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !13066, metadata !DIExpression()), !dbg !13071
+  call void @llvm.dbg.value(metadata i32 %esr_el2, metadata !13067, metadata !DIExpression()), !dbg !13071
+  %mul = shl i32 %vmid, 2, !dbg !13072
+  %add = add i32 %mul, %vcpuid, !dbg !13072
+  call void @llvm.dbg.value(metadata i32 %add, metadata !13069, metadata !DIExpression()), !dbg !13071
+  %call = call fastcc %struct.shared_data* @get_shared_data_start(), !dbg !13073
+  call void @llvm.dbg.value(metadata %struct.shared_data* %call, metadata !13068, metadata !DIExpression()), !dbg !13071
+  %idxprom = sext i32 %add to i64, !dbg !13074
+  call void @llvm.dbg.value(metadata !DIArgList(%struct.shared_data* %call, i64 %idxprom), metadata !13070, metadata !DIExpression(DW_OP_LLVM_arg, 0, DW_OP_LLVM_arg, 1, DW_OP_constu, 9056, DW_OP_mul, DW_OP_plus, DW_OP_plus_uconst, 158832, DW_OP_stack_value)), !dbg !13071
+  %esr_el21 = getelementptr inbounds %struct.shared_data, %struct.shared_data* %call, i64 0, i32 1, i64 %idxprom, i32 29, i32 8, i32 0, !dbg !13075
+  store i32 %esr_el2, i32* %esr_el21, align 16, !dbg !13076, !tbaa !10884
+  ret void, !dbg !13077
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @set_shadow_ctxt_esr(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %value) unnamed_addr #0 !dbg !13076 {
+define internal fastcc void @set_shadow_ctxt_esr(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %value) unnamed_addr #0 !dbg !13078 {
 entry:
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !13078, metadata !DIExpression()), !dbg !13083
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !13079, metadata !DIExpression()), !dbg !13083
-  call void @llvm.dbg.value(metadata i32 %value, metadata !13080, metadata !DIExpression()), !dbg !13083
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !13084
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !13081, metadata !DIExpression()), !dbg !13083
-  %mul = shl i32 %vmid, 2, !dbg !13085
-  %add = add i32 %mul, %vcpuid, !dbg !13085
-  call void @llvm.dbg.value(metadata i32 %add, metadata !13082, metadata !DIExpression()), !dbg !13083
-  %idxprom = sext i32 %add to i64, !dbg !13086
-  %esr = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 9, !dbg !13087
-  store i32 %value, i32* %esr, align 16, !dbg !13088, !tbaa !10451
-  ret void, !dbg !13089
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !13080, metadata !DIExpression()), !dbg !13085
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !13081, metadata !DIExpression()), !dbg !13085
+  call void @llvm.dbg.value(metadata i32 %value, metadata !13082, metadata !DIExpression()), !dbg !13085
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !13086
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !13083, metadata !DIExpression()), !dbg !13085
+  %mul = shl i32 %vmid, 2, !dbg !13087
+  %add = add i32 %mul, %vcpuid, !dbg !13087
+  call void @llvm.dbg.value(metadata i32 %add, metadata !13084, metadata !DIExpression()), !dbg !13085
+  %idxprom = sext i32 %add to i64, !dbg !13088
+  %esr = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 18, i64 %idxprom, i32 9, !dbg !13089
+  store i32 %value, i32* %esr, align 16, !dbg !13090, !tbaa !10451
+  ret void, !dbg !13091
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i1 @__populate_fault_info(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %esr) unnamed_addr #0 section ".hyp.text" !dbg !13090 {
+define internal fastcc i1 @__populate_fault_info(i32 noundef %vmid, i32 noundef %vcpuid, i32 noundef %esr) unnamed_addr #0 section ".hyp.text" !dbg !13092 {
 entry:
   %hpfar = alloca i64, align 8
-  call void @llvm.dbg.value(metadata i32 %vmid, metadata !13094, metadata !DIExpression()), !dbg !13101
-  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !13095, metadata !DIExpression()), !dbg !13101
-  call void @llvm.dbg.value(metadata i32 %esr, metadata !13096, metadata !DIExpression()), !dbg !13101
-  %0 = bitcast i64* %hpfar to i8*, !dbg !13102
-  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %0) #18, !dbg !13102
-  %call = call fastcc i64 @get_far_el2(), !dbg !13103
-  call void @llvm.dbg.value(metadata i64 %call, metadata !13098, metadata !DIExpression()), !dbg !13101
-  %call1 = call %struct.kvm_vcpu* @hypsec_vcpu_id_to_vcpu(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !13104
-  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %call1, metadata !13099, metadata !DIExpression()), !dbg !13101
-  %call2 = call %struct.shadow_vcpu_context* @hypsec_vcpu_id_to_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !13105
-  call void @llvm.dbg.value(metadata %struct.shadow_vcpu_context* %call2, metadata !13100, metadata !DIExpression()), !dbg !13101
-  %1 = and i32 %esr, 128, !dbg !13106
-  %tobool.not = icmp eq i32 %1, 0, !dbg !13106
-  br i1 %tobool.not, label %land.lhs.true, label %if.else, !dbg !13108
+  call void @llvm.dbg.value(metadata i32 %vmid, metadata !13096, metadata !DIExpression()), !dbg !13103
+  call void @llvm.dbg.value(metadata i32 %vcpuid, metadata !13097, metadata !DIExpression()), !dbg !13103
+  call void @llvm.dbg.value(metadata i32 %esr, metadata !13098, metadata !DIExpression()), !dbg !13103
+  %0 = bitcast i64* %hpfar to i8*, !dbg !13104
+  call void @llvm.lifetime.start.p0i8(i64 8, i8* nonnull %0) #18, !dbg !13104
+  %call = call fastcc i64 @get_far_el2(), !dbg !13105
+  call void @llvm.dbg.value(metadata i64 %call, metadata !13100, metadata !DIExpression()), !dbg !13103
+  %call1 = call %struct.kvm_vcpu* @hypsec_vcpu_id_to_vcpu(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !13106
+  call void @llvm.dbg.value(metadata %struct.kvm_vcpu* %call1, metadata !13101, metadata !DIExpression()), !dbg !13103
+  %call2 = call %struct.shadow_vcpu_context* @hypsec_vcpu_id_to_shadow_ctxt(i32 noundef %vmid, i32 noundef %vcpuid), !dbg !13107
+  call void @llvm.dbg.value(metadata %struct.shadow_vcpu_context* %call2, metadata !13102, metadata !DIExpression()), !dbg !13103
+  %1 = and i32 %esr, 128, !dbg !13108
+  %tobool.not = icmp eq i32 %1, 0, !dbg !13108
+  br i1 %tobool.not, label %land.lhs.true, label %if.else, !dbg !13110
 
 land.lhs.true:                                    ; preds = %entry
-  call void @llvm.dbg.value(metadata i64* %hpfar, metadata !13097, metadata !DIExpression(DW_OP_deref)), !dbg !13101
-  %call7 = call fastcc i1 @__translate_far_to_hpfar(i64 noundef %call, i64* noundef nonnull %hpfar), !dbg !13109
-  br i1 %call7, label %if.end10, label %cleanup, !dbg !13112
+  call void @llvm.dbg.value(metadata i64* %hpfar, metadata !13099, metadata !DIExpression(DW_OP_deref)), !dbg !13103
+  %call7 = call fastcc i1 @__translate_far_to_hpfar(i64 noundef %call, i64* noundef nonnull %hpfar), !dbg !13111
+  br i1 %call7, label %if.end10, label %cleanup, !dbg !13114
 
 if.else:                                          ; preds = %entry
-  %call9 = call fastcc i64 @get_hpfar_el2(), !dbg !13113
-  call void @llvm.dbg.value(metadata i64 %call9, metadata !13097, metadata !DIExpression()), !dbg !13101
-  store i64 %call9, i64* %hpfar, align 8, !dbg !13115, !tbaa !6675
+  %call9 = call fastcc i64 @get_hpfar_el2(), !dbg !13115
+  call void @llvm.dbg.value(metadata i64 %call9, metadata !13099, metadata !DIExpression()), !dbg !13103
+  store i64 %call9, i64* %hpfar, align 8, !dbg !13117, !tbaa !6675
   br label %if.end10
 
 if.end10:                                         ; preds = %land.lhs.true, %if.else
-  %far_el2 = getelementptr inbounds %struct.kvm_vcpu, %struct.kvm_vcpu* %call1, i64 0, i32 29, i32 8, i32 1, !dbg !13116
-  store i64 %call, i64* %far_el2, align 8, !dbg !13117, !tbaa !13118
-  %2 = load i64, i64* %hpfar, align 8, !dbg !13119, !tbaa !6675
-  call void @llvm.dbg.value(metadata i64 %2, metadata !13097, metadata !DIExpression()), !dbg !13101
-  %hpfar_el2 = getelementptr inbounds %struct.kvm_vcpu, %struct.kvm_vcpu* %call1, i64 0, i32 29, i32 8, i32 2, !dbg !13120
-  store i64 %2, i64* %hpfar_el2, align 16, !dbg !13121, !tbaa !13122
-  %far_el213 = getelementptr inbounds %struct.shadow_vcpu_context, %struct.shadow_vcpu_context* %call2, i64 0, i32 1, !dbg !13123
-  store i64 %call, i64* %far_el213, align 8, !dbg !13124, !tbaa !7540
-  call void @llvm.dbg.value(metadata i64 %2, metadata !13097, metadata !DIExpression()), !dbg !13101
-  %hpfar14 = getelementptr inbounds %struct.shadow_vcpu_context, %struct.shadow_vcpu_context* %call2, i64 0, i32 2, !dbg !13125
-  store i64 %2, i64* %hpfar14, align 16, !dbg !13126, !tbaa !7546
-  %and15 = and i32 %esr, 60, !dbg !13127
-  %cmp16 = icmp eq i32 %and15, 4, !dbg !13129
-  br i1 %cmp16, label %if.then18, label %cleanup, !dbg !13130
+  %far_el2 = getelementptr inbounds %struct.kvm_vcpu, %struct.kvm_vcpu* %call1, i64 0, i32 29, i32 8, i32 1, !dbg !13118
+  store i64 %call, i64* %far_el2, align 8, !dbg !13119, !tbaa !13120
+  %2 = load i64, i64* %hpfar, align 8, !dbg !13121, !tbaa !6675
+  call void @llvm.dbg.value(metadata i64 %2, metadata !13099, metadata !DIExpression()), !dbg !13103
+  %hpfar_el2 = getelementptr inbounds %struct.kvm_vcpu, %struct.kvm_vcpu* %call1, i64 0, i32 29, i32 8, i32 2, !dbg !13122
+  store i64 %2, i64* %hpfar_el2, align 16, !dbg !13123, !tbaa !13124
+  %far_el213 = getelementptr inbounds %struct.shadow_vcpu_context, %struct.shadow_vcpu_context* %call2, i64 0, i32 1, !dbg !13125
+  store i64 %call, i64* %far_el213, align 8, !dbg !13126, !tbaa !7540
+  call void @llvm.dbg.value(metadata i64 %2, metadata !13099, metadata !DIExpression()), !dbg !13103
+  %hpfar14 = getelementptr inbounds %struct.shadow_vcpu_context, %struct.shadow_vcpu_context* %call2, i64 0, i32 2, !dbg !13127
+  store i64 %2, i64* %hpfar14, align 16, !dbg !13128, !tbaa !7546
+  %and15 = and i32 %esr, 60, !dbg !13129
+  %cmp16 = icmp eq i32 %and15, 4, !dbg !13131
+  br i1 %cmp16, label %if.then18, label %cleanup, !dbg !13132
 
 if.then18:                                        ; preds = %if.end10
-  call void @llvm.dbg.value(metadata i64 %2, metadata !13097, metadata !DIExpression()), !dbg !13101
-  %and19 = shl i64 %2, 8, !dbg !13131
-  %shl = and i64 %and19, -4096, !dbg !13131
-  %call20 = call fastcc i1 @is_mmio_gpa(i64 noundef %shl), !dbg !13134
-  br i1 %call20, label %cleanup, label %if.then21, !dbg !13135
+  call void @llvm.dbg.value(metadata i64 %2, metadata !13099, metadata !DIExpression()), !dbg !13103
+  %and19 = shl i64 %2, 8, !dbg !13133
+  %shl = and i64 %and19, -4096, !dbg !13133
+  %call20 = call fastcc i1 @is_mmio_gpa(i64 noundef %shl), !dbg !13136
+  br i1 %call20, label %cleanup, label %if.then21, !dbg !13137
 
 if.then21:                                        ; preds = %if.then18
-  %walk_result = getelementptr inbounds %struct.kvm_vcpu, %struct.kvm_vcpu* %call1, i64 0, i32 29, i32 2, !dbg !13136
-  %3 = bitcast %struct.s2_trans* %walk_result to i8*, !dbg !13138
-  call void @el2_memset(i8* noundef nonnull %3, i32 noundef 0, i32 noundef 32), !dbg !13139
-  %flags = getelementptr inbounds %struct.shadow_vcpu_context, %struct.shadow_vcpu_context* %call2, i64 0, i32 6, !dbg !13140
-  %4 = load i64, i64* %flags, align 16, !dbg !13141, !tbaa !7566
-  %or = or i64 %4, 2, !dbg !13141
-  store i64 %or, i64* %flags, align 16, !dbg !13141, !tbaa !7566
-  br label %cleanup, !dbg !13142
+  %walk_result = getelementptr inbounds %struct.kvm_vcpu, %struct.kvm_vcpu* %call1, i64 0, i32 29, i32 2, !dbg !13138
+  %3 = bitcast %struct.s2_trans* %walk_result to i8*, !dbg !13140
+  call void @el2_memset(i8* noundef nonnull %3, i32 noundef 0, i32 noundef 32), !dbg !13141
+  %flags = getelementptr inbounds %struct.shadow_vcpu_context, %struct.shadow_vcpu_context* %call2, i64 0, i32 6, !dbg !13142
+  %4 = load i64, i64* %flags, align 16, !dbg !13143, !tbaa !7566
+  %or = or i64 %4, 2, !dbg !13143
+  store i64 %or, i64* %flags, align 16, !dbg !13143, !tbaa !7566
+  br label %cleanup, !dbg !13144
 
 cleanup:                                          ; preds = %if.end10, %if.then21, %if.then18, %land.lhs.true
-  %retval.0 = phi i1 [ false, %land.lhs.true ], [ true, %if.then18 ], [ true, %if.then21 ], [ true, %if.end10 ], !dbg !13101
-  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %0) #18, !dbg !13143
-  ret i1 %retval.0, !dbg !13143
+  %retval.0 = phi i1 [ false, %land.lhs.true ], [ true, %if.then18 ], [ true, %if.then21 ], [ true, %if.end10 ], !dbg !13103
+  call void @llvm.lifetime.end.p0i8(i64 8, i8* nonnull %0) #18, !dbg !13145
+  ret i1 %retval.0, !dbg !13145
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @get_far_el2() unnamed_addr #0 section ".hyp.text" !dbg !13144 {
+define internal fastcc i64 @get_far_el2() unnamed_addr #0 section ".hyp.text" !dbg !13146 {
 entry:
-  %0 = call i64 asm sideeffect "mrs $0, far_el2", "=r"() #18, !dbg !13148, !srcloc !13149
-  call void @llvm.dbg.value(metadata i64 %0, metadata !13146, metadata !DIExpression()), !dbg !13150
-  ret i64 %0, !dbg !13151
+  %0 = call i64 asm sideeffect "mrs $0, far_el2", "=r"() #18, !dbg !13150, !srcloc !13151
+  call void @llvm.dbg.value(metadata i64 %0, metadata !13148, metadata !DIExpression()), !dbg !13152
+  ret i64 %0, !dbg !13153
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i1 @__translate_far_to_hpfar(i64 noundef %far, i64* nocapture noundef writeonly %hpfar) unnamed_addr #0 section ".hyp.text" !dbg !13152 {
+define internal fastcc i1 @__translate_far_to_hpfar(i64 noundef %far, i64* nocapture noundef writeonly %hpfar) unnamed_addr #0 section ".hyp.text" !dbg !13154 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %far, metadata !13157, metadata !DIExpression()), !dbg !13167
-  call void @llvm.dbg.value(metadata i64* %hpfar, metadata !13158, metadata !DIExpression()), !dbg !13167
-  %0 = call i64 asm sideeffect "mrs $0, par_el1", "=r"() #18, !dbg !13168, !srcloc !13169
-  call void @llvm.dbg.value(metadata i64 %0, metadata !13161, metadata !DIExpression()), !dbg !13170
-  call void @llvm.dbg.value(metadata i64 %0, metadata !13159, metadata !DIExpression()), !dbg !13167
-  call void asm sideeffect "at s1e1r, $0", "r"(i64 %far) #18, !dbg !13171, !srcloc !13172
-  call void asm sideeffect "isb", "~{memory}"() #18, !dbg !13173, !srcloc !13174
-  %1 = call i64 asm sideeffect "mrs $0, par_el1", "=r"() #18, !dbg !13175, !srcloc !13176
-  call void @llvm.dbg.value(metadata i64 %1, metadata !13163, metadata !DIExpression()), !dbg !13177
-  call void @llvm.dbg.value(metadata i64 %1, metadata !13160, metadata !DIExpression()), !dbg !13167
-  call void @llvm.dbg.value(metadata i64 %0, metadata !13165, metadata !DIExpression()), !dbg !13178
-  call void asm sideeffect "msr par_el1, ${0:x}", "rZ"(i64 %0) #18, !dbg !13179, !srcloc !13180
-  %and = and i64 %1, 1, !dbg !13181
-  %tobool.not = icmp eq i64 %and, 0, !dbg !13181
-  br i1 %tobool.not, label %if.end, label %cleanup, !dbg !13183, !prof !13184
+  call void @llvm.dbg.value(metadata i64 %far, metadata !13159, metadata !DIExpression()), !dbg !13169
+  call void @llvm.dbg.value(metadata i64* %hpfar, metadata !13160, metadata !DIExpression()), !dbg !13169
+  %0 = call i64 asm sideeffect "mrs $0, par_el1", "=r"() #18, !dbg !13170, !srcloc !13171
+  call void @llvm.dbg.value(metadata i64 %0, metadata !13163, metadata !DIExpression()), !dbg !13172
+  call void @llvm.dbg.value(metadata i64 %0, metadata !13161, metadata !DIExpression()), !dbg !13169
+  call void asm sideeffect "at s1e1r, $0", "r"(i64 %far) #18, !dbg !13173, !srcloc !13174
+  call void asm sideeffect "isb", "~{memory}"() #18, !dbg !13175, !srcloc !13176
+  %1 = call i64 asm sideeffect "mrs $0, par_el1", "=r"() #18, !dbg !13177, !srcloc !13178
+  call void @llvm.dbg.value(metadata i64 %1, metadata !13165, metadata !DIExpression()), !dbg !13179
+  call void @llvm.dbg.value(metadata i64 %1, metadata !13162, metadata !DIExpression()), !dbg !13169
+  call void @llvm.dbg.value(metadata i64 %0, metadata !13167, metadata !DIExpression()), !dbg !13180
+  call void asm sideeffect "msr par_el1, ${0:x}", "rZ"(i64 %0) #18, !dbg !13181, !srcloc !13182
+  %and = and i64 %1, 1, !dbg !13183
+  %tobool.not = icmp eq i64 %and, 0, !dbg !13183
+  br i1 %tobool.not, label %if.end, label %cleanup, !dbg !13185, !prof !13186
 
 if.end:                                           ; preds = %entry
-  %2 = lshr i64 %1, 8, !dbg !13185
-  %shl = and i64 %2, 1099511627760, !dbg !13185
-  store i64 %shl, i64* %hpfar, align 8, !dbg !13186, !tbaa !6675
-  br label %cleanup, !dbg !13187
+  %2 = lshr i64 %1, 8, !dbg !13187
+  %shl = and i64 %2, 1099511627760, !dbg !13187
+  store i64 %shl, i64* %hpfar, align 8, !dbg !13188, !tbaa !6675
+  br label %cleanup, !dbg !13189
 
 cleanup:                                          ; preds = %entry, %if.end
-  ret i1 %tobool.not, !dbg !13188
+  ret i1 %tobool.not, !dbg !13190
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @get_hpfar_el2() unnamed_addr #0 section ".hyp.text" !dbg !13189 {
+define internal fastcc i64 @get_hpfar_el2() unnamed_addr #0 section ".hyp.text" !dbg !13191 {
 entry:
-  %0 = call i64 asm sideeffect "mrs $0, hpfar_el2", "=r"() #18, !dbg !13193, !srcloc !13194
-  call void @llvm.dbg.value(metadata i64 %0, metadata !13191, metadata !DIExpression()), !dbg !13195
-  ret i64 %0, !dbg !13196
+  %0 = call i64 asm sideeffect "mrs $0, hpfar_el2", "=r"() #18, !dbg !13195, !srcloc !13196
+  call void @llvm.dbg.value(metadata i64 %0, metadata !13193, metadata !DIExpression()), !dbg !13197
+  ret i64 %0, !dbg !13198
 }
 
 ; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
-define internal fastcc i1 @is_mmio_gpa(i64 noundef %addr) unnamed_addr #4 !dbg !13197 {
+define internal fastcc i1 @is_mmio_gpa(i64 noundef %addr) unnamed_addr #4 !dbg !13199 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %addr, metadata !13201, metadata !DIExpression()), !dbg !13202
-  %cmp = icmp ult i64 %addr, 1073741824, !dbg !13203
-  br i1 %cmp, label %land.rhs, label %land.end, !dbg !13204
+  call void @llvm.dbg.value(metadata i64 %addr, metadata !13203, metadata !DIExpression()), !dbg !13204
+  %cmp = icmp ult i64 %addr, 1073741824, !dbg !13205
+  br i1 %cmp, label %land.rhs, label %land.end, !dbg !13206
 
 land.rhs:                                         ; preds = %entry
-  %call = call fastcc i1 @is_gic_cpu(i64 noundef %addr), !dbg !13205
-  %lnot = xor i1 %call, true, !dbg !13206
+  %call = call fastcc i1 @is_gic_cpu(i64 noundef %addr), !dbg !13207
+  %lnot = xor i1 %call, true, !dbg !13208
   br label %land.end
 
 land.end:                                         ; preds = %land.rhs, %entry
-  %0 = phi i1 [ false, %entry ], [ %lnot, %land.rhs ], !dbg !13202
-  ret i1 %0, !dbg !13207
+  %0 = phi i1 [ false, %entry ], [ %lnot, %land.rhs ], !dbg !13204
+  ret i1 %0, !dbg !13209
 }
 
 ; Function Attrs: mustprogress nofree noinline norecurse nosync nounwind readnone uwtable willreturn
-define internal fastcc i1 @is_gic_cpu(i64 noundef %addr) unnamed_addr #4 !dbg !13208 {
+define internal fastcc i1 @is_gic_cpu(i64 noundef %addr) unnamed_addr #4 !dbg !13210 {
 entry:
-  call void @llvm.dbg.value(metadata i64 %addr, metadata !13210, metadata !DIExpression()), !dbg !13211
-  %0 = and i64 %addr, -65536, !dbg !13212
-  %1 = icmp eq i64 %0, 134283264, !dbg !13212
-  ret i1 %1, !dbg !13213
+  call void @llvm.dbg.value(metadata i64 %addr, metadata !13212, metadata !DIExpression()), !dbg !13213
+  %0 = and i64 %addr, -65536, !dbg !13214
+  %1 = icmp eq i64 %0, 134283264, !dbg !13214
+  ret i1 %1, !dbg !13215
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__deactivate_traps_nvhe() unnamed_addr #0 section ".hyp.text" !dbg !13214 {
+define internal fastcc void @__deactivate_traps_nvhe() unnamed_addr #0 section ".hyp.text" !dbg !13216 {
 entry:
-  call fastcc void @__deactivate_traps_common(), !dbg !13215
-  call fastcc void @set_mdcr_el2(), !dbg !13216
-  call fastcc void @set_cptr_el2(i64 noundef 13055), !dbg !13217
-  ret void, !dbg !13218
+  call fastcc void @__deactivate_traps_common(), !dbg !13217
+  call fastcc void @set_mdcr_el2(), !dbg !13218
+  call fastcc void @set_cptr_el2(i64 noundef 13055), !dbg !13219
+  ret void, !dbg !13220
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc void @__deactivate_traps_common() unnamed_addr #0 section ".hyp.text" !dbg !13219 {
+define internal fastcc void @__deactivate_traps_common() unnamed_addr #0 section ".hyp.text" !dbg !13221 {
 entry:
-  call fastcc void @set_pmuserenr_el0(i64 noundef 0), !dbg !13220
-  ret void, !dbg !13221
+  call fastcc void @set_pmuserenr_el0(i64 noundef 0), !dbg !13222
+  ret void, !dbg !13223
 }
 
 ; Function Attrs: noinline nounwind uwtable
-define internal fastcc i64 @get_host_vttbr() unnamed_addr #0 !dbg !13222 {
+define internal fastcc i64 @get_host_vttbr() unnamed_addr #0 !dbg !13224 {
 entry:
-  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !13227
-  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !13226, metadata !DIExpression()), !dbg !13228
-  %host_vttbr = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 5, !dbg !13229
-  %0 = load i64, i64* %host_vttbr, align 16, !dbg !13229, !tbaa !11147
-  ret i64 %0, !dbg !13230
+  %call = call fastcc %struct.el2_data* @get_el2_data_start(), !dbg !13229
+  call void @llvm.dbg.value(metadata %struct.el2_data* %call, metadata !13228, metadata !DIExpression()), !dbg !13230
+  %host_vttbr = getelementptr inbounds %struct.el2_data, %struct.el2_data* %call, i64 0, i32 5, !dbg !13231
+  %0 = load i64, i64* %host_vttbr, align 16, !dbg !13231, !tbaa !11147
+  ret i64 %0, !dbg !13232
 }
 
 ; Function Attrs: nofree nosync nounwind readnone speculatable willreturn
@@ -8872,7 +8872,7 @@ attributes #22 = { noreturn nounwind }
 !0 = !DIGlobalVariableExpression(var: !1, expr: !DIExpression())
 !1 = distinct !DIGlobalVariable(name: "host_sys_reg_descs", scope: !2, file: !3, line: 2890, type: !6311, isLocal: true, isDefinition: true)
 !2 = distinct !DICompileUnit(language: DW_LANG_C89, file: !3, producer: "clang version 14.0.0", isOptimized: true, runtimeVersion: 0, emissionKind: FullDebug, enums: !4, retainedTypes: !205, globals: !6310, splitDebugInlining: false, nameTableKind: None)
-!3 = !DIFile(filename: "all.c", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "af926f60305593248a9da3a038f7bace")
+!3 = !DIFile(filename: "all.c", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "f62ebc19374cb33e543410229d5940fb")
 !4 = !{!5, !13, !21, !28, !37, !42, !48, !54, !60, !68, !74, !80, !90, !98, !104, !111, !118, !124, !129, !135, !143, !200}
 !5 = !DICompositeType(tag: DW_TAG_enumeration_type, name: "memblock_flags", file: !6, line: 35, baseType: !7, size: 32, elements: !8)
 !6 = !DIFile(filename: "./include/linux/memblock.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "922861c5cd2d663fe08cb87a6ad3ea4f")
@@ -15223,16 +15223,16 @@ attributes #22 = { noreturn nounwind }
 !6351 = !DILocation(line: 11, column: 2, scope: !6349)
 !6352 = !DILocation(line: 12, column: 3, scope: !6339)
 !6353 = !DILocation(line: 13, column: 15, scope: !6338)
-!6354 = !{i64 2154473507}
+!6354 = !{i64 2154473525}
 !6355 = !DILocation(line: 0, scope: !6338)
 !6356 = !DILocation(line: 0, scope: !6340)
 !6357 = !DILocation(line: 15, column: 14, scope: !6342)
-!6358 = !{i64 2154473859}
+!6358 = !{i64 2154473877}
 !6359 = !DILocation(line: 0, scope: !6342)
 !6360 = !DILocation(line: 15, column: 14, scope: !6333)
 !6361 = !DILocation(line: 15, column: 2, scope: !6333)
 !6362 = !DILocation(line: 16, column: 2, scope: !6333)
-!6363 = !{i64 2154474044}
+!6363 = !{i64 2154474062}
 !6364 = !DILocation(line: 18, column: 1, scope: !6333)
 !6365 = distinct !DISubprogram(name: "get_cur_vmid", scope: !14, file: !14, line: 271, type: !4209, scopeLine: 272, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !6366)
 !6366 = !{!6367, !6548}
@@ -15576,7 +15576,7 @@ attributes #22 = { noreturn nounwind }
 !6704 = !DILocalVariable(name: "v", arg: 1, scope: !6699, file: !6700, line: 95, type: !210)
 !6705 = !DILocation(line: 0, scope: !6699)
 !6706 = !DILocation(line: 97, column: 2, scope: !6699)
-!6707 = !{i64 2153974735, i64 2153974782, i64 2153974788, i64 2153975032, i64 2153975059, i64 2153975086, i64 2153975121, i64 2153974811, i64 2153974825, i64 2153974843, i64 2153975204, i64 2153975252, i64 2153975311, i64 2153975374, i64 2153975423, i64 2153974927, i64 2153974952, i64 2153974958, i64 2153974978}
+!6707 = !{i64 2153974753, i64 2153974800, i64 2153974806, i64 2153975050, i64 2153975077, i64 2153975104, i64 2153975139, i64 2153974829, i64 2153974843, i64 2153974861, i64 2153975222, i64 2153975270, i64 2153975329, i64 2153975392, i64 2153975441, i64 2153974945, i64 2153974970, i64 2153974976, i64 2153974996}
 !6708 = !DILocation(line: 104, column: 2, scope: !6699)
 !6709 = distinct !DISubprogram(name: "get_exception_vector", scope: !3, file: !3, line: 24, type: !6710, scopeLine: 24, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !6712)
 !6710 = !DISubroutineType(types: !6711)
@@ -17414,7 +17414,7 @@ attributes #22 = { noreturn nounwind }
 !8542 = !DILocation(line: 1010, column: 2, scope: !8540)
 !8543 = !DILocation(line: 1011, column: 2, scope: !8523)
 !8544 = !DILocation(line: 1012, column: 2, scope: !8523)
-!8545 = !{i64 2154508017}
+!8545 = !{i64 2154508035}
 !8546 = !DILocation(line: 1013, column: 22, scope: !8523)
 !8547 = !DILocation(line: 1013, column: 2, scope: !8523)
 !8548 = !DILocation(line: 1014, column: 1, scope: !8523)
@@ -17811,7 +17811,7 @@ attributes #22 = { noreturn nounwind }
 !8939 = distinct !DILexicalBlock(scope: !8930, file: !3, line: 1485, column: 15)
 !8940 = !DILocation(line: 0, scope: !8915)
 !8941 = !DILocation(line: 1450, column: 15, scope: !8926)
-!8942 = !{i64 2154522003, i64 2154522050, i64 2154522056, i64 2154523070, i64 2154523110, i64 2154523128, i64 2154523160, i64 2154523188, i64 2154523242, i64 2154523262, i64 2154523359, i64 2154522079, i64 2154522093, i64 2154522111, i64 2154523816, i64 2154523864, i64 2154523912, i64 2154523975, i64 2154524024, i64 2154522189, i64 2154522214, i64 2154522240, i64 2154522246, i64 2154523482, i64 2154523522, i64 2154523540, i64 2154523572, i64 2154523600, i64 2154523654, i64 2154523674, i64 2154523771, i64 2154522269, i64 2154522283, i64 2154522289, i64 2154522314, i64 2154522364, i64 2154522418}
+!8942 = !{i64 2154522021, i64 2154522068, i64 2154522074, i64 2154523088, i64 2154523128, i64 2154523146, i64 2154523178, i64 2154523206, i64 2154523260, i64 2154523280, i64 2154523377, i64 2154522097, i64 2154522111, i64 2154522129, i64 2154523834, i64 2154523882, i64 2154523930, i64 2154523993, i64 2154524042, i64 2154522207, i64 2154522232, i64 2154522258, i64 2154522264, i64 2154523500, i64 2154523540, i64 2154523558, i64 2154523590, i64 2154523618, i64 2154523672, i64 2154523692, i64 2154523789, i64 2154522287, i64 2154522301, i64 2154522307, i64 2154522332, i64 2154522382, i64 2154522436}
 !8943 = !DILocation(line: 0, scope: !8926)
 !8944 = !DILocation(line: 1450, column: 40, scope: !8915)
 !8945 = !DILocation(line: 1454, column: 16, scope: !8934)
@@ -18049,7 +18049,7 @@ attributes #22 = { noreturn nounwind }
 !9177 = !DILocalVariable(name: "addr", arg: 2, scope: !9169, file: !9170, line: 43, type: !9173)
 !9178 = !DILocation(line: 0, scope: !9169)
 !9179 = !DILocation(line: 45, column: 2, scope: !9169)
-!9180 = !{i64 5084286}
+!9180 = !{i64 5084304}
 !9181 = !DILocation(line: 46, column: 1, scope: !9169)
 !9182 = distinct !DISubprogram(name: "__raw_writel", scope: !9170, file: !9170, line: 37, type: !9183, scopeLine: 38, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !9185)
 !9183 = !DISubroutineType(types: !9184)
@@ -18059,7 +18059,7 @@ attributes #22 = { noreturn nounwind }
 !9187 = !DILocalVariable(name: "addr", arg: 2, scope: !9182, file: !9170, line: 37, type: !9173)
 !9188 = !DILocation(line: 0, scope: !9182)
 !9189 = !DILocation(line: 39, column: 2, scope: !9182)
-!9190 = !{i64 5084118}
+!9190 = !{i64 5084136}
 !9191 = !DILocation(line: 40, column: 1, scope: !9182)
 !9192 = distinct !DISubprogram(name: "host_dabt_get_rd", scope: !232, file: !232, line: 120, type: !9193, scopeLine: 121, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !9195)
 !9193 = !DISubroutineType(types: !9194)
@@ -18079,7 +18079,7 @@ attributes #22 = { noreturn nounwind }
 !9207 = !DILocalVariable(name: "val", scope: !9200, file: !9170, line: 85, type: !217)
 !9208 = !DILocation(line: 0, scope: !9200)
 !9209 = !DILocation(line: 86, column: 2, scope: !9200)
-!9210 = !{i64 2152581930, i64 2152581977, i64 2152581983, i64 2152582020, i64 2152582038, i64 2152582955, i64 2152583003, i64 2152583051, i64 2152583114, i64 2152583163, i64 2152582116, i64 2152582141, i64 2152582167, i64 2152582173, i64 2152582210, i64 2152582216, i64 2152582241, i64 2152582291, i64 2152582345}
+!9210 = !{i64 2152581948, i64 2152581995, i64 2152582001, i64 2152582038, i64 2152582056, i64 2152582973, i64 2152583021, i64 2152583069, i64 2152583132, i64 2152583181, i64 2152582134, i64 2152582159, i64 2152582185, i64 2152582191, i64 2152582228, i64 2152582234, i64 2152582259, i64 2152582309, i64 2152582363}
 !9211 = !DILocation(line: 90, column: 2, scope: !9200)
 !9212 = distinct !DISubprogram(name: "__raw_readl", scope: !9170, file: !9170, line: 72, type: !9213, scopeLine: 73, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !9215)
 !9213 = !DISubroutineType(types: !9214)
@@ -18089,7 +18089,7 @@ attributes #22 = { noreturn nounwind }
 !9217 = !DILocalVariable(name: "val", scope: !9212, file: !9170, line: 74, type: !282)
 !9218 = !DILocation(line: 0, scope: !9212)
 !9219 = !DILocation(line: 75, column: 2, scope: !9212)
-!9220 = !{i64 2152580241, i64 2152580288, i64 2152580294, i64 2152580331, i64 2152580349, i64 2152581268, i64 2152581316, i64 2152581364, i64 2152581427, i64 2152581476, i64 2152580427, i64 2152580452, i64 2152580478, i64 2152580484, i64 2152580521, i64 2152580527, i64 2152580552, i64 2152580602, i64 2152580656}
+!9220 = !{i64 2152580259, i64 2152580306, i64 2152580312, i64 2152580349, i64 2152580367, i64 2152581286, i64 2152581334, i64 2152581382, i64 2152581445, i64 2152581494, i64 2152580445, i64 2152580470, i64 2152580496, i64 2152580502, i64 2152580539, i64 2152580545, i64 2152580570, i64 2152580620, i64 2152580674}
 !9221 = !DILocation(line: 79, column: 2, scope: !9212)
 !9222 = distinct !DISubprogram(name: "emulate_mmio", scope: !3, file: !3, line: 1641, type: !9223, scopeLine: 1642, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !9225)
 !9223 = !DISubroutineType(types: !9224)
@@ -18159,7 +18159,7 @@ attributes #22 = { noreturn nounwind }
 !9287 = !DILocation(line: 1809, column: 32, scope: !9271)
 !9288 = !DILocation(line: 1809, column: 14, scope: !9271)
 !9289 = !DILocation(line: 1810, column: 28, scope: !9281)
-!9290 = !{i64 2154531125, i64 2154531172, i64 2154531178, i64 2154532192, i64 2154532232, i64 2154532250, i64 2154532282, i64 2154532310, i64 2154532364, i64 2154532384, i64 2154532481, i64 2154531201, i64 2154531215, i64 2154531233, i64 2154532938, i64 2154532986, i64 2154533034, i64 2154533097, i64 2154533146, i64 2154531311, i64 2154531336, i64 2154531362, i64 2154531368, i64 2154532604, i64 2154532644, i64 2154532662, i64 2154532694, i64 2154532722, i64 2154532776, i64 2154532796, i64 2154532893, i64 2154531391, i64 2154531405, i64 2154531411, i64 2154531436, i64 2154531486, i64 2154531540}
+!9290 = !{i64 2154531143, i64 2154531190, i64 2154531196, i64 2154532210, i64 2154532250, i64 2154532268, i64 2154532300, i64 2154532328, i64 2154532382, i64 2154532402, i64 2154532499, i64 2154531219, i64 2154531233, i64 2154531251, i64 2154532956, i64 2154533004, i64 2154533052, i64 2154533115, i64 2154533164, i64 2154531329, i64 2154531354, i64 2154531380, i64 2154531386, i64 2154532622, i64 2154532662, i64 2154532680, i64 2154532712, i64 2154532740, i64 2154532794, i64 2154532814, i64 2154532911, i64 2154531409, i64 2154531423, i64 2154531429, i64 2154531454, i64 2154531504, i64 2154531558}
 !9291 = !DILocation(line: 0, scope: !9281)
 !9292 = !DILocation(line: 1810, column: 53, scope: !9271)
 !9293 = !DILocation(line: 1810, column: 25, scope: !9271)
@@ -18173,13 +18173,13 @@ attributes #22 = { noreturn nounwind }
 !9301 = !DILocation(line: 1822, column: 3, scope: !9302)
 !9302 = distinct !DILexicalBlock(scope: !9299, file: !3, line: 1819, column: 9)
 !9303 = !DILocation(line: 1827, column: 8, scope: !9283)
-!9304 = !{i64 2154533246}
+!9304 = !{i64 2154533264}
 !9305 = !DILocation(line: 0, scope: !9283)
 !9306 = !DILocation(line: 1828, column: 2, scope: !9271)
-!9307 = !{i64 2154533377}
+!9307 = !{i64 2154533395}
 !9308 = !DILocation(line: 1829, column: 2, scope: !9285)
 !9309 = !DILocation(line: 0, scope: !9285)
-!9310 = !{i64 2154533464}
+!9310 = !{i64 2154533482}
 !9311 = !DILocation(line: 1830, column: 1, scope: !9271)
 !9312 = distinct !DISubprogram(name: "release_lock_smmu", scope: !208, file: !208, line: 595, type: !2404, scopeLine: 595, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !9313)
 !9313 = !{!9314}
@@ -18391,7 +18391,7 @@ attributes #22 = { noreturn nounwind }
 !9519 = !{!7289, !6562, i64 0}
 !9520 = !DILocation(line: 376, column: 3, scope: !9517)
 !9521 = !DILocation(line: 378, column: 10, scope: !9509)
-!9522 = !{i64 2154430854}
+!9522 = !{i64 2154430872}
 !9523 = !DILocation(line: 0, scope: !9509)
 !9524 = !DILocation(line: 378, column: 3, scope: !9510)
 !9525 = !DILocation(line: 0, scope: !9511)
@@ -19493,7 +19493,7 @@ attributes #22 = { noreturn nounwind }
 !10621 = !DILocation(line: 2700, column: 12, scope: !10611)
 !10622 = !DILocation(line: 2701, column: 9, scope: !10611)
 !10623 = !DILocation(line: 2703, column: 9, scope: !10615)
-!10624 = !{i64 2154553101}
+!10624 = !{i64 2154553119}
 !10625 = !DILocation(line: 0, scope: !10615)
 !10626 = !DILocation(line: 2703, column: 3, scope: !10616)
 !10627 = !DILocation(line: 2707, column: 19, scope: !10628)
@@ -19834,7 +19834,7 @@ attributes #22 = { noreturn nounwind }
 !10962 = !DILocalVariable(name: "__val", scope: !10963, file: !10960, line: 114, type: !217)
 !10963 = distinct !DILexicalBlock(scope: !10959, file: !10960, line: 114, column: 9)
 !10964 = !DILocation(line: 114, column: 9, scope: !10963)
-!10965 = !{i64 2148850761}
+!10965 = !{i64 2148850779}
 !10966 = !DILocation(line: 0, scope: !10963)
 !10967 = !DILocation(line: 114, column: 32, scope: !10959)
 !10968 = !DILocation(line: 114, column: 2, scope: !10959)
@@ -20043,7 +20043,7 @@ attributes #22 = { noreturn nounwind }
 !11171 = !DILocation(line: 3096, column: 2, scope: !11169)
 !11172 = !DILocation(line: 3095, column: 2, scope: !11173)
 !11173 = distinct !DILexicalBlock(scope: !11163, file: !3, line: 3095, column: 2)
-!11174 = !{i64 2154599251}
+!11174 = !{i64 2154599269}
 !11175 = !DILocation(line: 3095, column: 2, scope: !11176)
 !11176 = distinct !DILexicalBlock(scope: !11173, file: !3, line: 3095, column: 2)
 !11177 = !DILocation(line: 3097, column: 29, scope: !11178)
@@ -20120,7 +20120,7 @@ attributes #22 = { noreturn nounwind }
 !11248 = !DILocalVariable(name: "sp_el0", scope: !11243, file: !11244, line: 17, type: !210)
 !11249 = distinct !DILocation(line: 3140, column: 3, scope: !11250)
 !11250 = distinct !DILexicalBlock(scope: !11240, file: !3, line: 3139, column: 11)
-!11251 = !{i64 1631343}
+!11251 = !{i64 1631361}
 !11252 = !DILocation(line: 0, scope: !11243, inlinedAt: !11249)
 !11253 = !DILocation(line: 21, column: 9, scope: !11243, inlinedAt: !11249)
 !11254 = !DILocation(line: 3140, column: 3, scope: !11250)
@@ -20206,7 +20206,7 @@ attributes #22 = { noreturn nounwind }
 !11334 = !DILocation(line: 3171, column: 2, scope: !11333)
 !11335 = !DILocation(line: 3171, column: 2, scope: !11336)
 !11336 = distinct !DILexicalBlock(scope: !11332, file: !3, line: 3171, column: 2)
-!11337 = !{i64 2154605527}
+!11337 = !{i64 2154605545}
 !11338 = !DILocation(line: 3171, column: 2, scope: !11339)
 !11339 = distinct !DILexicalBlock(scope: !11336, file: !3, line: 3171, column: 2)
 !11340 = !DILocation(line: 3175, column: 20, scope: !11306)
@@ -20255,7 +20255,7 @@ attributes #22 = { noreturn nounwind }
 !11383 = !DILocation(line: 3208, column: 6, scope: !11361)
 !11384 = !DILocation(line: 3209, column: 3, scope: !11385)
 !11385 = distinct !DILexicalBlock(scope: !11382, file: !3, line: 3209, column: 3)
-!11386 = !{i64 2154608762}
+!11386 = !{i64 2154608780}
 !11387 = !DILocation(line: 3209, column: 3, scope: !11388)
 !11388 = distinct !DILexicalBlock(scope: !11385, file: !3, line: 3209, column: 3)
 !11389 = !DILocation(line: 3210, column: 2, scope: !11361)
@@ -20292,7 +20292,7 @@ attributes #22 = { noreturn nounwind }
 !11420 = !DILocation(line: 3232, column: 6, scope: !11390)
 !11421 = !DILocation(line: 3233, column: 3, scope: !11422)
 !11422 = distinct !DILexicalBlock(scope: !11419, file: !3, line: 3233, column: 3)
-!11423 = !{i64 2154612015}
+!11423 = !{i64 2154612033}
 !11424 = !DILocation(line: 3233, column: 3, scope: !11425)
 !11425 = distinct !DILexicalBlock(scope: !11422, file: !3, line: 3233, column: 3)
 !11426 = !DILocation(line: 3234, column: 2, scope: !11390)
@@ -20329,7 +20329,7 @@ attributes #22 = { noreturn nounwind }
 !11457 = !DILocation(line: 3257, column: 6, scope: !11427)
 !11458 = !DILocation(line: 3258, column: 3, scope: !11459)
 !11459 = distinct !DILexicalBlock(scope: !11456, file: !3, line: 3258, column: 3)
-!11460 = !{i64 2154615190}
+!11460 = !{i64 2154615208}
 !11461 = !DILocation(line: 3258, column: 3, scope: !11462)
 !11462 = distinct !DILexicalBlock(scope: !11459, file: !3, line: 3258, column: 3)
 !11463 = !DILocation(line: 3259, column: 2, scope: !11427)
@@ -20366,7 +20366,7 @@ attributes #22 = { noreturn nounwind }
 !11494 = !DILocation(line: 3281, column: 6, scope: !11464)
 !11495 = !DILocation(line: 3282, column: 3, scope: !11496)
 !11496 = distinct !DILexicalBlock(scope: !11493, file: !3, line: 3282, column: 3)
-!11497 = !{i64 2154618172}
+!11497 = !{i64 2154618190}
 !11498 = !DILocation(line: 3282, column: 3, scope: !11499)
 !11499 = distinct !DILexicalBlock(scope: !11496, file: !3, line: 3282, column: 3)
 !11500 = !DILocation(line: 3283, column: 9, scope: !11464)
@@ -20391,7 +20391,7 @@ attributes #22 = { noreturn nounwind }
 !11519 = !DILocation(line: 3291, column: 6, scope: !11503)
 !11520 = !DILocation(line: 3292, column: 3, scope: !11521)
 !11521 = distinct !DILexicalBlock(scope: !11518, file: !3, line: 3292, column: 3)
-!11522 = !{i64 2154621233}
+!11522 = !{i64 2154621251}
 !11523 = !DILocation(line: 3292, column: 3, scope: !11524)
 !11524 = distinct !DILexicalBlock(scope: !11521, file: !3, line: 3292, column: 3)
 !11525 = !DILocation(line: 3290, column: 16, scope: !11510)
@@ -20419,7 +20419,7 @@ attributes #22 = { noreturn nounwind }
 !11547 = !DILocation(line: 3301, column: 27, scope: !11546)
 !11548 = !DILocation(line: 3302, column: 3, scope: !11549)
 !11549 = distinct !DILexicalBlock(scope: !11546, file: !3, line: 3302, column: 3)
-!11550 = !{i64 2154624096}
+!11550 = !{i64 2154624114}
 !11551 = !DILocation(line: 3302, column: 3, scope: !11552)
 !11552 = distinct !DILexicalBlock(scope: !11549, file: !3, line: 3302, column: 3)
 !11553 = !DILocation(line: 3300, column: 16, scope: !11538)
@@ -20579,13 +20579,13 @@ attributes #22 = { noreturn nounwind }
 !11707 = distinct !DILexicalBlock(scope: !11696, file: !3, line: 3431, column: 6)
 !11708 = !DILocation(line: 0, scope: !11696)
 !11709 = !DILocation(line: 3429, column: 22, scope: !11704)
-!11710 = !{i64 2154638663}
+!11710 = !{i64 2154638681}
 !11711 = !DILocation(line: 0, scope: !11704)
 !11712 = !DILocation(line: 3429, column: 59, scope: !11696)
 !11713 = !DILocation(line: 3430, column: 24, scope: !11696)
 !11714 = !DILocation(line: 3430, column: 2, scope: !11696)
 !11715 = !DILocation(line: 3431, column: 25, scope: !11706)
-!11716 = !{i64 2154638899}
+!11716 = !{i64 2154638917}
 !11717 = !DILocation(line: 0, scope: !11706)
 !11718 = !DILocation(line: 3431, column: 25, scope: !11707)
 !11719 = !DILocation(line: 3431, column: 6, scope: !11707)
@@ -20725,10 +20725,10 @@ attributes #22 = { noreturn nounwind }
 !11853 = !DILocation(line: 3469, column: 2, scope: !11836)
 !11854 = !DILocation(line: 3471, column: 2, scope: !11840)
 !11855 = !DILocation(line: 0, scope: !11840)
-!11856 = !{i64 2154639419}
+!11856 = !{i64 2154639437}
 !11857 = !DILocation(line: 0, scope: !11842)
 !11858 = !DILocation(line: 3472, column: 2, scope: !11842)
-!11859 = !{i64 2154639622}
+!11859 = !{i64 2154639640}
 !11860 = !DILocation(line: 3473, column: 2, scope: !11836)
 !11861 = !DILocation(line: 3475, column: 2, scope: !11836)
 !11862 = !DILocation(line: 3477, column: 1, scope: !11836)
@@ -20865,1238 +20865,1240 @@ attributes #22 = { noreturn nounwind }
 !11993 = !DILocation(line: 3627, column: 16, scope: !11981)
 !11994 = !DILocation(line: 3628, column: 11, scope: !11981)
 !11995 = !DILocation(line: 3629, column: 10, scope: !11981)
-!11996 = !DILocation(line: 3633, column: 2, scope: !11981)
-!11997 = distinct !DISubprogram(name: "get_shared_data_start", scope: !14, file: !14, line: 192, type: !11998, scopeLine: 193, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12000)
-!11998 = !DISubroutineType(types: !11999)
-!11999 = !{!10716}
-!12000 = !{!12001, !12002, !12004}
-!12001 = !DILocalVariable(name: "shared_data", scope: !11997, file: !14, line: 194, type: !10716)
-!12002 = !DILocalVariable(name: "val", scope: !12003, file: !14, line: 194, type: !206)
-!12003 = distinct !DILexicalBlock(scope: !11997, file: !14, line: 194, column: 36)
-!12004 = !DILocalVariable(name: "__ptr", scope: !12005, file: !14, line: 194, type: !210)
-!12005 = distinct !DILexicalBlock(scope: !12006, file: !14, line: 194, column: 36)
-!12006 = distinct !DILexicalBlock(scope: !12003, file: !14, line: 194, column: 36)
-!12007 = !DILocation(line: 194, column: 36, scope: !12006)
-!12008 = !DILocation(line: 194, column: 36, scope: !12003)
-!12009 = !DILocation(line: 0, scope: !12003)
-!12010 = !DILocation(line: 194, column: 36, scope: !11997)
-!12011 = !DILocation(line: 0, scope: !11997)
-!12012 = !DILocation(line: 195, column: 2, scope: !11997)
-!12013 = distinct !DISubprogram(name: "hypsec_vmid_to_kvm", scope: !3, file: !3, line: 3636, type: !11504, scopeLine: 3637, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12014)
-!12014 = !{!12015, !12016, !12017}
-!12015 = !DILocalVariable(name: "vmid", arg: 1, scope: !12013, file: !3, line: 3636, type: !228)
-!12016 = !DILocalVariable(name: "kvm", scope: !12013, file: !3, line: 3638, type: !291)
-!12017 = !DILocalVariable(name: "shared_data", scope: !12013, file: !3, line: 3639, type: !10716)
-!12018 = !DILocation(line: 0, scope: !12013)
-!12019 = !DILocation(line: 3641, column: 16, scope: !12013)
-!12020 = !DILocation(line: 3643, column: 7, scope: !12021)
-!12021 = distinct !DILexicalBlock(scope: !12013, file: !3, line: 3643, column: 6)
-!12022 = !DILocation(line: 3643, column: 6, scope: !12013)
-!12023 = !DILocation(line: 3644, column: 3, scope: !12021)
-!12024 = !DILocation(line: 3642, column: 9, scope: !12013)
-!12025 = !DILocation(line: 3646, column: 2, scope: !12013)
-!12026 = distinct !DISubprogram(name: "hypsec_vcpu_id_to_shadow_ctxt", scope: !3, file: !3, line: 3649, type: !12027, scopeLine: 3651, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12029)
-!12027 = !DISubroutineType(types: !12028)
-!12028 = !{!6479, !228, !82}
-!12029 = !{!12030, !12031, !12032, !12033, !12034}
-!12030 = !DILocalVariable(name: "vmid", arg: 1, scope: !12026, file: !3, line: 3650, type: !228)
-!12031 = !DILocalVariable(name: "vcpu_id", arg: 2, scope: !12026, file: !3, line: 3650, type: !82)
-!12032 = !DILocalVariable(name: "el2_data", scope: !12026, file: !3, line: 3652, type: !6368)
-!12033 = !DILocalVariable(name: "shadow_ctxt", scope: !12026, file: !3, line: 3653, type: !6479)
-!12034 = !DILocalVariable(name: "index", scope: !12026, file: !3, line: 3654, type: !82)
-!12035 = !DILocation(line: 0, scope: !12026)
-!12036 = !DILocation(line: 3652, column: 30, scope: !12026)
-!12037 = !DILocation(line: 3656, column: 14, scope: !12038)
-!12038 = distinct !DILexicalBlock(scope: !12026, file: !3, line: 3656, column: 6)
-!12039 = !DILocation(line: 3656, column: 6, scope: !12026)
-!12040 = !DILocation(line: 3657, column: 3, scope: !12038)
-!12041 = !DILocation(line: 3659, column: 10, scope: !12026)
-!12042 = !DILocation(line: 3660, column: 17, scope: !12026)
-!12043 = !DILocation(line: 3664, column: 2, scope: !12026)
-!12044 = distinct !DISubprogram(name: "hypsec_set_vcpu_state", scope: !3, file: !3, line: 3667, type: !12045, scopeLine: 3668, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12047)
-!12045 = !DISubroutineType(types: !12046)
-!12046 = !{null, !228, !82, !82}
-!12047 = !{!12048, !12049, !12050}
-!12048 = !DILocalVariable(name: "vmid", arg: 1, scope: !12044, file: !3, line: 3667, type: !228)
-!12049 = !DILocalVariable(name: "vcpu_id", arg: 2, scope: !12044, file: !3, line: 3667, type: !82)
-!12050 = !DILocalVariable(name: "state", arg: 3, scope: !12044, file: !3, line: 3667, type: !82)
-!12051 = !DILocation(line: 0, scope: !12044)
-!12052 = !DILocation(line: 3669, column: 2, scope: !12044)
-!12053 = !DILocation(line: 3670, column: 2, scope: !12044)
-!12054 = !DILocation(line: 3671, column: 2, scope: !12044)
-!12055 = !DILocation(line: 3672, column: 1, scope: !12044)
-!12056 = distinct !DISubprogram(name: "stage2_inject_el1_fault", scope: !3, file: !3, line: 3732, type: !6601, scopeLine: 3733, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12057)
-!12057 = !{!12058, !12059, !12060, !12062, !12063, !12064, !12065, !12067, !12069, !12071, !12073, !12075, !12077, !12079}
-!12058 = !DILocalVariable(name: "addr", arg: 1, scope: !12056, file: !3, line: 3732, type: !210)
-!12059 = !DILocalVariable(name: "pstate", scope: !12056, file: !3, line: 3734, type: !207)
-!12060 = !DILocalVariable(name: "__val", scope: !12061, file: !3, line: 3734, type: !207)
-!12061 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3734, column: 15)
-!12062 = !DILocalVariable(name: "esr", scope: !12056, file: !3, line: 3735, type: !228)
-!12063 = !DILocalVariable(name: "esr_el2", scope: !12056, file: !3, line: 3735, type: !228)
-!12064 = !DILocalVariable(name: "is_iabt", scope: !12056, file: !3, line: 3736, type: !621)
-!12065 = !DILocalVariable(name: "__val", scope: !12066, file: !3, line: 3738, type: !207)
-!12066 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3738, column: 2)
+!11996 = !DILocation(line: 3633, column: 3, scope: !11997)
+!11997 = distinct !DILexicalBlock(scope: !11981, file: !3, line: 3630, column: 6)
+!11998 = distinct !DISubprogram(name: "get_shared_data_start", scope: !14, file: !14, line: 192, type: !11999, scopeLine: 193, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12001)
+!11999 = !DISubroutineType(types: !12000)
+!12000 = !{!10716}
+!12001 = !{!12002, !12003, !12005}
+!12002 = !DILocalVariable(name: "shared_data", scope: !11998, file: !14, line: 194, type: !10716)
+!12003 = !DILocalVariable(name: "val", scope: !12004, file: !14, line: 194, type: !206)
+!12004 = distinct !DILexicalBlock(scope: !11998, file: !14, line: 194, column: 36)
+!12005 = !DILocalVariable(name: "__ptr", scope: !12006, file: !14, line: 194, type: !210)
+!12006 = distinct !DILexicalBlock(scope: !12007, file: !14, line: 194, column: 36)
+!12007 = distinct !DILexicalBlock(scope: !12004, file: !14, line: 194, column: 36)
+!12008 = !DILocation(line: 194, column: 36, scope: !12007)
+!12009 = !DILocation(line: 194, column: 36, scope: !12004)
+!12010 = !DILocation(line: 0, scope: !12004)
+!12011 = !DILocation(line: 194, column: 36, scope: !11998)
+!12012 = !DILocation(line: 0, scope: !11998)
+!12013 = !DILocation(line: 195, column: 2, scope: !11998)
+!12014 = distinct !DISubprogram(name: "hypsec_vmid_to_kvm", scope: !3, file: !3, line: 3636, type: !11504, scopeLine: 3637, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12015)
+!12015 = !{!12016, !12017, !12018}
+!12016 = !DILocalVariable(name: "vmid", arg: 1, scope: !12014, file: !3, line: 3636, type: !228)
+!12017 = !DILocalVariable(name: "kvm", scope: !12014, file: !3, line: 3638, type: !291)
+!12018 = !DILocalVariable(name: "shared_data", scope: !12014, file: !3, line: 3639, type: !10716)
+!12019 = !DILocation(line: 0, scope: !12014)
+!12020 = !DILocation(line: 3641, column: 16, scope: !12014)
+!12021 = !DILocation(line: 3643, column: 7, scope: !12022)
+!12022 = distinct !DILexicalBlock(scope: !12014, file: !3, line: 3643, column: 6)
+!12023 = !DILocation(line: 3643, column: 6, scope: !12014)
+!12024 = !DILocation(line: 3644, column: 3, scope: !12022)
+!12025 = !DILocation(line: 3642, column: 9, scope: !12014)
+!12026 = !DILocation(line: 3646, column: 3, scope: !12022)
+!12027 = distinct !DISubprogram(name: "hypsec_vcpu_id_to_shadow_ctxt", scope: !3, file: !3, line: 3649, type: !12028, scopeLine: 3651, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12030)
+!12028 = !DISubroutineType(types: !12029)
+!12029 = !{!6479, !228, !82}
+!12030 = !{!12031, !12032, !12033, !12034, !12035}
+!12031 = !DILocalVariable(name: "vmid", arg: 1, scope: !12027, file: !3, line: 3650, type: !228)
+!12032 = !DILocalVariable(name: "vcpu_id", arg: 2, scope: !12027, file: !3, line: 3650, type: !82)
+!12033 = !DILocalVariable(name: "el2_data", scope: !12027, file: !3, line: 3652, type: !6368)
+!12034 = !DILocalVariable(name: "shadow_ctxt", scope: !12027, file: !3, line: 3653, type: !6479)
+!12035 = !DILocalVariable(name: "index", scope: !12027, file: !3, line: 3654, type: !82)
+!12036 = !DILocation(line: 0, scope: !12027)
+!12037 = !DILocation(line: 3652, column: 30, scope: !12027)
+!12038 = !DILocation(line: 3656, column: 14, scope: !12039)
+!12039 = distinct !DILexicalBlock(scope: !12027, file: !3, line: 3656, column: 6)
+!12040 = !DILocation(line: 3656, column: 6, scope: !12027)
+!12041 = !DILocation(line: 3657, column: 3, scope: !12039)
+!12042 = !DILocation(line: 3659, column: 10, scope: !12027)
+!12043 = !DILocation(line: 3660, column: 17, scope: !12027)
+!12044 = !DILocation(line: 3664, column: 3, scope: !12045)
+!12045 = distinct !DILexicalBlock(scope: !12027, file: !3, line: 3661, column: 6)
+!12046 = distinct !DISubprogram(name: "hypsec_set_vcpu_state", scope: !3, file: !3, line: 3667, type: !12047, scopeLine: 3668, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12049)
+!12047 = !DISubroutineType(types: !12048)
+!12048 = !{null, !228, !82, !82}
+!12049 = !{!12050, !12051, !12052}
+!12050 = !DILocalVariable(name: "vmid", arg: 1, scope: !12046, file: !3, line: 3667, type: !228)
+!12051 = !DILocalVariable(name: "vcpu_id", arg: 2, scope: !12046, file: !3, line: 3667, type: !82)
+!12052 = !DILocalVariable(name: "state", arg: 3, scope: !12046, file: !3, line: 3667, type: !82)
+!12053 = !DILocation(line: 0, scope: !12046)
+!12054 = !DILocation(line: 3669, column: 2, scope: !12046)
+!12055 = !DILocation(line: 3670, column: 2, scope: !12046)
+!12056 = !DILocation(line: 3671, column: 2, scope: !12046)
+!12057 = !DILocation(line: 3672, column: 1, scope: !12046)
+!12058 = distinct !DISubprogram(name: "stage2_inject_el1_fault", scope: !3, file: !3, line: 3732, type: !6601, scopeLine: 3733, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12059)
+!12059 = !{!12060, !12061, !12062, !12064, !12065, !12066, !12067, !12069, !12071, !12073, !12075, !12077, !12079, !12081}
+!12060 = !DILocalVariable(name: "addr", arg: 1, scope: !12058, file: !3, line: 3732, type: !210)
+!12061 = !DILocalVariable(name: "pstate", scope: !12058, file: !3, line: 3734, type: !207)
+!12062 = !DILocalVariable(name: "__val", scope: !12063, file: !3, line: 3734, type: !207)
+!12063 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3734, column: 15)
+!12064 = !DILocalVariable(name: "esr", scope: !12058, file: !3, line: 3735, type: !228)
+!12065 = !DILocalVariable(name: "esr_el2", scope: !12058, file: !3, line: 3735, type: !228)
+!12066 = !DILocalVariable(name: "is_iabt", scope: !12058, file: !3, line: 3736, type: !621)
 !12067 = !DILocalVariable(name: "__val", scope: !12068, file: !3, line: 3738, type: !207)
-!12068 = distinct !DILexicalBlock(scope: !12066, file: !3, line: 3738, column: 2)
-!12069 = !DILocalVariable(name: "__val", scope: !12070, file: !3, line: 3739, type: !207)
-!12070 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3739, column: 2)
-!12071 = !DILocalVariable(name: "__val", scope: !12072, file: !3, line: 3741, type: !207)
-!12072 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3741, column: 2)
-!12073 = !DILocalVariable(name: "__val", scope: !12074, file: !3, line: 3742, type: !207)
-!12074 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3742, column: 2)
-!12075 = !DILocalVariable(name: "__val", scope: !12076, file: !3, line: 3743, type: !207)
-!12076 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3743, column: 2)
-!12077 = !DILocalVariable(name: "__val", scope: !12078, file: !3, line: 3745, type: !207)
-!12078 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3745, column: 12)
-!12079 = !DILocalVariable(name: "__val", scope: !12080, file: !3, line: 3762, type: !207)
-!12080 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3762, column: 2)
-!12081 = !DILocation(line: 0, scope: !12056)
-!12082 = !DILocation(line: 3734, column: 15, scope: !12061)
-!12083 = !{i64 2154641862}
-!12084 = !DILocation(line: 0, scope: !12061)
-!12085 = !DILocation(line: 3738, column: 2, scope: !12068)
-!12086 = !{i64 2154642299}
-!12087 = !DILocation(line: 0, scope: !12068)
-!12088 = !DILocation(line: 0, scope: !12066)
-!12089 = !DILocation(line: 3738, column: 2, scope: !12066)
-!12090 = !{i64 2154642029}
-!12091 = !DILocation(line: 3739, column: 2, scope: !12070)
-!12092 = !DILocation(line: 0, scope: !12070)
-!12093 = !{i64 2154642458}
+!12068 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3738, column: 2)
+!12069 = !DILocalVariable(name: "__val", scope: !12070, file: !3, line: 3738, type: !207)
+!12070 = distinct !DILexicalBlock(scope: !12068, file: !3, line: 3738, column: 2)
+!12071 = !DILocalVariable(name: "__val", scope: !12072, file: !3, line: 3739, type: !207)
+!12072 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3739, column: 2)
+!12073 = !DILocalVariable(name: "__val", scope: !12074, file: !3, line: 3741, type: !207)
+!12074 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3741, column: 2)
+!12075 = !DILocalVariable(name: "__val", scope: !12076, file: !3, line: 3742, type: !207)
+!12076 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3742, column: 2)
+!12077 = !DILocalVariable(name: "__val", scope: !12078, file: !3, line: 3743, type: !207)
+!12078 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3743, column: 2)
+!12079 = !DILocalVariable(name: "__val", scope: !12080, file: !3, line: 3745, type: !207)
+!12080 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3745, column: 12)
+!12081 = !DILocalVariable(name: "__val", scope: !12082, file: !3, line: 3762, type: !207)
+!12082 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3762, column: 2)
+!12083 = !DILocation(line: 0, scope: !12058)
+!12084 = !DILocation(line: 3734, column: 15, scope: !12063)
+!12085 = !{i64 2154641880}
+!12086 = !DILocation(line: 0, scope: !12063)
+!12087 = !DILocation(line: 3738, column: 2, scope: !12070)
+!12088 = !{i64 2154642317}
+!12089 = !DILocation(line: 0, scope: !12070)
+!12090 = !DILocation(line: 0, scope: !12068)
+!12091 = !DILocation(line: 3738, column: 2, scope: !12068)
+!12092 = !{i64 2154642047}
+!12093 = !DILocation(line: 3739, column: 2, scope: !12072)
 !12094 = !DILocation(line: 0, scope: !12072)
-!12095 = !DILocation(line: 3741, column: 2, scope: !12072)
-!12096 = !{i64 2154642670}
-!12097 = !DILocation(line: 0, scope: !12074)
-!12098 = !DILocation(line: 3742, column: 2, scope: !12074)
-!12099 = !{i64 2154642851}
-!12100 = !DILocation(line: 0, scope: !12076)
-!12101 = !DILocation(line: 3743, column: 2, scope: !12076)
-!12102 = !{i64 2154643040}
-!12103 = !DILocation(line: 3745, column: 12, scope: !12078)
-!12104 = !{i64 2154643214}
-!12105 = !DILocation(line: 0, scope: !12078)
-!12106 = !DILocation(line: 3753, column: 14, scope: !12107)
-!12107 = distinct !DILexicalBlock(scope: !12056, file: !3, line: 3753, column: 6)
-!12108 = !DILocation(line: 3753, column: 31, scope: !12107)
-!12109 = !DILocation(line: 3753, column: 6, scope: !12056)
-!12110 = !DILocation(line: 0, scope: !12080)
-!12111 = !DILocation(line: 3762, column: 2, scope: !12080)
-!12112 = !{i64 2154643455}
-!12113 = !DILocation(line: 3763, column: 1, scope: !12056)
-!12114 = distinct !DISubprogram(name: "stage2_get_exception_vector", scope: !3, file: !3, line: 3710, type: !6710, scopeLine: 3711, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12115)
-!12115 = !{!12116, !12117, !12118}
-!12116 = !DILocalVariable(name: "pstate", arg: 1, scope: !12114, file: !3, line: 3710, type: !207)
-!12117 = !DILocalVariable(name: "exc_offset", scope: !12114, file: !3, line: 3712, type: !207)
-!12118 = !DILocalVariable(name: "__val", scope: !12119, file: !3, line: 3728, type: !207)
-!12119 = distinct !DILexicalBlock(scope: !12114, file: !3, line: 3728, column: 9)
-!12120 = !DILocation(line: 0, scope: !12114)
-!12121 = !DILocation(line: 3714, column: 17, scope: !12114)
-!12122 = !DILocation(line: 3714, column: 2, scope: !12114)
-!12123 = !DILocation(line: 0, scope: !12124)
-!12124 = distinct !DILexicalBlock(scope: !12114, file: !3, line: 3714, column: 53)
-!12125 = !DILocation(line: 3728, column: 9, scope: !12119)
-!12126 = !{i64 2154641589}
-!12127 = !DILocation(line: 0, scope: !12119)
-!12128 = !DILocation(line: 3728, column: 31, scope: !12114)
-!12129 = !DILocation(line: 3728, column: 2, scope: !12114)
-!12130 = distinct !DISubprogram(name: "reject_invalid_mem_access", scope: !3, file: !3, line: 3765, type: !9628, scopeLine: 3766, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12131)
-!12131 = !{!12132, !12133}
-!12132 = !DILocalVariable(name: "addr", arg: 1, scope: !12130, file: !3, line: 3765, type: !234)
-!12133 = !DILocalVariable(name: "__val", scope: !12134, file: !3, line: 3769, type: !207)
-!12134 = distinct !DILexicalBlock(scope: !12130, file: !3, line: 3769, column: 14)
-!12135 = !DILocation(line: 0, scope: !12130)
-!12136 = !DILocation(line: 3767, column: 2, scope: !12130)
-!12137 = !DILocation(line: 3768, column: 2, scope: !12130)
-!12138 = !DILocation(line: 3769, column: 14, scope: !12134)
-!12139 = !{i64 2154643741}
-!12140 = !DILocation(line: 0, scope: !12134)
-!12141 = !DILocation(line: 3769, column: 2, scope: !12130)
-!12142 = !DILocation(line: 3770, column: 2, scope: !12130)
-!12143 = !DILocation(line: 3771, column: 2, scope: !12130)
-!12144 = !DILocation(line: 3772, column: 2, scope: !12130)
-!12145 = !DILocation(line: 3773, column: 1, scope: !12130)
-!12146 = distinct !DISubprogram(name: "__init_stage2_translation", scope: !3, file: !3, line: 3796, type: !7025, scopeLine: 3797, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12147)
-!12147 = !{!12148, !12149, !12150, !12151, !12153, !12155, !12157}
-!12148 = !DILocalVariable(name: "val", scope: !12146, file: !3, line: 3798, type: !207)
-!12149 = !DILocalVariable(name: "parange", scope: !12146, file: !3, line: 3799, type: !207)
-!12150 = !DILocalVariable(name: "tmp", scope: !12146, file: !3, line: 3800, type: !207)
-!12151 = !DILocalVariable(name: "__val", scope: !12152, file: !3, line: 3807, type: !207)
-!12152 = distinct !DILexicalBlock(scope: !12146, file: !3, line: 3807, column: 12)
-!12153 = !DILocalVariable(name: "__val", scope: !12154, file: !3, line: 3847, type: !207)
-!12154 = distinct !DILexicalBlock(scope: !12146, file: !3, line: 3847, column: 9)
-!12155 = !DILocalVariable(name: "__val", scope: !12156, file: !3, line: 3855, type: !207)
-!12156 = distinct !DILexicalBlock(scope: !12146, file: !3, line: 3855, column: 9)
-!12157 = !DILocalVariable(name: "__val", scope: !12158, file: !3, line: 3860, type: !207)
-!12158 = distinct !DILexicalBlock(scope: !12146, file: !3, line: 3860, column: 2)
-!12159 = !DILocation(line: 0, scope: !12146)
-!12160 = !DILocation(line: 3807, column: 12, scope: !12152)
-!12161 = !{i64 2154644627}
-!12162 = !DILocation(line: 0, scope: !12152)
-!12163 = !DILocation(line: 3807, column: 42, scope: !12146)
-!12164 = !DILocation(line: 3808, column: 6, scope: !12146)
-!12165 = !DILocation(line: 3813, column: 2, scope: !12146)
-!12166 = !DILocation(line: 3810, column: 17, scope: !12146)
-!12167 = !DILocation(line: 3841, column: 6, scope: !12146)
-!12168 = !DILocation(line: 3847, column: 9, scope: !12154)
-!12169 = !{i64 2154644862}
-!12170 = !DILocation(line: 0, scope: !12154)
-!12171 = !DILocation(line: 3847, column: 68, scope: !12146)
-!12172 = !DILocation(line: 3848, column: 6, scope: !12173)
-!12173 = distinct !DILexicalBlock(scope: !12146, file: !3, line: 3848, column: 6)
-!12174 = !DILocation(line: 3848, column: 6, scope: !12146)
-!12175 = !DILocation(line: 3855, column: 9, scope: !12156)
-!12176 = !{i64 2154645053}
-!12177 = !DILocation(line: 0, scope: !12156)
-!12178 = !DILocation(line: 3856, column: 14, scope: !12146)
-!12179 = !DILocation(line: 3856, column: 9, scope: !12146)
-!12180 = !DILocation(line: 3856, column: 6, scope: !12146)
-!12181 = !DILocation(line: 0, scope: !12158)
-!12182 = !DILocation(line: 3860, column: 2, scope: !12158)
-!12183 = !{i64 2154645304}
-!12184 = !DILocation(line: 3862, column: 2, scope: !12146)
-!12185 = distinct !DISubprogram(name: "__vm_sysreg_restore_state_nvhe_opt", scope: !3, file: !3, line: 4009, type: !6798, scopeLine: 4010, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12186)
-!12186 = !{!12187, !12188}
-!12187 = !DILocalVariable(name: "vmid", arg: 1, scope: !12185, file: !3, line: 4009, type: !228)
-!12188 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12185, file: !3, line: 4009, type: !228)
-!12189 = !DILocation(line: 0, scope: !12185)
-!12190 = !DILocation(line: 4011, column: 2, scope: !12185)
-!12191 = !DILocation(line: 4012, column: 2, scope: !12185)
-!12192 = !DILocation(line: 4013, column: 2, scope: !12185)
-!12193 = !DILocation(line: 4014, column: 2, scope: !12185)
-!12194 = !DILocation(line: 4015, column: 1, scope: !12185)
-!12195 = distinct !DISubprogram(name: "__vm_sysreg_restore_el1_state", scope: !3, file: !3, line: 3941, type: !6798, scopeLine: 3942, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12196)
-!12196 = !{!12197, !12198, !12199, !12200, !12201, !12202, !12204, !12206, !12208, !12210, !12212, !12214, !12216, !12218, !12220, !12222, !12224, !12226, !12228, !12230, !12232, !12234, !12236, !12238, !12240, !12242, !12244}
-!12197 = !DILocalVariable(name: "vmid", arg: 1, scope: !12195, file: !3, line: 3941, type: !228)
-!12198 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12195, file: !3, line: 3941, type: !228)
-!12199 = !DILocalVariable(name: "el2_data", scope: !12195, file: !3, line: 3943, type: !6368)
-!12200 = !DILocalVariable(name: "offset", scope: !12195, file: !3, line: 3944, type: !82)
-!12201 = !DILocalVariable(name: "ctxt", scope: !12195, file: !3, line: 3945, type: !6479)
-!12202 = !DILocalVariable(name: "__val", scope: !12203, file: !3, line: 3947, type: !207)
-!12203 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3947, column: 2)
-!12204 = !DILocalVariable(name: "__val", scope: !12205, file: !3, line: 3948, type: !207)
-!12205 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3948, column: 2)
-!12206 = !DILocalVariable(name: "__val", scope: !12207, file: !3, line: 3949, type: !207)
-!12207 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3949, column: 2)
-!12208 = !DILocalVariable(name: "__val", scope: !12209, file: !3, line: 3950, type: !207)
-!12209 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3950, column: 2)
-!12210 = !DILocalVariable(name: "__val", scope: !12211, file: !3, line: 3951, type: !207)
-!12211 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3951, column: 2)
-!12212 = !DILocalVariable(name: "__val", scope: !12213, file: !3, line: 3952, type: !207)
-!12213 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3952, column: 2)
-!12214 = !DILocalVariable(name: "__val", scope: !12215, file: !3, line: 3953, type: !207)
-!12215 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3953, column: 2)
-!12216 = !DILocalVariable(name: "__val", scope: !12217, file: !3, line: 3954, type: !207)
-!12217 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3954, column: 2)
-!12218 = !DILocalVariable(name: "__val", scope: !12219, file: !3, line: 3955, type: !207)
-!12219 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3955, column: 2)
-!12220 = !DILocalVariable(name: "__val", scope: !12221, file: !3, line: 3956, type: !207)
-!12221 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3956, column: 2)
-!12222 = !DILocalVariable(name: "__val", scope: !12223, file: !3, line: 3957, type: !207)
-!12223 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3957, column: 2)
-!12224 = !DILocalVariable(name: "__val", scope: !12225, file: !3, line: 3958, type: !207)
-!12225 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3958, column: 2)
-!12226 = !DILocalVariable(name: "__val", scope: !12227, file: !3, line: 3959, type: !207)
-!12227 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3959, column: 2)
-!12228 = !DILocalVariable(name: "__val", scope: !12229, file: !3, line: 3960, type: !207)
-!12229 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3960, column: 2)
-!12230 = !DILocalVariable(name: "__val", scope: !12231, file: !3, line: 3961, type: !207)
-!12231 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3961, column: 2)
-!12232 = !DILocalVariable(name: "__val", scope: !12233, file: !3, line: 3962, type: !207)
-!12233 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3962, column: 2)
-!12234 = !DILocalVariable(name: "__val", scope: !12235, file: !3, line: 3963, type: !207)
-!12235 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3963, column: 2)
-!12236 = !DILocalVariable(name: "__val", scope: !12237, file: !3, line: 3964, type: !207)
-!12237 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3964, column: 2)
-!12238 = !DILocalVariable(name: "__val", scope: !12239, file: !3, line: 3965, type: !207)
-!12239 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3965, column: 2)
-!12240 = !DILocalVariable(name: "__val", scope: !12241, file: !3, line: 3967, type: !207)
-!12241 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3967, column: 2)
-!12242 = !DILocalVariable(name: "__val", scope: !12243, file: !3, line: 3968, type: !207)
-!12243 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3968, column: 2)
-!12244 = !DILocalVariable(name: "__val", scope: !12245, file: !3, line: 3969, type: !207)
-!12245 = distinct !DILexicalBlock(scope: !12195, file: !3, line: 3969, column: 2)
-!12246 = !DILocation(line: 0, scope: !12195)
-!12247 = !DILocation(line: 3943, column: 30, scope: !12195)
-!12248 = !DILocation(line: 3944, column: 15, scope: !12195)
-!12249 = !DILocation(line: 3945, column: 38, scope: !12195)
-!12250 = !DILocation(line: 3947, column: 2, scope: !12203)
-!12251 = !DILocation(line: 0, scope: !12203)
-!12252 = !{i64 2154767926}
-!12253 = !DILocation(line: 3948, column: 2, scope: !12205)
-!12254 = !DILocation(line: 0, scope: !12205)
-!12255 = !{i64 2154768137}
-!12256 = !DILocation(line: 3949, column: 2, scope: !12207)
-!12257 = !DILocation(line: 0, scope: !12207)
-!12258 = !{i64 2154772509, i64 2154772556, i64 2154772562, i64 2154773576, i64 2154773616, i64 2154773634, i64 2154773666, i64 2154773694, i64 2154773748, i64 2154773768, i64 2154773866, i64 2154772585, i64 2154772599, i64 2154772617, i64 2154774324, i64 2154774372, i64 2154774420, i64 2154774483, i64 2154774532, i64 2154772695, i64 2154772720, i64 2154772746, i64 2154772752, i64 2154773989, i64 2154774029, i64 2154774047, i64 2154774079, i64 2154774107, i64 2154774161, i64 2154774181, i64 2154774279, i64 2154772775, i64 2154772789, i64 2154772795, i64 2154772820, i64 2154772870, i64 2154772924}
-!12259 = !DILocation(line: 3950, column: 2, scope: !12209)
-!12260 = !DILocation(line: 0, scope: !12209)
-!12261 = !{i64 2154774637}
-!12262 = !DILocation(line: 3951, column: 2, scope: !12211)
-!12263 = !DILocation(line: 0, scope: !12211)
-!12264 = !{i64 2154779005, i64 2154779052, i64 2154779058, i64 2154780072, i64 2154780112, i64 2154780130, i64 2154780162, i64 2154780190, i64 2154780244, i64 2154780264, i64 2154780362, i64 2154779081, i64 2154779095, i64 2154779113, i64 2154780820, i64 2154780868, i64 2154780916, i64 2154780979, i64 2154781028, i64 2154779191, i64 2154779216, i64 2154779242, i64 2154779248, i64 2154780485, i64 2154780525, i64 2154780543, i64 2154780575, i64 2154780603, i64 2154780657, i64 2154780677, i64 2154780775, i64 2154779271, i64 2154779285, i64 2154779291, i64 2154779316, i64 2154779366, i64 2154779420}
-!12265 = !DILocation(line: 3952, column: 2, scope: !12213)
-!12266 = !DILocation(line: 0, scope: !12213)
-!12267 = !{i64 2154785293, i64 2154785340, i64 2154785346, i64 2154786360, i64 2154786400, i64 2154786418, i64 2154786450, i64 2154786478, i64 2154786532, i64 2154786552, i64 2154786650, i64 2154785369, i64 2154785383, i64 2154785401, i64 2154787108, i64 2154787156, i64 2154787204, i64 2154787267, i64 2154787316, i64 2154785479, i64 2154785504, i64 2154785530, i64 2154785536, i64 2154786773, i64 2154786813, i64 2154786831, i64 2154786863, i64 2154786891, i64 2154786945, i64 2154786965, i64 2154787063, i64 2154785559, i64 2154785573, i64 2154785579, i64 2154785604, i64 2154785654, i64 2154785708}
-!12268 = !DILocation(line: 3953, column: 2, scope: !12215)
-!12269 = !DILocation(line: 0, scope: !12215)
-!12270 = !{i64 2154791581, i64 2154791628, i64 2154791634, i64 2154792648, i64 2154792688, i64 2154792706, i64 2154792738, i64 2154792766, i64 2154792820, i64 2154792840, i64 2154792938, i64 2154791657, i64 2154791671, i64 2154791689, i64 2154793396, i64 2154793444, i64 2154793492, i64 2154793555, i64 2154793604, i64 2154791767, i64 2154791792, i64 2154791818, i64 2154791824, i64 2154793061, i64 2154793101, i64 2154793119, i64 2154793151, i64 2154793179, i64 2154793233, i64 2154793253, i64 2154793351, i64 2154791847, i64 2154791861, i64 2154791867, i64 2154791892, i64 2154791942, i64 2154791996}
-!12271 = !DILocation(line: 3954, column: 2, scope: !12217)
-!12272 = !DILocation(line: 0, scope: !12217)
-!12273 = !{i64 2154797855, i64 2154797902, i64 2154797908, i64 2154798922, i64 2154798962, i64 2154798980, i64 2154799012, i64 2154799040, i64 2154799094, i64 2154799114, i64 2154799212, i64 2154797931, i64 2154797945, i64 2154797963, i64 2154799670, i64 2154799718, i64 2154799766, i64 2154799829, i64 2154799878, i64 2154798041, i64 2154798066, i64 2154798092, i64 2154798098, i64 2154799335, i64 2154799375, i64 2154799393, i64 2154799425, i64 2154799453, i64 2154799507, i64 2154799527, i64 2154799625, i64 2154798121, i64 2154798135, i64 2154798141, i64 2154798166, i64 2154798216, i64 2154798270}
-!12274 = !DILocation(line: 3955, column: 2, scope: !12219)
-!12275 = !DILocation(line: 0, scope: !12219)
-!12276 = !{i64 2154804129, i64 2154804176, i64 2154804182, i64 2154805196, i64 2154805236, i64 2154805254, i64 2154805286, i64 2154805314, i64 2154805368, i64 2154805388, i64 2154805486, i64 2154804205, i64 2154804219, i64 2154804237, i64 2154805944, i64 2154805992, i64 2154806040, i64 2154806103, i64 2154806152, i64 2154804315, i64 2154804340, i64 2154804366, i64 2154804372, i64 2154805609, i64 2154805649, i64 2154805667, i64 2154805699, i64 2154805727, i64 2154805781, i64 2154805801, i64 2154805899, i64 2154804395, i64 2154804409, i64 2154804415, i64 2154804440, i64 2154804490, i64 2154804544}
-!12277 = !DILocation(line: 3956, column: 2, scope: !12221)
-!12278 = !DILocation(line: 0, scope: !12221)
-!12279 = !{i64 2154810417, i64 2154810464, i64 2154810470, i64 2154811484, i64 2154811524, i64 2154811542, i64 2154811574, i64 2154811602, i64 2154811656, i64 2154811676, i64 2154811774, i64 2154810493, i64 2154810507, i64 2154810525, i64 2154812232, i64 2154812280, i64 2154812328, i64 2154812391, i64 2154812440, i64 2154810603, i64 2154810628, i64 2154810654, i64 2154810660, i64 2154811897, i64 2154811937, i64 2154811955, i64 2154811987, i64 2154812015, i64 2154812069, i64 2154812089, i64 2154812187, i64 2154810683, i64 2154810697, i64 2154810703, i64 2154810728, i64 2154810778, i64 2154810832}
-!12280 = !DILocation(line: 3957, column: 2, scope: !12223)
-!12281 = !DILocation(line: 0, scope: !12223)
-!12282 = !{i64 2154820766, i64 2154820813, i64 2154820819, i64 2154821833, i64 2154821873, i64 2154821891, i64 2154821923, i64 2154821951, i64 2154822005, i64 2154822025, i64 2154822123, i64 2154820842, i64 2154820856, i64 2154820874, i64 2154822581, i64 2154822629, i64 2154822677, i64 2154822740, i64 2154822789, i64 2154820952, i64 2154820977, i64 2154821003, i64 2154821009, i64 2154822246, i64 2154822286, i64 2154822304, i64 2154822336, i64 2154822364, i64 2154822418, i64 2154822438, i64 2154822536, i64 2154821032, i64 2154821046, i64 2154821052, i64 2154821077, i64 2154821127, i64 2154821181}
-!12283 = !DILocation(line: 3958, column: 2, scope: !12225)
-!12284 = !DILocation(line: 0, scope: !12225)
-!12285 = !{i64 2154827040, i64 2154827087, i64 2154827093, i64 2154828107, i64 2154828147, i64 2154828165, i64 2154828197, i64 2154828225, i64 2154828279, i64 2154828299, i64 2154828397, i64 2154827116, i64 2154827130, i64 2154827148, i64 2154828855, i64 2154828903, i64 2154828951, i64 2154829014, i64 2154829063, i64 2154827226, i64 2154827251, i64 2154827277, i64 2154827283, i64 2154828520, i64 2154828560, i64 2154828578, i64 2154828610, i64 2154828638, i64 2154828692, i64 2154828712, i64 2154828810, i64 2154827306, i64 2154827320, i64 2154827326, i64 2154827351, i64 2154827401, i64 2154827455}
-!12286 = !DILocation(line: 3959, column: 2, scope: !12227)
-!12287 = !DILocation(line: 0, scope: !12227)
-!12288 = !{i64 2154833335, i64 2154833382, i64 2154833388, i64 2154834402, i64 2154834442, i64 2154834460, i64 2154834492, i64 2154834520, i64 2154834574, i64 2154834594, i64 2154834693, i64 2154833411, i64 2154833425, i64 2154833443, i64 2154835152, i64 2154835200, i64 2154835248, i64 2154835311, i64 2154835360, i64 2154833521, i64 2154833546, i64 2154833572, i64 2154833578, i64 2154834816, i64 2154834856, i64 2154834874, i64 2154834906, i64 2154834934, i64 2154834988, i64 2154835008, i64 2154835107, i64 2154833601, i64 2154833615, i64 2154833621, i64 2154833646, i64 2154833696, i64 2154833750}
-!12289 = !DILocation(line: 3960, column: 2, scope: !12229)
-!12290 = !DILocation(line: 0, scope: !12229)
-!12291 = !{i64 2154839632, i64 2154839679, i64 2154839685, i64 2154840699, i64 2154840739, i64 2154840757, i64 2154840789, i64 2154840817, i64 2154840871, i64 2154840891, i64 2154840990, i64 2154839708, i64 2154839722, i64 2154839740, i64 2154841449, i64 2154841497, i64 2154841545, i64 2154841608, i64 2154841657, i64 2154839818, i64 2154839843, i64 2154839869, i64 2154839875, i64 2154841113, i64 2154841153, i64 2154841171, i64 2154841203, i64 2154841231, i64 2154841285, i64 2154841305, i64 2154841404, i64 2154839898, i64 2154839912, i64 2154839918, i64 2154839943, i64 2154839993, i64 2154840047}
-!12292 = !DILocation(line: 3961, column: 2, scope: !12231)
-!12293 = !DILocation(line: 0, scope: !12231)
-!12294 = !{i64 2154845971, i64 2154846018, i64 2154846024, i64 2154847038, i64 2154847078, i64 2154847096, i64 2154847128, i64 2154847156, i64 2154847210, i64 2154847230, i64 2154847329, i64 2154846047, i64 2154846061, i64 2154846079, i64 2154847788, i64 2154847836, i64 2154847884, i64 2154847947, i64 2154847996, i64 2154846157, i64 2154846182, i64 2154846208, i64 2154846214, i64 2154847452, i64 2154847492, i64 2154847510, i64 2154847542, i64 2154847570, i64 2154847624, i64 2154847644, i64 2154847743, i64 2154846237, i64 2154846251, i64 2154846257, i64 2154846282, i64 2154846332, i64 2154846386}
-!12295 = !DILocation(line: 3962, column: 2, scope: !12233)
-!12296 = !DILocation(line: 0, scope: !12233)
-!12297 = !{i64 2154852275, i64 2154852322, i64 2154852328, i64 2154853342, i64 2154853382, i64 2154853400, i64 2154853432, i64 2154853460, i64 2154853514, i64 2154853534, i64 2154853633, i64 2154852351, i64 2154852365, i64 2154852383, i64 2154854092, i64 2154854140, i64 2154854188, i64 2154854251, i64 2154854300, i64 2154852461, i64 2154852486, i64 2154852512, i64 2154852518, i64 2154853756, i64 2154853796, i64 2154853814, i64 2154853846, i64 2154853874, i64 2154853928, i64 2154853948, i64 2154854047, i64 2154852541, i64 2154852555, i64 2154852561, i64 2154852586, i64 2154852636, i64 2154852690}
-!12298 = !DILocation(line: 3963, column: 2, scope: !12235)
-!12299 = !DILocation(line: 0, scope: !12235)
-!12300 = !{i64 2154858593, i64 2154858640, i64 2154858646, i64 2154859660, i64 2154859700, i64 2154859718, i64 2154859750, i64 2154859778, i64 2154859832, i64 2154859852, i64 2154859951, i64 2154858669, i64 2154858683, i64 2154858701, i64 2154860410, i64 2154860458, i64 2154860506, i64 2154860569, i64 2154860618, i64 2154858779, i64 2154858804, i64 2154858830, i64 2154858836, i64 2154860074, i64 2154860114, i64 2154860132, i64 2154860164, i64 2154860192, i64 2154860246, i64 2154860266, i64 2154860365, i64 2154858859, i64 2154858873, i64 2154858879, i64 2154858904, i64 2154858954, i64 2154859008}
-!12301 = !DILocation(line: 3964, column: 2, scope: !12237)
-!12302 = !DILocation(line: 0, scope: !12237)
-!12303 = !{i64 2154860723}
-!12304 = !DILocation(line: 3965, column: 2, scope: !12239)
-!12305 = !DILocation(line: 0, scope: !12239)
-!12306 = !{i64 2154860923}
-!12307 = !DILocation(line: 3967, column: 2, scope: !12241)
-!12308 = !DILocation(line: 0, scope: !12241)
-!12309 = !{i64 2154861131}
-!12310 = !DILocation(line: 3968, column: 2, scope: !12243)
-!12311 = !DILocation(line: 0, scope: !12243)
-!12312 = !{i64 2154865459, i64 2154865506, i64 2154865512, i64 2154866526, i64 2154866566, i64 2154866584, i64 2154866616, i64 2154866644, i64 2154866698, i64 2154866718, i64 2154866816, i64 2154865535, i64 2154865549, i64 2154865567, i64 2154867274, i64 2154867322, i64 2154867370, i64 2154867433, i64 2154867482, i64 2154865645, i64 2154865670, i64 2154865696, i64 2154865702, i64 2154866939, i64 2154866979, i64 2154866997, i64 2154867029, i64 2154867057, i64 2154867111, i64 2154867131, i64 2154867229, i64 2154865725, i64 2154865739, i64 2154865745, i64 2154865770, i64 2154865820, i64 2154865874}
-!12313 = !DILocation(line: 3969, column: 2, scope: !12245)
-!12314 = !DILocation(line: 0, scope: !12245)
-!12315 = !{i64 2154871727, i64 2154871774, i64 2154871780, i64 2154872794, i64 2154872834, i64 2154872852, i64 2154872884, i64 2154872912, i64 2154872966, i64 2154872986, i64 2154873084, i64 2154871803, i64 2154871817, i64 2154871835, i64 2154873542, i64 2154873590, i64 2154873638, i64 2154873701, i64 2154873750, i64 2154871913, i64 2154871938, i64 2154871964, i64 2154871970, i64 2154873207, i64 2154873247, i64 2154873265, i64 2154873297, i64 2154873325, i64 2154873379, i64 2154873399, i64 2154873497, i64 2154871993, i64 2154872007, i64 2154872013, i64 2154872038, i64 2154872088, i64 2154872142}
-!12316 = !DILocation(line: 3970, column: 1, scope: !12195)
-!12317 = distinct !DISubprogram(name: "__vm_sysreg_restore_common_state", scope: !3, file: !3, line: 3972, type: !6798, scopeLine: 3973, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12318)
-!12318 = !{!12319, !12320, !12321, !12322, !12323, !12324, !12326}
-!12319 = !DILocalVariable(name: "vmid", arg: 1, scope: !12317, file: !3, line: 3972, type: !228)
-!12320 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12317, file: !3, line: 3972, type: !228)
-!12321 = !DILocalVariable(name: "el2_data", scope: !12317, file: !3, line: 3974, type: !6368)
-!12322 = !DILocalVariable(name: "offset", scope: !12317, file: !3, line: 3975, type: !82)
-!12323 = !DILocalVariable(name: "ctxt", scope: !12317, file: !3, line: 3976, type: !6479)
-!12324 = !DILocalVariable(name: "__val", scope: !12325, file: !3, line: 3978, type: !207)
-!12325 = distinct !DILexicalBlock(scope: !12317, file: !3, line: 3978, column: 2)
-!12326 = !DILocalVariable(name: "__val", scope: !12327, file: !3, line: 3984, type: !207)
-!12327 = distinct !DILexicalBlock(scope: !12317, file: !3, line: 3984, column: 2)
-!12328 = !DILocation(line: 0, scope: !12317)
-!12329 = !DILocation(line: 3974, column: 30, scope: !12317)
-!12330 = !DILocation(line: 3975, column: 15, scope: !12317)
-!12331 = !DILocation(line: 3976, column: 38, scope: !12317)
-!12332 = !DILocation(line: 3978, column: 2, scope: !12325)
-!12333 = !DILocation(line: 0, scope: !12325)
-!12334 = !{i64 2154874023}
-!12335 = !DILocation(line: 3984, column: 2, scope: !12327)
-!12336 = !DILocation(line: 0, scope: !12327)
-!12337 = !{i64 2154874231}
-!12338 = !DILocation(line: 3985, column: 1, scope: !12317)
-!12339 = distinct !DISubprogram(name: "__vm_sysreg_restore_user_state", scope: !3, file: !3, line: 3999, type: !6798, scopeLine: 4000, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12340)
-!12340 = !{!12341, !12342, !12343, !12344, !12345, !12346, !12348}
-!12341 = !DILocalVariable(name: "vmid", arg: 1, scope: !12339, file: !3, line: 3999, type: !228)
-!12342 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12339, file: !3, line: 3999, type: !228)
-!12343 = !DILocalVariable(name: "el2_data", scope: !12339, file: !3, line: 4001, type: !6368)
-!12344 = !DILocalVariable(name: "offset", scope: !12339, file: !3, line: 4002, type: !82)
-!12345 = !DILocalVariable(name: "ctxt", scope: !12339, file: !3, line: 4003, type: !6479)
-!12346 = !DILocalVariable(name: "__val", scope: !12347, file: !3, line: 4005, type: !207)
-!12347 = distinct !DILexicalBlock(scope: !12339, file: !3, line: 4005, column: 2)
-!12348 = !DILocalVariable(name: "__val", scope: !12349, file: !3, line: 4006, type: !207)
-!12349 = distinct !DILexicalBlock(scope: !12339, file: !3, line: 4006, column: 2)
-!12350 = !DILocation(line: 0, scope: !12339)
-!12351 = !DILocation(line: 4001, column: 30, scope: !12339)
-!12352 = !DILocation(line: 4002, column: 15, scope: !12339)
-!12353 = !DILocation(line: 4003, column: 38, scope: !12339)
-!12354 = !DILocation(line: 4005, column: 2, scope: !12347)
-!12355 = !DILocation(line: 0, scope: !12347)
-!12356 = !{i64 2154887285}
-!12357 = !DILocation(line: 4006, column: 2, scope: !12349)
-!12358 = !DILocation(line: 0, scope: !12349)
-!12359 = !{i64 2154887493}
-!12360 = !DILocation(line: 4007, column: 1, scope: !12339)
-!12361 = distinct !DISubprogram(name: "__vm_sysreg_restore_el2_return_state", scope: !3, file: !3, line: 3988, type: !6798, scopeLine: 3989, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12362)
-!12362 = !{!12363, !12364, !12365, !12366, !12367, !12368, !12370}
-!12363 = !DILocalVariable(name: "vmid", arg: 1, scope: !12361, file: !3, line: 3988, type: !228)
-!12364 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12361, file: !3, line: 3988, type: !228)
-!12365 = !DILocalVariable(name: "el2_data", scope: !12361, file: !3, line: 3990, type: !6368)
-!12366 = !DILocalVariable(name: "offset", scope: !12361, file: !3, line: 3991, type: !82)
-!12367 = !DILocalVariable(name: "ctxt", scope: !12361, file: !3, line: 3992, type: !6479)
-!12368 = !DILocalVariable(name: "__val", scope: !12369, file: !3, line: 3994, type: !207)
-!12369 = distinct !DILexicalBlock(scope: !12361, file: !3, line: 3994, column: 2)
-!12370 = !DILocalVariable(name: "__val", scope: !12371, file: !3, line: 3995, type: !207)
-!12371 = distinct !DILexicalBlock(scope: !12361, file: !3, line: 3995, column: 2)
-!12372 = !DILocation(line: 0, scope: !12361)
-!12373 = !DILocation(line: 3990, column: 30, scope: !12361)
-!12374 = !DILocation(line: 3991, column: 15, scope: !12361)
-!12375 = !DILocation(line: 3992, column: 38, scope: !12361)
-!12376 = !DILocation(line: 3994, column: 2, scope: !12369)
-!12377 = !DILocation(line: 0, scope: !12369)
-!12378 = !{i64 2154878724, i64 2154878771, i64 2154878777, i64 2154879791, i64 2154879831, i64 2154879849, i64 2154879881, i64 2154879909, i64 2154879963, i64 2154879983, i64 2154880081, i64 2154878800, i64 2154878814, i64 2154878832, i64 2154880539, i64 2154880587, i64 2154880635, i64 2154880698, i64 2154880747, i64 2154878910, i64 2154878935, i64 2154878961, i64 2154878967, i64 2154880204, i64 2154880244, i64 2154880262, i64 2154880294, i64 2154880322, i64 2154880376, i64 2154880396, i64 2154880494, i64 2154878990, i64 2154879004, i64 2154879010, i64 2154879035, i64 2154879085, i64 2154879139}
-!12379 = !DILocation(line: 3995, column: 2, scope: !12371)
-!12380 = !DILocation(line: 0, scope: !12371)
-!12381 = !{i64 2154884989, i64 2154885036, i64 2154885042, i64 2154886056, i64 2154886096, i64 2154886114, i64 2154886146, i64 2154886174, i64 2154886228, i64 2154886248, i64 2154886346, i64 2154885065, i64 2154885079, i64 2154885097, i64 2154886804, i64 2154886852, i64 2154886900, i64 2154886963, i64 2154887012, i64 2154885175, i64 2154885200, i64 2154885226, i64 2154885232, i64 2154886469, i64 2154886509, i64 2154886527, i64 2154886559, i64 2154886587, i64 2154886641, i64 2154886661, i64 2154886759, i64 2154885255, i64 2154885269, i64 2154885275, i64 2154885300, i64 2154885350, i64 2154885404}
-!12382 = !DILocation(line: 3996, column: 1, scope: !12361)
-!12383 = distinct !DISubprogram(name: "__vm_sysreg_save_state_nvhe_opt", scope: !3, file: !3, line: 4017, type: !6798, scopeLine: 4018, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12384)
-!12384 = !{!12385, !12386}
-!12385 = !DILocalVariable(name: "vmid", arg: 1, scope: !12383, file: !3, line: 4017, type: !228)
-!12386 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12383, file: !3, line: 4017, type: !228)
-!12387 = !DILocation(line: 0, scope: !12383)
-!12388 = !DILocation(line: 4019, column: 2, scope: !12383)
-!12389 = !DILocation(line: 4020, column: 2, scope: !12383)
-!12390 = !DILocation(line: 4021, column: 2, scope: !12383)
-!12391 = !DILocation(line: 4022, column: 2, scope: !12383)
-!12392 = !DILocation(line: 4023, column: 1, scope: !12383)
-!12393 = distinct !DISubprogram(name: "__vm_sysreg_save_el1_state", scope: !3, file: !3, line: 3900, type: !6798, scopeLine: 3901, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12394)
-!12394 = !{!12395, !12396, !12397, !12398, !12399, !12400, !12402, !12404, !12406, !12408, !12410, !12412, !12414, !12416, !12418, !12420, !12422, !12424, !12426, !12428, !12430, !12432, !12434, !12436, !12438, !12440, !12442}
-!12395 = !DILocalVariable(name: "vmid", arg: 1, scope: !12393, file: !3, line: 3900, type: !228)
-!12396 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12393, file: !3, line: 3900, type: !228)
-!12397 = !DILocalVariable(name: "el2_data", scope: !12393, file: !3, line: 3902, type: !6368)
-!12398 = !DILocalVariable(name: "offset", scope: !12393, file: !3, line: 3903, type: !82)
-!12399 = !DILocalVariable(name: "ctxt", scope: !12393, file: !3, line: 3904, type: !6479)
-!12400 = !DILocalVariable(name: "__val", scope: !12401, file: !3, line: 3906, type: !207)
-!12401 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3906, column: 30)
-!12402 = !DILocalVariable(name: "__val", scope: !12403, file: !3, line: 3907, type: !207)
-!12403 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3907, column: 31)
-!12404 = !DILocalVariable(name: "reg", scope: !12405, file: !3, line: 3908, type: !207)
-!12405 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3908, column: 30)
-!12406 = !DILocalVariable(name: "__val", scope: !12407, file: !3, line: 3909, type: !207)
-!12407 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3909, column: 30)
-!12408 = !DILocalVariable(name: "reg", scope: !12409, file: !3, line: 3910, type: !207)
-!12409 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3910, column: 30)
-!12410 = !DILocalVariable(name: "reg", scope: !12411, file: !3, line: 3911, type: !207)
-!12411 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3911, column: 30)
-!12412 = !DILocalVariable(name: "reg", scope: !12413, file: !3, line: 3912, type: !207)
-!12413 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3912, column: 30)
-!12414 = !DILocalVariable(name: "reg", scope: !12415, file: !3, line: 3913, type: !207)
-!12415 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3913, column: 28)
-!12416 = !DILocalVariable(name: "reg", scope: !12417, file: !3, line: 3914, type: !207)
-!12417 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3914, column: 28)
-!12418 = !DILocalVariable(name: "reg", scope: !12419, file: !3, line: 3915, type: !207)
-!12419 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3915, column: 30)
-!12420 = !DILocalVariable(name: "reg", scope: !12421, file: !3, line: 3916, type: !207)
-!12421 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3916, column: 30)
-!12422 = !DILocalVariable(name: "reg", scope: !12423, file: !3, line: 3917, type: !207)
-!12423 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3917, column: 28)
-!12424 = !DILocalVariable(name: "reg", scope: !12425, file: !3, line: 3918, type: !207)
-!12425 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3918, column: 29)
-!12426 = !DILocalVariable(name: "reg", scope: !12427, file: !3, line: 3919, type: !207)
-!12427 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3919, column: 29)
-!12428 = !DILocalVariable(name: "reg", scope: !12429, file: !3, line: 3920, type: !207)
-!12429 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3920, column: 35)
-!12430 = !DILocalVariable(name: "reg", scope: !12431, file: !3, line: 3921, type: !207)
-!12431 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3921, column: 30)
-!12432 = !DILocalVariable(name: "reg", scope: !12433, file: !3, line: 3922, type: !207)
-!12433 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3922, column: 32)
-!12434 = !DILocalVariable(name: "__val", scope: !12435, file: !3, line: 3923, type: !207)
-!12435 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3923, column: 28)
-!12436 = !DILocalVariable(name: "__val", scope: !12437, file: !3, line: 3924, type: !207)
-!12437 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3924, column: 30)
-!12438 = !DILocalVariable(name: "__val", scope: !12439, file: !3, line: 3926, type: !207)
-!12439 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3926, column: 25)
-!12440 = !DILocalVariable(name: "reg", scope: !12441, file: !3, line: 3927, type: !207)
-!12441 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3927, column: 26)
-!12442 = !DILocalVariable(name: "reg", scope: !12443, file: !3, line: 3928, type: !207)
-!12443 = distinct !DILexicalBlock(scope: !12393, file: !3, line: 3928, column: 27)
-!12444 = !DILocation(line: 0, scope: !12393)
-!12445 = !DILocation(line: 3902, column: 30, scope: !12393)
-!12446 = !DILocation(line: 3903, column: 15, scope: !12393)
-!12447 = !DILocation(line: 3904, column: 38, scope: !12393)
-!12448 = !DILocation(line: 3906, column: 30, scope: !12401)
-!12449 = !{i64 2154646611}
-!12450 = !DILocation(line: 0, scope: !12401)
-!12451 = !DILocation(line: 3906, column: 2, scope: !12393)
-!12452 = !DILocation(line: 3906, column: 28, scope: !12393)
-!12453 = !DILocation(line: 3907, column: 31, scope: !12403)
-!12454 = !{i64 2154646772}
-!12455 = !DILocation(line: 0, scope: !12403)
-!12456 = !DILocation(line: 3907, column: 2, scope: !12393)
-!12457 = !DILocation(line: 3907, column: 29, scope: !12393)
-!12458 = !DILocation(line: 3908, column: 30, scope: !12405)
-!12459 = !{i64 2154651033, i64 2154651080, i64 2154651086, i64 2154652100, i64 2154652140, i64 2154652158, i64 2154652190, i64 2154652218, i64 2154652272, i64 2154652292, i64 2154652389, i64 2154651109, i64 2154651123, i64 2154651141, i64 2154652846, i64 2154652894, i64 2154652942, i64 2154653005, i64 2154653054, i64 2154651219, i64 2154651244, i64 2154651270, i64 2154651276, i64 2154652512, i64 2154652552, i64 2154652570, i64 2154652602, i64 2154652630, i64 2154652684, i64 2154652704, i64 2154652801, i64 2154651299, i64 2154651313, i64 2154651319, i64 2154651344, i64 2154651394, i64 2154651448}
-!12460 = !DILocation(line: 0, scope: !12405)
-!12461 = !DILocation(line: 3908, column: 2, scope: !12393)
-!12462 = !DILocation(line: 3908, column: 28, scope: !12393)
-!12463 = !DILocation(line: 3909, column: 30, scope: !12407)
-!12464 = !{i64 2154653147}
-!12465 = !DILocation(line: 0, scope: !12407)
-!12466 = !DILocation(line: 3909, column: 2, scope: !12393)
-!12467 = !DILocation(line: 3909, column: 28, scope: !12393)
-!12468 = !DILocation(line: 3910, column: 30, scope: !12409)
-!12469 = !{i64 2154657405, i64 2154657452, i64 2154657458, i64 2154658472, i64 2154658512, i64 2154658530, i64 2154658562, i64 2154658590, i64 2154658644, i64 2154658664, i64 2154658761, i64 2154657481, i64 2154657495, i64 2154657513, i64 2154659218, i64 2154659266, i64 2154659314, i64 2154659377, i64 2154659426, i64 2154657591, i64 2154657616, i64 2154657642, i64 2154657648, i64 2154658884, i64 2154658924, i64 2154658942, i64 2154658974, i64 2154659002, i64 2154659056, i64 2154659076, i64 2154659173, i64 2154657671, i64 2154657685, i64 2154657691, i64 2154657716, i64 2154657766, i64 2154657820}
-!12470 = !DILocation(line: 0, scope: !12409)
-!12471 = !DILocation(line: 3910, column: 2, scope: !12393)
-!12472 = !DILocation(line: 3910, column: 28, scope: !12393)
-!12473 = !DILocation(line: 3911, column: 30, scope: !12411)
-!12474 = !{i64 2154663619, i64 2154663666, i64 2154663672, i64 2154668747, i64 2154668787, i64 2154668805, i64 2154668837, i64 2154668865, i64 2154668919, i64 2154668939, i64 2154669036, i64 2154663695, i64 2154663709, i64 2154663727, i64 2154669493, i64 2154669541, i64 2154669589, i64 2154669652, i64 2154669701, i64 2154663805, i64 2154663830, i64 2154663856, i64 2154663862, i64 2154669159, i64 2154669199, i64 2154669217, i64 2154669249, i64 2154669277, i64 2154669331, i64 2154669351, i64 2154669448, i64 2154663885, i64 2154663899, i64 2154663905, i64 2154663930, i64 2154663980, i64 2154664034}
-!12475 = !DILocation(line: 0, scope: !12411)
-!12476 = !DILocation(line: 3911, column: 2, scope: !12393)
-!12477 = !DILocation(line: 3911, column: 28, scope: !12393)
-!12478 = !DILocation(line: 3912, column: 30, scope: !12413)
-!12479 = !{i64 2154673894, i64 2154673941, i64 2154673947, i64 2154674961, i64 2154675001, i64 2154675019, i64 2154675051, i64 2154675079, i64 2154675133, i64 2154675153, i64 2154675250, i64 2154673970, i64 2154673984, i64 2154674002, i64 2154675707, i64 2154675755, i64 2154675803, i64 2154675866, i64 2154675915, i64 2154674080, i64 2154674105, i64 2154674131, i64 2154674137, i64 2154675373, i64 2154675413, i64 2154675431, i64 2154675463, i64 2154675491, i64 2154675545, i64 2154675565, i64 2154675662, i64 2154674160, i64 2154674174, i64 2154674180, i64 2154674205, i64 2154674255, i64 2154674309}
-!12480 = !DILocation(line: 0, scope: !12413)
-!12481 = !DILocation(line: 3912, column: 2, scope: !12393)
-!12482 = !DILocation(line: 3912, column: 28, scope: !12393)
-!12483 = !DILocation(line: 3913, column: 28, scope: !12415)
-!12484 = !{i64 2154680098, i64 2154680145, i64 2154680151, i64 2154681165, i64 2154681205, i64 2154681223, i64 2154681255, i64 2154681283, i64 2154681337, i64 2154681357, i64 2154681454, i64 2154680174, i64 2154680188, i64 2154680206, i64 2154681911, i64 2154681959, i64 2154682007, i64 2154682070, i64 2154682119, i64 2154680284, i64 2154680309, i64 2154680335, i64 2154680341, i64 2154681577, i64 2154681617, i64 2154681635, i64 2154681667, i64 2154681695, i64 2154681749, i64 2154681769, i64 2154681866, i64 2154680364, i64 2154680378, i64 2154680384, i64 2154680409, i64 2154680459, i64 2154680513}
-!12485 = !DILocation(line: 0, scope: !12415)
-!12486 = !DILocation(line: 3913, column: 2, scope: !12393)
-!12487 = !DILocation(line: 3913, column: 26, scope: !12393)
-!12488 = !DILocation(line: 3914, column: 28, scope: !12417)
-!12489 = !{i64 2154686302, i64 2154686349, i64 2154686355, i64 2154687369, i64 2154687409, i64 2154687427, i64 2154687459, i64 2154687487, i64 2154687541, i64 2154687561, i64 2154687658, i64 2154686378, i64 2154686392, i64 2154686410, i64 2154688115, i64 2154688163, i64 2154688211, i64 2154688274, i64 2154688323, i64 2154686488, i64 2154686513, i64 2154686539, i64 2154686545, i64 2154687781, i64 2154687821, i64 2154687839, i64 2154687871, i64 2154687899, i64 2154687953, i64 2154687973, i64 2154688070, i64 2154686568, i64 2154686582, i64 2154686588, i64 2154686613, i64 2154686663, i64 2154686717}
-!12490 = !DILocation(line: 0, scope: !12417)
-!12491 = !DILocation(line: 3914, column: 2, scope: !12393)
-!12492 = !DILocation(line: 3914, column: 26, scope: !12393)
-!12493 = !DILocation(line: 3915, column: 30, scope: !12419)
-!12494 = !{i64 2154692516, i64 2154692563, i64 2154692569, i64 2154693583, i64 2154693623, i64 2154693641, i64 2154693673, i64 2154693701, i64 2154693755, i64 2154693775, i64 2154693872, i64 2154692592, i64 2154692606, i64 2154692624, i64 2154694329, i64 2154694377, i64 2154694425, i64 2154694488, i64 2154694537, i64 2154692702, i64 2154692727, i64 2154692753, i64 2154692759, i64 2154693995, i64 2154694035, i64 2154694053, i64 2154694085, i64 2154694113, i64 2154694167, i64 2154694187, i64 2154694284, i64 2154692782, i64 2154692796, i64 2154692802, i64 2154692827, i64 2154692877, i64 2154692931}
-!12495 = !DILocation(line: 0, scope: !12419)
-!12496 = !DILocation(line: 3915, column: 2, scope: !12393)
-!12497 = !DILocation(line: 3915, column: 28, scope: !12393)
-!12498 = !DILocation(line: 3916, column: 30, scope: !12421)
-!12499 = !{i64 2154698730, i64 2154698777, i64 2154698783, i64 2154699797, i64 2154699837, i64 2154699855, i64 2154699887, i64 2154699915, i64 2154699969, i64 2154699989, i64 2154700086, i64 2154698806, i64 2154698820, i64 2154698838, i64 2154700543, i64 2154700591, i64 2154700639, i64 2154700702, i64 2154700751, i64 2154698916, i64 2154698941, i64 2154698967, i64 2154698973, i64 2154700209, i64 2154700249, i64 2154700267, i64 2154700299, i64 2154700327, i64 2154700381, i64 2154700401, i64 2154700498, i64 2154698996, i64 2154699010, i64 2154699016, i64 2154699041, i64 2154699091, i64 2154699145}
-!12500 = !DILocation(line: 0, scope: !12421)
-!12501 = !DILocation(line: 3916, column: 2, scope: !12393)
-!12502 = !DILocation(line: 3916, column: 28, scope: !12393)
-!12503 = !DILocation(line: 3917, column: 28, scope: !12423)
-!12504 = !{i64 2154704934, i64 2154704981, i64 2154704987, i64 2154706001, i64 2154706041, i64 2154706059, i64 2154706091, i64 2154706119, i64 2154706173, i64 2154706193, i64 2154706290, i64 2154705010, i64 2154705024, i64 2154705042, i64 2154706747, i64 2154706795, i64 2154706843, i64 2154706906, i64 2154706955, i64 2154705120, i64 2154705145, i64 2154705171, i64 2154705177, i64 2154706413, i64 2154706453, i64 2154706471, i64 2154706503, i64 2154706531, i64 2154706585, i64 2154706605, i64 2154706702, i64 2154705200, i64 2154705214, i64 2154705220, i64 2154705245, i64 2154705295, i64 2154705349}
-!12505 = !DILocation(line: 0, scope: !12423)
-!12506 = !DILocation(line: 3917, column: 2, scope: !12393)
-!12507 = !DILocation(line: 3917, column: 26, scope: !12393)
-!12508 = !DILocation(line: 3918, column: 29, scope: !12425)
-!12509 = !{i64 2154711157, i64 2154711204, i64 2154711210, i64 2154712224, i64 2154712264, i64 2154712282, i64 2154712314, i64 2154712342, i64 2154712396, i64 2154712416, i64 2154712514, i64 2154711233, i64 2154711247, i64 2154711265, i64 2154712972, i64 2154713020, i64 2154713068, i64 2154713131, i64 2154713180, i64 2154711343, i64 2154711368, i64 2154711394, i64 2154711400, i64 2154712637, i64 2154712677, i64 2154712695, i64 2154712727, i64 2154712755, i64 2154712809, i64 2154712829, i64 2154712927, i64 2154711423, i64 2154711437, i64 2154711443, i64 2154711468, i64 2154711518, i64 2154711572}
-!12510 = !DILocation(line: 0, scope: !12425)
-!12511 = !DILocation(line: 3918, column: 2, scope: !12393)
-!12512 = !DILocation(line: 3918, column: 27, scope: !12393)
-!12513 = !DILocation(line: 3919, column: 29, scope: !12427)
-!12514 = !{i64 2154717382, i64 2154717429, i64 2154717435, i64 2154718449, i64 2154718489, i64 2154718507, i64 2154718539, i64 2154718567, i64 2154718621, i64 2154718641, i64 2154718739, i64 2154717458, i64 2154717472, i64 2154717490, i64 2154719197, i64 2154719245, i64 2154719293, i64 2154719356, i64 2154719405, i64 2154717568, i64 2154717593, i64 2154717619, i64 2154717625, i64 2154718862, i64 2154718902, i64 2154718920, i64 2154718952, i64 2154718980, i64 2154719034, i64 2154719054, i64 2154719152, i64 2154717648, i64 2154717662, i64 2154717668, i64 2154717693, i64 2154717743, i64 2154717797}
-!12515 = !DILocation(line: 0, scope: !12427)
-!12516 = !DILocation(line: 3919, column: 2, scope: !12393)
-!12517 = !DILocation(line: 3919, column: 27, scope: !12393)
-!12518 = !DILocation(line: 3920, column: 35, scope: !12429)
-!12519 = !{i64 2154723637, i64 2154723684, i64 2154723690, i64 2154724704, i64 2154724744, i64 2154724762, i64 2154724794, i64 2154724822, i64 2154724876, i64 2154724896, i64 2154724994, i64 2154723713, i64 2154723727, i64 2154723745, i64 2154725452, i64 2154725500, i64 2154725548, i64 2154725611, i64 2154725660, i64 2154723823, i64 2154723848, i64 2154723874, i64 2154723880, i64 2154725117, i64 2154725157, i64 2154725175, i64 2154725207, i64 2154725235, i64 2154725289, i64 2154725309, i64 2154725407, i64 2154723903, i64 2154723917, i64 2154723923, i64 2154723948, i64 2154723998, i64 2154724052}
-!12520 = !DILocation(line: 0, scope: !12429)
-!12521 = !DILocation(line: 3920, column: 2, scope: !12393)
-!12522 = !DILocation(line: 3920, column: 33, scope: !12393)
-!12523 = !DILocation(line: 3921, column: 30, scope: !12431)
-!12524 = !{i64 2154729867, i64 2154729914, i64 2154729920, i64 2154730934, i64 2154730974, i64 2154730992, i64 2154731024, i64 2154731052, i64 2154731106, i64 2154731126, i64 2154731224, i64 2154729943, i64 2154729957, i64 2154729975, i64 2154731682, i64 2154731730, i64 2154731778, i64 2154731841, i64 2154731890, i64 2154730053, i64 2154730078, i64 2154730104, i64 2154730110, i64 2154731347, i64 2154731387, i64 2154731405, i64 2154731437, i64 2154731465, i64 2154731519, i64 2154731539, i64 2154731637, i64 2154730133, i64 2154730147, i64 2154730153, i64 2154730178, i64 2154730228, i64 2154730282}
-!12525 = !DILocation(line: 0, scope: !12431)
-!12526 = !DILocation(line: 3921, column: 2, scope: !12393)
-!12527 = !DILocation(line: 3921, column: 28, scope: !12393)
-!12528 = !DILocation(line: 3922, column: 32, scope: !12433)
-!12529 = !{i64 2154736107, i64 2154736154, i64 2154736160, i64 2154737174, i64 2154737214, i64 2154737232, i64 2154737264, i64 2154737292, i64 2154737346, i64 2154737366, i64 2154737464, i64 2154736183, i64 2154736197, i64 2154736215, i64 2154737922, i64 2154737970, i64 2154738018, i64 2154738081, i64 2154738130, i64 2154736293, i64 2154736318, i64 2154736344, i64 2154736350, i64 2154737587, i64 2154737627, i64 2154737645, i64 2154737677, i64 2154737705, i64 2154737759, i64 2154737779, i64 2154737877, i64 2154736373, i64 2154736387, i64 2154736393, i64 2154736418, i64 2154736468, i64 2154736522}
-!12530 = !DILocation(line: 0, scope: !12433)
-!12531 = !DILocation(line: 3922, column: 2, scope: !12393)
-!12532 = !DILocation(line: 3922, column: 30, scope: !12393)
-!12533 = !DILocation(line: 3923, column: 28, scope: !12435)
-!12534 = !{i64 2154738223}
-!12535 = !DILocation(line: 0, scope: !12435)
-!12536 = !DILocation(line: 3923, column: 2, scope: !12393)
-!12537 = !DILocation(line: 3923, column: 26, scope: !12393)
-!12538 = !DILocation(line: 3924, column: 30, scope: !12437)
-!12539 = !{i64 2154738375}
-!12540 = !DILocation(line: 0, scope: !12437)
-!12541 = !DILocation(line: 3924, column: 2, scope: !12393)
-!12542 = !DILocation(line: 3924, column: 28, scope: !12393)
-!12543 = !DILocation(line: 3926, column: 25, scope: !12439)
-!12544 = !{i64 2154738536}
-!12545 = !DILocation(line: 0, scope: !12439)
-!12546 = !DILocation(line: 3926, column: 2, scope: !12393)
-!12547 = !DILocation(line: 3926, column: 23, scope: !12393)
-!12548 = !DILocation(line: 3927, column: 26, scope: !12441)
-!12549 = !{i64 2154746839, i64 2154746886, i64 2154746892, i64 2154747906, i64 2154747946, i64 2154747964, i64 2154747996, i64 2154748024, i64 2154748078, i64 2154748098, i64 2154748195, i64 2154746915, i64 2154746929, i64 2154746947, i64 2154748652, i64 2154748700, i64 2154748748, i64 2154748811, i64 2154748860, i64 2154747025, i64 2154747050, i64 2154747076, i64 2154747082, i64 2154748318, i64 2154748358, i64 2154748376, i64 2154748408, i64 2154748436, i64 2154748490, i64 2154748510, i64 2154748607, i64 2154747105, i64 2154747119, i64 2154747125, i64 2154747150, i64 2154747200, i64 2154747254}
-!12550 = !DILocation(line: 0, scope: !12441)
-!12551 = !DILocation(line: 3927, column: 2, scope: !12393)
-!12552 = !DILocation(line: 3927, column: 24, scope: !12393)
-!12553 = !DILocation(line: 3928, column: 27, scope: !12443)
-!12554 = !{i64 2154753051, i64 2154753098, i64 2154753104, i64 2154754118, i64 2154754158, i64 2154754176, i64 2154754208, i64 2154754236, i64 2154754290, i64 2154754310, i64 2154754407, i64 2154753127, i64 2154753141, i64 2154753159, i64 2154754864, i64 2154754912, i64 2154754960, i64 2154755023, i64 2154755072, i64 2154753237, i64 2154753262, i64 2154753288, i64 2154753294, i64 2154754530, i64 2154754570, i64 2154754588, i64 2154754620, i64 2154754648, i64 2154754702, i64 2154754722, i64 2154754819, i64 2154753317, i64 2154753331, i64 2154753337, i64 2154753362, i64 2154753412, i64 2154753466}
-!12555 = !DILocation(line: 0, scope: !12443)
-!12556 = !DILocation(line: 3928, column: 2, scope: !12393)
-!12557 = !DILocation(line: 3928, column: 25, scope: !12393)
-!12558 = !DILocation(line: 3929, column: 1, scope: !12393)
-!12559 = distinct !DISubprogram(name: "__vm_sysreg_save_common_state", scope: !3, file: !3, line: 3875, type: !6798, scopeLine: 3876, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12560)
-!12560 = !{!12561, !12562, !12563, !12564, !12565, !12566, !12568}
-!12561 = !DILocalVariable(name: "vmid", arg: 1, scope: !12559, file: !3, line: 3875, type: !228)
-!12562 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12559, file: !3, line: 3875, type: !228)
-!12563 = !DILocalVariable(name: "el2_data", scope: !12559, file: !3, line: 3877, type: !6368)
-!12564 = !DILocalVariable(name: "offset", scope: !12559, file: !3, line: 3878, type: !82)
-!12565 = !DILocalVariable(name: "ctxt", scope: !12559, file: !3, line: 3879, type: !6479)
-!12566 = !DILocalVariable(name: "__val", scope: !12567, file: !3, line: 3881, type: !207)
-!12567 = distinct !DILexicalBlock(scope: !12559, file: !3, line: 3881, column: 30)
-!12568 = !DILocalVariable(name: "__val", scope: !12569, file: !3, line: 3887, type: !207)
-!12569 = distinct !DILexicalBlock(scope: !12559, file: !3, line: 3887, column: 21)
-!12570 = !DILocation(line: 0, scope: !12559)
-!12571 = !DILocation(line: 3877, column: 30, scope: !12559)
-!12572 = !DILocation(line: 3878, column: 15, scope: !12559)
-!12573 = !DILocation(line: 3879, column: 38, scope: !12559)
-!12574 = !DILocation(line: 3881, column: 30, scope: !12567)
-!12575 = !{i64 2154645643}
-!12576 = !DILocation(line: 0, scope: !12567)
-!12577 = !DILocation(line: 3881, column: 2, scope: !12559)
-!12578 = !DILocation(line: 3881, column: 28, scope: !12559)
-!12579 = !DILocation(line: 3887, column: 21, scope: !12569)
-!12580 = !{i64 2154645804}
-!12581 = !DILocation(line: 0, scope: !12569)
-!12582 = !DILocation(line: 3887, column: 2, scope: !12559)
-!12583 = !DILocation(line: 3887, column: 19, scope: !12559)
-!12584 = !DILocation(line: 3888, column: 1, scope: !12559)
-!12585 = distinct !DISubprogram(name: "__vm_sysreg_save_user_state", scope: !3, file: !3, line: 3890, type: !6798, scopeLine: 3891, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12586)
-!12586 = !{!12587, !12588, !12589, !12590, !12591, !12592, !12594}
-!12587 = !DILocalVariable(name: "vmid", arg: 1, scope: !12585, file: !3, line: 3890, type: !228)
-!12588 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12585, file: !3, line: 3890, type: !228)
-!12589 = !DILocalVariable(name: "el2_data", scope: !12585, file: !3, line: 3892, type: !6368)
-!12590 = !DILocalVariable(name: "offset", scope: !12585, file: !3, line: 3893, type: !82)
-!12591 = !DILocalVariable(name: "ctxt", scope: !12585, file: !3, line: 3894, type: !6479)
-!12592 = !DILocalVariable(name: "__val", scope: !12593, file: !3, line: 3896, type: !207)
-!12593 = distinct !DILexicalBlock(scope: !12585, file: !3, line: 3896, column: 30)
-!12594 = !DILocalVariable(name: "__val", scope: !12595, file: !3, line: 3897, type: !207)
-!12595 = distinct !DILexicalBlock(scope: !12585, file: !3, line: 3897, column: 32)
-!12596 = !DILocation(line: 0, scope: !12585)
-!12597 = !DILocation(line: 3892, column: 30, scope: !12585)
-!12598 = !DILocation(line: 3893, column: 15, scope: !12585)
-!12599 = !DILocation(line: 3894, column: 38, scope: !12585)
-!12600 = !DILocation(line: 3896, column: 30, scope: !12593)
-!12601 = !{i64 2154646121}
-!12602 = !DILocation(line: 0, scope: !12593)
-!12603 = !DILocation(line: 3896, column: 2, scope: !12585)
-!12604 = !DILocation(line: 3896, column: 28, scope: !12585)
-!12605 = !DILocation(line: 3897, column: 32, scope: !12595)
-!12606 = !{i64 2154646279}
-!12607 = !DILocation(line: 0, scope: !12595)
-!12608 = !DILocation(line: 3897, column: 2, scope: !12585)
-!12609 = !DILocation(line: 3897, column: 30, scope: !12585)
-!12610 = !DILocation(line: 3898, column: 1, scope: !12585)
-!12611 = distinct !DISubprogram(name: "__vm_sysreg_save_el2_return_state", scope: !3, file: !3, line: 3931, type: !6798, scopeLine: 3932, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12612)
-!12612 = !{!12613, !12614, !12615, !12616, !12617, !12618, !12620}
-!12613 = !DILocalVariable(name: "vmid", arg: 1, scope: !12611, file: !3, line: 3931, type: !228)
-!12614 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12611, file: !3, line: 3931, type: !228)
-!12615 = !DILocalVariable(name: "el2_data", scope: !12611, file: !3, line: 3933, type: !6368)
-!12616 = !DILocalVariable(name: "offset", scope: !12611, file: !3, line: 3934, type: !82)
-!12617 = !DILocalVariable(name: "ctxt", scope: !12611, file: !3, line: 3935, type: !6479)
-!12618 = !DILocalVariable(name: "reg", scope: !12619, file: !3, line: 3937, type: !207)
-!12619 = distinct !DILexicalBlock(scope: !12611, file: !3, line: 3937, column: 21)
-!12620 = !DILocalVariable(name: "reg", scope: !12621, file: !3, line: 3938, type: !207)
-!12621 = distinct !DILexicalBlock(scope: !12611, file: !3, line: 3938, column: 25)
-!12622 = !DILocation(line: 0, scope: !12611)
-!12623 = !DILocation(line: 3933, column: 30, scope: !12611)
-!12624 = !DILocation(line: 3934, column: 15, scope: !12611)
-!12625 = !DILocation(line: 3935, column: 38, scope: !12611)
-!12626 = !DILocation(line: 3937, column: 21, scope: !12619)
-!12627 = !{i64 2154759423, i64 2154759470, i64 2154759476, i64 2154760490, i64 2154760530, i64 2154760548, i64 2154760580, i64 2154760608, i64 2154760662, i64 2154760682, i64 2154760779, i64 2154759499, i64 2154759513, i64 2154759531, i64 2154761236, i64 2154761284, i64 2154761332, i64 2154761395, i64 2154761444, i64 2154759609, i64 2154759634, i64 2154759660, i64 2154759666, i64 2154760902, i64 2154760942, i64 2154760960, i64 2154760992, i64 2154761020, i64 2154761074, i64 2154761094, i64 2154761191, i64 2154759689, i64 2154759703, i64 2154759709, i64 2154759734, i64 2154759784, i64 2154759838}
-!12628 = !DILocation(line: 0, scope: !12619)
-!12629 = !DILocation(line: 3937, column: 2, scope: !12611)
-!12630 = !DILocation(line: 3937, column: 19, scope: !12611)
-!12631 = !DILocation(line: 3938, column: 25, scope: !12621)
-!12632 = !{i64 2154765632, i64 2154765679, i64 2154765685, i64 2154766699, i64 2154766739, i64 2154766757, i64 2154766789, i64 2154766817, i64 2154766871, i64 2154766891, i64 2154766988, i64 2154765708, i64 2154765722, i64 2154765740, i64 2154767445, i64 2154767493, i64 2154767541, i64 2154767604, i64 2154767653, i64 2154765818, i64 2154765843, i64 2154765869, i64 2154765875, i64 2154767111, i64 2154767151, i64 2154767169, i64 2154767201, i64 2154767229, i64 2154767283, i64 2154767303, i64 2154767400, i64 2154765898, i64 2154765912, i64 2154765918, i64 2154765943, i64 2154765993, i64 2154766047}
-!12633 = !DILocation(line: 0, scope: !12621)
-!12634 = !DILocation(line: 3938, column: 2, scope: !12611)
-!12635 = !DILocation(line: 3938, column: 23, scope: !12611)
-!12636 = !DILocation(line: 3939, column: 1, scope: !12611)
-!12637 = distinct !DISubprogram(name: "activate_traps_vhe_load", scope: !3, file: !3, line: 4117, type: !11593, scopeLine: 4118, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12638)
-!12638 = !{!12639}
-!12639 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12637, file: !3, line: 4117, type: !286)
-!12640 = !DILocation(line: 0, scope: !12637)
-!12641 = !DILocation(line: 4119, column: 1, scope: !12637)
-!12642 = distinct !DISubprogram(name: "deactivate_traps_vhe_put", scope: !3, file: !3, line: 4121, type: !2404, scopeLine: 4122, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !2257)
-!12643 = !DILocation(line: 4123, column: 1, scope: !12642)
-!12644 = distinct !DISubprogram(name: "kvm_vcpu_run_vhe", scope: !3, file: !3, line: 4282, type: !12645, scopeLine: 4283, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12647)
-!12645 = !DISubroutineType(types: !12646)
-!12646 = !{!82, !286}
-!12647 = !{!12648}
-!12648 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12644, file: !3, line: 4282, type: !286)
-!12649 = !DILocation(line: 0, scope: !12644)
-!12650 = !DILocation(line: 4284, column: 2, scope: !12644)
-!12651 = distinct !DISubprogram(name: "set_per_cpu", scope: !14, file: !14, line: 261, type: !12652, scopeLine: 262, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12654)
-!12652 = !DISubroutineType(types: !12653)
-!12653 = !{null, !82, !82}
-!12654 = !{!12655, !12656, !12657, !12658}
-!12655 = !DILocalVariable(name: "vmid", arg: 1, scope: !12651, file: !14, line: 261, type: !82)
-!12656 = !DILocalVariable(name: "vcpu_id", arg: 2, scope: !12651, file: !14, line: 261, type: !82)
-!12657 = !DILocalVariable(name: "el2_data", scope: !12651, file: !14, line: 263, type: !6368)
-!12658 = !DILocalVariable(name: "pcpuid", scope: !12651, file: !14, line: 264, type: !82)
-!12659 = !DILocation(line: 0, scope: !12651)
-!12660 = !DILocation(line: 263, column: 30, scope: !12651)
-!12661 = !DILocation(line: 264, column: 15, scope: !12651)
-!12662 = !DILocation(line: 265, column: 2, scope: !12651)
-!12663 = !DILocation(line: 265, column: 33, scope: !12651)
-!12664 = !DILocation(line: 265, column: 38, scope: !12651)
-!12665 = !DILocation(line: 266, column: 33, scope: !12651)
-!12666 = !DILocation(line: 266, column: 41, scope: !12651)
-!12667 = !DILocation(line: 267, column: 1, scope: !12651)
-!12668 = distinct !DISubprogram(name: "get_vcpu_host_cpu_context", scope: !14, file: !14, line: 396, type: !12669, scopeLine: 396, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12671)
-!12669 = !DISubroutineType(types: !12670)
-!12670 = !{!235, !282, !282}
-!12671 = !{!12672, !12673, !12674, !12675, !12676}
-!12672 = !DILocalVariable(name: "vmid", arg: 1, scope: !12668, file: !14, line: 396, type: !282)
-!12673 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12668, file: !14, line: 396, type: !282)
-!12674 = !DILocalVariable(name: "shared_data", scope: !12668, file: !14, line: 397, type: !10716)
-!12675 = !DILocalVariable(name: "offset", scope: !12668, file: !14, line: 398, type: !82)
-!12676 = !DILocalVariable(name: "vcpu", scope: !12668, file: !14, line: 399, type: !286)
-!12677 = !DILocation(line: 0, scope: !12668)
-!12678 = !DILocation(line: 398, column: 15, scope: !12668)
-!12679 = !DILocation(line: 400, column: 16, scope: !12668)
-!12680 = !DILocation(line: 401, column: 10, scope: !12668)
-!12681 = !DILocation(line: 402, column: 9, scope: !12668)
-!12682 = !{!10733, !6564, i64 3272}
-!12683 = !DILocation(line: 402, column: 2, scope: !12668)
-!12684 = distinct !DISubprogram(name: "set_host_running_vcpu", scope: !14, file: !14, line: 387, type: !12685, scopeLine: 387, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12687)
-!12685 = !DISubroutineType(types: !12686)
-!12686 = !{null, !282, !282}
-!12687 = !{!12688, !12689, !12690, !12691, !12692}
-!12688 = !DILocalVariable(name: "vmid", arg: 1, scope: !12684, file: !14, line: 387, type: !282)
-!12689 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12684, file: !14, line: 387, type: !282)
-!12690 = !DILocalVariable(name: "shared_data", scope: !12684, file: !14, line: 388, type: !10716)
-!12691 = !DILocalVariable(name: "offset", scope: !12684, file: !14, line: 389, type: !82)
-!12692 = !DILocalVariable(name: "vcpu", scope: !12684, file: !14, line: 390, type: !286)
-!12693 = !DILocation(line: 0, scope: !12684)
-!12694 = !DILocation(line: 389, column: 15, scope: !12684)
-!12695 = !DILocation(line: 391, column: 16, scope: !12684)
-!12696 = !DILocation(line: 392, column: 10, scope: !12684)
-!12697 = !DILocation(line: 393, column: 2, scope: !12684)
-!12698 = !DILocation(line: 393, column: 44, scope: !12684)
-!12699 = !DILocation(line: 393, column: 63, scope: !12684)
-!12700 = !{!6559, !6564, i64 1752}
-!12701 = !DILocation(line: 394, column: 1, scope: !12684)
-!12702 = distinct !DISubprogram(name: "set_tpidr_el2", scope: !12703, file: !12703, line: 92, type: !6678, scopeLine: 93, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12704)
-!12703 = !DIFile(filename: "./arch/arm64/kvm/hyp/switch-simple.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "c7c16343f2f2bb76f5e5cc569033b40e")
-!12704 = !{!12705, !12706}
-!12705 = !DILocalVariable(name: "val", arg: 1, scope: !12702, file: !12703, line: 92, type: !207)
-!12706 = !DILocalVariable(name: "__val", scope: !12707, file: !12703, line: 94, type: !207)
-!12707 = distinct !DILexicalBlock(scope: !12702, file: !12703, line: 94, column: 2)
-!12708 = !DILocation(line: 0, scope: !12702)
-!12709 = !DILocation(line: 0, scope: !12707)
-!12710 = !DILocation(line: 94, column: 2, scope: !12707)
-!12711 = !{i64 2154904864}
-!12712 = !DILocation(line: 95, column: 1, scope: !12702)
-!12713 = distinct !DISubprogram(name: "__activate_traps", scope: !3, file: !3, line: 4083, type: !11593, scopeLine: 4084, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12714)
-!12714 = !{!12715, !12716}
-!12715 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12713, file: !3, line: 4083, type: !286)
-!12716 = !DILocalVariable(name: "hcr", scope: !12713, file: !3, line: 4085, type: !207)
-!12717 = !DILocation(line: 0, scope: !12713)
-!12718 = !DILocation(line: 4087, column: 17, scope: !12719)
-!12719 = distinct !DILexicalBlock(scope: !12713, file: !3, line: 4087, column: 6)
-!12720 = !{!10733, !6562, i64 2176}
-!12721 = !DILocation(line: 4090, column: 6, scope: !12713)
-!12722 = !DILocation(line: 4093, column: 2, scope: !12713)
-!12723 = !DILocation(line: 4097, column: 2, scope: !12713)
-!12724 = !DILocation(line: 4098, column: 1, scope: !12713)
-!12725 = distinct !DISubprogram(name: "__activate_vm", scope: !3, file: !3, line: 4125, type: !6678, scopeLine: 4126, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12726)
-!12726 = !{!12727, !12728}
-!12727 = !DILocalVariable(name: "vmid", arg: 1, scope: !12725, file: !3, line: 4125, type: !207)
-!12728 = !DILocalVariable(name: "shadow_vttbr", scope: !12725, file: !3, line: 4128, type: !207)
-!12729 = !DILocation(line: 0, scope: !12725)
-!12730 = !DILocation(line: 4128, column: 34, scope: !12725)
-!12731 = !DILocation(line: 4128, column: 21, scope: !12725)
-!12732 = !DILocation(line: 4129, column: 2, scope: !12725)
-!12733 = !DILocation(line: 4130, column: 1, scope: !12725)
-!12734 = distinct !DISubprogram(name: "get_vcpu_was_preempted", scope: !14, file: !14, line: 405, type: !12735, scopeLine: 405, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12737)
-!12735 = !DISubroutineType(types: !12736)
-!12736 = !{!621, !282, !282}
-!12737 = !{!12738, !12739, !12740, !12741, !12742}
-!12738 = !DILocalVariable(name: "vmid", arg: 1, scope: !12734, file: !14, line: 405, type: !282)
-!12739 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12734, file: !14, line: 405, type: !282)
-!12740 = !DILocalVariable(name: "shared_data", scope: !12734, file: !14, line: 406, type: !10716)
-!12741 = !DILocalVariable(name: "offset", scope: !12734, file: !14, line: 407, type: !82)
-!12742 = !DILocalVariable(name: "vcpu", scope: !12734, file: !14, line: 408, type: !286)
-!12743 = !DILocation(line: 0, scope: !12734)
-!12744 = !DILocation(line: 407, column: 15, scope: !12734)
-!12745 = !DILocation(line: 409, column: 16, scope: !12734)
-!12746 = !DILocation(line: 410, column: 10, scope: !12734)
-!12747 = !DILocation(line: 411, column: 20, scope: !12734)
-!12748 = !{!10733, !7036, i64 356}
-!12749 = !DILocation(line: 411, column: 2, scope: !12734)
-!12750 = !DISubprogram(name: "hypsec_tlb_flush_local_vmid", scope: !6133, file: !6133, line: 121, type: !2404, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !2257)
-!12751 = distinct !DISubprogram(name: "set_vcpu_was_preempted", scope: !14, file: !14, line: 414, type: !12752, scopeLine: 414, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12754)
-!12752 = !DISubroutineType(types: !12753)
-!12753 = !{null, !282, !282, !621}
-!12754 = !{!12755, !12756, !12757, !12758, !12759, !12760}
-!12755 = !DILocalVariable(name: "vmid", arg: 1, scope: !12751, file: !14, line: 414, type: !282)
-!12756 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12751, file: !14, line: 414, type: !282)
-!12757 = !DILocalVariable(name: "preempted", arg: 3, scope: !12751, file: !14, line: 414, type: !621)
-!12758 = !DILocalVariable(name: "shared_data", scope: !12751, file: !14, line: 415, type: !10716)
-!12759 = !DILocalVariable(name: "offset", scope: !12751, file: !14, line: 416, type: !82)
-!12760 = !DILocalVariable(name: "vcpu", scope: !12751, file: !14, line: 417, type: !286)
-!12761 = !DILocation(line: 0, scope: !12751)
-!12762 = !DILocation(line: 416, column: 15, scope: !12751)
-!12763 = !DILocation(line: 418, column: 16, scope: !12751)
-!12764 = !DILocation(line: 419, column: 10, scope: !12751)
-!12765 = !DILocation(line: 420, column: 13, scope: !12751)
-!12766 = !DILocation(line: 420, column: 27, scope: !12751)
-!12767 = !DILocation(line: 421, column: 1, scope: !12751)
-!12768 = distinct !DISubprogram(name: "get_core_context", scope: !14, file: !14, line: 438, type: !12769, scopeLine: 439, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12771)
-!12769 = !DISubroutineType(types: !12770)
-!12770 = !{!235}
-!12771 = !{!12772, !12773}
-!12772 = !DILocalVariable(name: "el2_data", scope: !12768, file: !14, line: 440, type: !6368)
-!12773 = !DILocalVariable(name: "pcpuid", scope: !12768, file: !14, line: 441, type: !82)
-!12774 = !DILocation(line: 440, column: 30, scope: !12768)
-!12775 = !DILocation(line: 0, scope: !12768)
-!12776 = !DILocation(line: 441, column: 15, scope: !12768)
-!12777 = !DILocation(line: 442, column: 10, scope: !12768)
-!12778 = !DILocation(line: 442, column: 41, scope: !12768)
-!12779 = !DILocation(line: 442, column: 2, scope: !12768)
-!12780 = distinct !DISubprogram(name: "fixup_guest_exit", scope: !3, file: !3, line: 4235, type: !12781, scopeLine: 4236, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12783)
-!12781 = !DISubroutineType(types: !12782)
-!12782 = !{!621, !228, !228, !207}
-!12783 = !{!12784, !12785, !12786, !12787, !12788, !12789, !12794, !12796, !12798}
-!12784 = !DILocalVariable(name: "vmid", arg: 1, scope: !12780, file: !3, line: 4235, type: !228)
-!12785 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12780, file: !3, line: 4235, type: !228)
-!12786 = !DILocalVariable(name: "exit_code", arg: 3, scope: !12780, file: !3, line: 4235, type: !207)
-!12787 = !DILocalVariable(name: "esr_el2", scope: !12780, file: !3, line: 4237, type: !228)
-!12788 = !DILocalVariable(name: "ec", scope: !12780, file: !3, line: 4238, type: !323)
-!12789 = !DILocalVariable(name: "elr", scope: !12790, file: !3, line: 4265, type: !207)
-!12790 = distinct !DILexicalBlock(scope: !12791, file: !3, line: 4264, column: 37)
-!12791 = distinct !DILexicalBlock(scope: !12792, file: !3, line: 4264, column: 13)
-!12792 = distinct !DILexicalBlock(scope: !12793, file: !3, line: 4261, column: 13)
-!12793 = distinct !DILexicalBlock(scope: !12780, file: !3, line: 4256, column: 6)
-!12794 = !DILocalVariable(name: "__val", scope: !12795, file: !3, line: 4265, type: !207)
-!12795 = distinct !DILexicalBlock(scope: !12790, file: !3, line: 4265, column: 13)
-!12796 = !DILocalVariable(name: "__val", scope: !12797, file: !3, line: 4266, type: !207)
-!12797 = distinct !DILexicalBlock(scope: !12790, file: !3, line: 4266, column: 3)
-!12798 = !DILabel(scope: !12780, name: "exit", file: !3, line: 4270)
-!12799 = !DILocation(line: 0, scope: !12780)
-!12800 = !DILocation(line: 4240, column: 6, scope: !12801)
-!12801 = distinct !DILexicalBlock(scope: !12780, file: !3, line: 4240, column: 6)
-!12802 = !DILocation(line: 4240, column: 36, scope: !12801)
-!12803 = !DILocation(line: 4240, column: 6, scope: !12780)
-!12804 = !DILocation(line: 4241, column: 13, scope: !12805)
-!12805 = distinct !DILexicalBlock(scope: !12801, file: !3, line: 4240, column: 58)
-!12806 = !DILocation(line: 4242, column: 3, scope: !12805)
-!12807 = !DILocation(line: 4243, column: 3, scope: !12805)
-!12808 = !DILocation(line: 4244, column: 2, scope: !12805)
-!12809 = !DILocation(line: 4252, column: 16, scope: !12810)
-!12810 = distinct !DILexicalBlock(scope: !12780, file: !3, line: 4252, column: 6)
-!12811 = !DILocation(line: 4252, column: 6, scope: !12780)
-!12812 = !DILocation(line: 4255, column: 7, scope: !12780)
-!12813 = !DILocation(line: 4256, column: 9, scope: !12793)
-!12814 = !DILocation(line: 4256, column: 6, scope: !12780)
-!12815 = !DILocation(line: 4257, column: 7, scope: !12816)
-!12816 = distinct !DILexicalBlock(scope: !12817, file: !3, line: 4257, column: 7)
-!12817 = distinct !DILexicalBlock(scope: !12793, file: !3, line: 4256, column: 30)
-!12818 = !DILocation(line: 4257, column: 34, scope: !12816)
-!12819 = !DILocation(line: 0, scope: !12816)
-!12820 = !DILocation(line: 4261, column: 39, scope: !12792)
-!12821 = !DILocation(line: 4262, column: 8, scope: !12822)
-!12822 = distinct !DILexicalBlock(scope: !12823, file: !3, line: 4262, column: 7)
-!12823 = distinct !DILexicalBlock(scope: !12792, file: !3, line: 4261, column: 69)
-!12824 = !DILocation(line: 4262, column: 7, scope: !12823)
-!12825 = !DILocation(line: 4264, column: 16, scope: !12791)
-!12826 = !DILocation(line: 4264, column: 13, scope: !12792)
-!12827 = !DILocation(line: 4265, column: 13, scope: !12795)
-!12828 = !{i64 2154913958}
-!12829 = !DILocation(line: 0, scope: !12795)
-!12830 = !DILocation(line: 0, scope: !12790)
-!12831 = !DILocation(line: 4266, column: 3, scope: !12797)
-!12832 = !DILocation(line: 0, scope: !12797)
-!12833 = !{i64 2154914122}
-!12834 = !DILocation(line: 4270, column: 1, scope: !12780)
-!12835 = !DILocation(line: 4272, column: 2, scope: !12780)
-!12836 = !DILocation(line: 4273, column: 1, scope: !12780)
-!12837 = distinct !DISubprogram(name: "__deactivate_traps", scope: !3, file: !3, line: 4112, type: !11593, scopeLine: 4113, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12838)
-!12838 = !{!12839}
-!12839 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12837, file: !3, line: 4112, type: !286)
-!12840 = !DILocation(line: 0, scope: !12837)
-!12841 = !DILocation(line: 4114, column: 2, scope: !12837)
-!12842 = !DILocation(line: 4115, column: 1, scope: !12837)
-!12843 = distinct !DISubprogram(name: "__host_el2_restore_state", scope: !3, file: !3, line: 4275, type: !12844, scopeLine: 4276, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12846)
-!12844 = !DISubroutineType(types: !12845)
-!12845 = !{null, !6368}
-!12846 = !{!12847}
-!12847 = !DILocalVariable(name: "el2_data", arg: 1, scope: !12843, file: !3, line: 4275, type: !6368)
-!12848 = !DILocation(line: 0, scope: !12843)
-!12849 = !DILocation(line: 4277, column: 16, scope: !12843)
-!12850 = !DILocation(line: 4277, column: 2, scope: !12843)
-!12851 = !DILocation(line: 4278, column: 2, scope: !12843)
-!12852 = !DILocation(line: 4279, column: 2, scope: !12843)
-!12853 = !DILocation(line: 4280, column: 1, scope: !12843)
-!12854 = distinct !DISubprogram(name: "hyp_panic", scope: !3, file: !3, line: 4372, type: !12855, scopeLine: 4373, flags: DIFlagPrototyped | DIFlagNoReturn | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12857)
-!12855 = !DISubroutineType(types: !12856)
-!12856 = !{null, !235}
-!12857 = !{!12858}
-!12858 = !DILocalVariable(name: "host_ctxt", arg: 1, scope: !12854, file: !3, line: 4372, type: !235)
-!12859 = !DILocation(line: 4375, column: 2, scope: !12860)
-!12860 = distinct !DILexicalBlock(scope: !12854, file: !3, line: 4375, column: 2)
-!12861 = distinct !DISubprogram(name: "handle_pvops", scope: !3, file: !3, line: 4390, type: !11864, scopeLine: 4391, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12862)
-!12862 = !{!12863, !12864, !12865, !12866, !12867}
-!12863 = !DILocalVariable(name: "vmid", arg: 1, scope: !12861, file: !3, line: 4390, type: !228)
-!12864 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12861, file: !3, line: 4390, type: !228)
-!12865 = !DILocalVariable(name: "call_num", scope: !12861, file: !3, line: 4395, type: !207)
-!12866 = !DILocalVariable(name: "addr", scope: !12861, file: !3, line: 4397, type: !207)
-!12867 = !DILocalVariable(name: "size", scope: !12861, file: !3, line: 4399, type: !207)
-!12868 = !DILocation(line: 0, scope: !12861)
-!12869 = !DILocation(line: 4395, column: 17, scope: !12861)
-!12870 = !DILocation(line: 4397, column: 13, scope: !12861)
-!12871 = !DILocation(line: 4399, column: 13, scope: !12861)
-!12872 = !DILocation(line: 4402, column: 2, scope: !12861)
-!12873 = !DILocation(line: 4404, column: 4, scope: !12874)
-!12874 = distinct !DILexicalBlock(scope: !12861, file: !3, line: 4402, column: 20)
-!12875 = !DILocation(line: 4405, column: 4, scope: !12874)
-!12876 = !DILocation(line: 4407, column: 4, scope: !12874)
-!12877 = !DILocation(line: 4408, column: 4, scope: !12874)
-!12878 = !DILocation(line: 4418, column: 1, scope: !12861)
-!12879 = distinct !DISubprogram(name: "read_cpuid_mpidr", scope: !12880, file: !12880, line: 190, type: !3651, scopeLine: 191, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12881)
-!12880 = !DIFile(filename: "./arch/arm64/include/asm/cputype.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "d77df4c4d7b35dad97b2d045d5acf6a0")
-!12881 = !{!12882}
-!12882 = !DILocalVariable(name: "__val", scope: !12883, file: !12880, line: 192, type: !217)
-!12883 = distinct !DILexicalBlock(scope: !12879, file: !12880, line: 192, column: 9)
-!12884 = !DILocation(line: 192, column: 9, scope: !12883)
-!12885 = !{i64 2147912498, i64 2147912600, i64 2147912640, i64 2147912658, i64 2147912400, i64 2147912688, i64 2147912716, i64 2147912216, i64 2147913049}
-!12886 = !DILocation(line: 0, scope: !12883)
-!12887 = !DILocation(line: 192, column: 2, scope: !12879)
-!12888 = distinct !DISubprogram(name: "_arch_spin_lock", scope: !14, file: !14, line: 147, type: !8085, scopeLine: 148, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12889)
-!12889 = !{!12890, !12891}
-!12890 = !DILocalVariable(name: "lock", arg: 1, scope: !12888, file: !14, line: 147, type: !8087)
-!12891 = !DILocalVariable(name: "tmp", scope: !12888, file: !14, line: 149, type: !7)
-!12892 = !DILocation(line: 0, scope: !12888)
-!12893 = !DILocation(line: 158, column: 29, scope: !12888)
-!12894 = !DILocation(line: 151, column: 2, scope: !12888)
-!12895 = !{i64 6912278, i64 6912290, i64 6912302, i64 6912324, i64 6912343, i64 6912367}
-!12896 = !DILocation(line: 161, column: 1, scope: !12888)
-!12897 = distinct !DISubprogram(name: "waituart", scope: !3, file: !3, line: 664, type: !12898, scopeLine: 665, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12900)
-!12898 = !DISubroutineType(types: !12899)
-!12899 = !{!210}
-!12900 = !{!12901, !12902, !12903, !12904}
-!12901 = !DILocalVariable(name: "ret", scope: !12897, file: !3, line: 666, type: !210)
-!12902 = !DILocalVariable(name: "base", scope: !12897, file: !3, line: 666, type: !210)
-!12903 = !DILocalVariable(name: "REG_FR", scope: !12897, file: !3, line: 666, type: !210)
-!12904 = !DILocalVariable(name: "el2_data", scope: !12897, file: !3, line: 667, type: !6368)
-!12905 = !DILocation(line: 667, column: 30, scope: !12897)
-!12906 = !DILocation(line: 0, scope: !12897)
-!12907 = !DILocation(line: 669, column: 19, scope: !12897)
-!12908 = !DILocation(line: 672, column: 2, scope: !12897)
-!12909 = !{i64 17027, i64 17050, i64 17065, i64 17085}
-!12910 = !DILocation(line: 681, column: 2, scope: !12897)
-!12911 = distinct !DISubprogram(name: "cpu_relax", scope: !3985, file: !3985, line: 245, type: !2404, scopeLine: 246, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !2257)
-!12912 = !DILocation(line: 247, column: 2, scope: !12911)
-!12913 = !{i64 1751567}
-!12914 = !DILocation(line: 248, column: 1, scope: !12911)
-!12915 = distinct !DISubprogram(name: "_arch_spin_unlock", scope: !14, file: !14, line: 163, type: !8085, scopeLine: 164, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12916)
-!12916 = !{!12917}
-!12917 = !DILocalVariable(name: "lock", arg: 1, scope: !12915, file: !14, line: 163, type: !8087)
-!12918 = !DILocation(line: 0, scope: !12915)
-!12919 = !DILocation(line: 167, column: 16, scope: !12915)
-!12920 = !DILocation(line: 165, column: 2, scope: !12915)
-!12921 = !{i64 6912532}
-!12922 = !DILocation(line: 168, column: 1, scope: !12915)
-!12923 = distinct !DISubprogram(name: "atomic_read", scope: !12924, file: !12924, line: 24, type: !12925, scopeLine: 25, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12929)
-!12924 = !DIFile(filename: "./include/asm-generic/atomic-instrumented.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "4562a74bb7e353209bc7b8fe69d2f7f3")
-!12925 = !DISubroutineType(types: !12926)
-!12926 = !{!82, !12927}
-!12927 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !12928, size: 64)
-!12928 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !314)
-!12929 = !{!12930, !12931}
-!12930 = !DILocalVariable(name: "v", arg: 1, scope: !12923, file: !12924, line: 24, type: !12927)
-!12931 = !DILocalVariable(name: "__u", scope: !12932, file: !12924, line: 27, type: !12933)
-!12932 = distinct !DILexicalBlock(scope: !12923, file: !12924, line: 27, column: 9)
-!12933 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !12923, file: !12924, line: 27, size: 32, elements: !12934)
-!12934 = !{!12935, !12936}
-!12935 = !DIDerivedType(tag: DW_TAG_member, name: "__val", scope: !12933, file: !12924, line: 27, baseType: !4298, size: 32)
-!12936 = !DIDerivedType(tag: DW_TAG_member, name: "__c", scope: !12933, file: !12924, line: 27, baseType: !12937, size: 8)
-!12937 = !DICompositeType(tag: DW_TAG_array_type, baseType: !578, size: 8, elements: !2529)
-!12938 = !DILocation(line: 0, scope: !12923)
-!12939 = !DILocalVariable(name: "res", arg: 2, scope: !12940, file: !12941, line: 197, type: !206)
-!12940 = distinct !DISubprogram(name: "__read_once_size", scope: !12941, file: !12941, line: 197, type: !12942, scopeLine: 198, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12944)
-!12941 = !DIFile(filename: "./include/linux/compiler.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "1babf236a76a670118805368873ee5c0")
-!12942 = !DISubroutineType(types: !12943)
-!12943 = !{null, !9203, !206, !82}
-!12944 = !{!12945, !12939, !12946}
-!12945 = !DILocalVariable(name: "p", arg: 1, scope: !12940, file: !12941, line: 197, type: !9203)
-!12946 = !DILocalVariable(name: "size", arg: 3, scope: !12940, file: !12941, line: 197, type: !82)
-!12947 = !DILocation(line: 0, scope: !12940, inlinedAt: !12948)
-!12948 = distinct !DILocation(line: 27, column: 9, scope: !12949)
-!12949 = distinct !DILexicalBlock(scope: !12932, file: !12924, line: 27, column: 9)
-!12950 = !DILocation(line: 199, column: 2, scope: !12951, inlinedAt: !12948)
-!12951 = distinct !DILexicalBlock(scope: !12952, file: !12941, line: 199, column: 2)
-!12952 = distinct !DILexicalBlock(scope: !12940, file: !12941, line: 199, column: 2)
-!12953 = !DILocation(line: 0, scope: !12932)
-!12954 = !DILocation(line: 27, column: 2, scope: !12923)
-!12955 = distinct !DISubprogram(name: "protect_el2_mem", scope: !3, file: !3, line: 3440, type: !2404, scopeLine: 3441, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12956)
-!12956 = !{!12957, !12958, !12959, !12960}
-!12957 = !DILocalVariable(name: "addr", scope: !12955, file: !3, line: 3442, type: !210)
-!12958 = !DILocalVariable(name: "end", scope: !12955, file: !3, line: 3442, type: !210)
-!12959 = !DILocalVariable(name: "index", scope: !12955, file: !3, line: 3442, type: !210)
-!12960 = !DILocalVariable(name: "el2_data", scope: !12955, file: !3, line: 3443, type: !6368)
-!12961 = !DILocation(line: 3443, column: 30, scope: !12955)
-!12962 = !DILocation(line: 0, scope: !12955)
-!12963 = !DILocation(line: 3446, column: 19, scope: !12955)
-!12964 = !DILocation(line: 3447, column: 19, scope: !12955)
-!12965 = !DILocation(line: 3448, column: 2, scope: !12955)
-!12966 = !DILocation(line: 3449, column: 11, scope: !12967)
-!12967 = distinct !DILexicalBlock(scope: !12955, file: !3, line: 3448, column: 5)
-!12968 = !DILocation(line: 3450, column: 3, scope: !12967)
-!12969 = !DILocation(line: 3451, column: 8, scope: !12967)
-!12970 = !DILocation(line: 3452, column: 16, scope: !12955)
-!12971 = !DILocation(line: 3452, column: 2, scope: !12967)
-!12972 = distinct !{!12972, !12965, !12973, !6597}
-!12973 = !DILocation(line: 3452, column: 21, scope: !12955)
-!12974 = !DILocation(line: 3453, column: 1, scope: !12955)
-!12975 = distinct !DISubprogram(name: "set_hcr_el2", scope: !12703, file: !12703, line: 61, type: !6678, scopeLine: 62, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12976)
-!12976 = !{!12977, !12978}
-!12977 = !DILocalVariable(name: "val", arg: 1, scope: !12975, file: !12703, line: 61, type: !207)
-!12978 = !DILocalVariable(name: "__val", scope: !12979, file: !12703, line: 63, type: !207)
-!12979 = distinct !DILexicalBlock(scope: !12975, file: !12703, line: 63, column: 2)
-!12980 = !DILocation(line: 0, scope: !12975)
-!12981 = !DILocation(line: 0, scope: !12979)
-!12982 = !DILocation(line: 63, column: 2, scope: !12979)
-!12983 = !{i64 2154903992}
-!12984 = !DILocation(line: 64, column: 1, scope: !12975)
-!12985 = distinct !DISubprogram(name: "__activate_traps_nvhe", scope: !3, file: !3, line: 4071, type: !11593, scopeLine: 4072, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12986)
-!12986 = !{!12987, !12988}
-!12987 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12985, file: !3, line: 4071, type: !286)
-!12988 = !DILocalVariable(name: "val", scope: !12985, file: !3, line: 4073, type: !207)
-!12989 = !DILocation(line: 0, scope: !12985)
-!12990 = !DILocation(line: 4075, column: 2, scope: !12985)
-!12991 = !DILocation(line: 4080, column: 2, scope: !12985)
-!12992 = !DILocation(line: 4081, column: 1, scope: !12985)
-!12993 = distinct !DISubprogram(name: "__activate_traps_common", scope: !3, file: !3, line: 4052, type: !11593, scopeLine: 4053, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12994)
-!12994 = !{!12995}
-!12995 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12993, file: !3, line: 4052, type: !286)
-!12996 = !DILocation(line: 0, scope: !12993)
-!12997 = !DILocation(line: 4060, column: 2, scope: !12993)
-!12998 = !DILocation(line: 4061, column: 2, scope: !12993)
-!12999 = !DILocation(line: 4063, column: 2, scope: !12993)
-!13000 = !DILocation(line: 4064, column: 1, scope: !12993)
-!13001 = distinct !DISubprogram(name: "set_cptr_el2", scope: !12703, file: !12703, line: 41, type: !6678, scopeLine: 42, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13002)
-!13002 = !{!13003, !13004}
-!13003 = !DILocalVariable(name: "val", arg: 1, scope: !13001, file: !12703, line: 41, type: !207)
-!13004 = !DILocalVariable(name: "__val", scope: !13005, file: !12703, line: 43, type: !207)
-!13005 = distinct !DILexicalBlock(scope: !13001, file: !12703, line: 43, column: 2)
-!13006 = !DILocation(line: 0, scope: !13001)
-!13007 = !DILocation(line: 0, scope: !13005)
-!13008 = !DILocation(line: 43, column: 2, scope: !13005)
-!13009 = !{i64 2154903390}
-!13010 = !DILocation(line: 44, column: 1, scope: !13001)
-!13011 = distinct !DISubprogram(name: "set_pmselr_el0", scope: !12703, file: !12703, line: 21, type: !6678, scopeLine: 22, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13012)
-!13012 = !{!13013, !13014}
-!13013 = !DILocalVariable(name: "val", arg: 1, scope: !13011, file: !12703, line: 21, type: !207)
-!13014 = !DILocalVariable(name: "__val", scope: !13015, file: !12703, line: 23, type: !207)
-!13015 = distinct !DILexicalBlock(scope: !13011, file: !12703, line: 23, column: 2)
-!13016 = !DILocation(line: 0, scope: !13011)
-!13017 = !DILocation(line: 0, scope: !13015)
-!13018 = !DILocation(line: 23, column: 2, scope: !13015)
-!13019 = !{i64 2154903083}
-!13020 = !DILocation(line: 24, column: 1, scope: !13011)
-!13021 = distinct !DISubprogram(name: "set_pmuserenr_el0", scope: !12703, file: !12703, line: 11, type: !6678, scopeLine: 12, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13022)
-!13022 = !{!13023, !13024}
-!13023 = !DILocalVariable(name: "val", arg: 1, scope: !13021, file: !12703, line: 11, type: !207)
-!13024 = !DILocalVariable(name: "__val", scope: !13025, file: !12703, line: 13, type: !207)
-!13025 = distinct !DILexicalBlock(scope: !13021, file: !12703, line: 13, column: 2)
-!13026 = !DILocation(line: 0, scope: !13021)
-!13027 = !DILocation(line: 0, scope: !13025)
-!13028 = !DILocation(line: 13, column: 2, scope: !13025)
-!13029 = !{i64 2154902767}
-!13030 = !DILocation(line: 14, column: 1, scope: !13021)
-!13031 = distinct !DISubprogram(name: "set_mdcr_el2", scope: !12703, file: !12703, line: 51, type: !6678, scopeLine: 52, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13032)
-!13032 = !{!13033, !13034}
-!13033 = !DILocalVariable(name: "val", arg: 1, scope: !13031, file: !12703, line: 51, type: !207)
-!13034 = !DILocalVariable(name: "__val", scope: !13035, file: !12703, line: 53, type: !207)
-!13035 = distinct !DILexicalBlock(scope: !13031, file: !12703, line: 53, column: 2)
-!13036 = !DILocation(line: 0, scope: !13031)
-!13037 = !DILocation(line: 0, scope: !13035)
-!13038 = !DILocation(line: 53, column: 2, scope: !13035)
-!13039 = !{i64 2154903691}
-!13040 = !DILocation(line: 54, column: 1, scope: !13031)
-!13041 = distinct !DISubprogram(name: "set_vttbr_el2", scope: !12703, file: !12703, line: 82, type: !6678, scopeLine: 83, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13042)
-!13042 = !{!13043, !13044}
-!13043 = !DILocalVariable(name: "val", arg: 1, scope: !13041, file: !12703, line: 82, type: !207)
-!13044 = !DILocalVariable(name: "__val", scope: !13045, file: !12703, line: 84, type: !207)
-!13045 = distinct !DILexicalBlock(scope: !13041, file: !12703, line: 84, column: 2)
-!13046 = !DILocation(line: 0, scope: !13041)
-!13047 = !DILocation(line: 0, scope: !13045)
-!13048 = !DILocation(line: 84, column: 2, scope: !13045)
-!13049 = !{i64 2154904560}
-!13050 = !DILocation(line: 85, column: 1, scope: !13041)
-!13051 = distinct !DISubprogram(name: "get_esr_el2", scope: !12703, file: !12703, line: 66, type: !7242, scopeLine: 67, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13052)
-!13052 = !{!13053}
-!13053 = !DILocalVariable(name: "__val", scope: !13054, file: !12703, line: 68, type: !207)
-!13054 = distinct !DILexicalBlock(scope: !13051, file: !12703, line: 68, column: 9)
-!13055 = !DILocation(line: 68, column: 9, scope: !13054)
-!13056 = !{i64 2154904278}
-!13057 = !DILocation(line: 0, scope: !13054)
-!13058 = !DILocation(line: 68, column: 2, scope: !13051)
-!13059 = distinct !DISubprogram(name: "set_vcpu_esr_el2", scope: !14, file: !14, line: 423, type: !13060, scopeLine: 423, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13062)
-!13060 = !DISubroutineType(types: !13061)
-!13061 = !{null, !282, !282, !282}
-!13062 = !{!13063, !13064, !13065, !13066, !13067, !13068}
-!13063 = !DILocalVariable(name: "vmid", arg: 1, scope: !13059, file: !14, line: 423, type: !282)
-!13064 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !13059, file: !14, line: 423, type: !282)
-!13065 = !DILocalVariable(name: "esr_el2", arg: 3, scope: !13059, file: !14, line: 423, type: !282)
-!13066 = !DILocalVariable(name: "shared_data", scope: !13059, file: !14, line: 424, type: !10716)
-!13067 = !DILocalVariable(name: "offset", scope: !13059, file: !14, line: 425, type: !82)
-!13068 = !DILocalVariable(name: "vcpu", scope: !13059, file: !14, line: 426, type: !286)
-!13069 = !DILocation(line: 0, scope: !13059)
-!13070 = !DILocation(line: 425, column: 15, scope: !13059)
-!13071 = !DILocation(line: 427, column: 16, scope: !13059)
-!13072 = !DILocation(line: 428, column: 10, scope: !13059)
-!13073 = !DILocation(line: 429, column: 19, scope: !13059)
-!13074 = !DILocation(line: 429, column: 27, scope: !13059)
-!13075 = !DILocation(line: 430, column: 1, scope: !13059)
-!13076 = distinct !DISubprogram(name: "set_shadow_ctxt_esr", scope: !14, file: !14, line: 349, type: !13060, scopeLine: 350, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13077)
-!13077 = !{!13078, !13079, !13080, !13081, !13082}
-!13078 = !DILocalVariable(name: "vmid", arg: 1, scope: !13076, file: !14, line: 349, type: !282)
-!13079 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !13076, file: !14, line: 349, type: !282)
-!13080 = !DILocalVariable(name: "value", arg: 3, scope: !13076, file: !14, line: 349, type: !282)
-!13081 = !DILocalVariable(name: "el2_data", scope: !13076, file: !14, line: 351, type: !6368)
-!13082 = !DILocalVariable(name: "offset", scope: !13076, file: !14, line: 352, type: !82)
-!13083 = !DILocation(line: 0, scope: !13076)
-!13084 = !DILocation(line: 351, column: 30, scope: !13076)
-!13085 = !DILocation(line: 352, column: 15, scope: !13076)
-!13086 = !DILocation(line: 353, column: 2, scope: !13076)
-!13087 = !DILocation(line: 353, column: 37, scope: !13076)
-!13088 = !DILocation(line: 353, column: 41, scope: !13076)
-!13089 = !DILocation(line: 354, column: 1, scope: !13076)
-!13090 = distinct !DISubprogram(name: "__populate_fault_info", scope: !3, file: !3, line: 4185, type: !13091, scopeLine: 4186, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13093)
-!13091 = !DISubroutineType(types: !13092)
-!13092 = !{!621, !228, !228, !228}
-!13093 = !{!13094, !13095, !13096, !13097, !13098, !13099, !13100}
-!13094 = !DILocalVariable(name: "vmid", arg: 1, scope: !13090, file: !3, line: 4185, type: !228)
-!13095 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !13090, file: !3, line: 4185, type: !228)
-!13096 = !DILocalVariable(name: "esr", arg: 3, scope: !13090, file: !3, line: 4185, type: !228)
-!13097 = !DILocalVariable(name: "hpfar", scope: !13090, file: !3, line: 4187, type: !207)
-!13098 = !DILocalVariable(name: "far", scope: !13090, file: !3, line: 4187, type: !207)
-!13099 = !DILocalVariable(name: "vcpu", scope: !13090, file: !3, line: 4188, type: !286)
-!13100 = !DILocalVariable(name: "shadow_ctxt", scope: !13090, file: !3, line: 4189, type: !6479)
-!13101 = !DILocation(line: 0, scope: !13090)
-!13102 = !DILocation(line: 4187, column: 2, scope: !13090)
-!13103 = !DILocation(line: 4187, column: 19, scope: !13090)
-!13104 = !DILocation(line: 4188, column: 26, scope: !13090)
-!13105 = !DILocation(line: 4189, column: 44, scope: !13090)
-!13106 = !DILocation(line: 4202, column: 12, scope: !13107)
-!13107 = distinct !DILexicalBlock(scope: !13090, file: !3, line: 4202, column: 6)
-!13108 = !DILocation(line: 4202, column: 29, scope: !13107)
-!13109 = !DILocation(line: 4204, column: 8, scope: !13110)
-!13110 = distinct !DILexicalBlock(scope: !13111, file: !3, line: 4204, column: 7)
-!13111 = distinct !DILexicalBlock(scope: !13107, file: !3, line: 4203, column: 70)
-!13112 = !DILocation(line: 4204, column: 7, scope: !13111)
-!13113 = !DILocation(line: 4207, column: 11, scope: !13114)
-!13114 = distinct !DILexicalBlock(scope: !13107, file: !3, line: 4206, column: 9)
-!13115 = !DILocation(line: 4207, column: 9, scope: !13114)
-!13116 = !DILocation(line: 4210, column: 19, scope: !13090)
-!13117 = !DILocation(line: 4210, column: 27, scope: !13090)
-!13118 = !{!10733, !6562, i64 2200}
-!13119 = !DILocation(line: 4211, column: 31, scope: !13090)
-!13120 = !DILocation(line: 4211, column: 19, scope: !13090)
-!13121 = !DILocation(line: 4211, column: 29, scope: !13090)
-!13122 = !{!10733, !6562, i64 2208}
-!13123 = !DILocation(line: 4212, column: 15, scope: !13090)
-!13124 = !DILocation(line: 4212, column: 23, scope: !13090)
-!13125 = !DILocation(line: 4213, column: 15, scope: !13090)
-!13126 = !DILocation(line: 4213, column: 21, scope: !13090)
-!13127 = !DILocation(line: 4215, column: 11, scope: !13128)
-!13128 = distinct !DILexicalBlock(scope: !13090, file: !3, line: 4215, column: 6)
-!13129 = !DILocation(line: 4215, column: 31, scope: !13128)
-!13130 = !DILocation(line: 4215, column: 6, scope: !13090)
-!13131 = !DILocation(line: 4221, column: 41, scope: !13132)
-!13132 = distinct !DILexicalBlock(scope: !13133, file: !3, line: 4221, column: 7)
-!13133 = distinct !DILexicalBlock(scope: !13128, file: !3, line: 4215, column: 45)
-!13134 = !DILocation(line: 4221, column: 8, scope: !13132)
-!13135 = !DILocation(line: 4221, column: 7, scope: !13133)
-!13136 = !DILocation(line: 4222, column: 27, scope: !13137)
-!13137 = distinct !DILexicalBlock(scope: !13132, file: !3, line: 4221, column: 48)
-!13138 = !DILocation(line: 4222, column: 15, scope: !13137)
-!13139 = !DILocation(line: 4222, column: 4, scope: !13137)
-!13140 = !DILocation(line: 4223, column: 17, scope: !13137)
-!13141 = !DILocation(line: 4223, column: 23, scope: !13137)
-!13142 = !DILocation(line: 4224, column: 3, scope: !13137)
-!13143 = !DILocation(line: 4228, column: 1, scope: !13090)
-!13144 = distinct !DISubprogram(name: "get_far_el2", scope: !12703, file: !12703, line: 97, type: !7242, scopeLine: 98, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13145)
-!13145 = !{!13146}
-!13146 = !DILocalVariable(name: "__val", scope: !13147, file: !12703, line: 99, type: !207)
-!13147 = distinct !DILexicalBlock(scope: !13144, file: !12703, line: 99, column: 9)
-!13148 = !DILocation(line: 99, column: 9, scope: !13147)
-!13149 = !{i64 2154905156}
-!13150 = !DILocation(line: 0, scope: !13147)
-!13151 = !DILocation(line: 99, column: 2, scope: !13144)
-!13152 = distinct !DISubprogram(name: "__translate_far_to_hpfar", scope: !3, file: !3, line: 4156, type: !13153, scopeLine: 4157, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13156)
-!13153 = !DISubroutineType(types: !13154)
-!13154 = !{!621, !207, !13155}
-!13155 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !207, size: 64)
-!13156 = !{!13157, !13158, !13159, !13160, !13161, !13163, !13165}
-!13157 = !DILocalVariable(name: "far", arg: 1, scope: !13152, file: !3, line: 4156, type: !207)
-!13158 = !DILocalVariable(name: "hpfar", arg: 2, scope: !13152, file: !3, line: 4156, type: !13155)
-!13159 = !DILocalVariable(name: "par", scope: !13152, file: !3, line: 4158, type: !207)
-!13160 = !DILocalVariable(name: "tmp", scope: !13152, file: !3, line: 4158, type: !207)
-!13161 = !DILocalVariable(name: "__val", scope: !13162, file: !3, line: 4170, type: !207)
-!13162 = distinct !DILexicalBlock(scope: !13152, file: !3, line: 4170, column: 8)
-!13163 = !DILocalVariable(name: "__val", scope: !13164, file: !3, line: 4174, type: !207)
-!13164 = distinct !DILexicalBlock(scope: !13152, file: !3, line: 4174, column: 8)
-!13165 = !DILocalVariable(name: "__val", scope: !13166, file: !3, line: 4175, type: !207)
-!13166 = distinct !DILexicalBlock(scope: !13152, file: !3, line: 4175, column: 2)
-!13167 = !DILocation(line: 0, scope: !13152)
-!13168 = !DILocation(line: 4170, column: 8, scope: !13162)
-!13169 = !{i64 2154912670}
-!13170 = !DILocation(line: 0, scope: !13162)
-!13171 = !DILocation(line: 4171, column: 2, scope: !13152)
-!13172 = !{i64 103563}
-!13173 = !DILocation(line: 4172, column: 2, scope: !13152)
-!13174 = !{i64 2154912793}
-!13175 = !DILocation(line: 4174, column: 8, scope: !13164)
-!13176 = !{i64 2154912857}
-!13177 = !DILocation(line: 0, scope: !13164)
-!13178 = !DILocation(line: 0, scope: !13166)
-!13179 = !DILocation(line: 4175, column: 2, scope: !13166)
-!13180 = !{i64 2154913021}
-!13181 = !DILocation(line: 4177, column: 6, scope: !13182)
-!13182 = distinct !DILexicalBlock(scope: !13152, file: !3, line: 4177, column: 6)
-!13183 = !DILocation(line: 4177, column: 6, scope: !13152)
-!13184 = !{!"branch_weights", i32 2000, i32 1}
-!13185 = !DILocation(line: 4181, column: 45, scope: !13152)
-!13186 = !DILocation(line: 4181, column: 9, scope: !13152)
-!13187 = !DILocation(line: 4182, column: 2, scope: !13152)
-!13188 = !DILocation(line: 4183, column: 1, scope: !13152)
-!13189 = distinct !DISubprogram(name: "get_hpfar_el2", scope: !12703, file: !12703, line: 107, type: !7242, scopeLine: 108, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13190)
-!13190 = !{!13191}
-!13191 = !DILocalVariable(name: "__val", scope: !13192, file: !12703, line: 109, type: !207)
-!13192 = distinct !DILexicalBlock(scope: !13189, file: !12703, line: 109, column: 9)
-!13193 = !DILocation(line: 109, column: 9, scope: !13192)
-!13194 = !{i64 2154909487}
-!13195 = !DILocation(line: 0, scope: !13192)
-!13196 = !DILocation(line: 109, column: 2, scope: !13189)
-!13197 = distinct !DISubprogram(name: "is_mmio_gpa", scope: !6133, file: !6133, line: 108, type: !13198, scopeLine: 109, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13200)
-!13198 = !DISubroutineType(types: !13199)
-!13199 = !{!621, !217}
-!13200 = !{!13201}
-!13201 = !DILocalVariable(name: "addr", arg: 1, scope: !13197, file: !6133, line: 108, type: !217)
-!13202 = !DILocation(line: 0, scope: !13197)
-!13203 = !DILocation(line: 110, column: 15, scope: !13197)
-!13204 = !DILocation(line: 110, column: 28, scope: !13197)
-!13205 = !DILocation(line: 110, column: 32, scope: !13197)
-!13206 = !DILocation(line: 110, column: 31, scope: !13197)
-!13207 = !DILocation(line: 110, column: 2, scope: !13197)
-!13208 = distinct !DISubprogram(name: "is_gic_cpu", scope: !6133, file: !6133, line: 103, type: !13198, scopeLine: 104, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13209)
-!13209 = !{!13210}
-!13210 = !DILocalVariable(name: "addr", arg: 1, scope: !13208, file: !6133, line: 103, type: !217)
-!13211 = !DILocation(line: 0, scope: !13208)
-!13212 = !DILocation(line: 105, column: 29, scope: !13208)
-!13213 = !DILocation(line: 105, column: 2, scope: !13208)
-!13214 = distinct !DISubprogram(name: "__deactivate_traps_nvhe", scope: !3, file: !3, line: 4100, type: !2404, scopeLine: 4101, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !2257)
-!13215 = !DILocation(line: 4102, column: 2, scope: !13214)
-!13216 = !DILocation(line: 4107, column: 2, scope: !13214)
-!13217 = !DILocation(line: 4109, column: 2, scope: !13214)
-!13218 = !DILocation(line: 4110, column: 1, scope: !13214)
-!13219 = distinct !DISubprogram(name: "__deactivate_traps_common", scope: !3, file: !3, line: 4066, type: !2404, scopeLine: 4067, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !2257)
-!13220 = !DILocation(line: 4068, column: 2, scope: !13219)
-!13221 = !DILocation(line: 4069, column: 1, scope: !13219)
-!13222 = distinct !DISubprogram(name: "get_host_vttbr", scope: !14, file: !14, line: 432, type: !13223, scopeLine: 433, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13225)
-!13223 = !DISubroutineType(types: !13224)
-!13224 = !{!3980}
-!13225 = !{!13226}
-!13226 = !DILocalVariable(name: "el2_data", scope: !13222, file: !14, line: 434, type: !6368)
-!13227 = !DILocation(line: 434, column: 30, scope: !13222)
-!13228 = !DILocation(line: 0, scope: !13222)
-!13229 = !DILocation(line: 435, column: 19, scope: !13222)
-!13230 = !DILocation(line: 435, column: 2, scope: !13222)
+!12095 = !{i64 2154642476}
+!12096 = !DILocation(line: 0, scope: !12074)
+!12097 = !DILocation(line: 3741, column: 2, scope: !12074)
+!12098 = !{i64 2154642688}
+!12099 = !DILocation(line: 0, scope: !12076)
+!12100 = !DILocation(line: 3742, column: 2, scope: !12076)
+!12101 = !{i64 2154642869}
+!12102 = !DILocation(line: 0, scope: !12078)
+!12103 = !DILocation(line: 3743, column: 2, scope: !12078)
+!12104 = !{i64 2154643058}
+!12105 = !DILocation(line: 3745, column: 12, scope: !12080)
+!12106 = !{i64 2154643232}
+!12107 = !DILocation(line: 0, scope: !12080)
+!12108 = !DILocation(line: 3753, column: 14, scope: !12109)
+!12109 = distinct !DILexicalBlock(scope: !12058, file: !3, line: 3753, column: 6)
+!12110 = !DILocation(line: 3753, column: 31, scope: !12109)
+!12111 = !DILocation(line: 3753, column: 6, scope: !12058)
+!12112 = !DILocation(line: 0, scope: !12082)
+!12113 = !DILocation(line: 3762, column: 2, scope: !12082)
+!12114 = !{i64 2154643473}
+!12115 = !DILocation(line: 3763, column: 1, scope: !12058)
+!12116 = distinct !DISubprogram(name: "stage2_get_exception_vector", scope: !3, file: !3, line: 3710, type: !6710, scopeLine: 3711, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12117)
+!12117 = !{!12118, !12119, !12120}
+!12118 = !DILocalVariable(name: "pstate", arg: 1, scope: !12116, file: !3, line: 3710, type: !207)
+!12119 = !DILocalVariable(name: "exc_offset", scope: !12116, file: !3, line: 3712, type: !207)
+!12120 = !DILocalVariable(name: "__val", scope: !12121, file: !3, line: 3728, type: !207)
+!12121 = distinct !DILexicalBlock(scope: !12116, file: !3, line: 3728, column: 9)
+!12122 = !DILocation(line: 0, scope: !12116)
+!12123 = !DILocation(line: 3714, column: 17, scope: !12116)
+!12124 = !DILocation(line: 3714, column: 2, scope: !12116)
+!12125 = !DILocation(line: 0, scope: !12126)
+!12126 = distinct !DILexicalBlock(scope: !12116, file: !3, line: 3714, column: 53)
+!12127 = !DILocation(line: 3728, column: 9, scope: !12121)
+!12128 = !{i64 2154641607}
+!12129 = !DILocation(line: 0, scope: !12121)
+!12130 = !DILocation(line: 3728, column: 31, scope: !12116)
+!12131 = !DILocation(line: 3728, column: 2, scope: !12116)
+!12132 = distinct !DISubprogram(name: "reject_invalid_mem_access", scope: !3, file: !3, line: 3765, type: !9628, scopeLine: 3766, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12133)
+!12133 = !{!12134, !12135}
+!12134 = !DILocalVariable(name: "addr", arg: 1, scope: !12132, file: !3, line: 3765, type: !234)
+!12135 = !DILocalVariable(name: "__val", scope: !12136, file: !3, line: 3769, type: !207)
+!12136 = distinct !DILexicalBlock(scope: !12132, file: !3, line: 3769, column: 14)
+!12137 = !DILocation(line: 0, scope: !12132)
+!12138 = !DILocation(line: 3767, column: 2, scope: !12132)
+!12139 = !DILocation(line: 3768, column: 2, scope: !12132)
+!12140 = !DILocation(line: 3769, column: 14, scope: !12136)
+!12141 = !{i64 2154643759}
+!12142 = !DILocation(line: 0, scope: !12136)
+!12143 = !DILocation(line: 3769, column: 2, scope: !12132)
+!12144 = !DILocation(line: 3770, column: 2, scope: !12132)
+!12145 = !DILocation(line: 3771, column: 2, scope: !12132)
+!12146 = !DILocation(line: 3772, column: 2, scope: !12132)
+!12147 = !DILocation(line: 3773, column: 1, scope: !12132)
+!12148 = distinct !DISubprogram(name: "__init_stage2_translation", scope: !3, file: !3, line: 3796, type: !7025, scopeLine: 3797, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12149)
+!12149 = !{!12150, !12151, !12152, !12153, !12155, !12157, !12159}
+!12150 = !DILocalVariable(name: "val", scope: !12148, file: !3, line: 3798, type: !207)
+!12151 = !DILocalVariable(name: "parange", scope: !12148, file: !3, line: 3799, type: !207)
+!12152 = !DILocalVariable(name: "tmp", scope: !12148, file: !3, line: 3800, type: !207)
+!12153 = !DILocalVariable(name: "__val", scope: !12154, file: !3, line: 3807, type: !207)
+!12154 = distinct !DILexicalBlock(scope: !12148, file: !3, line: 3807, column: 12)
+!12155 = !DILocalVariable(name: "__val", scope: !12156, file: !3, line: 3847, type: !207)
+!12156 = distinct !DILexicalBlock(scope: !12148, file: !3, line: 3847, column: 9)
+!12157 = !DILocalVariable(name: "__val", scope: !12158, file: !3, line: 3855, type: !207)
+!12158 = distinct !DILexicalBlock(scope: !12148, file: !3, line: 3855, column: 9)
+!12159 = !DILocalVariable(name: "__val", scope: !12160, file: !3, line: 3860, type: !207)
+!12160 = distinct !DILexicalBlock(scope: !12148, file: !3, line: 3860, column: 2)
+!12161 = !DILocation(line: 0, scope: !12148)
+!12162 = !DILocation(line: 3807, column: 12, scope: !12154)
+!12163 = !{i64 2154644645}
+!12164 = !DILocation(line: 0, scope: !12154)
+!12165 = !DILocation(line: 3807, column: 42, scope: !12148)
+!12166 = !DILocation(line: 3808, column: 6, scope: !12148)
+!12167 = !DILocation(line: 3813, column: 2, scope: !12148)
+!12168 = !DILocation(line: 3810, column: 17, scope: !12148)
+!12169 = !DILocation(line: 3841, column: 6, scope: !12148)
+!12170 = !DILocation(line: 3847, column: 9, scope: !12156)
+!12171 = !{i64 2154644880}
+!12172 = !DILocation(line: 0, scope: !12156)
+!12173 = !DILocation(line: 3847, column: 68, scope: !12148)
+!12174 = !DILocation(line: 3848, column: 6, scope: !12175)
+!12175 = distinct !DILexicalBlock(scope: !12148, file: !3, line: 3848, column: 6)
+!12176 = !DILocation(line: 3848, column: 6, scope: !12148)
+!12177 = !DILocation(line: 3855, column: 9, scope: !12158)
+!12178 = !{i64 2154645071}
+!12179 = !DILocation(line: 0, scope: !12158)
+!12180 = !DILocation(line: 3856, column: 14, scope: !12148)
+!12181 = !DILocation(line: 3856, column: 9, scope: !12148)
+!12182 = !DILocation(line: 3856, column: 6, scope: !12148)
+!12183 = !DILocation(line: 0, scope: !12160)
+!12184 = !DILocation(line: 3860, column: 2, scope: !12160)
+!12185 = !{i64 2154645322}
+!12186 = !DILocation(line: 3862, column: 2, scope: !12148)
+!12187 = distinct !DISubprogram(name: "__vm_sysreg_restore_state_nvhe_opt", scope: !3, file: !3, line: 4009, type: !6798, scopeLine: 4010, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12188)
+!12188 = !{!12189, !12190}
+!12189 = !DILocalVariable(name: "vmid", arg: 1, scope: !12187, file: !3, line: 4009, type: !228)
+!12190 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12187, file: !3, line: 4009, type: !228)
+!12191 = !DILocation(line: 0, scope: !12187)
+!12192 = !DILocation(line: 4011, column: 2, scope: !12187)
+!12193 = !DILocation(line: 4012, column: 2, scope: !12187)
+!12194 = !DILocation(line: 4013, column: 2, scope: !12187)
+!12195 = !DILocation(line: 4014, column: 2, scope: !12187)
+!12196 = !DILocation(line: 4015, column: 1, scope: !12187)
+!12197 = distinct !DISubprogram(name: "__vm_sysreg_restore_el1_state", scope: !3, file: !3, line: 3941, type: !6798, scopeLine: 3942, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12198)
+!12198 = !{!12199, !12200, !12201, !12202, !12203, !12204, !12206, !12208, !12210, !12212, !12214, !12216, !12218, !12220, !12222, !12224, !12226, !12228, !12230, !12232, !12234, !12236, !12238, !12240, !12242, !12244, !12246}
+!12199 = !DILocalVariable(name: "vmid", arg: 1, scope: !12197, file: !3, line: 3941, type: !228)
+!12200 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12197, file: !3, line: 3941, type: !228)
+!12201 = !DILocalVariable(name: "el2_data", scope: !12197, file: !3, line: 3943, type: !6368)
+!12202 = !DILocalVariable(name: "offset", scope: !12197, file: !3, line: 3944, type: !82)
+!12203 = !DILocalVariable(name: "ctxt", scope: !12197, file: !3, line: 3945, type: !6479)
+!12204 = !DILocalVariable(name: "__val", scope: !12205, file: !3, line: 3947, type: !207)
+!12205 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3947, column: 2)
+!12206 = !DILocalVariable(name: "__val", scope: !12207, file: !3, line: 3948, type: !207)
+!12207 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3948, column: 2)
+!12208 = !DILocalVariable(name: "__val", scope: !12209, file: !3, line: 3949, type: !207)
+!12209 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3949, column: 2)
+!12210 = !DILocalVariable(name: "__val", scope: !12211, file: !3, line: 3950, type: !207)
+!12211 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3950, column: 2)
+!12212 = !DILocalVariable(name: "__val", scope: !12213, file: !3, line: 3951, type: !207)
+!12213 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3951, column: 2)
+!12214 = !DILocalVariable(name: "__val", scope: !12215, file: !3, line: 3952, type: !207)
+!12215 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3952, column: 2)
+!12216 = !DILocalVariable(name: "__val", scope: !12217, file: !3, line: 3953, type: !207)
+!12217 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3953, column: 2)
+!12218 = !DILocalVariable(name: "__val", scope: !12219, file: !3, line: 3954, type: !207)
+!12219 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3954, column: 2)
+!12220 = !DILocalVariable(name: "__val", scope: !12221, file: !3, line: 3955, type: !207)
+!12221 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3955, column: 2)
+!12222 = !DILocalVariable(name: "__val", scope: !12223, file: !3, line: 3956, type: !207)
+!12223 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3956, column: 2)
+!12224 = !DILocalVariable(name: "__val", scope: !12225, file: !3, line: 3957, type: !207)
+!12225 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3957, column: 2)
+!12226 = !DILocalVariable(name: "__val", scope: !12227, file: !3, line: 3958, type: !207)
+!12227 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3958, column: 2)
+!12228 = !DILocalVariable(name: "__val", scope: !12229, file: !3, line: 3959, type: !207)
+!12229 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3959, column: 2)
+!12230 = !DILocalVariable(name: "__val", scope: !12231, file: !3, line: 3960, type: !207)
+!12231 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3960, column: 2)
+!12232 = !DILocalVariable(name: "__val", scope: !12233, file: !3, line: 3961, type: !207)
+!12233 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3961, column: 2)
+!12234 = !DILocalVariable(name: "__val", scope: !12235, file: !3, line: 3962, type: !207)
+!12235 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3962, column: 2)
+!12236 = !DILocalVariable(name: "__val", scope: !12237, file: !3, line: 3963, type: !207)
+!12237 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3963, column: 2)
+!12238 = !DILocalVariable(name: "__val", scope: !12239, file: !3, line: 3964, type: !207)
+!12239 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3964, column: 2)
+!12240 = !DILocalVariable(name: "__val", scope: !12241, file: !3, line: 3965, type: !207)
+!12241 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3965, column: 2)
+!12242 = !DILocalVariable(name: "__val", scope: !12243, file: !3, line: 3967, type: !207)
+!12243 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3967, column: 2)
+!12244 = !DILocalVariable(name: "__val", scope: !12245, file: !3, line: 3968, type: !207)
+!12245 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3968, column: 2)
+!12246 = !DILocalVariable(name: "__val", scope: !12247, file: !3, line: 3969, type: !207)
+!12247 = distinct !DILexicalBlock(scope: !12197, file: !3, line: 3969, column: 2)
+!12248 = !DILocation(line: 0, scope: !12197)
+!12249 = !DILocation(line: 3943, column: 30, scope: !12197)
+!12250 = !DILocation(line: 3944, column: 15, scope: !12197)
+!12251 = !DILocation(line: 3945, column: 38, scope: !12197)
+!12252 = !DILocation(line: 3947, column: 2, scope: !12205)
+!12253 = !DILocation(line: 0, scope: !12205)
+!12254 = !{i64 2154767944}
+!12255 = !DILocation(line: 3948, column: 2, scope: !12207)
+!12256 = !DILocation(line: 0, scope: !12207)
+!12257 = !{i64 2154768155}
+!12258 = !DILocation(line: 3949, column: 2, scope: !12209)
+!12259 = !DILocation(line: 0, scope: !12209)
+!12260 = !{i64 2154772527, i64 2154772574, i64 2154772580, i64 2154773594, i64 2154773634, i64 2154773652, i64 2154773684, i64 2154773712, i64 2154773766, i64 2154773786, i64 2154773884, i64 2154772603, i64 2154772617, i64 2154772635, i64 2154774342, i64 2154774390, i64 2154774438, i64 2154774501, i64 2154774550, i64 2154772713, i64 2154772738, i64 2154772764, i64 2154772770, i64 2154774007, i64 2154774047, i64 2154774065, i64 2154774097, i64 2154774125, i64 2154774179, i64 2154774199, i64 2154774297, i64 2154772793, i64 2154772807, i64 2154772813, i64 2154772838, i64 2154772888, i64 2154772942}
+!12261 = !DILocation(line: 3950, column: 2, scope: !12211)
+!12262 = !DILocation(line: 0, scope: !12211)
+!12263 = !{i64 2154774655}
+!12264 = !DILocation(line: 3951, column: 2, scope: !12213)
+!12265 = !DILocation(line: 0, scope: !12213)
+!12266 = !{i64 2154779023, i64 2154779070, i64 2154779076, i64 2154780090, i64 2154780130, i64 2154780148, i64 2154780180, i64 2154780208, i64 2154780262, i64 2154780282, i64 2154780380, i64 2154779099, i64 2154779113, i64 2154779131, i64 2154780838, i64 2154780886, i64 2154780934, i64 2154780997, i64 2154781046, i64 2154779209, i64 2154779234, i64 2154779260, i64 2154779266, i64 2154780503, i64 2154780543, i64 2154780561, i64 2154780593, i64 2154780621, i64 2154780675, i64 2154780695, i64 2154780793, i64 2154779289, i64 2154779303, i64 2154779309, i64 2154779334, i64 2154779384, i64 2154779438}
+!12267 = !DILocation(line: 3952, column: 2, scope: !12215)
+!12268 = !DILocation(line: 0, scope: !12215)
+!12269 = !{i64 2154785311, i64 2154785358, i64 2154785364, i64 2154786378, i64 2154786418, i64 2154786436, i64 2154786468, i64 2154786496, i64 2154786550, i64 2154786570, i64 2154786668, i64 2154785387, i64 2154785401, i64 2154785419, i64 2154787126, i64 2154787174, i64 2154787222, i64 2154787285, i64 2154787334, i64 2154785497, i64 2154785522, i64 2154785548, i64 2154785554, i64 2154786791, i64 2154786831, i64 2154786849, i64 2154786881, i64 2154786909, i64 2154786963, i64 2154786983, i64 2154787081, i64 2154785577, i64 2154785591, i64 2154785597, i64 2154785622, i64 2154785672, i64 2154785726}
+!12270 = !DILocation(line: 3953, column: 2, scope: !12217)
+!12271 = !DILocation(line: 0, scope: !12217)
+!12272 = !{i64 2154791599, i64 2154791646, i64 2154791652, i64 2154792666, i64 2154792706, i64 2154792724, i64 2154792756, i64 2154792784, i64 2154792838, i64 2154792858, i64 2154792956, i64 2154791675, i64 2154791689, i64 2154791707, i64 2154793414, i64 2154793462, i64 2154793510, i64 2154793573, i64 2154793622, i64 2154791785, i64 2154791810, i64 2154791836, i64 2154791842, i64 2154793079, i64 2154793119, i64 2154793137, i64 2154793169, i64 2154793197, i64 2154793251, i64 2154793271, i64 2154793369, i64 2154791865, i64 2154791879, i64 2154791885, i64 2154791910, i64 2154791960, i64 2154792014}
+!12273 = !DILocation(line: 3954, column: 2, scope: !12219)
+!12274 = !DILocation(line: 0, scope: !12219)
+!12275 = !{i64 2154797873, i64 2154797920, i64 2154797926, i64 2154798940, i64 2154798980, i64 2154798998, i64 2154799030, i64 2154799058, i64 2154799112, i64 2154799132, i64 2154799230, i64 2154797949, i64 2154797963, i64 2154797981, i64 2154799688, i64 2154799736, i64 2154799784, i64 2154799847, i64 2154799896, i64 2154798059, i64 2154798084, i64 2154798110, i64 2154798116, i64 2154799353, i64 2154799393, i64 2154799411, i64 2154799443, i64 2154799471, i64 2154799525, i64 2154799545, i64 2154799643, i64 2154798139, i64 2154798153, i64 2154798159, i64 2154798184, i64 2154798234, i64 2154798288}
+!12276 = !DILocation(line: 3955, column: 2, scope: !12221)
+!12277 = !DILocation(line: 0, scope: !12221)
+!12278 = !{i64 2154804147, i64 2154804194, i64 2154804200, i64 2154805214, i64 2154805254, i64 2154805272, i64 2154805304, i64 2154805332, i64 2154805386, i64 2154805406, i64 2154805504, i64 2154804223, i64 2154804237, i64 2154804255, i64 2154805962, i64 2154806010, i64 2154806058, i64 2154806121, i64 2154806170, i64 2154804333, i64 2154804358, i64 2154804384, i64 2154804390, i64 2154805627, i64 2154805667, i64 2154805685, i64 2154805717, i64 2154805745, i64 2154805799, i64 2154805819, i64 2154805917, i64 2154804413, i64 2154804427, i64 2154804433, i64 2154804458, i64 2154804508, i64 2154804562}
+!12279 = !DILocation(line: 3956, column: 2, scope: !12223)
+!12280 = !DILocation(line: 0, scope: !12223)
+!12281 = !{i64 2154810435, i64 2154810482, i64 2154810488, i64 2154811502, i64 2154811542, i64 2154811560, i64 2154811592, i64 2154811620, i64 2154811674, i64 2154811694, i64 2154811792, i64 2154810511, i64 2154810525, i64 2154810543, i64 2154812250, i64 2154812298, i64 2154812346, i64 2154812409, i64 2154812458, i64 2154810621, i64 2154810646, i64 2154810672, i64 2154810678, i64 2154811915, i64 2154811955, i64 2154811973, i64 2154812005, i64 2154812033, i64 2154812087, i64 2154812107, i64 2154812205, i64 2154810701, i64 2154810715, i64 2154810721, i64 2154810746, i64 2154810796, i64 2154810850}
+!12282 = !DILocation(line: 3957, column: 2, scope: !12225)
+!12283 = !DILocation(line: 0, scope: !12225)
+!12284 = !{i64 2154820784, i64 2154820831, i64 2154820837, i64 2154821851, i64 2154821891, i64 2154821909, i64 2154821941, i64 2154821969, i64 2154822023, i64 2154822043, i64 2154822141, i64 2154820860, i64 2154820874, i64 2154820892, i64 2154822599, i64 2154822647, i64 2154822695, i64 2154822758, i64 2154822807, i64 2154820970, i64 2154820995, i64 2154821021, i64 2154821027, i64 2154822264, i64 2154822304, i64 2154822322, i64 2154822354, i64 2154822382, i64 2154822436, i64 2154822456, i64 2154822554, i64 2154821050, i64 2154821064, i64 2154821070, i64 2154821095, i64 2154821145, i64 2154821199}
+!12285 = !DILocation(line: 3958, column: 2, scope: !12227)
+!12286 = !DILocation(line: 0, scope: !12227)
+!12287 = !{i64 2154827058, i64 2154827105, i64 2154827111, i64 2154828125, i64 2154828165, i64 2154828183, i64 2154828215, i64 2154828243, i64 2154828297, i64 2154828317, i64 2154828415, i64 2154827134, i64 2154827148, i64 2154827166, i64 2154828873, i64 2154828921, i64 2154828969, i64 2154829032, i64 2154829081, i64 2154827244, i64 2154827269, i64 2154827295, i64 2154827301, i64 2154828538, i64 2154828578, i64 2154828596, i64 2154828628, i64 2154828656, i64 2154828710, i64 2154828730, i64 2154828828, i64 2154827324, i64 2154827338, i64 2154827344, i64 2154827369, i64 2154827419, i64 2154827473}
+!12288 = !DILocation(line: 3959, column: 2, scope: !12229)
+!12289 = !DILocation(line: 0, scope: !12229)
+!12290 = !{i64 2154833353, i64 2154833400, i64 2154833406, i64 2154834420, i64 2154834460, i64 2154834478, i64 2154834510, i64 2154834538, i64 2154834592, i64 2154834612, i64 2154834711, i64 2154833429, i64 2154833443, i64 2154833461, i64 2154835170, i64 2154835218, i64 2154835266, i64 2154835329, i64 2154835378, i64 2154833539, i64 2154833564, i64 2154833590, i64 2154833596, i64 2154834834, i64 2154834874, i64 2154834892, i64 2154834924, i64 2154834952, i64 2154835006, i64 2154835026, i64 2154835125, i64 2154833619, i64 2154833633, i64 2154833639, i64 2154833664, i64 2154833714, i64 2154833768}
+!12291 = !DILocation(line: 3960, column: 2, scope: !12231)
+!12292 = !DILocation(line: 0, scope: !12231)
+!12293 = !{i64 2154839650, i64 2154839697, i64 2154839703, i64 2154840717, i64 2154840757, i64 2154840775, i64 2154840807, i64 2154840835, i64 2154840889, i64 2154840909, i64 2154841008, i64 2154839726, i64 2154839740, i64 2154839758, i64 2154841467, i64 2154841515, i64 2154841563, i64 2154841626, i64 2154841675, i64 2154839836, i64 2154839861, i64 2154839887, i64 2154839893, i64 2154841131, i64 2154841171, i64 2154841189, i64 2154841221, i64 2154841249, i64 2154841303, i64 2154841323, i64 2154841422, i64 2154839916, i64 2154839930, i64 2154839936, i64 2154839961, i64 2154840011, i64 2154840065}
+!12294 = !DILocation(line: 3961, column: 2, scope: !12233)
+!12295 = !DILocation(line: 0, scope: !12233)
+!12296 = !{i64 2154845989, i64 2154846036, i64 2154846042, i64 2154847056, i64 2154847096, i64 2154847114, i64 2154847146, i64 2154847174, i64 2154847228, i64 2154847248, i64 2154847347, i64 2154846065, i64 2154846079, i64 2154846097, i64 2154847806, i64 2154847854, i64 2154847902, i64 2154847965, i64 2154848014, i64 2154846175, i64 2154846200, i64 2154846226, i64 2154846232, i64 2154847470, i64 2154847510, i64 2154847528, i64 2154847560, i64 2154847588, i64 2154847642, i64 2154847662, i64 2154847761, i64 2154846255, i64 2154846269, i64 2154846275, i64 2154846300, i64 2154846350, i64 2154846404}
+!12297 = !DILocation(line: 3962, column: 2, scope: !12235)
+!12298 = !DILocation(line: 0, scope: !12235)
+!12299 = !{i64 2154852293, i64 2154852340, i64 2154852346, i64 2154853360, i64 2154853400, i64 2154853418, i64 2154853450, i64 2154853478, i64 2154853532, i64 2154853552, i64 2154853651, i64 2154852369, i64 2154852383, i64 2154852401, i64 2154854110, i64 2154854158, i64 2154854206, i64 2154854269, i64 2154854318, i64 2154852479, i64 2154852504, i64 2154852530, i64 2154852536, i64 2154853774, i64 2154853814, i64 2154853832, i64 2154853864, i64 2154853892, i64 2154853946, i64 2154853966, i64 2154854065, i64 2154852559, i64 2154852573, i64 2154852579, i64 2154852604, i64 2154852654, i64 2154852708}
+!12300 = !DILocation(line: 3963, column: 2, scope: !12237)
+!12301 = !DILocation(line: 0, scope: !12237)
+!12302 = !{i64 2154858611, i64 2154858658, i64 2154858664, i64 2154859678, i64 2154859718, i64 2154859736, i64 2154859768, i64 2154859796, i64 2154859850, i64 2154859870, i64 2154859969, i64 2154858687, i64 2154858701, i64 2154858719, i64 2154860428, i64 2154860476, i64 2154860524, i64 2154860587, i64 2154860636, i64 2154858797, i64 2154858822, i64 2154858848, i64 2154858854, i64 2154860092, i64 2154860132, i64 2154860150, i64 2154860182, i64 2154860210, i64 2154860264, i64 2154860284, i64 2154860383, i64 2154858877, i64 2154858891, i64 2154858897, i64 2154858922, i64 2154858972, i64 2154859026}
+!12303 = !DILocation(line: 3964, column: 2, scope: !12239)
+!12304 = !DILocation(line: 0, scope: !12239)
+!12305 = !{i64 2154860741}
+!12306 = !DILocation(line: 3965, column: 2, scope: !12241)
+!12307 = !DILocation(line: 0, scope: !12241)
+!12308 = !{i64 2154860941}
+!12309 = !DILocation(line: 3967, column: 2, scope: !12243)
+!12310 = !DILocation(line: 0, scope: !12243)
+!12311 = !{i64 2154861149}
+!12312 = !DILocation(line: 3968, column: 2, scope: !12245)
+!12313 = !DILocation(line: 0, scope: !12245)
+!12314 = !{i64 2154865477, i64 2154865524, i64 2154865530, i64 2154866544, i64 2154866584, i64 2154866602, i64 2154866634, i64 2154866662, i64 2154866716, i64 2154866736, i64 2154866834, i64 2154865553, i64 2154865567, i64 2154865585, i64 2154867292, i64 2154867340, i64 2154867388, i64 2154867451, i64 2154867500, i64 2154865663, i64 2154865688, i64 2154865714, i64 2154865720, i64 2154866957, i64 2154866997, i64 2154867015, i64 2154867047, i64 2154867075, i64 2154867129, i64 2154867149, i64 2154867247, i64 2154865743, i64 2154865757, i64 2154865763, i64 2154865788, i64 2154865838, i64 2154865892}
+!12315 = !DILocation(line: 3969, column: 2, scope: !12247)
+!12316 = !DILocation(line: 0, scope: !12247)
+!12317 = !{i64 2154871745, i64 2154871792, i64 2154871798, i64 2154872812, i64 2154872852, i64 2154872870, i64 2154872902, i64 2154872930, i64 2154872984, i64 2154873004, i64 2154873102, i64 2154871821, i64 2154871835, i64 2154871853, i64 2154873560, i64 2154873608, i64 2154873656, i64 2154873719, i64 2154873768, i64 2154871931, i64 2154871956, i64 2154871982, i64 2154871988, i64 2154873225, i64 2154873265, i64 2154873283, i64 2154873315, i64 2154873343, i64 2154873397, i64 2154873417, i64 2154873515, i64 2154872011, i64 2154872025, i64 2154872031, i64 2154872056, i64 2154872106, i64 2154872160}
+!12318 = !DILocation(line: 3970, column: 1, scope: !12197)
+!12319 = distinct !DISubprogram(name: "__vm_sysreg_restore_common_state", scope: !3, file: !3, line: 3972, type: !6798, scopeLine: 3973, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12320)
+!12320 = !{!12321, !12322, !12323, !12324, !12325, !12326, !12328}
+!12321 = !DILocalVariable(name: "vmid", arg: 1, scope: !12319, file: !3, line: 3972, type: !228)
+!12322 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12319, file: !3, line: 3972, type: !228)
+!12323 = !DILocalVariable(name: "el2_data", scope: !12319, file: !3, line: 3974, type: !6368)
+!12324 = !DILocalVariable(name: "offset", scope: !12319, file: !3, line: 3975, type: !82)
+!12325 = !DILocalVariable(name: "ctxt", scope: !12319, file: !3, line: 3976, type: !6479)
+!12326 = !DILocalVariable(name: "__val", scope: !12327, file: !3, line: 3978, type: !207)
+!12327 = distinct !DILexicalBlock(scope: !12319, file: !3, line: 3978, column: 2)
+!12328 = !DILocalVariable(name: "__val", scope: !12329, file: !3, line: 3984, type: !207)
+!12329 = distinct !DILexicalBlock(scope: !12319, file: !3, line: 3984, column: 2)
+!12330 = !DILocation(line: 0, scope: !12319)
+!12331 = !DILocation(line: 3974, column: 30, scope: !12319)
+!12332 = !DILocation(line: 3975, column: 15, scope: !12319)
+!12333 = !DILocation(line: 3976, column: 38, scope: !12319)
+!12334 = !DILocation(line: 3978, column: 2, scope: !12327)
+!12335 = !DILocation(line: 0, scope: !12327)
+!12336 = !{i64 2154874041}
+!12337 = !DILocation(line: 3984, column: 2, scope: !12329)
+!12338 = !DILocation(line: 0, scope: !12329)
+!12339 = !{i64 2154874249}
+!12340 = !DILocation(line: 3985, column: 1, scope: !12319)
+!12341 = distinct !DISubprogram(name: "__vm_sysreg_restore_user_state", scope: !3, file: !3, line: 3999, type: !6798, scopeLine: 4000, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12342)
+!12342 = !{!12343, !12344, !12345, !12346, !12347, !12348, !12350}
+!12343 = !DILocalVariable(name: "vmid", arg: 1, scope: !12341, file: !3, line: 3999, type: !228)
+!12344 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12341, file: !3, line: 3999, type: !228)
+!12345 = !DILocalVariable(name: "el2_data", scope: !12341, file: !3, line: 4001, type: !6368)
+!12346 = !DILocalVariable(name: "offset", scope: !12341, file: !3, line: 4002, type: !82)
+!12347 = !DILocalVariable(name: "ctxt", scope: !12341, file: !3, line: 4003, type: !6479)
+!12348 = !DILocalVariable(name: "__val", scope: !12349, file: !3, line: 4005, type: !207)
+!12349 = distinct !DILexicalBlock(scope: !12341, file: !3, line: 4005, column: 2)
+!12350 = !DILocalVariable(name: "__val", scope: !12351, file: !3, line: 4006, type: !207)
+!12351 = distinct !DILexicalBlock(scope: !12341, file: !3, line: 4006, column: 2)
+!12352 = !DILocation(line: 0, scope: !12341)
+!12353 = !DILocation(line: 4001, column: 30, scope: !12341)
+!12354 = !DILocation(line: 4002, column: 15, scope: !12341)
+!12355 = !DILocation(line: 4003, column: 38, scope: !12341)
+!12356 = !DILocation(line: 4005, column: 2, scope: !12349)
+!12357 = !DILocation(line: 0, scope: !12349)
+!12358 = !{i64 2154887303}
+!12359 = !DILocation(line: 4006, column: 2, scope: !12351)
+!12360 = !DILocation(line: 0, scope: !12351)
+!12361 = !{i64 2154887511}
+!12362 = !DILocation(line: 4007, column: 1, scope: !12341)
+!12363 = distinct !DISubprogram(name: "__vm_sysreg_restore_el2_return_state", scope: !3, file: !3, line: 3988, type: !6798, scopeLine: 3989, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12364)
+!12364 = !{!12365, !12366, !12367, !12368, !12369, !12370, !12372}
+!12365 = !DILocalVariable(name: "vmid", arg: 1, scope: !12363, file: !3, line: 3988, type: !228)
+!12366 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12363, file: !3, line: 3988, type: !228)
+!12367 = !DILocalVariable(name: "el2_data", scope: !12363, file: !3, line: 3990, type: !6368)
+!12368 = !DILocalVariable(name: "offset", scope: !12363, file: !3, line: 3991, type: !82)
+!12369 = !DILocalVariable(name: "ctxt", scope: !12363, file: !3, line: 3992, type: !6479)
+!12370 = !DILocalVariable(name: "__val", scope: !12371, file: !3, line: 3994, type: !207)
+!12371 = distinct !DILexicalBlock(scope: !12363, file: !3, line: 3994, column: 2)
+!12372 = !DILocalVariable(name: "__val", scope: !12373, file: !3, line: 3995, type: !207)
+!12373 = distinct !DILexicalBlock(scope: !12363, file: !3, line: 3995, column: 2)
+!12374 = !DILocation(line: 0, scope: !12363)
+!12375 = !DILocation(line: 3990, column: 30, scope: !12363)
+!12376 = !DILocation(line: 3991, column: 15, scope: !12363)
+!12377 = !DILocation(line: 3992, column: 38, scope: !12363)
+!12378 = !DILocation(line: 3994, column: 2, scope: !12371)
+!12379 = !DILocation(line: 0, scope: !12371)
+!12380 = !{i64 2154878742, i64 2154878789, i64 2154878795, i64 2154879809, i64 2154879849, i64 2154879867, i64 2154879899, i64 2154879927, i64 2154879981, i64 2154880001, i64 2154880099, i64 2154878818, i64 2154878832, i64 2154878850, i64 2154880557, i64 2154880605, i64 2154880653, i64 2154880716, i64 2154880765, i64 2154878928, i64 2154878953, i64 2154878979, i64 2154878985, i64 2154880222, i64 2154880262, i64 2154880280, i64 2154880312, i64 2154880340, i64 2154880394, i64 2154880414, i64 2154880512, i64 2154879008, i64 2154879022, i64 2154879028, i64 2154879053, i64 2154879103, i64 2154879157}
+!12381 = !DILocation(line: 3995, column: 2, scope: !12373)
+!12382 = !DILocation(line: 0, scope: !12373)
+!12383 = !{i64 2154885007, i64 2154885054, i64 2154885060, i64 2154886074, i64 2154886114, i64 2154886132, i64 2154886164, i64 2154886192, i64 2154886246, i64 2154886266, i64 2154886364, i64 2154885083, i64 2154885097, i64 2154885115, i64 2154886822, i64 2154886870, i64 2154886918, i64 2154886981, i64 2154887030, i64 2154885193, i64 2154885218, i64 2154885244, i64 2154885250, i64 2154886487, i64 2154886527, i64 2154886545, i64 2154886577, i64 2154886605, i64 2154886659, i64 2154886679, i64 2154886777, i64 2154885273, i64 2154885287, i64 2154885293, i64 2154885318, i64 2154885368, i64 2154885422}
+!12384 = !DILocation(line: 3996, column: 1, scope: !12363)
+!12385 = distinct !DISubprogram(name: "__vm_sysreg_save_state_nvhe_opt", scope: !3, file: !3, line: 4017, type: !6798, scopeLine: 4018, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12386)
+!12386 = !{!12387, !12388}
+!12387 = !DILocalVariable(name: "vmid", arg: 1, scope: !12385, file: !3, line: 4017, type: !228)
+!12388 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12385, file: !3, line: 4017, type: !228)
+!12389 = !DILocation(line: 0, scope: !12385)
+!12390 = !DILocation(line: 4019, column: 2, scope: !12385)
+!12391 = !DILocation(line: 4020, column: 2, scope: !12385)
+!12392 = !DILocation(line: 4021, column: 2, scope: !12385)
+!12393 = !DILocation(line: 4022, column: 2, scope: !12385)
+!12394 = !DILocation(line: 4023, column: 1, scope: !12385)
+!12395 = distinct !DISubprogram(name: "__vm_sysreg_save_el1_state", scope: !3, file: !3, line: 3900, type: !6798, scopeLine: 3901, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12396)
+!12396 = !{!12397, !12398, !12399, !12400, !12401, !12402, !12404, !12406, !12408, !12410, !12412, !12414, !12416, !12418, !12420, !12422, !12424, !12426, !12428, !12430, !12432, !12434, !12436, !12438, !12440, !12442, !12444}
+!12397 = !DILocalVariable(name: "vmid", arg: 1, scope: !12395, file: !3, line: 3900, type: !228)
+!12398 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12395, file: !3, line: 3900, type: !228)
+!12399 = !DILocalVariable(name: "el2_data", scope: !12395, file: !3, line: 3902, type: !6368)
+!12400 = !DILocalVariable(name: "offset", scope: !12395, file: !3, line: 3903, type: !82)
+!12401 = !DILocalVariable(name: "ctxt", scope: !12395, file: !3, line: 3904, type: !6479)
+!12402 = !DILocalVariable(name: "__val", scope: !12403, file: !3, line: 3906, type: !207)
+!12403 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3906, column: 30)
+!12404 = !DILocalVariable(name: "__val", scope: !12405, file: !3, line: 3907, type: !207)
+!12405 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3907, column: 31)
+!12406 = !DILocalVariable(name: "reg", scope: !12407, file: !3, line: 3908, type: !207)
+!12407 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3908, column: 30)
+!12408 = !DILocalVariable(name: "__val", scope: !12409, file: !3, line: 3909, type: !207)
+!12409 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3909, column: 30)
+!12410 = !DILocalVariable(name: "reg", scope: !12411, file: !3, line: 3910, type: !207)
+!12411 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3910, column: 30)
+!12412 = !DILocalVariable(name: "reg", scope: !12413, file: !3, line: 3911, type: !207)
+!12413 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3911, column: 30)
+!12414 = !DILocalVariable(name: "reg", scope: !12415, file: !3, line: 3912, type: !207)
+!12415 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3912, column: 30)
+!12416 = !DILocalVariable(name: "reg", scope: !12417, file: !3, line: 3913, type: !207)
+!12417 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3913, column: 28)
+!12418 = !DILocalVariable(name: "reg", scope: !12419, file: !3, line: 3914, type: !207)
+!12419 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3914, column: 28)
+!12420 = !DILocalVariable(name: "reg", scope: !12421, file: !3, line: 3915, type: !207)
+!12421 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3915, column: 30)
+!12422 = !DILocalVariable(name: "reg", scope: !12423, file: !3, line: 3916, type: !207)
+!12423 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3916, column: 30)
+!12424 = !DILocalVariable(name: "reg", scope: !12425, file: !3, line: 3917, type: !207)
+!12425 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3917, column: 28)
+!12426 = !DILocalVariable(name: "reg", scope: !12427, file: !3, line: 3918, type: !207)
+!12427 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3918, column: 29)
+!12428 = !DILocalVariable(name: "reg", scope: !12429, file: !3, line: 3919, type: !207)
+!12429 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3919, column: 29)
+!12430 = !DILocalVariable(name: "reg", scope: !12431, file: !3, line: 3920, type: !207)
+!12431 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3920, column: 35)
+!12432 = !DILocalVariable(name: "reg", scope: !12433, file: !3, line: 3921, type: !207)
+!12433 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3921, column: 30)
+!12434 = !DILocalVariable(name: "reg", scope: !12435, file: !3, line: 3922, type: !207)
+!12435 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3922, column: 32)
+!12436 = !DILocalVariable(name: "__val", scope: !12437, file: !3, line: 3923, type: !207)
+!12437 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3923, column: 28)
+!12438 = !DILocalVariable(name: "__val", scope: !12439, file: !3, line: 3924, type: !207)
+!12439 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3924, column: 30)
+!12440 = !DILocalVariable(name: "__val", scope: !12441, file: !3, line: 3926, type: !207)
+!12441 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3926, column: 25)
+!12442 = !DILocalVariable(name: "reg", scope: !12443, file: !3, line: 3927, type: !207)
+!12443 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3927, column: 26)
+!12444 = !DILocalVariable(name: "reg", scope: !12445, file: !3, line: 3928, type: !207)
+!12445 = distinct !DILexicalBlock(scope: !12395, file: !3, line: 3928, column: 27)
+!12446 = !DILocation(line: 0, scope: !12395)
+!12447 = !DILocation(line: 3902, column: 30, scope: !12395)
+!12448 = !DILocation(line: 3903, column: 15, scope: !12395)
+!12449 = !DILocation(line: 3904, column: 38, scope: !12395)
+!12450 = !DILocation(line: 3906, column: 30, scope: !12403)
+!12451 = !{i64 2154646629}
+!12452 = !DILocation(line: 0, scope: !12403)
+!12453 = !DILocation(line: 3906, column: 2, scope: !12395)
+!12454 = !DILocation(line: 3906, column: 28, scope: !12395)
+!12455 = !DILocation(line: 3907, column: 31, scope: !12405)
+!12456 = !{i64 2154646790}
+!12457 = !DILocation(line: 0, scope: !12405)
+!12458 = !DILocation(line: 3907, column: 2, scope: !12395)
+!12459 = !DILocation(line: 3907, column: 29, scope: !12395)
+!12460 = !DILocation(line: 3908, column: 30, scope: !12407)
+!12461 = !{i64 2154651051, i64 2154651098, i64 2154651104, i64 2154652118, i64 2154652158, i64 2154652176, i64 2154652208, i64 2154652236, i64 2154652290, i64 2154652310, i64 2154652407, i64 2154651127, i64 2154651141, i64 2154651159, i64 2154652864, i64 2154652912, i64 2154652960, i64 2154653023, i64 2154653072, i64 2154651237, i64 2154651262, i64 2154651288, i64 2154651294, i64 2154652530, i64 2154652570, i64 2154652588, i64 2154652620, i64 2154652648, i64 2154652702, i64 2154652722, i64 2154652819, i64 2154651317, i64 2154651331, i64 2154651337, i64 2154651362, i64 2154651412, i64 2154651466}
+!12462 = !DILocation(line: 0, scope: !12407)
+!12463 = !DILocation(line: 3908, column: 2, scope: !12395)
+!12464 = !DILocation(line: 3908, column: 28, scope: !12395)
+!12465 = !DILocation(line: 3909, column: 30, scope: !12409)
+!12466 = !{i64 2154653165}
+!12467 = !DILocation(line: 0, scope: !12409)
+!12468 = !DILocation(line: 3909, column: 2, scope: !12395)
+!12469 = !DILocation(line: 3909, column: 28, scope: !12395)
+!12470 = !DILocation(line: 3910, column: 30, scope: !12411)
+!12471 = !{i64 2154657423, i64 2154657470, i64 2154657476, i64 2154658490, i64 2154658530, i64 2154658548, i64 2154658580, i64 2154658608, i64 2154658662, i64 2154658682, i64 2154658779, i64 2154657499, i64 2154657513, i64 2154657531, i64 2154659236, i64 2154659284, i64 2154659332, i64 2154659395, i64 2154659444, i64 2154657609, i64 2154657634, i64 2154657660, i64 2154657666, i64 2154658902, i64 2154658942, i64 2154658960, i64 2154658992, i64 2154659020, i64 2154659074, i64 2154659094, i64 2154659191, i64 2154657689, i64 2154657703, i64 2154657709, i64 2154657734, i64 2154657784, i64 2154657838}
+!12472 = !DILocation(line: 0, scope: !12411)
+!12473 = !DILocation(line: 3910, column: 2, scope: !12395)
+!12474 = !DILocation(line: 3910, column: 28, scope: !12395)
+!12475 = !DILocation(line: 3911, column: 30, scope: !12413)
+!12476 = !{i64 2154663637, i64 2154663684, i64 2154663690, i64 2154668765, i64 2154668805, i64 2154668823, i64 2154668855, i64 2154668883, i64 2154668937, i64 2154668957, i64 2154669054, i64 2154663713, i64 2154663727, i64 2154663745, i64 2154669511, i64 2154669559, i64 2154669607, i64 2154669670, i64 2154669719, i64 2154663823, i64 2154663848, i64 2154663874, i64 2154663880, i64 2154669177, i64 2154669217, i64 2154669235, i64 2154669267, i64 2154669295, i64 2154669349, i64 2154669369, i64 2154669466, i64 2154663903, i64 2154663917, i64 2154663923, i64 2154663948, i64 2154663998, i64 2154664052}
+!12477 = !DILocation(line: 0, scope: !12413)
+!12478 = !DILocation(line: 3911, column: 2, scope: !12395)
+!12479 = !DILocation(line: 3911, column: 28, scope: !12395)
+!12480 = !DILocation(line: 3912, column: 30, scope: !12415)
+!12481 = !{i64 2154673912, i64 2154673959, i64 2154673965, i64 2154674979, i64 2154675019, i64 2154675037, i64 2154675069, i64 2154675097, i64 2154675151, i64 2154675171, i64 2154675268, i64 2154673988, i64 2154674002, i64 2154674020, i64 2154675725, i64 2154675773, i64 2154675821, i64 2154675884, i64 2154675933, i64 2154674098, i64 2154674123, i64 2154674149, i64 2154674155, i64 2154675391, i64 2154675431, i64 2154675449, i64 2154675481, i64 2154675509, i64 2154675563, i64 2154675583, i64 2154675680, i64 2154674178, i64 2154674192, i64 2154674198, i64 2154674223, i64 2154674273, i64 2154674327}
+!12482 = !DILocation(line: 0, scope: !12415)
+!12483 = !DILocation(line: 3912, column: 2, scope: !12395)
+!12484 = !DILocation(line: 3912, column: 28, scope: !12395)
+!12485 = !DILocation(line: 3913, column: 28, scope: !12417)
+!12486 = !{i64 2154680116, i64 2154680163, i64 2154680169, i64 2154681183, i64 2154681223, i64 2154681241, i64 2154681273, i64 2154681301, i64 2154681355, i64 2154681375, i64 2154681472, i64 2154680192, i64 2154680206, i64 2154680224, i64 2154681929, i64 2154681977, i64 2154682025, i64 2154682088, i64 2154682137, i64 2154680302, i64 2154680327, i64 2154680353, i64 2154680359, i64 2154681595, i64 2154681635, i64 2154681653, i64 2154681685, i64 2154681713, i64 2154681767, i64 2154681787, i64 2154681884, i64 2154680382, i64 2154680396, i64 2154680402, i64 2154680427, i64 2154680477, i64 2154680531}
+!12487 = !DILocation(line: 0, scope: !12417)
+!12488 = !DILocation(line: 3913, column: 2, scope: !12395)
+!12489 = !DILocation(line: 3913, column: 26, scope: !12395)
+!12490 = !DILocation(line: 3914, column: 28, scope: !12419)
+!12491 = !{i64 2154686320, i64 2154686367, i64 2154686373, i64 2154687387, i64 2154687427, i64 2154687445, i64 2154687477, i64 2154687505, i64 2154687559, i64 2154687579, i64 2154687676, i64 2154686396, i64 2154686410, i64 2154686428, i64 2154688133, i64 2154688181, i64 2154688229, i64 2154688292, i64 2154688341, i64 2154686506, i64 2154686531, i64 2154686557, i64 2154686563, i64 2154687799, i64 2154687839, i64 2154687857, i64 2154687889, i64 2154687917, i64 2154687971, i64 2154687991, i64 2154688088, i64 2154686586, i64 2154686600, i64 2154686606, i64 2154686631, i64 2154686681, i64 2154686735}
+!12492 = !DILocation(line: 0, scope: !12419)
+!12493 = !DILocation(line: 3914, column: 2, scope: !12395)
+!12494 = !DILocation(line: 3914, column: 26, scope: !12395)
+!12495 = !DILocation(line: 3915, column: 30, scope: !12421)
+!12496 = !{i64 2154692534, i64 2154692581, i64 2154692587, i64 2154693601, i64 2154693641, i64 2154693659, i64 2154693691, i64 2154693719, i64 2154693773, i64 2154693793, i64 2154693890, i64 2154692610, i64 2154692624, i64 2154692642, i64 2154694347, i64 2154694395, i64 2154694443, i64 2154694506, i64 2154694555, i64 2154692720, i64 2154692745, i64 2154692771, i64 2154692777, i64 2154694013, i64 2154694053, i64 2154694071, i64 2154694103, i64 2154694131, i64 2154694185, i64 2154694205, i64 2154694302, i64 2154692800, i64 2154692814, i64 2154692820, i64 2154692845, i64 2154692895, i64 2154692949}
+!12497 = !DILocation(line: 0, scope: !12421)
+!12498 = !DILocation(line: 3915, column: 2, scope: !12395)
+!12499 = !DILocation(line: 3915, column: 28, scope: !12395)
+!12500 = !DILocation(line: 3916, column: 30, scope: !12423)
+!12501 = !{i64 2154698748, i64 2154698795, i64 2154698801, i64 2154699815, i64 2154699855, i64 2154699873, i64 2154699905, i64 2154699933, i64 2154699987, i64 2154700007, i64 2154700104, i64 2154698824, i64 2154698838, i64 2154698856, i64 2154700561, i64 2154700609, i64 2154700657, i64 2154700720, i64 2154700769, i64 2154698934, i64 2154698959, i64 2154698985, i64 2154698991, i64 2154700227, i64 2154700267, i64 2154700285, i64 2154700317, i64 2154700345, i64 2154700399, i64 2154700419, i64 2154700516, i64 2154699014, i64 2154699028, i64 2154699034, i64 2154699059, i64 2154699109, i64 2154699163}
+!12502 = !DILocation(line: 0, scope: !12423)
+!12503 = !DILocation(line: 3916, column: 2, scope: !12395)
+!12504 = !DILocation(line: 3916, column: 28, scope: !12395)
+!12505 = !DILocation(line: 3917, column: 28, scope: !12425)
+!12506 = !{i64 2154704952, i64 2154704999, i64 2154705005, i64 2154706019, i64 2154706059, i64 2154706077, i64 2154706109, i64 2154706137, i64 2154706191, i64 2154706211, i64 2154706308, i64 2154705028, i64 2154705042, i64 2154705060, i64 2154706765, i64 2154706813, i64 2154706861, i64 2154706924, i64 2154706973, i64 2154705138, i64 2154705163, i64 2154705189, i64 2154705195, i64 2154706431, i64 2154706471, i64 2154706489, i64 2154706521, i64 2154706549, i64 2154706603, i64 2154706623, i64 2154706720, i64 2154705218, i64 2154705232, i64 2154705238, i64 2154705263, i64 2154705313, i64 2154705367}
+!12507 = !DILocation(line: 0, scope: !12425)
+!12508 = !DILocation(line: 3917, column: 2, scope: !12395)
+!12509 = !DILocation(line: 3917, column: 26, scope: !12395)
+!12510 = !DILocation(line: 3918, column: 29, scope: !12427)
+!12511 = !{i64 2154711175, i64 2154711222, i64 2154711228, i64 2154712242, i64 2154712282, i64 2154712300, i64 2154712332, i64 2154712360, i64 2154712414, i64 2154712434, i64 2154712532, i64 2154711251, i64 2154711265, i64 2154711283, i64 2154712990, i64 2154713038, i64 2154713086, i64 2154713149, i64 2154713198, i64 2154711361, i64 2154711386, i64 2154711412, i64 2154711418, i64 2154712655, i64 2154712695, i64 2154712713, i64 2154712745, i64 2154712773, i64 2154712827, i64 2154712847, i64 2154712945, i64 2154711441, i64 2154711455, i64 2154711461, i64 2154711486, i64 2154711536, i64 2154711590}
+!12512 = !DILocation(line: 0, scope: !12427)
+!12513 = !DILocation(line: 3918, column: 2, scope: !12395)
+!12514 = !DILocation(line: 3918, column: 27, scope: !12395)
+!12515 = !DILocation(line: 3919, column: 29, scope: !12429)
+!12516 = !{i64 2154717400, i64 2154717447, i64 2154717453, i64 2154718467, i64 2154718507, i64 2154718525, i64 2154718557, i64 2154718585, i64 2154718639, i64 2154718659, i64 2154718757, i64 2154717476, i64 2154717490, i64 2154717508, i64 2154719215, i64 2154719263, i64 2154719311, i64 2154719374, i64 2154719423, i64 2154717586, i64 2154717611, i64 2154717637, i64 2154717643, i64 2154718880, i64 2154718920, i64 2154718938, i64 2154718970, i64 2154718998, i64 2154719052, i64 2154719072, i64 2154719170, i64 2154717666, i64 2154717680, i64 2154717686, i64 2154717711, i64 2154717761, i64 2154717815}
+!12517 = !DILocation(line: 0, scope: !12429)
+!12518 = !DILocation(line: 3919, column: 2, scope: !12395)
+!12519 = !DILocation(line: 3919, column: 27, scope: !12395)
+!12520 = !DILocation(line: 3920, column: 35, scope: !12431)
+!12521 = !{i64 2154723655, i64 2154723702, i64 2154723708, i64 2154724722, i64 2154724762, i64 2154724780, i64 2154724812, i64 2154724840, i64 2154724894, i64 2154724914, i64 2154725012, i64 2154723731, i64 2154723745, i64 2154723763, i64 2154725470, i64 2154725518, i64 2154725566, i64 2154725629, i64 2154725678, i64 2154723841, i64 2154723866, i64 2154723892, i64 2154723898, i64 2154725135, i64 2154725175, i64 2154725193, i64 2154725225, i64 2154725253, i64 2154725307, i64 2154725327, i64 2154725425, i64 2154723921, i64 2154723935, i64 2154723941, i64 2154723966, i64 2154724016, i64 2154724070}
+!12522 = !DILocation(line: 0, scope: !12431)
+!12523 = !DILocation(line: 3920, column: 2, scope: !12395)
+!12524 = !DILocation(line: 3920, column: 33, scope: !12395)
+!12525 = !DILocation(line: 3921, column: 30, scope: !12433)
+!12526 = !{i64 2154729885, i64 2154729932, i64 2154729938, i64 2154730952, i64 2154730992, i64 2154731010, i64 2154731042, i64 2154731070, i64 2154731124, i64 2154731144, i64 2154731242, i64 2154729961, i64 2154729975, i64 2154729993, i64 2154731700, i64 2154731748, i64 2154731796, i64 2154731859, i64 2154731908, i64 2154730071, i64 2154730096, i64 2154730122, i64 2154730128, i64 2154731365, i64 2154731405, i64 2154731423, i64 2154731455, i64 2154731483, i64 2154731537, i64 2154731557, i64 2154731655, i64 2154730151, i64 2154730165, i64 2154730171, i64 2154730196, i64 2154730246, i64 2154730300}
+!12527 = !DILocation(line: 0, scope: !12433)
+!12528 = !DILocation(line: 3921, column: 2, scope: !12395)
+!12529 = !DILocation(line: 3921, column: 28, scope: !12395)
+!12530 = !DILocation(line: 3922, column: 32, scope: !12435)
+!12531 = !{i64 2154736125, i64 2154736172, i64 2154736178, i64 2154737192, i64 2154737232, i64 2154737250, i64 2154737282, i64 2154737310, i64 2154737364, i64 2154737384, i64 2154737482, i64 2154736201, i64 2154736215, i64 2154736233, i64 2154737940, i64 2154737988, i64 2154738036, i64 2154738099, i64 2154738148, i64 2154736311, i64 2154736336, i64 2154736362, i64 2154736368, i64 2154737605, i64 2154737645, i64 2154737663, i64 2154737695, i64 2154737723, i64 2154737777, i64 2154737797, i64 2154737895, i64 2154736391, i64 2154736405, i64 2154736411, i64 2154736436, i64 2154736486, i64 2154736540}
+!12532 = !DILocation(line: 0, scope: !12435)
+!12533 = !DILocation(line: 3922, column: 2, scope: !12395)
+!12534 = !DILocation(line: 3922, column: 30, scope: !12395)
+!12535 = !DILocation(line: 3923, column: 28, scope: !12437)
+!12536 = !{i64 2154738241}
+!12537 = !DILocation(line: 0, scope: !12437)
+!12538 = !DILocation(line: 3923, column: 2, scope: !12395)
+!12539 = !DILocation(line: 3923, column: 26, scope: !12395)
+!12540 = !DILocation(line: 3924, column: 30, scope: !12439)
+!12541 = !{i64 2154738393}
+!12542 = !DILocation(line: 0, scope: !12439)
+!12543 = !DILocation(line: 3924, column: 2, scope: !12395)
+!12544 = !DILocation(line: 3924, column: 28, scope: !12395)
+!12545 = !DILocation(line: 3926, column: 25, scope: !12441)
+!12546 = !{i64 2154738554}
+!12547 = !DILocation(line: 0, scope: !12441)
+!12548 = !DILocation(line: 3926, column: 2, scope: !12395)
+!12549 = !DILocation(line: 3926, column: 23, scope: !12395)
+!12550 = !DILocation(line: 3927, column: 26, scope: !12443)
+!12551 = !{i64 2154746857, i64 2154746904, i64 2154746910, i64 2154747924, i64 2154747964, i64 2154747982, i64 2154748014, i64 2154748042, i64 2154748096, i64 2154748116, i64 2154748213, i64 2154746933, i64 2154746947, i64 2154746965, i64 2154748670, i64 2154748718, i64 2154748766, i64 2154748829, i64 2154748878, i64 2154747043, i64 2154747068, i64 2154747094, i64 2154747100, i64 2154748336, i64 2154748376, i64 2154748394, i64 2154748426, i64 2154748454, i64 2154748508, i64 2154748528, i64 2154748625, i64 2154747123, i64 2154747137, i64 2154747143, i64 2154747168, i64 2154747218, i64 2154747272}
+!12552 = !DILocation(line: 0, scope: !12443)
+!12553 = !DILocation(line: 3927, column: 2, scope: !12395)
+!12554 = !DILocation(line: 3927, column: 24, scope: !12395)
+!12555 = !DILocation(line: 3928, column: 27, scope: !12445)
+!12556 = !{i64 2154753069, i64 2154753116, i64 2154753122, i64 2154754136, i64 2154754176, i64 2154754194, i64 2154754226, i64 2154754254, i64 2154754308, i64 2154754328, i64 2154754425, i64 2154753145, i64 2154753159, i64 2154753177, i64 2154754882, i64 2154754930, i64 2154754978, i64 2154755041, i64 2154755090, i64 2154753255, i64 2154753280, i64 2154753306, i64 2154753312, i64 2154754548, i64 2154754588, i64 2154754606, i64 2154754638, i64 2154754666, i64 2154754720, i64 2154754740, i64 2154754837, i64 2154753335, i64 2154753349, i64 2154753355, i64 2154753380, i64 2154753430, i64 2154753484}
+!12557 = !DILocation(line: 0, scope: !12445)
+!12558 = !DILocation(line: 3928, column: 2, scope: !12395)
+!12559 = !DILocation(line: 3928, column: 25, scope: !12395)
+!12560 = !DILocation(line: 3929, column: 1, scope: !12395)
+!12561 = distinct !DISubprogram(name: "__vm_sysreg_save_common_state", scope: !3, file: !3, line: 3875, type: !6798, scopeLine: 3876, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12562)
+!12562 = !{!12563, !12564, !12565, !12566, !12567, !12568, !12570}
+!12563 = !DILocalVariable(name: "vmid", arg: 1, scope: !12561, file: !3, line: 3875, type: !228)
+!12564 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12561, file: !3, line: 3875, type: !228)
+!12565 = !DILocalVariable(name: "el2_data", scope: !12561, file: !3, line: 3877, type: !6368)
+!12566 = !DILocalVariable(name: "offset", scope: !12561, file: !3, line: 3878, type: !82)
+!12567 = !DILocalVariable(name: "ctxt", scope: !12561, file: !3, line: 3879, type: !6479)
+!12568 = !DILocalVariable(name: "__val", scope: !12569, file: !3, line: 3881, type: !207)
+!12569 = distinct !DILexicalBlock(scope: !12561, file: !3, line: 3881, column: 30)
+!12570 = !DILocalVariable(name: "__val", scope: !12571, file: !3, line: 3887, type: !207)
+!12571 = distinct !DILexicalBlock(scope: !12561, file: !3, line: 3887, column: 21)
+!12572 = !DILocation(line: 0, scope: !12561)
+!12573 = !DILocation(line: 3877, column: 30, scope: !12561)
+!12574 = !DILocation(line: 3878, column: 15, scope: !12561)
+!12575 = !DILocation(line: 3879, column: 38, scope: !12561)
+!12576 = !DILocation(line: 3881, column: 30, scope: !12569)
+!12577 = !{i64 2154645661}
+!12578 = !DILocation(line: 0, scope: !12569)
+!12579 = !DILocation(line: 3881, column: 2, scope: !12561)
+!12580 = !DILocation(line: 3881, column: 28, scope: !12561)
+!12581 = !DILocation(line: 3887, column: 21, scope: !12571)
+!12582 = !{i64 2154645822}
+!12583 = !DILocation(line: 0, scope: !12571)
+!12584 = !DILocation(line: 3887, column: 2, scope: !12561)
+!12585 = !DILocation(line: 3887, column: 19, scope: !12561)
+!12586 = !DILocation(line: 3888, column: 1, scope: !12561)
+!12587 = distinct !DISubprogram(name: "__vm_sysreg_save_user_state", scope: !3, file: !3, line: 3890, type: !6798, scopeLine: 3891, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12588)
+!12588 = !{!12589, !12590, !12591, !12592, !12593, !12594, !12596}
+!12589 = !DILocalVariable(name: "vmid", arg: 1, scope: !12587, file: !3, line: 3890, type: !228)
+!12590 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12587, file: !3, line: 3890, type: !228)
+!12591 = !DILocalVariable(name: "el2_data", scope: !12587, file: !3, line: 3892, type: !6368)
+!12592 = !DILocalVariable(name: "offset", scope: !12587, file: !3, line: 3893, type: !82)
+!12593 = !DILocalVariable(name: "ctxt", scope: !12587, file: !3, line: 3894, type: !6479)
+!12594 = !DILocalVariable(name: "__val", scope: !12595, file: !3, line: 3896, type: !207)
+!12595 = distinct !DILexicalBlock(scope: !12587, file: !3, line: 3896, column: 30)
+!12596 = !DILocalVariable(name: "__val", scope: !12597, file: !3, line: 3897, type: !207)
+!12597 = distinct !DILexicalBlock(scope: !12587, file: !3, line: 3897, column: 32)
+!12598 = !DILocation(line: 0, scope: !12587)
+!12599 = !DILocation(line: 3892, column: 30, scope: !12587)
+!12600 = !DILocation(line: 3893, column: 15, scope: !12587)
+!12601 = !DILocation(line: 3894, column: 38, scope: !12587)
+!12602 = !DILocation(line: 3896, column: 30, scope: !12595)
+!12603 = !{i64 2154646139}
+!12604 = !DILocation(line: 0, scope: !12595)
+!12605 = !DILocation(line: 3896, column: 2, scope: !12587)
+!12606 = !DILocation(line: 3896, column: 28, scope: !12587)
+!12607 = !DILocation(line: 3897, column: 32, scope: !12597)
+!12608 = !{i64 2154646297}
+!12609 = !DILocation(line: 0, scope: !12597)
+!12610 = !DILocation(line: 3897, column: 2, scope: !12587)
+!12611 = !DILocation(line: 3897, column: 30, scope: !12587)
+!12612 = !DILocation(line: 3898, column: 1, scope: !12587)
+!12613 = distinct !DISubprogram(name: "__vm_sysreg_save_el2_return_state", scope: !3, file: !3, line: 3931, type: !6798, scopeLine: 3932, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12614)
+!12614 = !{!12615, !12616, !12617, !12618, !12619, !12620, !12622}
+!12615 = !DILocalVariable(name: "vmid", arg: 1, scope: !12613, file: !3, line: 3931, type: !228)
+!12616 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12613, file: !3, line: 3931, type: !228)
+!12617 = !DILocalVariable(name: "el2_data", scope: !12613, file: !3, line: 3933, type: !6368)
+!12618 = !DILocalVariable(name: "offset", scope: !12613, file: !3, line: 3934, type: !82)
+!12619 = !DILocalVariable(name: "ctxt", scope: !12613, file: !3, line: 3935, type: !6479)
+!12620 = !DILocalVariable(name: "reg", scope: !12621, file: !3, line: 3937, type: !207)
+!12621 = distinct !DILexicalBlock(scope: !12613, file: !3, line: 3937, column: 21)
+!12622 = !DILocalVariable(name: "reg", scope: !12623, file: !3, line: 3938, type: !207)
+!12623 = distinct !DILexicalBlock(scope: !12613, file: !3, line: 3938, column: 25)
+!12624 = !DILocation(line: 0, scope: !12613)
+!12625 = !DILocation(line: 3933, column: 30, scope: !12613)
+!12626 = !DILocation(line: 3934, column: 15, scope: !12613)
+!12627 = !DILocation(line: 3935, column: 38, scope: !12613)
+!12628 = !DILocation(line: 3937, column: 21, scope: !12621)
+!12629 = !{i64 2154759441, i64 2154759488, i64 2154759494, i64 2154760508, i64 2154760548, i64 2154760566, i64 2154760598, i64 2154760626, i64 2154760680, i64 2154760700, i64 2154760797, i64 2154759517, i64 2154759531, i64 2154759549, i64 2154761254, i64 2154761302, i64 2154761350, i64 2154761413, i64 2154761462, i64 2154759627, i64 2154759652, i64 2154759678, i64 2154759684, i64 2154760920, i64 2154760960, i64 2154760978, i64 2154761010, i64 2154761038, i64 2154761092, i64 2154761112, i64 2154761209, i64 2154759707, i64 2154759721, i64 2154759727, i64 2154759752, i64 2154759802, i64 2154759856}
+!12630 = !DILocation(line: 0, scope: !12621)
+!12631 = !DILocation(line: 3937, column: 2, scope: !12613)
+!12632 = !DILocation(line: 3937, column: 19, scope: !12613)
+!12633 = !DILocation(line: 3938, column: 25, scope: !12623)
+!12634 = !{i64 2154765650, i64 2154765697, i64 2154765703, i64 2154766717, i64 2154766757, i64 2154766775, i64 2154766807, i64 2154766835, i64 2154766889, i64 2154766909, i64 2154767006, i64 2154765726, i64 2154765740, i64 2154765758, i64 2154767463, i64 2154767511, i64 2154767559, i64 2154767622, i64 2154767671, i64 2154765836, i64 2154765861, i64 2154765887, i64 2154765893, i64 2154767129, i64 2154767169, i64 2154767187, i64 2154767219, i64 2154767247, i64 2154767301, i64 2154767321, i64 2154767418, i64 2154765916, i64 2154765930, i64 2154765936, i64 2154765961, i64 2154766011, i64 2154766065}
+!12635 = !DILocation(line: 0, scope: !12623)
+!12636 = !DILocation(line: 3938, column: 2, scope: !12613)
+!12637 = !DILocation(line: 3938, column: 23, scope: !12613)
+!12638 = !DILocation(line: 3939, column: 1, scope: !12613)
+!12639 = distinct !DISubprogram(name: "activate_traps_vhe_load", scope: !3, file: !3, line: 4117, type: !11593, scopeLine: 4118, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12640)
+!12640 = !{!12641}
+!12641 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12639, file: !3, line: 4117, type: !286)
+!12642 = !DILocation(line: 0, scope: !12639)
+!12643 = !DILocation(line: 4119, column: 1, scope: !12639)
+!12644 = distinct !DISubprogram(name: "deactivate_traps_vhe_put", scope: !3, file: !3, line: 4121, type: !2404, scopeLine: 4122, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !2257)
+!12645 = !DILocation(line: 4123, column: 1, scope: !12644)
+!12646 = distinct !DISubprogram(name: "kvm_vcpu_run_vhe", scope: !3, file: !3, line: 4282, type: !12647, scopeLine: 4283, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12649)
+!12647 = !DISubroutineType(types: !12648)
+!12648 = !{!82, !286}
+!12649 = !{!12650}
+!12650 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12646, file: !3, line: 4282, type: !286)
+!12651 = !DILocation(line: 0, scope: !12646)
+!12652 = !DILocation(line: 4284, column: 2, scope: !12646)
+!12653 = distinct !DISubprogram(name: "set_per_cpu", scope: !14, file: !14, line: 261, type: !12654, scopeLine: 262, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12656)
+!12654 = !DISubroutineType(types: !12655)
+!12655 = !{null, !82, !82}
+!12656 = !{!12657, !12658, !12659, !12660}
+!12657 = !DILocalVariable(name: "vmid", arg: 1, scope: !12653, file: !14, line: 261, type: !82)
+!12658 = !DILocalVariable(name: "vcpu_id", arg: 2, scope: !12653, file: !14, line: 261, type: !82)
+!12659 = !DILocalVariable(name: "el2_data", scope: !12653, file: !14, line: 263, type: !6368)
+!12660 = !DILocalVariable(name: "pcpuid", scope: !12653, file: !14, line: 264, type: !82)
+!12661 = !DILocation(line: 0, scope: !12653)
+!12662 = !DILocation(line: 263, column: 30, scope: !12653)
+!12663 = !DILocation(line: 264, column: 15, scope: !12653)
+!12664 = !DILocation(line: 265, column: 2, scope: !12653)
+!12665 = !DILocation(line: 265, column: 33, scope: !12653)
+!12666 = !DILocation(line: 265, column: 38, scope: !12653)
+!12667 = !DILocation(line: 266, column: 33, scope: !12653)
+!12668 = !DILocation(line: 266, column: 41, scope: !12653)
+!12669 = !DILocation(line: 267, column: 1, scope: !12653)
+!12670 = distinct !DISubprogram(name: "get_vcpu_host_cpu_context", scope: !14, file: !14, line: 396, type: !12671, scopeLine: 396, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12673)
+!12671 = !DISubroutineType(types: !12672)
+!12672 = !{!235, !282, !282}
+!12673 = !{!12674, !12675, !12676, !12677, !12678}
+!12674 = !DILocalVariable(name: "vmid", arg: 1, scope: !12670, file: !14, line: 396, type: !282)
+!12675 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12670, file: !14, line: 396, type: !282)
+!12676 = !DILocalVariable(name: "shared_data", scope: !12670, file: !14, line: 397, type: !10716)
+!12677 = !DILocalVariable(name: "offset", scope: !12670, file: !14, line: 398, type: !82)
+!12678 = !DILocalVariable(name: "vcpu", scope: !12670, file: !14, line: 399, type: !286)
+!12679 = !DILocation(line: 0, scope: !12670)
+!12680 = !DILocation(line: 398, column: 15, scope: !12670)
+!12681 = !DILocation(line: 400, column: 16, scope: !12670)
+!12682 = !DILocation(line: 401, column: 10, scope: !12670)
+!12683 = !DILocation(line: 402, column: 9, scope: !12670)
+!12684 = !{!10733, !6564, i64 3272}
+!12685 = !DILocation(line: 402, column: 2, scope: !12670)
+!12686 = distinct !DISubprogram(name: "set_host_running_vcpu", scope: !14, file: !14, line: 387, type: !12687, scopeLine: 387, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12689)
+!12687 = !DISubroutineType(types: !12688)
+!12688 = !{null, !282, !282}
+!12689 = !{!12690, !12691, !12692, !12693, !12694}
+!12690 = !DILocalVariable(name: "vmid", arg: 1, scope: !12686, file: !14, line: 387, type: !282)
+!12691 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12686, file: !14, line: 387, type: !282)
+!12692 = !DILocalVariable(name: "shared_data", scope: !12686, file: !14, line: 388, type: !10716)
+!12693 = !DILocalVariable(name: "offset", scope: !12686, file: !14, line: 389, type: !82)
+!12694 = !DILocalVariable(name: "vcpu", scope: !12686, file: !14, line: 390, type: !286)
+!12695 = !DILocation(line: 0, scope: !12686)
+!12696 = !DILocation(line: 389, column: 15, scope: !12686)
+!12697 = !DILocation(line: 391, column: 16, scope: !12686)
+!12698 = !DILocation(line: 392, column: 10, scope: !12686)
+!12699 = !DILocation(line: 393, column: 2, scope: !12686)
+!12700 = !DILocation(line: 393, column: 44, scope: !12686)
+!12701 = !DILocation(line: 393, column: 63, scope: !12686)
+!12702 = !{!6559, !6564, i64 1752}
+!12703 = !DILocation(line: 394, column: 1, scope: !12686)
+!12704 = distinct !DISubprogram(name: "set_tpidr_el2", scope: !12705, file: !12705, line: 92, type: !6678, scopeLine: 93, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12706)
+!12705 = !DIFile(filename: "./arch/arm64/kvm/hyp/switch-simple.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "c7c16343f2f2bb76f5e5cc569033b40e")
+!12706 = !{!12707, !12708}
+!12707 = !DILocalVariable(name: "val", arg: 1, scope: !12704, file: !12705, line: 92, type: !207)
+!12708 = !DILocalVariable(name: "__val", scope: !12709, file: !12705, line: 94, type: !207)
+!12709 = distinct !DILexicalBlock(scope: !12704, file: !12705, line: 94, column: 2)
+!12710 = !DILocation(line: 0, scope: !12704)
+!12711 = !DILocation(line: 0, scope: !12709)
+!12712 = !DILocation(line: 94, column: 2, scope: !12709)
+!12713 = !{i64 2154904882}
+!12714 = !DILocation(line: 95, column: 1, scope: !12704)
+!12715 = distinct !DISubprogram(name: "__activate_traps", scope: !3, file: !3, line: 4083, type: !11593, scopeLine: 4084, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12716)
+!12716 = !{!12717, !12718}
+!12717 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12715, file: !3, line: 4083, type: !286)
+!12718 = !DILocalVariable(name: "hcr", scope: !12715, file: !3, line: 4085, type: !207)
+!12719 = !DILocation(line: 0, scope: !12715)
+!12720 = !DILocation(line: 4087, column: 17, scope: !12721)
+!12721 = distinct !DILexicalBlock(scope: !12715, file: !3, line: 4087, column: 6)
+!12722 = !{!10733, !6562, i64 2176}
+!12723 = !DILocation(line: 4090, column: 6, scope: !12715)
+!12724 = !DILocation(line: 4093, column: 2, scope: !12715)
+!12725 = !DILocation(line: 4097, column: 2, scope: !12715)
+!12726 = !DILocation(line: 4098, column: 1, scope: !12715)
+!12727 = distinct !DISubprogram(name: "__activate_vm", scope: !3, file: !3, line: 4125, type: !6678, scopeLine: 4126, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12728)
+!12728 = !{!12729, !12730}
+!12729 = !DILocalVariable(name: "vmid", arg: 1, scope: !12727, file: !3, line: 4125, type: !207)
+!12730 = !DILocalVariable(name: "shadow_vttbr", scope: !12727, file: !3, line: 4128, type: !207)
+!12731 = !DILocation(line: 0, scope: !12727)
+!12732 = !DILocation(line: 4128, column: 34, scope: !12727)
+!12733 = !DILocation(line: 4128, column: 21, scope: !12727)
+!12734 = !DILocation(line: 4129, column: 2, scope: !12727)
+!12735 = !DILocation(line: 4130, column: 1, scope: !12727)
+!12736 = distinct !DISubprogram(name: "get_vcpu_was_preempted", scope: !14, file: !14, line: 405, type: !12737, scopeLine: 405, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12739)
+!12737 = !DISubroutineType(types: !12738)
+!12738 = !{!621, !282, !282}
+!12739 = !{!12740, !12741, !12742, !12743, !12744}
+!12740 = !DILocalVariable(name: "vmid", arg: 1, scope: !12736, file: !14, line: 405, type: !282)
+!12741 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12736, file: !14, line: 405, type: !282)
+!12742 = !DILocalVariable(name: "shared_data", scope: !12736, file: !14, line: 406, type: !10716)
+!12743 = !DILocalVariable(name: "offset", scope: !12736, file: !14, line: 407, type: !82)
+!12744 = !DILocalVariable(name: "vcpu", scope: !12736, file: !14, line: 408, type: !286)
+!12745 = !DILocation(line: 0, scope: !12736)
+!12746 = !DILocation(line: 407, column: 15, scope: !12736)
+!12747 = !DILocation(line: 409, column: 16, scope: !12736)
+!12748 = !DILocation(line: 410, column: 10, scope: !12736)
+!12749 = !DILocation(line: 411, column: 20, scope: !12736)
+!12750 = !{!10733, !7036, i64 356}
+!12751 = !DILocation(line: 411, column: 2, scope: !12736)
+!12752 = !DISubprogram(name: "hypsec_tlb_flush_local_vmid", scope: !6133, file: !6133, line: 121, type: !2404, flags: DIFlagPrototyped, spFlags: DISPFlagOptimized, retainedNodes: !2257)
+!12753 = distinct !DISubprogram(name: "set_vcpu_was_preempted", scope: !14, file: !14, line: 414, type: !12754, scopeLine: 414, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12756)
+!12754 = !DISubroutineType(types: !12755)
+!12755 = !{null, !282, !282, !621}
+!12756 = !{!12757, !12758, !12759, !12760, !12761, !12762}
+!12757 = !DILocalVariable(name: "vmid", arg: 1, scope: !12753, file: !14, line: 414, type: !282)
+!12758 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12753, file: !14, line: 414, type: !282)
+!12759 = !DILocalVariable(name: "preempted", arg: 3, scope: !12753, file: !14, line: 414, type: !621)
+!12760 = !DILocalVariable(name: "shared_data", scope: !12753, file: !14, line: 415, type: !10716)
+!12761 = !DILocalVariable(name: "offset", scope: !12753, file: !14, line: 416, type: !82)
+!12762 = !DILocalVariable(name: "vcpu", scope: !12753, file: !14, line: 417, type: !286)
+!12763 = !DILocation(line: 0, scope: !12753)
+!12764 = !DILocation(line: 416, column: 15, scope: !12753)
+!12765 = !DILocation(line: 418, column: 16, scope: !12753)
+!12766 = !DILocation(line: 419, column: 10, scope: !12753)
+!12767 = !DILocation(line: 420, column: 13, scope: !12753)
+!12768 = !DILocation(line: 420, column: 27, scope: !12753)
+!12769 = !DILocation(line: 421, column: 1, scope: !12753)
+!12770 = distinct !DISubprogram(name: "get_core_context", scope: !14, file: !14, line: 438, type: !12771, scopeLine: 439, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12773)
+!12771 = !DISubroutineType(types: !12772)
+!12772 = !{!235}
+!12773 = !{!12774, !12775}
+!12774 = !DILocalVariable(name: "el2_data", scope: !12770, file: !14, line: 440, type: !6368)
+!12775 = !DILocalVariable(name: "pcpuid", scope: !12770, file: !14, line: 441, type: !82)
+!12776 = !DILocation(line: 440, column: 30, scope: !12770)
+!12777 = !DILocation(line: 0, scope: !12770)
+!12778 = !DILocation(line: 441, column: 15, scope: !12770)
+!12779 = !DILocation(line: 442, column: 10, scope: !12770)
+!12780 = !DILocation(line: 442, column: 41, scope: !12770)
+!12781 = !DILocation(line: 442, column: 2, scope: !12770)
+!12782 = distinct !DISubprogram(name: "fixup_guest_exit", scope: !3, file: !3, line: 4235, type: !12783, scopeLine: 4236, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12785)
+!12783 = !DISubroutineType(types: !12784)
+!12784 = !{!621, !228, !228, !207}
+!12785 = !{!12786, !12787, !12788, !12789, !12790, !12791, !12796, !12798, !12800}
+!12786 = !DILocalVariable(name: "vmid", arg: 1, scope: !12782, file: !3, line: 4235, type: !228)
+!12787 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12782, file: !3, line: 4235, type: !228)
+!12788 = !DILocalVariable(name: "exit_code", arg: 3, scope: !12782, file: !3, line: 4235, type: !207)
+!12789 = !DILocalVariable(name: "esr_el2", scope: !12782, file: !3, line: 4237, type: !228)
+!12790 = !DILocalVariable(name: "ec", scope: !12782, file: !3, line: 4238, type: !323)
+!12791 = !DILocalVariable(name: "elr", scope: !12792, file: !3, line: 4265, type: !207)
+!12792 = distinct !DILexicalBlock(scope: !12793, file: !3, line: 4264, column: 37)
+!12793 = distinct !DILexicalBlock(scope: !12794, file: !3, line: 4264, column: 13)
+!12794 = distinct !DILexicalBlock(scope: !12795, file: !3, line: 4261, column: 13)
+!12795 = distinct !DILexicalBlock(scope: !12782, file: !3, line: 4256, column: 6)
+!12796 = !DILocalVariable(name: "__val", scope: !12797, file: !3, line: 4265, type: !207)
+!12797 = distinct !DILexicalBlock(scope: !12792, file: !3, line: 4265, column: 13)
+!12798 = !DILocalVariable(name: "__val", scope: !12799, file: !3, line: 4266, type: !207)
+!12799 = distinct !DILexicalBlock(scope: !12792, file: !3, line: 4266, column: 3)
+!12800 = !DILabel(scope: !12782, name: "exit", file: !3, line: 4270)
+!12801 = !DILocation(line: 0, scope: !12782)
+!12802 = !DILocation(line: 4240, column: 6, scope: !12803)
+!12803 = distinct !DILexicalBlock(scope: !12782, file: !3, line: 4240, column: 6)
+!12804 = !DILocation(line: 4240, column: 36, scope: !12803)
+!12805 = !DILocation(line: 4240, column: 6, scope: !12782)
+!12806 = !DILocation(line: 4241, column: 13, scope: !12807)
+!12807 = distinct !DILexicalBlock(scope: !12803, file: !3, line: 4240, column: 58)
+!12808 = !DILocation(line: 4242, column: 3, scope: !12807)
+!12809 = !DILocation(line: 4243, column: 3, scope: !12807)
+!12810 = !DILocation(line: 4244, column: 2, scope: !12807)
+!12811 = !DILocation(line: 4252, column: 16, scope: !12812)
+!12812 = distinct !DILexicalBlock(scope: !12782, file: !3, line: 4252, column: 6)
+!12813 = !DILocation(line: 4252, column: 6, scope: !12782)
+!12814 = !DILocation(line: 4255, column: 7, scope: !12782)
+!12815 = !DILocation(line: 4256, column: 9, scope: !12795)
+!12816 = !DILocation(line: 4256, column: 6, scope: !12782)
+!12817 = !DILocation(line: 4257, column: 7, scope: !12818)
+!12818 = distinct !DILexicalBlock(scope: !12819, file: !3, line: 4257, column: 7)
+!12819 = distinct !DILexicalBlock(scope: !12795, file: !3, line: 4256, column: 30)
+!12820 = !DILocation(line: 4257, column: 34, scope: !12818)
+!12821 = !DILocation(line: 0, scope: !12818)
+!12822 = !DILocation(line: 4261, column: 39, scope: !12794)
+!12823 = !DILocation(line: 4262, column: 8, scope: !12824)
+!12824 = distinct !DILexicalBlock(scope: !12825, file: !3, line: 4262, column: 7)
+!12825 = distinct !DILexicalBlock(scope: !12794, file: !3, line: 4261, column: 69)
+!12826 = !DILocation(line: 4262, column: 7, scope: !12825)
+!12827 = !DILocation(line: 4264, column: 16, scope: !12793)
+!12828 = !DILocation(line: 4264, column: 13, scope: !12794)
+!12829 = !DILocation(line: 4265, column: 13, scope: !12797)
+!12830 = !{i64 2154913976}
+!12831 = !DILocation(line: 0, scope: !12797)
+!12832 = !DILocation(line: 0, scope: !12792)
+!12833 = !DILocation(line: 4266, column: 3, scope: !12799)
+!12834 = !DILocation(line: 0, scope: !12799)
+!12835 = !{i64 2154914140}
+!12836 = !DILocation(line: 4270, column: 1, scope: !12782)
+!12837 = !DILocation(line: 4272, column: 2, scope: !12782)
+!12838 = !DILocation(line: 4273, column: 1, scope: !12782)
+!12839 = distinct !DISubprogram(name: "__deactivate_traps", scope: !3, file: !3, line: 4112, type: !11593, scopeLine: 4113, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12840)
+!12840 = !{!12841}
+!12841 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12839, file: !3, line: 4112, type: !286)
+!12842 = !DILocation(line: 0, scope: !12839)
+!12843 = !DILocation(line: 4114, column: 2, scope: !12839)
+!12844 = !DILocation(line: 4115, column: 1, scope: !12839)
+!12845 = distinct !DISubprogram(name: "__host_el2_restore_state", scope: !3, file: !3, line: 4275, type: !12846, scopeLine: 4276, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12848)
+!12846 = !DISubroutineType(types: !12847)
+!12847 = !{null, !6368}
+!12848 = !{!12849}
+!12849 = !DILocalVariable(name: "el2_data", arg: 1, scope: !12845, file: !3, line: 4275, type: !6368)
+!12850 = !DILocation(line: 0, scope: !12845)
+!12851 = !DILocation(line: 4277, column: 16, scope: !12845)
+!12852 = !DILocation(line: 4277, column: 2, scope: !12845)
+!12853 = !DILocation(line: 4278, column: 2, scope: !12845)
+!12854 = !DILocation(line: 4279, column: 2, scope: !12845)
+!12855 = !DILocation(line: 4280, column: 1, scope: !12845)
+!12856 = distinct !DISubprogram(name: "hyp_panic", scope: !3, file: !3, line: 4372, type: !12857, scopeLine: 4373, flags: DIFlagPrototyped | DIFlagNoReturn | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12859)
+!12857 = !DISubroutineType(types: !12858)
+!12858 = !{null, !235}
+!12859 = !{!12860}
+!12860 = !DILocalVariable(name: "host_ctxt", arg: 1, scope: !12856, file: !3, line: 4372, type: !235)
+!12861 = !DILocation(line: 4375, column: 2, scope: !12862)
+!12862 = distinct !DILexicalBlock(scope: !12856, file: !3, line: 4375, column: 2)
+!12863 = distinct !DISubprogram(name: "handle_pvops", scope: !3, file: !3, line: 4390, type: !11864, scopeLine: 4391, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12864)
+!12864 = !{!12865, !12866, !12867, !12868, !12869}
+!12865 = !DILocalVariable(name: "vmid", arg: 1, scope: !12863, file: !3, line: 4390, type: !228)
+!12866 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !12863, file: !3, line: 4390, type: !228)
+!12867 = !DILocalVariable(name: "call_num", scope: !12863, file: !3, line: 4395, type: !207)
+!12868 = !DILocalVariable(name: "addr", scope: !12863, file: !3, line: 4397, type: !207)
+!12869 = !DILocalVariable(name: "size", scope: !12863, file: !3, line: 4399, type: !207)
+!12870 = !DILocation(line: 0, scope: !12863)
+!12871 = !DILocation(line: 4395, column: 17, scope: !12863)
+!12872 = !DILocation(line: 4397, column: 13, scope: !12863)
+!12873 = !DILocation(line: 4399, column: 13, scope: !12863)
+!12874 = !DILocation(line: 4402, column: 2, scope: !12863)
+!12875 = !DILocation(line: 4404, column: 4, scope: !12876)
+!12876 = distinct !DILexicalBlock(scope: !12863, file: !3, line: 4402, column: 20)
+!12877 = !DILocation(line: 4405, column: 4, scope: !12876)
+!12878 = !DILocation(line: 4407, column: 4, scope: !12876)
+!12879 = !DILocation(line: 4408, column: 4, scope: !12876)
+!12880 = !DILocation(line: 4418, column: 1, scope: !12863)
+!12881 = distinct !DISubprogram(name: "read_cpuid_mpidr", scope: !12882, file: !12882, line: 190, type: !3651, scopeLine: 191, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12883)
+!12882 = !DIFile(filename: "./arch/arm64/include/asm/cputype.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "d77df4c4d7b35dad97b2d045d5acf6a0")
+!12883 = !{!12884}
+!12884 = !DILocalVariable(name: "__val", scope: !12885, file: !12882, line: 192, type: !217)
+!12885 = distinct !DILexicalBlock(scope: !12881, file: !12882, line: 192, column: 9)
+!12886 = !DILocation(line: 192, column: 9, scope: !12885)
+!12887 = !{i64 2147912516, i64 2147912618, i64 2147912658, i64 2147912676, i64 2147912418, i64 2147912706, i64 2147912734, i64 2147912234, i64 2147913067}
+!12888 = !DILocation(line: 0, scope: !12885)
+!12889 = !DILocation(line: 192, column: 2, scope: !12881)
+!12890 = distinct !DISubprogram(name: "_arch_spin_lock", scope: !14, file: !14, line: 147, type: !8085, scopeLine: 148, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12891)
+!12891 = !{!12892, !12893}
+!12892 = !DILocalVariable(name: "lock", arg: 1, scope: !12890, file: !14, line: 147, type: !8087)
+!12893 = !DILocalVariable(name: "tmp", scope: !12890, file: !14, line: 149, type: !7)
+!12894 = !DILocation(line: 0, scope: !12890)
+!12895 = !DILocation(line: 158, column: 29, scope: !12890)
+!12896 = !DILocation(line: 151, column: 2, scope: !12890)
+!12897 = !{i64 6912296, i64 6912308, i64 6912320, i64 6912342, i64 6912361, i64 6912385}
+!12898 = !DILocation(line: 161, column: 1, scope: !12890)
+!12899 = distinct !DISubprogram(name: "waituart", scope: !3, file: !3, line: 664, type: !12900, scopeLine: 665, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12902)
+!12900 = !DISubroutineType(types: !12901)
+!12901 = !{!210}
+!12902 = !{!12903, !12904, !12905, !12906}
+!12903 = !DILocalVariable(name: "ret", scope: !12899, file: !3, line: 666, type: !210)
+!12904 = !DILocalVariable(name: "base", scope: !12899, file: !3, line: 666, type: !210)
+!12905 = !DILocalVariable(name: "REG_FR", scope: !12899, file: !3, line: 666, type: !210)
+!12906 = !DILocalVariable(name: "el2_data", scope: !12899, file: !3, line: 667, type: !6368)
+!12907 = !DILocation(line: 667, column: 30, scope: !12899)
+!12908 = !DILocation(line: 0, scope: !12899)
+!12909 = !DILocation(line: 669, column: 19, scope: !12899)
+!12910 = !DILocation(line: 672, column: 2, scope: !12899)
+!12911 = !{i64 17027, i64 17050, i64 17065, i64 17085}
+!12912 = !DILocation(line: 681, column: 2, scope: !12899)
+!12913 = distinct !DISubprogram(name: "cpu_relax", scope: !3985, file: !3985, line: 245, type: !2404, scopeLine: 246, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !2257)
+!12914 = !DILocation(line: 247, column: 2, scope: !12913)
+!12915 = !{i64 1751585}
+!12916 = !DILocation(line: 248, column: 1, scope: !12913)
+!12917 = distinct !DISubprogram(name: "_arch_spin_unlock", scope: !14, file: !14, line: 163, type: !8085, scopeLine: 164, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12918)
+!12918 = !{!12919}
+!12919 = !DILocalVariable(name: "lock", arg: 1, scope: !12917, file: !14, line: 163, type: !8087)
+!12920 = !DILocation(line: 0, scope: !12917)
+!12921 = !DILocation(line: 167, column: 16, scope: !12917)
+!12922 = !DILocation(line: 165, column: 2, scope: !12917)
+!12923 = !{i64 6912550}
+!12924 = !DILocation(line: 168, column: 1, scope: !12917)
+!12925 = distinct !DISubprogram(name: "atomic_read", scope: !12926, file: !12926, line: 24, type: !12927, scopeLine: 25, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12931)
+!12926 = !DIFile(filename: "./include/asm-generic/atomic-instrumented.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "4562a74bb7e353209bc7b8fe69d2f7f3")
+!12927 = !DISubroutineType(types: !12928)
+!12928 = !{!82, !12929}
+!12929 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !12930, size: 64)
+!12930 = !DIDerivedType(tag: DW_TAG_const_type, baseType: !314)
+!12931 = !{!12932, !12933}
+!12932 = !DILocalVariable(name: "v", arg: 1, scope: !12925, file: !12926, line: 24, type: !12929)
+!12933 = !DILocalVariable(name: "__u", scope: !12934, file: !12926, line: 27, type: !12935)
+!12934 = distinct !DILexicalBlock(scope: !12925, file: !12926, line: 27, column: 9)
+!12935 = distinct !DICompositeType(tag: DW_TAG_union_type, scope: !12925, file: !12926, line: 27, size: 32, elements: !12936)
+!12936 = !{!12937, !12938}
+!12937 = !DIDerivedType(tag: DW_TAG_member, name: "__val", scope: !12935, file: !12926, line: 27, baseType: !4298, size: 32)
+!12938 = !DIDerivedType(tag: DW_TAG_member, name: "__c", scope: !12935, file: !12926, line: 27, baseType: !12939, size: 8)
+!12939 = !DICompositeType(tag: DW_TAG_array_type, baseType: !578, size: 8, elements: !2529)
+!12940 = !DILocation(line: 0, scope: !12925)
+!12941 = !DILocalVariable(name: "res", arg: 2, scope: !12942, file: !12943, line: 197, type: !206)
+!12942 = distinct !DISubprogram(name: "__read_once_size", scope: !12943, file: !12943, line: 197, type: !12944, scopeLine: 198, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12946)
+!12943 = !DIFile(filename: "./include/linux/compiler.h", directory: "/home/xupeng/Projects/SeKVM", checksumkind: CSK_MD5, checksum: "1babf236a76a670118805368873ee5c0")
+!12944 = !DISubroutineType(types: !12945)
+!12945 = !{null, !9203, !206, !82}
+!12946 = !{!12947, !12941, !12948}
+!12947 = !DILocalVariable(name: "p", arg: 1, scope: !12942, file: !12943, line: 197, type: !9203)
+!12948 = !DILocalVariable(name: "size", arg: 3, scope: !12942, file: !12943, line: 197, type: !82)
+!12949 = !DILocation(line: 0, scope: !12942, inlinedAt: !12950)
+!12950 = distinct !DILocation(line: 27, column: 9, scope: !12951)
+!12951 = distinct !DILexicalBlock(scope: !12934, file: !12926, line: 27, column: 9)
+!12952 = !DILocation(line: 199, column: 2, scope: !12953, inlinedAt: !12950)
+!12953 = distinct !DILexicalBlock(scope: !12954, file: !12943, line: 199, column: 2)
+!12954 = distinct !DILexicalBlock(scope: !12942, file: !12943, line: 199, column: 2)
+!12955 = !DILocation(line: 0, scope: !12934)
+!12956 = !DILocation(line: 27, column: 2, scope: !12925)
+!12957 = distinct !DISubprogram(name: "protect_el2_mem", scope: !3, file: !3, line: 3440, type: !2404, scopeLine: 3441, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12958)
+!12958 = !{!12959, !12960, !12961, !12962}
+!12959 = !DILocalVariable(name: "addr", scope: !12957, file: !3, line: 3442, type: !210)
+!12960 = !DILocalVariable(name: "end", scope: !12957, file: !3, line: 3442, type: !210)
+!12961 = !DILocalVariable(name: "index", scope: !12957, file: !3, line: 3442, type: !210)
+!12962 = !DILocalVariable(name: "el2_data", scope: !12957, file: !3, line: 3443, type: !6368)
+!12963 = !DILocation(line: 3443, column: 30, scope: !12957)
+!12964 = !DILocation(line: 0, scope: !12957)
+!12965 = !DILocation(line: 3446, column: 19, scope: !12957)
+!12966 = !DILocation(line: 3447, column: 19, scope: !12957)
+!12967 = !DILocation(line: 3448, column: 2, scope: !12957)
+!12968 = !DILocation(line: 3449, column: 11, scope: !12969)
+!12969 = distinct !DILexicalBlock(scope: !12957, file: !3, line: 3448, column: 5)
+!12970 = !DILocation(line: 3450, column: 3, scope: !12969)
+!12971 = !DILocation(line: 3451, column: 8, scope: !12969)
+!12972 = !DILocation(line: 3452, column: 16, scope: !12957)
+!12973 = !DILocation(line: 3452, column: 2, scope: !12969)
+!12974 = distinct !{!12974, !12967, !12975, !6597}
+!12975 = !DILocation(line: 3452, column: 21, scope: !12957)
+!12976 = !DILocation(line: 3453, column: 1, scope: !12957)
+!12977 = distinct !DISubprogram(name: "set_hcr_el2", scope: !12705, file: !12705, line: 61, type: !6678, scopeLine: 62, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12978)
+!12978 = !{!12979, !12980}
+!12979 = !DILocalVariable(name: "val", arg: 1, scope: !12977, file: !12705, line: 61, type: !207)
+!12980 = !DILocalVariable(name: "__val", scope: !12981, file: !12705, line: 63, type: !207)
+!12981 = distinct !DILexicalBlock(scope: !12977, file: !12705, line: 63, column: 2)
+!12982 = !DILocation(line: 0, scope: !12977)
+!12983 = !DILocation(line: 0, scope: !12981)
+!12984 = !DILocation(line: 63, column: 2, scope: !12981)
+!12985 = !{i64 2154904010}
+!12986 = !DILocation(line: 64, column: 1, scope: !12977)
+!12987 = distinct !DISubprogram(name: "__activate_traps_nvhe", scope: !3, file: !3, line: 4071, type: !11593, scopeLine: 4072, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12988)
+!12988 = !{!12989, !12990}
+!12989 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12987, file: !3, line: 4071, type: !286)
+!12990 = !DILocalVariable(name: "val", scope: !12987, file: !3, line: 4073, type: !207)
+!12991 = !DILocation(line: 0, scope: !12987)
+!12992 = !DILocation(line: 4075, column: 2, scope: !12987)
+!12993 = !DILocation(line: 4080, column: 2, scope: !12987)
+!12994 = !DILocation(line: 4081, column: 1, scope: !12987)
+!12995 = distinct !DISubprogram(name: "__activate_traps_common", scope: !3, file: !3, line: 4052, type: !11593, scopeLine: 4053, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !12996)
+!12996 = !{!12997}
+!12997 = !DILocalVariable(name: "vcpu", arg: 1, scope: !12995, file: !3, line: 4052, type: !286)
+!12998 = !DILocation(line: 0, scope: !12995)
+!12999 = !DILocation(line: 4060, column: 2, scope: !12995)
+!13000 = !DILocation(line: 4061, column: 2, scope: !12995)
+!13001 = !DILocation(line: 4063, column: 2, scope: !12995)
+!13002 = !DILocation(line: 4064, column: 1, scope: !12995)
+!13003 = distinct !DISubprogram(name: "set_cptr_el2", scope: !12705, file: !12705, line: 41, type: !6678, scopeLine: 42, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13004)
+!13004 = !{!13005, !13006}
+!13005 = !DILocalVariable(name: "val", arg: 1, scope: !13003, file: !12705, line: 41, type: !207)
+!13006 = !DILocalVariable(name: "__val", scope: !13007, file: !12705, line: 43, type: !207)
+!13007 = distinct !DILexicalBlock(scope: !13003, file: !12705, line: 43, column: 2)
+!13008 = !DILocation(line: 0, scope: !13003)
+!13009 = !DILocation(line: 0, scope: !13007)
+!13010 = !DILocation(line: 43, column: 2, scope: !13007)
+!13011 = !{i64 2154903408}
+!13012 = !DILocation(line: 44, column: 1, scope: !13003)
+!13013 = distinct !DISubprogram(name: "set_pmselr_el0", scope: !12705, file: !12705, line: 21, type: !6678, scopeLine: 22, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13014)
+!13014 = !{!13015, !13016}
+!13015 = !DILocalVariable(name: "val", arg: 1, scope: !13013, file: !12705, line: 21, type: !207)
+!13016 = !DILocalVariable(name: "__val", scope: !13017, file: !12705, line: 23, type: !207)
+!13017 = distinct !DILexicalBlock(scope: !13013, file: !12705, line: 23, column: 2)
+!13018 = !DILocation(line: 0, scope: !13013)
+!13019 = !DILocation(line: 0, scope: !13017)
+!13020 = !DILocation(line: 23, column: 2, scope: !13017)
+!13021 = !{i64 2154903101}
+!13022 = !DILocation(line: 24, column: 1, scope: !13013)
+!13023 = distinct !DISubprogram(name: "set_pmuserenr_el0", scope: !12705, file: !12705, line: 11, type: !6678, scopeLine: 12, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13024)
+!13024 = !{!13025, !13026}
+!13025 = !DILocalVariable(name: "val", arg: 1, scope: !13023, file: !12705, line: 11, type: !207)
+!13026 = !DILocalVariable(name: "__val", scope: !13027, file: !12705, line: 13, type: !207)
+!13027 = distinct !DILexicalBlock(scope: !13023, file: !12705, line: 13, column: 2)
+!13028 = !DILocation(line: 0, scope: !13023)
+!13029 = !DILocation(line: 0, scope: !13027)
+!13030 = !DILocation(line: 13, column: 2, scope: !13027)
+!13031 = !{i64 2154902785}
+!13032 = !DILocation(line: 14, column: 1, scope: !13023)
+!13033 = distinct !DISubprogram(name: "set_mdcr_el2", scope: !12705, file: !12705, line: 51, type: !6678, scopeLine: 52, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13034)
+!13034 = !{!13035, !13036}
+!13035 = !DILocalVariable(name: "val", arg: 1, scope: !13033, file: !12705, line: 51, type: !207)
+!13036 = !DILocalVariable(name: "__val", scope: !13037, file: !12705, line: 53, type: !207)
+!13037 = distinct !DILexicalBlock(scope: !13033, file: !12705, line: 53, column: 2)
+!13038 = !DILocation(line: 0, scope: !13033)
+!13039 = !DILocation(line: 0, scope: !13037)
+!13040 = !DILocation(line: 53, column: 2, scope: !13037)
+!13041 = !{i64 2154903709}
+!13042 = !DILocation(line: 54, column: 1, scope: !13033)
+!13043 = distinct !DISubprogram(name: "set_vttbr_el2", scope: !12705, file: !12705, line: 82, type: !6678, scopeLine: 83, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13044)
+!13044 = !{!13045, !13046}
+!13045 = !DILocalVariable(name: "val", arg: 1, scope: !13043, file: !12705, line: 82, type: !207)
+!13046 = !DILocalVariable(name: "__val", scope: !13047, file: !12705, line: 84, type: !207)
+!13047 = distinct !DILexicalBlock(scope: !13043, file: !12705, line: 84, column: 2)
+!13048 = !DILocation(line: 0, scope: !13043)
+!13049 = !DILocation(line: 0, scope: !13047)
+!13050 = !DILocation(line: 84, column: 2, scope: !13047)
+!13051 = !{i64 2154904578}
+!13052 = !DILocation(line: 85, column: 1, scope: !13043)
+!13053 = distinct !DISubprogram(name: "get_esr_el2", scope: !12705, file: !12705, line: 66, type: !7242, scopeLine: 67, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13054)
+!13054 = !{!13055}
+!13055 = !DILocalVariable(name: "__val", scope: !13056, file: !12705, line: 68, type: !207)
+!13056 = distinct !DILexicalBlock(scope: !13053, file: !12705, line: 68, column: 9)
+!13057 = !DILocation(line: 68, column: 9, scope: !13056)
+!13058 = !{i64 2154904296}
+!13059 = !DILocation(line: 0, scope: !13056)
+!13060 = !DILocation(line: 68, column: 2, scope: !13053)
+!13061 = distinct !DISubprogram(name: "set_vcpu_esr_el2", scope: !14, file: !14, line: 423, type: !13062, scopeLine: 423, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13064)
+!13062 = !DISubroutineType(types: !13063)
+!13063 = !{null, !282, !282, !282}
+!13064 = !{!13065, !13066, !13067, !13068, !13069, !13070}
+!13065 = !DILocalVariable(name: "vmid", arg: 1, scope: !13061, file: !14, line: 423, type: !282)
+!13066 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !13061, file: !14, line: 423, type: !282)
+!13067 = !DILocalVariable(name: "esr_el2", arg: 3, scope: !13061, file: !14, line: 423, type: !282)
+!13068 = !DILocalVariable(name: "shared_data", scope: !13061, file: !14, line: 424, type: !10716)
+!13069 = !DILocalVariable(name: "offset", scope: !13061, file: !14, line: 425, type: !82)
+!13070 = !DILocalVariable(name: "vcpu", scope: !13061, file: !14, line: 426, type: !286)
+!13071 = !DILocation(line: 0, scope: !13061)
+!13072 = !DILocation(line: 425, column: 15, scope: !13061)
+!13073 = !DILocation(line: 427, column: 16, scope: !13061)
+!13074 = !DILocation(line: 428, column: 10, scope: !13061)
+!13075 = !DILocation(line: 429, column: 19, scope: !13061)
+!13076 = !DILocation(line: 429, column: 27, scope: !13061)
+!13077 = !DILocation(line: 430, column: 1, scope: !13061)
+!13078 = distinct !DISubprogram(name: "set_shadow_ctxt_esr", scope: !14, file: !14, line: 349, type: !13062, scopeLine: 350, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13079)
+!13079 = !{!13080, !13081, !13082, !13083, !13084}
+!13080 = !DILocalVariable(name: "vmid", arg: 1, scope: !13078, file: !14, line: 349, type: !282)
+!13081 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !13078, file: !14, line: 349, type: !282)
+!13082 = !DILocalVariable(name: "value", arg: 3, scope: !13078, file: !14, line: 349, type: !282)
+!13083 = !DILocalVariable(name: "el2_data", scope: !13078, file: !14, line: 351, type: !6368)
+!13084 = !DILocalVariable(name: "offset", scope: !13078, file: !14, line: 352, type: !82)
+!13085 = !DILocation(line: 0, scope: !13078)
+!13086 = !DILocation(line: 351, column: 30, scope: !13078)
+!13087 = !DILocation(line: 352, column: 15, scope: !13078)
+!13088 = !DILocation(line: 353, column: 2, scope: !13078)
+!13089 = !DILocation(line: 353, column: 37, scope: !13078)
+!13090 = !DILocation(line: 353, column: 41, scope: !13078)
+!13091 = !DILocation(line: 354, column: 1, scope: !13078)
+!13092 = distinct !DISubprogram(name: "__populate_fault_info", scope: !3, file: !3, line: 4185, type: !13093, scopeLine: 4186, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13095)
+!13093 = !DISubroutineType(types: !13094)
+!13094 = !{!621, !228, !228, !228}
+!13095 = !{!13096, !13097, !13098, !13099, !13100, !13101, !13102}
+!13096 = !DILocalVariable(name: "vmid", arg: 1, scope: !13092, file: !3, line: 4185, type: !228)
+!13097 = !DILocalVariable(name: "vcpuid", arg: 2, scope: !13092, file: !3, line: 4185, type: !228)
+!13098 = !DILocalVariable(name: "esr", arg: 3, scope: !13092, file: !3, line: 4185, type: !228)
+!13099 = !DILocalVariable(name: "hpfar", scope: !13092, file: !3, line: 4187, type: !207)
+!13100 = !DILocalVariable(name: "far", scope: !13092, file: !3, line: 4187, type: !207)
+!13101 = !DILocalVariable(name: "vcpu", scope: !13092, file: !3, line: 4188, type: !286)
+!13102 = !DILocalVariable(name: "shadow_ctxt", scope: !13092, file: !3, line: 4189, type: !6479)
+!13103 = !DILocation(line: 0, scope: !13092)
+!13104 = !DILocation(line: 4187, column: 2, scope: !13092)
+!13105 = !DILocation(line: 4187, column: 19, scope: !13092)
+!13106 = !DILocation(line: 4188, column: 26, scope: !13092)
+!13107 = !DILocation(line: 4189, column: 44, scope: !13092)
+!13108 = !DILocation(line: 4202, column: 12, scope: !13109)
+!13109 = distinct !DILexicalBlock(scope: !13092, file: !3, line: 4202, column: 6)
+!13110 = !DILocation(line: 4202, column: 29, scope: !13109)
+!13111 = !DILocation(line: 4204, column: 8, scope: !13112)
+!13112 = distinct !DILexicalBlock(scope: !13113, file: !3, line: 4204, column: 7)
+!13113 = distinct !DILexicalBlock(scope: !13109, file: !3, line: 4203, column: 70)
+!13114 = !DILocation(line: 4204, column: 7, scope: !13113)
+!13115 = !DILocation(line: 4207, column: 11, scope: !13116)
+!13116 = distinct !DILexicalBlock(scope: !13109, file: !3, line: 4206, column: 9)
+!13117 = !DILocation(line: 4207, column: 9, scope: !13116)
+!13118 = !DILocation(line: 4210, column: 19, scope: !13092)
+!13119 = !DILocation(line: 4210, column: 27, scope: !13092)
+!13120 = !{!10733, !6562, i64 2200}
+!13121 = !DILocation(line: 4211, column: 31, scope: !13092)
+!13122 = !DILocation(line: 4211, column: 19, scope: !13092)
+!13123 = !DILocation(line: 4211, column: 29, scope: !13092)
+!13124 = !{!10733, !6562, i64 2208}
+!13125 = !DILocation(line: 4212, column: 15, scope: !13092)
+!13126 = !DILocation(line: 4212, column: 23, scope: !13092)
+!13127 = !DILocation(line: 4213, column: 15, scope: !13092)
+!13128 = !DILocation(line: 4213, column: 21, scope: !13092)
+!13129 = !DILocation(line: 4215, column: 11, scope: !13130)
+!13130 = distinct !DILexicalBlock(scope: !13092, file: !3, line: 4215, column: 6)
+!13131 = !DILocation(line: 4215, column: 31, scope: !13130)
+!13132 = !DILocation(line: 4215, column: 6, scope: !13092)
+!13133 = !DILocation(line: 4221, column: 41, scope: !13134)
+!13134 = distinct !DILexicalBlock(scope: !13135, file: !3, line: 4221, column: 7)
+!13135 = distinct !DILexicalBlock(scope: !13130, file: !3, line: 4215, column: 45)
+!13136 = !DILocation(line: 4221, column: 8, scope: !13134)
+!13137 = !DILocation(line: 4221, column: 7, scope: !13135)
+!13138 = !DILocation(line: 4222, column: 27, scope: !13139)
+!13139 = distinct !DILexicalBlock(scope: !13134, file: !3, line: 4221, column: 48)
+!13140 = !DILocation(line: 4222, column: 15, scope: !13139)
+!13141 = !DILocation(line: 4222, column: 4, scope: !13139)
+!13142 = !DILocation(line: 4223, column: 17, scope: !13139)
+!13143 = !DILocation(line: 4223, column: 23, scope: !13139)
+!13144 = !DILocation(line: 4224, column: 3, scope: !13139)
+!13145 = !DILocation(line: 4228, column: 1, scope: !13092)
+!13146 = distinct !DISubprogram(name: "get_far_el2", scope: !12705, file: !12705, line: 97, type: !7242, scopeLine: 98, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13147)
+!13147 = !{!13148}
+!13148 = !DILocalVariable(name: "__val", scope: !13149, file: !12705, line: 99, type: !207)
+!13149 = distinct !DILexicalBlock(scope: !13146, file: !12705, line: 99, column: 9)
+!13150 = !DILocation(line: 99, column: 9, scope: !13149)
+!13151 = !{i64 2154905174}
+!13152 = !DILocation(line: 0, scope: !13149)
+!13153 = !DILocation(line: 99, column: 2, scope: !13146)
+!13154 = distinct !DISubprogram(name: "__translate_far_to_hpfar", scope: !3, file: !3, line: 4156, type: !13155, scopeLine: 4157, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13158)
+!13155 = !DISubroutineType(types: !13156)
+!13156 = !{!621, !207, !13157}
+!13157 = !DIDerivedType(tag: DW_TAG_pointer_type, baseType: !207, size: 64)
+!13158 = !{!13159, !13160, !13161, !13162, !13163, !13165, !13167}
+!13159 = !DILocalVariable(name: "far", arg: 1, scope: !13154, file: !3, line: 4156, type: !207)
+!13160 = !DILocalVariable(name: "hpfar", arg: 2, scope: !13154, file: !3, line: 4156, type: !13157)
+!13161 = !DILocalVariable(name: "par", scope: !13154, file: !3, line: 4158, type: !207)
+!13162 = !DILocalVariable(name: "tmp", scope: !13154, file: !3, line: 4158, type: !207)
+!13163 = !DILocalVariable(name: "__val", scope: !13164, file: !3, line: 4170, type: !207)
+!13164 = distinct !DILexicalBlock(scope: !13154, file: !3, line: 4170, column: 8)
+!13165 = !DILocalVariable(name: "__val", scope: !13166, file: !3, line: 4174, type: !207)
+!13166 = distinct !DILexicalBlock(scope: !13154, file: !3, line: 4174, column: 8)
+!13167 = !DILocalVariable(name: "__val", scope: !13168, file: !3, line: 4175, type: !207)
+!13168 = distinct !DILexicalBlock(scope: !13154, file: !3, line: 4175, column: 2)
+!13169 = !DILocation(line: 0, scope: !13154)
+!13170 = !DILocation(line: 4170, column: 8, scope: !13164)
+!13171 = !{i64 2154912688}
+!13172 = !DILocation(line: 0, scope: !13164)
+!13173 = !DILocation(line: 4171, column: 2, scope: !13154)
+!13174 = !{i64 103581}
+!13175 = !DILocation(line: 4172, column: 2, scope: !13154)
+!13176 = !{i64 2154912811}
+!13177 = !DILocation(line: 4174, column: 8, scope: !13166)
+!13178 = !{i64 2154912875}
+!13179 = !DILocation(line: 0, scope: !13166)
+!13180 = !DILocation(line: 0, scope: !13168)
+!13181 = !DILocation(line: 4175, column: 2, scope: !13168)
+!13182 = !{i64 2154913039}
+!13183 = !DILocation(line: 4177, column: 6, scope: !13184)
+!13184 = distinct !DILexicalBlock(scope: !13154, file: !3, line: 4177, column: 6)
+!13185 = !DILocation(line: 4177, column: 6, scope: !13154)
+!13186 = !{!"branch_weights", i32 2000, i32 1}
+!13187 = !DILocation(line: 4181, column: 45, scope: !13154)
+!13188 = !DILocation(line: 4181, column: 9, scope: !13154)
+!13189 = !DILocation(line: 4182, column: 2, scope: !13154)
+!13190 = !DILocation(line: 4183, column: 1, scope: !13154)
+!13191 = distinct !DISubprogram(name: "get_hpfar_el2", scope: !12705, file: !12705, line: 107, type: !7242, scopeLine: 108, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13192)
+!13192 = !{!13193}
+!13193 = !DILocalVariable(name: "__val", scope: !13194, file: !12705, line: 109, type: !207)
+!13194 = distinct !DILexicalBlock(scope: !13191, file: !12705, line: 109, column: 9)
+!13195 = !DILocation(line: 109, column: 9, scope: !13194)
+!13196 = !{i64 2154909505}
+!13197 = !DILocation(line: 0, scope: !13194)
+!13198 = !DILocation(line: 109, column: 2, scope: !13191)
+!13199 = distinct !DISubprogram(name: "is_mmio_gpa", scope: !6133, file: !6133, line: 108, type: !13200, scopeLine: 109, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13202)
+!13200 = !DISubroutineType(types: !13201)
+!13201 = !{!621, !217}
+!13202 = !{!13203}
+!13203 = !DILocalVariable(name: "addr", arg: 1, scope: !13199, file: !6133, line: 108, type: !217)
+!13204 = !DILocation(line: 0, scope: !13199)
+!13205 = !DILocation(line: 110, column: 15, scope: !13199)
+!13206 = !DILocation(line: 110, column: 28, scope: !13199)
+!13207 = !DILocation(line: 110, column: 32, scope: !13199)
+!13208 = !DILocation(line: 110, column: 31, scope: !13199)
+!13209 = !DILocation(line: 110, column: 2, scope: !13199)
+!13210 = distinct !DISubprogram(name: "is_gic_cpu", scope: !6133, file: !6133, line: 103, type: !13200, scopeLine: 104, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13211)
+!13211 = !{!13212}
+!13212 = !DILocalVariable(name: "addr", arg: 1, scope: !13210, file: !6133, line: 103, type: !217)
+!13213 = !DILocation(line: 0, scope: !13210)
+!13214 = !DILocation(line: 105, column: 29, scope: !13210)
+!13215 = !DILocation(line: 105, column: 2, scope: !13210)
+!13216 = distinct !DISubprogram(name: "__deactivate_traps_nvhe", scope: !3, file: !3, line: 4100, type: !2404, scopeLine: 4101, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !2257)
+!13217 = !DILocation(line: 4102, column: 2, scope: !13216)
+!13218 = !DILocation(line: 4107, column: 2, scope: !13216)
+!13219 = !DILocation(line: 4109, column: 2, scope: !13216)
+!13220 = !DILocation(line: 4110, column: 1, scope: !13216)
+!13221 = distinct !DISubprogram(name: "__deactivate_traps_common", scope: !3, file: !3, line: 4066, type: !2404, scopeLine: 4067, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !2257)
+!13222 = !DILocation(line: 4068, column: 2, scope: !13221)
+!13223 = !DILocation(line: 4069, column: 1, scope: !13221)
+!13224 = distinct !DISubprogram(name: "get_host_vttbr", scope: !14, file: !14, line: 432, type: !13225, scopeLine: 433, flags: DIFlagPrototyped | DIFlagAllCallsDescribed, spFlags: DISPFlagLocalToUnit | DISPFlagDefinition | DISPFlagOptimized, unit: !2, retainedNodes: !13227)
+!13225 = !DISubroutineType(types: !13226)
+!13226 = !{!3980}
+!13227 = !{!13228}
+!13228 = !DILocalVariable(name: "el2_data", scope: !13224, file: !14, line: 434, type: !6368)
+!13229 = !DILocation(line: 434, column: 30, scope: !13224)
+!13230 = !DILocation(line: 0, scope: !13224)
+!13231 = !DILocation(line: 435, column: 19, scope: !13224)
+!13232 = !DILocation(line: 435, column: 2, scope: !13224)

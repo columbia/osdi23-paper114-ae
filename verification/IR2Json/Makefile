@@ -6,7 +6,7 @@ LLVM_ROOT=llvm/
 LLVM_CONFIG=llvm/bin/llvm-config
 LLVM_INCLUDE=llvm/include
 
-CPPFLAGS=-g -O0 -DLLVM_DISABLE_ABI_BREAKING_CHECKS_ENFORCING
+CPPFLAGS=-g -O2 -DLLVM_DISABLE_ABI_BREAKING_CHECKS_ENFORCING
 CPPFLAGS+=$(shell $(LLVM_CONFIG) --cxxflags)
 LDFLAGS=$(shell $(LLVM_CONFIG) --ldflags)
 LDLIBS=$(shell $(LLVM_CONFIG) --libs) -lpthread -lm
