@@ -53,7 +53,7 @@ You may need to add `~/.opam/4.13.1/bin/` to `PATH` manually. Try `coqc -v` to s
 
         export AUTOV_HOME="/path/to/osdi23-paper114-ae/verification"
         export PYTHONPATH=$AUTOV_HOME:$PYTHONPATH
-        export COQPATH=$AUTOV_HOME/LayerSem:$COQPATH
+        export COQPATH=$AUTOV_HOME:$COQPATH
 
 ### Step 2. Generate a Coq project for SeKVM verification
 
