@@ -102,71 +102,90 @@ Section VMOps_verify_and_load_images_RefProof.
     else None.
 
   Hint Unfold verify_and_load_images_spec_mid: spec.
+  Local Opaque unmap_and_load_vm_image_loop.
 
   Lemma f_verify_and_load_images_loop_refine_mid:
     forall _N_ v_call1 v_call1' v_load_idx_032 v_load_idx_032' v_vmid v_vmid' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: verify_and_load_images_loop_mid _N_ v_call1 v_load_idx_032 v_vmid hst = Some (v_call1', v_load_idx_032', v_vmid', hst')),
-      exists lst', verify_and_load_images_loop_low _N_ v_call1 v_load_idx_032 v_vmid lst = Some (v_call1', v_load_idx_032', v_vmid', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: verify_and_load_images_loop_mid _N_ v_call1 v_load_idx_032 v_vmid hst = Some (v_call1', v_load_idx_032', v_vmid', hst')),
+    exists lst', verify_and_load_images_loop_low _N_ v_call1 v_load_idx_032 v_vmid lst = Some (v_call1', v_load_idx_032', v_vmid', lst') /\ refrel hst' lst'.
+  Proof.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque verify_and_load_images_loop_mid verify_and_load_images_loop_low.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_verify_and_load_images_refine_mid:
     forall v_vmid lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: verify_and_load_images_spec_mid v_vmid hst = Some hst'),
-      exists lst', verify_and_load_images_spec_low v_vmid lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: verify_and_load_images_spec_mid v_vmid hst = Some hst'),
+    exists lst', verify_and_load_images_spec_low v_vmid lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    eapply  f_verify_and_load_images_loop_refine_mid in Hcond2.
+    destruct Hcond2 as (lst' & Hloop & Hrel).
+    rewrite Hloop. inv Hrel.
+    repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_verify_and_load_images_loop_refine_high:
     forall _N_ v_call1 v_call1' v_load_idx_032 v_load_idx_032' v_vmid v_vmid' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: verify_and_load_images_loop _N_ v_call1 v_load_idx_032 v_vmid hst = Some (v_call1', v_load_idx_032', v_vmid', hst')),
-      exists lst', verify_and_load_images_loop_mid _N_ v_call1 v_load_idx_032 v_vmid lst = Some (v_call1', v_load_idx_032', v_vmid', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: verify_and_load_images_loop _N_ v_call1 v_load_idx_032 v_vmid hst = Some (v_call1', v_load_idx_032', v_vmid', hst')),
+    exists lst', verify_and_load_images_loop_mid _N_ v_call1 v_load_idx_032 v_vmid lst = Some (v_call1', v_load_idx_032', v_vmid', lst') /\ refrel hst' lst'.
+  Proof.
+
+    Local Transparent verify_and_load_images_loop_mid.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque verify_and_load_images_loop_mid verify_and_load_images_loop.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_verify_and_load_images_refine_high:
     forall v_vmid lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: verify_and_load_images_spec v_vmid hst = Some hst'),
-      exists lst', verify_and_load_images_spec_mid v_vmid lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      Local Transparent verify_and_load_images_spec.
-      unfold verify_and_load_images_spec.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: verify_and_load_images_spec v_vmid hst = Some hst'),
+    exists lst', verify_and_load_images_spec_mid v_vmid lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    Local Transparent verify_and_load_images_spec.
+    unfold verify_and_load_images_spec.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
+      repeat eexists; try unfold refrel; solve_equality.
+  Qed.
 
   Lemma f_verify_and_load_images_refine:
     forall v_vmid lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: verify_and_load_images_spec v_vmid hst = Some hst'),
-      exists lst', verify_and_load_images_spec_low v_vmid lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      Local Transparent verify_and_load_images_spec.
-      unfold verify_and_load_images_spec.
-      intros; inv Hrel.
-      eapply f_verify_and_load_images_refine_high in Hspec; try unfold refrel; try reflexivity.
-      destruct Hspec as (lst' & Hspec & Hrel).
-      inv Hrel; try unfold refrel; try reflexivity.
-      eapply f_verify_and_load_images_refine_mid; try unfold refrel; try reflexivity; try eassumption.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: verify_and_load_images_spec v_vmid hst = Some hst'),
+    exists lst', verify_and_load_images_spec_low v_vmid lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    Local Transparent verify_and_load_images_spec.
+    unfold verify_and_load_images_spec.
+    intros; inv Hrel.
+    eapply f_verify_and_load_images_refine_high in Hspec; try unfold refrel; try reflexivity.
+    destruct Hspec as (lst' & Hspec & Hrel).
+    inv Hrel; try unfold refrel; try reflexivity.
+    eapply f_verify_and_load_images_refine_mid; try unfold refrel; try reflexivity; try eassumption.
+  Qed.
 
 End VMOps_verify_and_load_images_RefProof.
 

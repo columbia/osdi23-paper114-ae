@@ -82,6 +82,17 @@ Section VCPUOps_restore_shadow_kvm_regs_RefProof.
 
   Hint Unfold restore_shadow_kvm_regs_spec_mid: spec.
 
+  Local Opaque sync_dirty_to_shadow_spec.
+  Local Opaque get_cur_vcpu_id_spec.
+  Local Opaque reset_sys_regs_spec.
+  Local Opaque set_shadow_dirty_bit_spec.
+  Local Opaque v_post_handle_shadow_s2pt_fault_spec.
+  Local Opaque reset_gp_regs_spec.
+  Local Opaque set_shadow_ctxt_spec.
+  Local Opaque v_update_exception_gp_regs_spec.
+  Local Opaque get_shadow_ctxt_spec.
+  Local Opaque get_cur_vmid_spec.
+
   Lemma f_restore_shadow_kvm_regs_refine_mid:
     forall lst hst hst'
            (Hrel: refrel hst lst)

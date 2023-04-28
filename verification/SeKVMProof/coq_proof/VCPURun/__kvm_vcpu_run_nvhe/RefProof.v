@@ -135,6 +135,40 @@ Section VCPURun___kvm_vcpu_run_nvhe_RefProof.
 
   Hint Unfold __kvm_vcpu_run_nvhe_spec_mid: spec.
 
+  Local Opaque __sysreg_save_state_nvhe_spec.
+  Local Opaque hypsec_set_vcpu_active_spec.
+  Local Opaque get_el2_data_start_spec.
+  Local Opaque __timer_enable_traps_spec.
+  Local Opaque set_vcpu_was_preempted_spec.
+  Local Opaque get_core_context_spec.
+  Local Opaque hypsec_set_vcpu_state_spec.
+  Local Opaque hypsec_tlb_flush_local_vmid_spec.
+  Local Opaque set_tpidr_el2_spec.
+  Local Opaque __timer_disable_traps_spec.
+  Local Opaque __sysreg_restore_state_nvhe_spec.
+  Local Opaque __activate_vm_spec.
+  Local Opaque hypsec_vcpu_id_to_shadow_ctxt_spec.
+  Local Opaque __fpsimd_restore_state_spec.
+  Local Opaque get_vcpu_host_cpu_context_spec.
+  Local Opaque __sysreg32_save_state_spec.
+  Local Opaque __guest_enter_spec.
+  Local Opaque set_per_cpu_spec.
+  Local Opaque restore_shadow_kvm_regs_spec.
+  Local Opaque set_shadow_ctxt_spec.
+  Local Opaque set_host_running_vcpu_spec.
+  Local Opaque save_shadow_kvm_regs_spec.
+  Local Opaque __activate_traps_spec.
+  Local Opaque __vm_sysreg_save_state_nvhe_opt_spec.
+  Local Opaque __vm_sysreg_restore_state_nvhe_opt_spec.
+  Local Opaque fixup_guest_exit_spec.
+  Local Opaque __deactivate_traps_spec.
+  Local Opaque get_cpuid_spec.
+  Local Opaque __sysreg32_restore_state_spec.
+  Local Opaque get_vcpu_was_preempted_spec.
+  Local Opaque hypsec_vcpu_id_to_vcpu_spec.
+  Local Opaque __host_el2_restore_state_spec.
+  Local Opaque __fpsimd_save_state_spec.
+
   Lemma f___kvm_vcpu_run_nvhe_loop_refine_mid:
     forall _N_ v_0 v_0' v_call1 v_call1' v_call4 v_call4' v_fp_regs v_fp_regs' v_fp_regs8 v_fp_regs8' v_retval_0 v_retval_0' v_vcpu_id v_vcpu_id' v_vmid v_vmid' lst hst hst'
            (Hrel: refrel hst lst)

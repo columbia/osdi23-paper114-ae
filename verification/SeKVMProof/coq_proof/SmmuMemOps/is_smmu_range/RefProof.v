@@ -61,64 +61,79 @@ Section SmmuMemOps_is_smmu_range_RefProof.
 
   Lemma f_is_smmu_range_loop_refine_mid:
     forall _N_ v_addr v_addr' v_indvars_iv v_indvars_iv' v_res_018 v_res_018' v_res_0_lcssa v_res_0_lcssa' v_wide_trip_count v_wide_trip_count' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: is_smmu_range_loop_mid _N_ v_addr v_indvars_iv v_res_018 v_res_0_lcssa v_wide_trip_count hst = Some (v_addr', v_indvars_iv', v_res_018', v_res_0_lcssa', v_wide_trip_count', hst')),
-      exists lst', is_smmu_range_loop_low _N_ v_addr v_indvars_iv v_res_018 v_res_0_lcssa v_wide_trip_count lst = Some (v_addr', v_indvars_iv', v_res_018', v_res_0_lcssa', v_wide_trip_count', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: is_smmu_range_loop_mid _N_ v_addr v_indvars_iv v_res_018 v_res_0_lcssa v_wide_trip_count hst = Some (v_addr', v_indvars_iv', v_res_018', v_res_0_lcssa', v_wide_trip_count', hst')),
+    exists lst', is_smmu_range_loop_low _N_ v_addr v_indvars_iv v_res_018 v_res_0_lcssa v_wide_trip_count lst = Some (v_addr', v_indvars_iv', v_res_018', v_res_0_lcssa', v_wide_trip_count', lst') /\ refrel hst' lst'.
+  Proof.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque is_smmu_range_loop_mid is_smmu_range_loop_low.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_is_smmu_range_refine_mid:
     forall v_addr lst hst hst' res
-           (Hrel: refrel hst lst)
-           (Hspec: is_smmu_range_spec_mid v_addr hst = Some (res, hst')),
-      exists lst', is_smmu_range_spec_low v_addr lst = Some (res, lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: is_smmu_range_spec_mid v_addr hst = Some (res, hst')),
+    exists lst', is_smmu_range_spec_low v_addr lst = Some (res, lst') /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    eapply f_is_smmu_range_loop_refine_mid in Hcond0.
+    destruct Hcond0 as (lst' & Hloop & Hrel).
+    rewrite Hloop. inv Hrel. reflexivity. constructor.
+  Qed.
 
   Lemma f_is_smmu_range_loop_refine_high:
     forall _N_ v_addr v_addr' v_indvars_iv v_indvars_iv' v_res_018 v_res_018' v_res_0_lcssa v_res_0_lcssa' v_wide_trip_count v_wide_trip_count' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: is_smmu_range_loop _N_ v_addr v_indvars_iv v_res_018 v_res_0_lcssa v_wide_trip_count hst = Some (v_addr', v_indvars_iv', v_res_018', v_res_0_lcssa', v_wide_trip_count', hst')),
-      exists lst', is_smmu_range_loop_mid _N_ v_addr v_indvars_iv v_res_018 v_res_0_lcssa v_wide_trip_count lst = Some (v_addr', v_indvars_iv', v_res_018', v_res_0_lcssa', v_wide_trip_count', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: is_smmu_range_loop _N_ v_addr v_indvars_iv v_res_018 v_res_0_lcssa v_wide_trip_count hst = Some (v_addr', v_indvars_iv', v_res_018', v_res_0_lcssa', v_wide_trip_count', hst')),
+    exists lst', is_smmu_range_loop_mid _N_ v_addr v_indvars_iv v_res_018 v_res_0_lcssa v_wide_trip_count lst = Some (v_addr', v_indvars_iv', v_res_018', v_res_0_lcssa', v_wide_trip_count', lst') /\ refrel hst' lst'.
+  Proof.
+
+    Local Transparent is_smmu_range_loop_mid.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque is_smmu_range_loop_mid is_smmu_range_loop.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_is_smmu_range_refine_high:
     forall v_addr lst hst hst' res
-           (Hrel: refrel hst lst)
-           (Hspec: is_smmu_range_spec v_addr hst = Some (res, hst')),
-      exists lst', is_smmu_range_spec_mid v_addr lst = Some (res, lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: is_smmu_range_spec v_addr hst = Some (res, hst')),
+    exists lst', is_smmu_range_spec_mid v_addr lst = Some (res, lst') /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
+      repeat eexists; try unfold refrel; solve_equality.
+  Qed.
 
   Lemma f_is_smmu_range_refine:
     forall v_addr lst hst hst' res
-           (Hrel: refrel hst lst)
-           (Hspec: is_smmu_range_spec v_addr hst = Some (res, hst')),
-      exists lst', is_smmu_range_spec_low v_addr lst = Some (res, lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      eapply f_is_smmu_range_refine_high in Hspec; try unfold refrel; try reflexivity.
-      destruct Hspec as (lst' & Hspec & Hrel).
-      inv Hrel; try unfold refrel; try reflexivity.
-      eapply f_is_smmu_range_refine_mid; try unfold refrel; try reflexivity; try eassumption.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: is_smmu_range_spec v_addr hst = Some (res, hst')),
+    exists lst', is_smmu_range_spec_low v_addr lst = Some (res, lst') /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    eapply f_is_smmu_range_refine_high in Hspec; try unfold refrel; try reflexivity.
+    destruct Hspec as (lst' & Hspec & Hrel).
+    inv Hrel; try unfold refrel; try reflexivity.
+    eapply f_is_smmu_range_refine_mid; try unfold refrel; try reflexivity; try eassumption.
+  Qed.
 
 End SmmuMemOps_is_smmu_range_RefProof.
 

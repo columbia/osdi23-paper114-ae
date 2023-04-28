@@ -116,64 +116,81 @@ Section VMOps_v_search_load_info_RefProof.
 
   Lemma f_v_search_load_info_loop_refine_mid:
     forall _N_ v_addr v_addr' v_call v_call' v_load_idx_029 v_load_idx_029' v_ret_028 v_ret_028' v_ret_0_lcssa v_ret_0_lcssa' v_vmid v_vmid' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: v_search_load_info_loop_mid _N_ v_addr v_call v_load_idx_029 v_ret_028 v_ret_0_lcssa v_vmid hst = Some (v_addr', v_call', v_load_idx_029', v_ret_028', v_ret_0_lcssa', v_vmid', hst')),
-      exists lst', v_search_load_info_loop_low _N_ v_addr v_call v_load_idx_029 v_ret_028 v_ret_0_lcssa v_vmid lst = Some (v_addr', v_call', v_load_idx_029', v_ret_028', v_ret_0_lcssa', v_vmid', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: v_search_load_info_loop_mid _N_ v_addr v_call v_load_idx_029 v_ret_028 v_ret_0_lcssa v_vmid hst = Some (v_addr', v_call', v_load_idx_029', v_ret_028', v_ret_0_lcssa', v_vmid', hst')),
+    exists lst', v_search_load_info_loop_low _N_ v_addr v_call v_load_idx_029 v_ret_028 v_ret_0_lcssa v_vmid lst = Some (v_addr', v_call', v_load_idx_029', v_ret_028', v_ret_0_lcssa', v_vmid', lst') /\ refrel hst' lst'.
+  Proof.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque v_search_load_info_loop_mid v_search_load_info_loop_low.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_v_search_load_info_refine_mid:
     forall v_vmid v_addr lst hst hst' res
-           (Hrel: refrel hst lst)
-           (Hspec: v_search_load_info_spec_mid v_vmid v_addr hst = Some (res, hst')),
-      exists lst', v_search_load_info_spec_low v_vmid v_addr lst = Some (res, lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: v_search_load_info_spec_mid v_vmid v_addr hst = Some (res, hst')),
+    exists lst', v_search_load_info_spec_low v_vmid v_addr lst = Some (res, lst') /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    eapply f_v_search_load_info_loop_refine_mid in Hcond1.
+    destruct Hcond1 as (lst' & Hloop & Hrel).
+    rewrite Hloop. inv Hrel.
+    repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_v_search_load_info_loop_refine_high:
     forall _N_ v_addr v_addr' v_call v_call' v_load_idx_029 v_load_idx_029' v_ret_028 v_ret_028' v_ret_0_lcssa v_ret_0_lcssa' v_vmid v_vmid' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: v_search_load_info_loop _N_ v_addr v_call v_load_idx_029 v_ret_028 v_ret_0_lcssa v_vmid hst = Some (v_addr', v_call', v_load_idx_029', v_ret_028', v_ret_0_lcssa', v_vmid', hst')),
-      exists lst', v_search_load_info_loop_mid _N_ v_addr v_call v_load_idx_029 v_ret_028 v_ret_0_lcssa v_vmid lst = Some (v_addr', v_call', v_load_idx_029', v_ret_028', v_ret_0_lcssa', v_vmid', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: v_search_load_info_loop _N_ v_addr v_call v_load_idx_029 v_ret_028 v_ret_0_lcssa v_vmid hst = Some (v_addr', v_call', v_load_idx_029', v_ret_028', v_ret_0_lcssa', v_vmid', hst')),
+    exists lst', v_search_load_info_loop_mid _N_ v_addr v_call v_load_idx_029 v_ret_028 v_ret_0_lcssa v_vmid lst = Some (v_addr', v_call', v_load_idx_029', v_ret_028', v_ret_0_lcssa', v_vmid', lst') /\ refrel hst' lst'.
+  Proof.
+    Local Transparent v_search_load_info_loop_mid.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque v_search_load_info_loop_mid v_search_load_info_loop.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_v_search_load_info_refine_high:
     forall v_vmid v_addr lst hst hst' res
-           (Hrel: refrel hst lst)
-           (Hspec: v_search_load_info_spec v_vmid v_addr hst = Some (res, hst')),
-      exists lst', v_search_load_info_spec_mid v_vmid v_addr lst = Some (res, lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: v_search_load_info_spec v_vmid v_addr hst = Some (res, hst')),
+    exists lst', v_search_load_info_spec_mid v_vmid v_addr lst = Some (res, lst') /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
+      repeat eexists; try unfold refrel; solve_equality.
+  Qed.
 
   Lemma f_v_search_load_info_refine:
     forall v_vmid v_addr lst hst hst' res
-           (Hrel: refrel hst lst)
-           (Hspec: v_search_load_info_spec v_vmid v_addr hst = Some (res, hst')),
-      exists lst', v_search_load_info_spec_low v_vmid v_addr lst = Some (res, lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      eapply f_v_search_load_info_refine_high in Hspec; try unfold refrel; try reflexivity.
-      destruct Hspec as (lst' & Hspec & Hrel).
-      inv Hrel; try unfold refrel; try reflexivity.
-      eapply f_v_search_load_info_refine_mid; try unfold refrel; try reflexivity; try eassumption.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: v_search_load_info_spec v_vmid v_addr hst = Some (res, hst')),
+    exists lst', v_search_load_info_spec_low v_vmid v_addr lst = Some (res, lst') /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    eapply f_v_search_load_info_refine_high in Hspec; try unfold refrel; try reflexivity.
+    destruct Hspec as (lst' & Hspec & Hrel).
+    inv Hrel; try unfold refrel; try reflexivity.
+    eapply f_v_search_load_info_refine_mid; try unfold refrel; try reflexivity; try eassumption.
+  Qed.
 
 End VMOps_v_search_load_info_RefProof.
 

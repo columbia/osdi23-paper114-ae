@@ -92,66 +92,91 @@ Section VMOpsAux_unmap_and_load_vm_image_RefProof.
 
   Hint Unfold unmap_and_load_vm_image_spec_mid: spec.
 
+  Local Opaque prot_and_map_vm_s2pt_loop.
+  Local Opaque z_to_nat.
+
   Lemma f_unmap_and_load_vm_image_loop_refine_mid:
     forall _N_ v_mb_num_029 v_mb_num_029' v_remap_addr_addr_032 v_remap_addr_addr_032' v_start_030 v_start_030' v_target_addr_addr_033 v_target_addr_addr_033' v_vmid v_vmid' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: unmap_and_load_vm_image_loop_mid _N_ v_mb_num_029 v_remap_addr_addr_032 v_start_030 v_target_addr_addr_033 v_vmid hst = Some (v_mb_num_029', v_remap_addr_addr_032', v_start_030', v_target_addr_addr_033', v_vmid', hst')),
-      exists lst', unmap_and_load_vm_image_loop_low _N_ v_mb_num_029 v_remap_addr_addr_032 v_start_030 v_target_addr_addr_033 v_vmid lst = Some (v_mb_num_029', v_remap_addr_addr_032', v_start_030', v_target_addr_addr_033', v_vmid', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: unmap_and_load_vm_image_loop_mid _N_ v_mb_num_029 v_remap_addr_addr_032 v_start_030 v_target_addr_addr_033 v_vmid hst = Some (v_mb_num_029', v_remap_addr_addr_032', v_start_030', v_target_addr_addr_033', v_vmid', hst')),
+    exists lst', unmap_and_load_vm_image_loop_low _N_ v_mb_num_029 v_remap_addr_addr_032 v_start_030 v_target_addr_addr_033 v_vmid lst = Some (v_mb_num_029', v_remap_addr_addr_032', v_start_030', v_target_addr_addr_033', v_vmid', lst') /\ refrel hst' lst'.
+  Proof.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque unmap_and_load_vm_image_loop_mid unmap_and_load_vm_image_loop_low.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_unmap_and_load_vm_image_refine_mid:
     forall v_vmid v_target_addr v_remap_addr v_num lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: unmap_and_load_vm_image_spec_mid v_vmid v_target_addr v_remap_addr v_num hst = Some hst'),
-      exists lst', unmap_and_load_vm_image_spec_low v_vmid v_target_addr v_remap_addr v_num lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: unmap_and_load_vm_image_spec_mid v_vmid v_target_addr v_remap_addr v_num hst = Some hst'),
+    exists lst', unmap_and_load_vm_image_spec_low v_vmid v_target_addr v_remap_addr v_num lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    eapply f_unmap_and_load_vm_image_loop_refine_mid in Hcond0.
+    destruct Hcond0 as (lst' & Hloop & Hrel).
+    rewrite Hloop. inv Hrel.
+    repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_unmap_and_load_vm_image_loop_refine_high:
     forall _N_ v_mb_num_029 v_mb_num_029' v_remap_addr_addr_032 v_remap_addr_addr_032' v_start_030 v_start_030' v_target_addr_addr_033 v_target_addr_addr_033' v_vmid v_vmid' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: unmap_and_load_vm_image_loop _N_ v_mb_num_029 v_remap_addr_addr_032 v_start_030 v_target_addr_addr_033 v_vmid hst = Some (v_mb_num_029', v_remap_addr_addr_032', v_start_030', v_target_addr_addr_033', v_vmid', hst')),
-      exists lst', unmap_and_load_vm_image_loop_mid _N_ v_mb_num_029 v_remap_addr_addr_032 v_start_030 v_target_addr_addr_033 v_vmid lst = Some (v_mb_num_029', v_remap_addr_addr_032', v_start_030', v_target_addr_addr_033', v_vmid', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: unmap_and_load_vm_image_loop _N_ v_mb_num_029 v_remap_addr_addr_032 v_start_030 v_target_addr_addr_033 v_vmid hst = Some (v_mb_num_029', v_remap_addr_addr_032', v_start_030', v_target_addr_addr_033', v_vmid', hst')),
+    exists lst', unmap_and_load_vm_image_loop_mid _N_ v_mb_num_029 v_remap_addr_addr_032 v_start_030 v_target_addr_addr_033 v_vmid lst = Some (v_mb_num_029', v_remap_addr_addr_032', v_start_030', v_target_addr_addr_033', v_vmid', lst') /\ refrel hst' lst'.
+  Proof.
+    Local Transparent unmap_and_load_vm_image_loop_mid.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque unmap_and_load_vm_image_loop_mid unmap_and_load_vm_image_loop.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    repeat rewrite annotation_eq. reflexivity.
+    repeat rewrite annotation_eq. reflexivity.
+    constructor.
+  Qed.
 
   Lemma f_unmap_and_load_vm_image_refine_high:
     forall v_vmid v_target_addr v_remap_addr v_num lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: unmap_and_load_vm_image_spec v_vmid v_target_addr v_remap_addr v_num hst = Some hst'),
-      exists lst', unmap_and_load_vm_image_spec_mid v_vmid v_target_addr v_remap_addr v_num lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: unmap_and_load_vm_image_spec v_vmid v_target_addr v_remap_addr v_num hst = Some hst'),
+    exists lst', unmap_and_load_vm_image_spec_mid v_vmid v_target_addr v_remap_addr v_num lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
+      repeat eexists; try unfold refrel; solve_equality.
+    eapply f_unmap_and_load_vm_image_loop_refine_high in Hcond0.
+    destruct Hcond0 as (lst' & Hloop & Hrel).
+    erewrite Hloop. inv Hrel. reflexivity. constructor.
+  Qed.
 
   Lemma f_unmap_and_load_vm_image_refine:
     forall v_vmid v_target_addr v_remap_addr v_num lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: unmap_and_load_vm_image_spec v_vmid v_target_addr v_remap_addr v_num hst = Some hst'),
-      exists lst', unmap_and_load_vm_image_spec_low v_vmid v_target_addr v_remap_addr v_num lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      eapply f_unmap_and_load_vm_image_refine_high in Hspec; try unfold refrel; try reflexivity.
-      destruct Hspec as (lst' & Hspec & Hrel).
-      inv Hrel; try unfold refrel; try reflexivity.
-      eapply f_unmap_and_load_vm_image_refine_mid; try unfold refrel; try reflexivity; try eassumption.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: unmap_and_load_vm_image_spec v_vmid v_target_addr v_remap_addr v_num hst = Some hst'),
+    exists lst', unmap_and_load_vm_image_spec_low v_vmid v_target_addr v_remap_addr v_num lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    eapply f_unmap_and_load_vm_image_refine_high in Hspec; try unfold refrel; try reflexivity.
+    destruct Hspec as (lst' & Hspec & Hrel).
+    inv Hrel; try unfold refrel; try reflexivity.
+    eapply f_unmap_and_load_vm_image_refine_mid; try unfold refrel; try reflexivity; try eassumption.
+  Qed.
 
 End VMOpsAux_unmap_and_load_vm_image_RefProof.
 

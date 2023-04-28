@@ -122,15 +122,23 @@ Section VMOps_verify_and_load_images_CodeProof.
         destruct Hout as [(? & ? & Hout)|(? & Hout)]; [inv Hout|unfold Q in Hout; destruct Hout as (Hte0 & Hst0)].
         subst. eapply exec_drop_tempvar. eapply Hte0. eassumption.
       }
+      assert(forall n a b v c a' b' v' c', verify_and_load_images_loop_low n a b v c = Some (a', b', v', c') -> v = v').
+      { induction n. simpl. intros. inv H. reflexivity.
+        simpl. intros. simpl_hyp H. repeat destruct p. apply IHn in C1. subst.
+        autounfold with sem in *. destruct_spec H; reflexivity. }
+      exploit H. eassumption. intros. subst.
       subst.
-      eapply exec_func_call; try reflexivity; vcgen;
-        try eapply HLoop; try reflexivity; simpl; intros;
-        repeat match goal with
-        | H: context[if (?s =? ?v)%string then _ else _] |- _ =>
-            let Hs := fresh "Hs" in
-            let Hss := fresh "Hss" in
-            destruct (s =? v)%string eqn:Hs; simpl in *; try solve[inv H]
-        end; contra; vcgen.
+      eapply exec_func_call; try reflexivity.
+      vcgen. eapply HLoop; try reflexivity.
+      simpl; intros.
+      repeat match goal with
+             | H: context[if (?s =? ?v)%string then _ else _] |- _ =>
+                 let Hs := fresh "Hs" in
+                 let Hss := fresh "Hss" in
+                 destruct (s =? v)%string eqn:Hs; simpl in *; try solve[inv H]
+             end. reflexivity.
+      2: intro; contra. intro.
+      vcgen. 2: intro; contra. intros. vcgen.
     Qed.
 
 End VMOps_verify_and_load_images_CodeProof.

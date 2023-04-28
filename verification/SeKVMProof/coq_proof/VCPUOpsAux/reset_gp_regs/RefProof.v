@@ -65,6 +65,18 @@ Section VCPUOpsAux_reset_gp_regs_RefProof.
 
   Hint Unfold reset_gp_regs_spec_mid: spec.
 
+  Lemma search_loop:
+    forall n a b c d e vmid g a' b' c' d' e' vmid' g',
+      v_search_load_info_loop n a b c d e vmid g = Some (a', b', c', d', e', vmid', g') ->
+      vmid' = vmid.
+  Proof.
+    induction n. simpl. intros. inv H. reflexivity.
+    simpl. intros. simpl_hyp H. repeat destruct p. eapply IHn in C. subst.
+    autounfold with sem in *. destruct_spec H; reflexivity.
+  Qed.
+
+  Local Opaque v_search_load_info_loop.
+
   Lemma f_reset_gp_regs_refine_mid:
     forall v_vmid v_vcpuid lst hst hst'
            (Hrel: refrel hst lst)
@@ -73,7 +85,8 @@ Section VCPUOpsAux_reset_gp_regs_RefProof.
     Proof.
       intros; inv Hrel.
       autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
+      destruct_spec Hspec. exploit search_loop. eassumption. intro T. subst.
+      repeat solve_refproof;
         repeat eexists; try unfold refrel; solve_equality.
     Qed.
 

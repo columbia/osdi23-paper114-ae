@@ -131,6 +131,13 @@ Section VMOps_v_search_load_info_CodeProof.
             let Hss := fresh "Hss" in
             destruct (s =? v)%string eqn:Hs; simpl in *; try solve[inv H]
         end; contra; vcgen.
+      assert(forall n a b c d e f g a' b' c' d' e' f' g',
+                v_search_load_info_loop_low n a b c d e f g = Some (a', b', c', d', e', f', g') ->
+                f = f').
+      { induction n. simpl. intros. inv H0. reflexivity.
+        simpl. intros. simpl_hyp H0. repeat destruct p. apply IHn in C1. subst.
+        autounfold with sem in H0. destruct_spec H0; reflexivity. }
+      apply H0 in Hfinal. subst. assumption.
     Qed.
 
 End VMOps_v_search_load_info_CodeProof.

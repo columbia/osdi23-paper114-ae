@@ -842,6 +842,29 @@ Ltac solve_equality :=
   repeat
     (try_solve;
       match goal with
+      | [ |- ?f ?a ?b ?c ?d ?e ?g ?h ?i ?j ?k = ?f ?a' ?b' ?c' ?d' ?e' ?g' ?h' ?i' ?j' ?k'] =>
+          replace a with a' by solve_equality;
+          replace b with b' by solve_equality;
+          replace c with c' by solve_equality;
+          replace d with d' by solve_equality;
+          replace e with e' by solve_equality;
+          replace g with g' by solve_equality;
+          replace h with h' by solve_equality;
+          replace i with i' by solve_equality;
+          replace j with j' by solve_equality;
+          replace k with k' by solve_equality;
+          reflexivity
+      | [ |- ?f ?a ?b ?c ?d ?e ?g ?h ?i ?j = ?f ?a' ?b' ?c' ?d' ?e' ?g' ?h' ?i' ?j'] =>
+          replace a with a' by solve_equality;
+          replace b with b' by solve_equality;
+          replace c with c' by solve_equality;
+          replace d with d' by solve_equality;
+          replace e with e' by solve_equality;
+          replace g with g' by solve_equality;
+          replace h with h' by solve_equality;
+          replace i with i' by solve_equality;
+          replace j with j' by solve_equality;
+          reflexivity
       | [ |- ?f ?a ?b ?c ?d ?e ?g ?h ?i = ?f ?a' ?b' ?c' ?d' ?e' ?g' ?h' ?i'] =>
           replace a with a' by solve_equality;
           replace b with b' by solve_equality;

@@ -80,74 +80,93 @@ Section VCPUOpsAux_sync_dirty_to_shadow_RefProof.
 
   Definition sync_dirty_to_shadow_spec_mid (v_vmid: Z) (v_vcpuid: Z) (st: RData) : (option RData) :=
     rely ((((0 - ((4 * v_vmid) + v_vcpuid)) <= 0) /\ (((4 * v_vmid) + v_vcpuid) < 72)));
-    (anno (((31 - 0) = 31));
-    match ((sync_dirty_to_shadow_loop_mid (z_to_nat 31) false ((((st.(priv)).(e_shadow_ctxts)) @ ((4 * v_vmid) + v_vcpuid)).(e_dirty)) 0 v_vcpuid v_vmid st)) with
-    | (Some (__return__, v_call_0, v_i_17, v_vcpuid_0, v_vmid_0, st_1)) => (Some st_1)
-    | None => None
-    end).
+  (anno (((31 - 0) = 31));
+   match ((sync_dirty_to_shadow_loop_mid (z_to_nat 31) false ((((st.(priv)).(e_shadow_ctxts)) @ ((4 * v_vmid) + v_vcpuid)).(e_dirty)) 0 v_vcpuid v_vmid st)) with
+   | (Some (__return__, v_call_0, v_i_17, v_vcpuid_0, v_vmid_0, st_1)) => (Some st_1)
+   | None => None
+   end).
 
   Hint Unfold sync_dirty_to_shadow_spec_mid: spec.
 
   Lemma f_sync_dirty_to_shadow_loop_refine_mid:
     forall _N_ __return__ __return__' v_call v_call' v_i_016 v_i_016' v_vcpuid v_vcpuid' v_vmid v_vmid' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: sync_dirty_to_shadow_loop_mid _N_ __return__ v_call v_i_016 v_vcpuid v_vmid hst = Some (__return__', v_call', v_i_016', v_vcpuid', v_vmid', hst')),
-      exists lst', sync_dirty_to_shadow_loop_low _N_ __return__ v_call v_i_016 v_vcpuid v_vmid lst = Some (__return__', v_call', v_i_016', v_vcpuid', v_vmid', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: sync_dirty_to_shadow_loop_mid _N_ __return__ v_call v_i_016 v_vcpuid v_vmid hst = Some (__return__', v_call', v_i_016', v_vcpuid', v_vmid', hst')),
+    exists lst', sync_dirty_to_shadow_loop_low _N_ __return__ v_call v_i_016 v_vcpuid v_vmid lst = Some (__return__', v_call', v_i_016', v_vcpuid', v_vmid', lst') /\ refrel hst' lst'.
+  Proof.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque sync_dirty_to_shadow_loop_mid sync_dirty_to_shadow_loop_low.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; try destruct __return__'; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
+  Qed.
 
   Lemma f_sync_dirty_to_shadow_refine_mid:
     forall v_vmid v_vcpuid lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: sync_dirty_to_shadow_spec_mid v_vmid v_vcpuid hst = Some hst'),
-      exists lst', sync_dirty_to_shadow_spec_low v_vmid v_vcpuid lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: sync_dirty_to_shadow_spec_mid v_vmid v_vcpuid hst = Some hst'),
+    exists lst', sync_dirty_to_shadow_spec_low v_vmid v_vcpuid lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    eapply f_sync_dirty_to_shadow_loop_refine_mid in Hcond.
+    destruct Hcond as (lst' & Hloop & Hrel).
+    rewrite Hloop. destruct b; inv Hrel; reflexivity. constructor.
+  Qed.
 
   Lemma f_sync_dirty_to_shadow_loop_refine_high:
     forall _N_ __return__ __return__' v_call v_call' v_i_016 v_i_016' v_vcpuid v_vcpuid' v_vmid v_vmid' lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: sync_dirty_to_shadow_loop _N_ __return__ v_call v_i_016 v_vcpuid v_vmid hst = Some (__return__', v_call', v_i_016', v_vcpuid', v_vmid', hst')),
-      exists lst', sync_dirty_to_shadow_loop_mid _N_ __return__ v_call v_i_016 v_vcpuid v_vmid lst = Some (__return__', v_call', v_i_016', v_vcpuid', v_vmid', lst') /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: sync_dirty_to_shadow_loop _N_ __return__ v_call v_i_016 v_vcpuid v_vmid hst = Some (__return__', v_call', v_i_016', v_vcpuid', v_vmid', hst')),
+    exists lst', sync_dirty_to_shadow_loop_mid _N_ __return__ v_call v_i_016 v_vcpuid v_vmid lst = Some (__return__', v_call', v_i_016', v_vcpuid', v_vmid', lst') /\ refrel hst' lst'.
+  Proof.
+    Local Transparent sync_dirty_to_shadow_loop_mid.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque sync_dirty_to_shadow_loop_mid sync_dirty_to_shadow_loop.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    repeat rewrite annotation_eq. reflexivity.
+    repeat rewrite annotation_eq. reflexivity.
+    constructor.
+  Qed.
 
   Lemma f_sync_dirty_to_shadow_refine_high:
     forall v_vmid v_vcpuid lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: sync_dirty_to_shadow_spec v_vmid v_vcpuid hst = Some hst'),
-      exists lst', sync_dirty_to_shadow_spec_mid v_vmid v_vcpuid lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: sync_dirty_to_shadow_spec v_vmid v_vcpuid hst = Some hst'),
+    exists lst', sync_dirty_to_shadow_spec_mid v_vmid v_vcpuid lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat (solve_refproof; repeat rewrite annotation_eq);
+      repeat eexists; try unfold refrel; solve_equality.
+    eapply f_sync_dirty_to_shadow_loop_refine_high in Hcond.
+    destruct Hcond as (lst' & Hloop & Hrel).
+    erewrite Hloop. inv Hrel. reflexivity. constructor.
+  Qed.
 
   Lemma f_sync_dirty_to_shadow_refine:
     forall v_vmid v_vcpuid lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: sync_dirty_to_shadow_spec v_vmid v_vcpuid hst = Some hst'),
-      exists lst', sync_dirty_to_shadow_spec_low v_vmid v_vcpuid lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      eapply f_sync_dirty_to_shadow_refine_high in Hspec; try unfold refrel; try reflexivity.
-      destruct Hspec as (lst' & Hspec & Hrel).
-      inv Hrel; try unfold refrel; try reflexivity.
-      eapply f_sync_dirty_to_shadow_refine_mid; try unfold refrel; try reflexivity; try eassumption.
-    Qed.
+      (Hrel: refrel hst lst)
+      (Hspec: sync_dirty_to_shadow_spec v_vmid v_vcpuid hst = Some hst'),
+    exists lst', sync_dirty_to_shadow_spec_low v_vmid v_vcpuid lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    intros; inv Hrel.
+    eapply f_sync_dirty_to_shadow_refine_high in Hspec; try unfold refrel; try reflexivity.
+    destruct Hspec as (lst' & Hspec & Hrel).
+    inv Hrel; try unfold refrel; try reflexivity.
+    eapply f_sync_dirty_to_shadow_refine_mid; try unfold refrel; try reflexivity; try eassumption.
+  Qed.
 
 End VCPUOpsAux_sync_dirty_to_shadow_RefProof.
 
