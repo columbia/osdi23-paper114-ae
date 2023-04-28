@@ -153,7 +153,7 @@ To run the test:
 The script traveres all LLVM IR files and executes the two steps for each one. It counts the succeeded and failed functions as below:
 
 1. If a function only has declaration but no definition, `succeeded += 1`.
-2. If a function is converted without error (the function body will be non-empty), `succeeded += 1`.
+2. If a function is converted without error (the function body is not None), `succeeded += 1`.
 3. If the function conversion failed (due to unknown instructions/failed control flow graph conversion/other exceptions), `failed += 1`.
 
 After the test, for each LLVM IR file `**/*.ll`, a converted `**/*.v` will be created.
