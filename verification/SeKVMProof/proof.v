@@ -412,7 +412,7 @@ End Bottom.
 Section InlineAsms.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_LOAD: string := "load_RData".
   Definition LAYER_STORE: string := "store_RData".
   Definition LAYER_GET_REG: string := "get_reg_RData".
@@ -434,7 +434,7 @@ End InlineAsms.
 Section Accessors.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_LOAD: string := "load_RData".
   Definition LAYER_STORE: string := "store_RData".
   Definition LAYER_PRIMS: list string :=
@@ -535,7 +535,7 @@ End Accessors.
 Section Locks.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "acquire_lock_core" ::
     "acquire_lock_pt" ::
@@ -556,7 +556,7 @@ End Locks.
 Section S2PTAlloc.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "alloc_s2pt_pgd" ::
     "alloc_s2pt_pud" ::
@@ -568,7 +568,7 @@ End S2PTAlloc.
 Section S2PTWalk.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "walk_pgd" ::
     "walk_pmd" ::
@@ -583,7 +583,7 @@ End S2PTWalk.
 Section S2PTTreeOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "init_npt" ::
     "walk_npt" ::
@@ -645,7 +645,7 @@ End S2PTTreeOps.
 Section S2PTOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "init_s2pt" ::
     "clear_pfn_host" ::
@@ -658,7 +658,7 @@ End S2PTOps.
 Section SmmuPTAlloc.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "alloc_smmu_pgd_page" ::
     "alloc_smmu_pmd_page" ::
@@ -669,7 +669,7 @@ End SmmuPTAlloc.
 Section SmmuPTWalk.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "walk_smmu_pgd" ::
     "walk_smmu_pmd" ::
@@ -682,7 +682,7 @@ End SmmuPTWalk.
 Section SmmuPTTreeOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "init_smmu_pt" ::
     "walk_smmu_pt" ::
@@ -740,7 +740,7 @@ End SmmuPTTreeOps.
 Section SmmuPTOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "init_spt" ::
     "walk_spt" ::
@@ -753,7 +753,7 @@ End SmmuPTOps.
 Section MemRegion.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "mem_region_search" ::
     nil.
@@ -766,7 +766,7 @@ End MemRegion.
 Section PageIndex.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "get_s2_page_index" ::
     nil.
@@ -776,7 +776,7 @@ End PageIndex.
 Section PageManager.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "get_pfn_count" ::
     "get_pfn_map" ::
@@ -828,7 +828,7 @@ End PageManager.
 Section MemManager.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "assign_pfn_to_vm" ::
     "map_pfn_vm" ::
@@ -848,7 +848,7 @@ End MemManager.
 Section MemoryOpsAux.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "__clear_vm_range" ::
     "prot_and_map_vm_s2pt" ::
@@ -865,7 +865,7 @@ End MemoryOpsAux.
 Section VMOpsAux.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "get_vm_poweron" ::
     "set_vm_poweroff" ::
@@ -882,7 +882,7 @@ End VMOpsAux.
 Section MemoryOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "map_page_host" ::
     "__clear_vm_stage2_range" ::
@@ -913,7 +913,7 @@ End MemoryOps.
 Section VMOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "set_boot_info" ::
     "verify_and_load_images" ::
@@ -942,7 +942,7 @@ End VMOps.
 Section SmmuMemOpsAux.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "assign_pfn_to_smmu" ::
     "unmap_smmu_page" ::
@@ -958,7 +958,7 @@ End SmmuMemOpsAux.
 Section SmmuMemOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "__el2_alloc_smmu_pgd" ::
     "__el2_free_smmu_pgd" ::
@@ -980,7 +980,7 @@ End SmmuMemOps.
 Section SmmuAccess.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "handle_smmu_cb_access" ::
     "handle_smmu_global_access" ::
@@ -991,7 +991,7 @@ End SmmuAccess.
 Section SmmuReadWrite.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "handle_smmu_read" ::
     "handle_smmu_write" ::
@@ -1004,7 +1004,7 @@ End SmmuReadWrite.
 Section SmmuOpsAux.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "handle_host_mmio" ::
     "smmu_assign_page" ::
@@ -1019,7 +1019,7 @@ End SmmuOpsAux.
 Section SmmuOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "v_el2_arm_lpae_map" ::
     "__el2_arm_lpae_clear" ::
@@ -1042,7 +1042,7 @@ End SmmuOps.
 Section VCPUOpsAux.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "reset_gp_regs" ::
     "sync_dirty_to_shadow" ::
@@ -1057,7 +1057,7 @@ End VCPUOpsAux.
 Section VCPUPrep.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "prep_hvc" ::
     "prep_wfx" ::
@@ -1072,7 +1072,7 @@ End VCPUPrep.
 Section VCPUOps.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "restore_shadow_kvm_regs" ::
     "save_shadow_kvm_regs" ::
@@ -1086,7 +1086,7 @@ End VCPUOps.
 Section CtxtSwitch.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "__activate_vm" ::
     "__host_el2_restore_state" ::
@@ -1097,7 +1097,7 @@ End CtxtSwitch.
 Section GuestHandler.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "handle_pvops" ::
     nil.
@@ -1107,7 +1107,7 @@ End GuestHandler.
 Section GuestExit.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "fixup_guest_exit" ::
     nil.
@@ -1117,7 +1117,7 @@ End GuestExit.
 Section VCPURun.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "__kvm_vcpu_run_nvhe" ::
     nil.
@@ -1136,7 +1136,7 @@ End VCPURun.
 Section TrapHandler.
 
   Definition LAYER_DATA := RData.
-  Definition LAYER_CODE: string := "../code/SeKVM.json".
+  Definition LAYER_CODE: string := "./SeKVM.json".
   Definition LAYER_PRIMS: list string :=
     "handle_host_hvc" ::
     "handle_host_stage2_fault" ::

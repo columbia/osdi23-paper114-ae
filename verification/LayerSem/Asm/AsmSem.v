@@ -4,7 +4,6 @@ Require Import Notations.
 Require Import AsmInsn.
 Require Import LayerSem.IRSem.
 Require Import LayerSem.IR.
-Require Import RecordUpdate.
 
 Section Semantics.
 

@@ -103,9 +103,9 @@ def spec_transformer(proj, specs):
             spec.body = new_spec
 
         print(f"transform [{spec.name}] using time: ", time.time() - now)
-        #print("="*20)
-        #print(spec)
-        #print("="*20)
+        print("="*20)
+        print(spec)
+        print("="*20)
 
     return specs
     
