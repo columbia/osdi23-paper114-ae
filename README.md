@@ -74,7 +74,7 @@ for the `Bottom` layer and we mostly rely on AutoV to generate specifications fo
 
 This step will run roughly 2 hours with 4 processes and 32 GB memory. AutoV currently creates `TOTAL_CORE_NUM / 2` processes to run.
 
-(Optionally) You can generate the `SeKVM.json` file from the C source code. To do this, first set up cross-compiler as below:
+(Optional) You can generate the `SeKVM.json` file from the C source code. To do this, first set up cross-compiler as below:
 
     export ARCH=arm64
     export CROSS_COMPILE=aarch64-linux-gnu-
