@@ -20,7 +20,7 @@ This part is tested on Ubuntu 22.04 x86_64, with 8 CPU cores and 32GB memory.  W
         opam init --compiler=4.13.1
         opam install ocamlbuild coq.8.16.1
 
-You may need to add `~/.opam/4.13.1/bin/` to `PATH`. Try `coqc -v` to see if Coq is installed properly.
+You may need to add `~/.opam/4.13.1/bin/` to `PATH` manually. Try `coqc -v` to see if Coq is installed properly.
 
 2. Clone the repo and enter `verification/` folder:
 
