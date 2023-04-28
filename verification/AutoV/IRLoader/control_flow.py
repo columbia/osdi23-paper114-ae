@@ -521,7 +521,6 @@ def control_flow_conversion(blocks):
             if succ: break
 
         if not succ:
-            print("Fail to convert")
             return []
 
     # print("Successful")

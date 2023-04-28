@@ -1,7 +1,9 @@
 # AutoV: Scaling Machine-Checkable Verification for Large System Software
 
-This artifact consists of two parts. The first part demonstrates how to leverage AutoV framework to generate
-specifications and proofs for SeKVM. The second part evaluates the performance of our modified SeKVM.
+This artifact consists of three parts. 
+The first part demonstrates how to leverage AutoV framework to generate specifications and proofs for SeKVM. 
+The second part demonstrates the ability of AutoV to translate LLVM IR files to Coq.
+The third part evaluates the performance of our modified SeKVM.
 
 ## Part 1. Verifying SeKVM with AutoV
 
@@ -13,7 +15,7 @@ This part is tested on Ubuntu 22.04 x86_64, with 8 CPU cores and 32GB memory.  W
 
         sudo apt install python3 python3-pip opam gcc-aarch64-linux-gnu flex bison libssl-dev
 
-        pip install z3-solver antlr4-python3-runtime===4.12.0
+        pip install z3-solver antlr4-python3-runtime===4.12.0 tqdm
 
         opam init --compiler=4.13.1
         opam install ocamlbuild coq.8.16.1
@@ -129,7 +131,31 @@ This artifact also includes a completed coq proof for SeKVM, modified from the g
 You can enter this folder and validate the proof by compilation:
     
     cd verification/SeKVMProof/coq_proof
-    make -j6
+    make -j4
 
-## Part 2. Performance Evaluation of SeKVM
+Note: Coq compilation may consume huge memory. Try smaller parallel number if out of memory.
 
+## Part 2. Converting LLVM IR to Coq
+
+Before following the instructions below, please make sure the developement environment is set up (See Part 1. Step 1.)
+
+We need two steps to convert a LLVM IR file to Coq. First, we run `ir2json` to parse a LLVM IR file to json. 
+Then, we use `AutoV.IRLoader.irloader.parse_module` to load the json file and convert LLVM IR to Coq representations.
+
+To evaluate this functionality, we pre-compiled five open-source projects and obtained the LLVM IR files.
+Those are `linux`, `mbedtls`, `memcached`, `openssl`, and `redis`.
+The LLVM IR files are in `verification/TestIR2Coq/`. We also provide a script to test the conversion for all IR files.
+To run the test:
+
+    cd verification/TestIR2Coq
+    python3 test_conversion.py
+
+The script traveres all LLVM IR files and executes the two steps for each one. It counts the succeeded and failed functions as below:
+
+1. If a function only has declaration but no definition, `succeeded += 1`.
+2. If a function is converted without error (the function body will be non-empty), `succeeded += 1`.
+3. If the function conversion failed (due to unknown instructions/failed control flow graph conversion/other exceptions), `failed += 1`.
+
+After the test, for each LLVM IR file `**/*.ll`, a converted `**/*.v` will be created.
+
+## Part 3. Performance Evaluation of SeKVM

@@ -34,7 +34,7 @@ def parse_type(typ):
         struct = []
         for st in typ["struct"]:
             struct.append(parse_type(st))
-        return TStruct(struct)
+        return TStruct(struct, 0)
     elif typ["type"] == "array":
         subtype = parse_type(typ["subtype"])
         length = int(typ["length"])
@@ -84,6 +84,8 @@ def parse_op(op):
         "urem": Op.OUrem,
         "xor": Op.OXor,
         "trunc": Op.OTrunc,
+        "xchg": Op.OXchg,
+        "select": Op.OSelect,
      } [op]
 
 def parse_ordering(order):
@@ -185,7 +187,7 @@ def parse_instruction(inst):
     elif inst["type"] == "CmpXchgInst":
         return ICmpXchg(parse_type(inst["assign"]["type"]), inst["assign"]["value"], parse_value(inst["ptr"]), 
                           parse_value(inst["cmp"]), parse_value(inst["new"]), 
-                          parse_ordering(inst["succ_ordering"]), parse_ordering(inst["fail_ordering"]), inst["align"])
+                          parse_ordering(inst["succ_ordering"]), parse_ordering(inst["failure_ordering"]), inst["align"])
     elif inst["type"] == "ExtractElementInst":
         return IExtractElem(parse_type(inst["assign"]["type"]), inst["assign"]["value"], 
                             parse_value(inst["src"]), parse_value(inst["index"]))
@@ -318,7 +320,10 @@ def parse_function(func):
     if not func.is_decl:
         loc = count_ir_loc(func)
         if DEBUG: print(func.fname)
-        body = control_flow_conversion(func.blocks)
+        try:
+            body = control_flow_conversion(func.blocks)
+        except:
+            body = None
         func = CFunction(func.fname, func.rettype, func.args, func.is_decl, body)
     else:
         func = CFunction(func.fname, func.rettype, func.args, func.is_decl, None)
@@ -331,7 +336,6 @@ def parse_function(func):
             fnames.append(func.fname)
         return func
     else:
-        print("Unable to resolve function ", fname)
         return None
 
 def parse_debug_info(module):

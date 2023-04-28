@@ -1,0 +1,45 @@
+; ModuleID = 'crypto/rsa/rsa_mp_names.c'
+source_filename = "crypto/rsa/rsa_mp_names.c"
+target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
+target triple = "x86_64-unknown-linux-gnu"
+
+@.str = private unnamed_addr constant [12 x i8] c"rsa-factor1\00", align 1
+@.str.1 = private unnamed_addr constant [12 x i8] c"rsa-factor2\00", align 1
+@.str.2 = private unnamed_addr constant [12 x i8] c"rsa-factor3\00", align 1
+@.str.3 = private unnamed_addr constant [12 x i8] c"rsa-factor4\00", align 1
+@.str.4 = private unnamed_addr constant [12 x i8] c"rsa-factor5\00", align 1
+@.str.5 = private unnamed_addr constant [12 x i8] c"rsa-factor6\00", align 1
+@.str.6 = private unnamed_addr constant [12 x i8] c"rsa-factor7\00", align 1
+@.str.7 = private unnamed_addr constant [12 x i8] c"rsa-factor8\00", align 1
+@.str.8 = private unnamed_addr constant [12 x i8] c"rsa-factor9\00", align 1
+@.str.9 = private unnamed_addr constant [13 x i8] c"rsa-factor10\00", align 1
+@ossl_rsa_mp_factor_names = local_unnamed_addr global [11 x i8*] [i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str, i32 0, i32 0), i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.1, i32 0, i32 0), i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.2, i32 0, i32 0), i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.3, i32 0, i32 0), i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.4, i32 0, i32 0), i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.5, i32 0, i32 0), i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.6, i32 0, i32 0), i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.7, i32 0, i32 0), i8* getelementptr inbounds ([12 x i8], [12 x i8]* @.str.8, i32 0, i32 0), i8* getelementptr inbounds ([13 x i8], [13 x i8]* @.str.9, i32 0, i32 0), i8* null], align 16
+@.str.10 = private unnamed_addr constant [14 x i8] c"rsa-exponent1\00", align 1
+@.str.11 = private unnamed_addr constant [14 x i8] c"rsa-exponent2\00", align 1
+@.str.12 = private unnamed_addr constant [14 x i8] c"rsa-exponent3\00", align 1
+@.str.13 = private unnamed_addr constant [14 x i8] c"rsa-exponent4\00", align 1
+@.str.14 = private unnamed_addr constant [14 x i8] c"rsa-exponent5\00", align 1
+@.str.15 = private unnamed_addr constant [14 x i8] c"rsa-exponent6\00", align 1
+@.str.16 = private unnamed_addr constant [14 x i8] c"rsa-exponent7\00", align 1
+@.str.17 = private unnamed_addr constant [14 x i8] c"rsa-exponent8\00", align 1
+@.str.18 = private unnamed_addr constant [14 x i8] c"rsa-exponent9\00", align 1
+@.str.19 = private unnamed_addr constant [15 x i8] c"rsa-exponent10\00", align 1
+@ossl_rsa_mp_exp_names = local_unnamed_addr global [11 x i8*] [i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.10, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.11, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.12, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.13, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.14, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.15, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.16, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.17, i32 0, i32 0), i8* getelementptr inbounds ([14 x i8], [14 x i8]* @.str.18, i32 0, i32 0), i8* getelementptr inbounds ([15 x i8], [15 x i8]* @.str.19, i32 0, i32 0), i8* null], align 16
+@.str.20 = private unnamed_addr constant [17 x i8] c"rsa-coefficient1\00", align 1
+@.str.21 = private unnamed_addr constant [17 x i8] c"rsa-coefficient2\00", align 1
+@.str.22 = private unnamed_addr constant [17 x i8] c"rsa-coefficient3\00", align 1
+@.str.23 = private unnamed_addr constant [17 x i8] c"rsa-coefficient4\00", align 1
+@.str.24 = private unnamed_addr constant [17 x i8] c"rsa-coefficient5\00", align 1
+@.str.25 = private unnamed_addr constant [17 x i8] c"rsa-coefficient6\00", align 1
+@.str.26 = private unnamed_addr constant [17 x i8] c"rsa-coefficient7\00", align 1
+@.str.27 = private unnamed_addr constant [17 x i8] c"rsa-coefficient8\00", align 1
+@.str.28 = private unnamed_addr constant [17 x i8] c"rsa-coefficient9\00", align 1
+@ossl_rsa_mp_coeff_names = local_unnamed_addr global [10 x i8*] [i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.20, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.21, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.22, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.23, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.24, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.25, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.26, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.27, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @.str.28, i32 0, i32 0), i8* null], align 16
+
+!llvm.module.flags = !{!0, !1, !2}
+!llvm.ident = !{!3}
+
+!0 = !{i32 1, !"wchar_size", i32 4}
+!1 = !{i32 7, !"PIC Level", i32 2}
+!2 = !{i32 7, !"uwtable", i32 1}
+!3 = !{!"clang version 14.0.0"}

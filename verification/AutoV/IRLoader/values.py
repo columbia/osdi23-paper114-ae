@@ -46,6 +46,8 @@ class Op(Enum):
     OUIToFP = auto()
     OZExt = auto()
     OGetElementPtr = auto()
+    OXchg = auto()
+    OSelect = auto()
 
     def to_coq(self, ty=None) -> str:
         if self in [Op.OBitCast, Op.OFPExt, Op.OFPToSI, Op.OFPToUI, Op.OFPTrunc, Op.OIntToPtr, 
@@ -54,6 +56,9 @@ class Op(Enum):
         return self.name
 
 class IRValue:
+    def __init__(self) -> None:
+        self.typ = IRType()
+
     def to_coq(self) -> str:
         return "UNSUPPORTED_VALUE"
 
