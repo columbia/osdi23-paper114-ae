@@ -65,6 +65,7 @@ Section MemoryOps_v_post_handle_shadow_s2pt_fault_RefProof.
            (Hspec: v_post_handle_shadow_s2pt_fault_spec_mid v_vmid v_vcpuid hst = Some hst'),
       exists lst', v_post_handle_shadow_s2pt_fault_spec_low v_vmid v_vcpuid lst = Some lst' /\ refrel hst' lst'.
     Proof.
+      Local Opaque prot_and_map_vm_s2pt_loop.
       intros; inv Hrel.
       autounfold with spec in *; autounfold with sem in *; simpl in *.
       destruct_spec Hspec; repeat solve_refproof;

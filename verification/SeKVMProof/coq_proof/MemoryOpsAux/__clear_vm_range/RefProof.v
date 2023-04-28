@@ -50,10 +50,15 @@ Section MemoryOpsAux___clear_vm_range_RefProof.
            (Hspec: __clear_vm_range_loop_mid _N_ v_num_07 v_pfn_06 v_vmid hst = Some (v_num_07', v_pfn_06', v_vmid', hst')),
       exists lst', __clear_vm_range_loop_low _N_ v_num_07 v_pfn_06 v_vmid lst = Some (v_num_07', v_pfn_06', v_vmid', lst') /\ refrel hst' lst'.
     Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque __clear_vm_range_loop_mid __clear_vm_range_loop_low.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
     Qed.
 
   Lemma f___clear_vm_range_refine_mid:
@@ -62,10 +67,14 @@ Section MemoryOpsAux___clear_vm_range_RefProof.
            (Hspec: __clear_vm_range_spec_mid v_vmid v_start v_size hst = Some hst'),
       exists lst', __clear_vm_range_spec_low v_vmid v_start v_size lst = Some lst' /\ refrel hst' lst'.
     Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
+
+    intros; inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    eapply f___clear_vm_range_loop_refine_mid in Hcond0.
+    destruct Hcond0 as (lst' & Hloop & Hrel).
+    rewrite Hloop. inv Hrel. reflexivity. constructor.
     Qed.
 
   Lemma f___clear_vm_range_loop_refine_high:
@@ -74,10 +83,16 @@ Section MemoryOpsAux___clear_vm_range_RefProof.
            (Hspec: __clear_vm_range_loop _N_ v_num_07 v_pfn_06 v_vmid hst = Some (v_num_07', v_pfn_06', v_vmid', hst')),
       exists lst', __clear_vm_range_loop_mid _N_ v_num_07 v_pfn_06 v_vmid lst = Some (v_num_07', v_pfn_06', v_vmid', lst') /\ refrel hst' lst'.
     Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
+    Local Transparent __clear_vm_range_loop_mid.
+    induction _N_. simpl. intros. inv Hrel. repeat eexists. assumption.
+    intros; inv Hrel.
+    simpl in *. Local Opaque __clear_vm_range_loop_mid __clear_vm_range_loop.
+    simpl_hyp Hspec. repeat destruct p. eapply IH_N_ in C.
+    destruct C as (lst' & Hloop & Hrel). rewrite Hloop. inv Hrel.
+    autounfold with spec in *; autounfold with sem in *; simpl in *.
+    destruct_spec Hspec; repeat solve_refproof;
+      repeat eexists; try unfold refrel; solve_equality.
+    constructor.
     Qed.
 
   Lemma f___clear_vm_range_refine_high:

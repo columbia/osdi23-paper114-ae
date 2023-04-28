@@ -5,7 +5,7 @@ Require Import GlobalDefs.
 Local Open Scope string_scope.
 Local Open Scope Z_scope.
 
-Parameter init_smmupt : (ZMap.t (option Z)).
+Definition init_smmupt : (ZMap.t (option Z)) := ZMap.init None.
 
 Section SmmuPTTreeOps_Spec.
 

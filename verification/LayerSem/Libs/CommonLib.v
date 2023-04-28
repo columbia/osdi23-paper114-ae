@@ -972,6 +972,7 @@ Ltac sstep :=
   | [ |- out_return _ <> out_break _ -> _ ] => intros
   | [ |- out_return _ <> out_break _ -> _ ] => intros
   | [ |- _ /\ _ ] => split
+  | _ => idtac
   end; grewrite; simpl_arith; simpl; try_refl; try eassumption.
 
 

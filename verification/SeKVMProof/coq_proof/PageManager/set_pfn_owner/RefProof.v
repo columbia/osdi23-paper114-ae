@@ -2,7 +2,6 @@ Require Import Accessors.Spec.
 Require Import CommonDeps.
 Require Import DataTypes.
 Require Import GlobalDefs.
-Require Import LayerSem.Libs.Zutils.div_mod_to_equations.
 Require Import PageIndex.Layer.
 Require Import PageIndex.Spec.
 Require Import PageManager.Layer.
@@ -19,16 +18,55 @@ Section PageManager_set_pfn_owner_RefProof.
   Context `{int_ptr: IntPtrCast}.
 
   Lemma f_set_pfn_owner_refine:
-    forall v_pfn v_vmid lst hst hst'
-           (Hrel: refrel hst lst)
-           (Hspec: set_pfn_owner_spec v_pfn v_vmid hst = Some hst'),
-      exists lst', set_pfn_owner_spec_low v_pfn v_vmid lst = Some lst' /\ refrel hst' lst'.
-    Proof.
-      intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
-        repeat eexists; try unfold refrel; solve_equality.
-    Qed.
+    forall _pfn _vmid lst hst hst'
+      (Hrel: refrel hst lst)
+      (Hspec: set_pfn_owner_spec _pfn _vmid hst = Some hst'),
+    exists lst', set_pfn_owner_spec_low _pfn _vmid lst = Some lst' /\ refrel hst' lst'.
+  Proof.
+    intros. inv Hrel. inv same_rel. inv s2page_rel; simpl in *.
+    unfold set_pfn_owner_spec, set_pfn_owner_spec_low in *.
+    autounfold with sem in *. autounfold with proof in *.
+    rewrite n_shiftl_12. replace (1 << 28 - 1) with 268435455 in * by reflexivity.
+    repeat simpl_hyp Hspec; inv Hspec; repeat extract_prop.
+    rewrite id_locks in Prop1.
+    exploit (page_index_succ (_pfn * 4096) lst).
+    autounfold with proof.
+    assumption. lia.
+    intros (idx & Hget_idx & Hidx).
+    rewrite Hget_idx.
+    destruct (idx =? -1) eqn:idx_inv.
+    bool_rel.
+    pose proof (s2page_map _ _ Hget_idx) as M. destruct M as (M1 & M2 & M3).
+    apply M1 in idx_inv. contra.
+    destruct Hidx as [|Hidx]. lia.
+    unfold set_s2_page_vmid_spec.
+    autounfold with sem; autounfold with proof.
+    extract_if. lia. extract_if. assumption.
+    eexists; split. reflexivity.
+    constructor. constructor; simpl; assumption.
+    constructor; simpl; try assumption.
+    intros.
+    assert(Hs2p': get_s2_page_index_spec (pfn * 4096) lst = Some (idx0, lst)).
+    { eapply s2_page_index_same. 2: apply Hidx0. simpl. reflexivity. }
+    pose proof Hs2p'.
+    apply s2page_map in H.
+    destruct H as (I1 & I2 & I3 & Isame).
+    destruct (idx0 =? idx) eqn:Hidx_eq; bool_rel.
+    - assert(Hpfn_eq: pfn = _pfn).
+      { eapply (page_index_unique lst pfn _pfn idx0 idx); try eassumption. lia. }
+      subst. repeat rewrite ZMap.gss.
+      simpl. split. lia. split. lia. split. lia.
+      intros. rewrite Isame. reflexivity. assumption.
+    - rewrite (ZMap.gso _ _ Hidx_eq).
+      assert(Hpfn_eq: pfn <> _pfn).
+      { red; intro T. eapply (page_index_unique lst pfn _pfn idx0 idx) in T; try eassumption. contra.
+        assert(idx0 <> -1).
+        { red; intros. subst. destruct I1 as (I11 & I12). rewrite I11 in Prop0. contra. reflexivity. }
+        exploit (page_index_succ (pfn * 4096) lst); try assumption; try lia.
+        intros (? & ? & ?). frewrite. inv H1. lia.
+      }
+      rewrite (ZMap.gso _ _ Hpfn_eq).
+      auto.
+  Qed.
 
 End PageManager_set_pfn_owner_RefProof.
-

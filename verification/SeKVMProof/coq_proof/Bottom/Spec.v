@@ -162,7 +162,7 @@ Section Bottom_Spec.
     let smmuid := (smmu_id v_cbndx v_index) in
     let ttbr := ((((st.(priv)).(e_smmu_cfg)) @ smmuid).(e_hw_ttbr)) in
     rely (((is_smmu_pgdp ttbr ((st.(shared)).(e_smmupts))) = true));
-    let pool' := (clear_zmap_range (z_to_nat 4096) ttbr (((st.(shared)).(e_smmupts)).(e_smmu_pgd_pool))) in
+    let pool' := (clear_zmap_range (z_to_nat 8192) ttbr (((st.(shared)).(e_smmupts)).(e_smmu_pgd_pool))) in
     (Some (st.[shared].[e_smmupts].[e_smmu_pgd_pool] :< pool')).
 
   Definition set_host_regs_spec (v_nr: Z) (v_value: Z) (st: RData) : (option RData) :=
