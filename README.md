@@ -96,8 +96,40 @@ Then, using the `ir2json` tool from Step 1.3 to convert `SeKVM.ll` to `SeKVM.jso
     
 You may compare and check that the generated `SeKVM.json` is identical with the one in `verification/SeKVMProof/`.
 
-### Step 3. 
+### Step 3. Check the SeKVM Proof
 
+Once finishing Step 2, you may find the generated Coq project at `verification/SeKVMProof/coq_proof_gen/`.
+The project is organized as:
+
+    /Code.v  
+          -- the generated Coq representation of SeKVM source code
+    /Datatypes.v  
+          -- the data structure definitions (derived from `SeKVMProof/datatypes.v`)
+    /GlobalDefs.v  
+          -- constant definitions and common helper functions defined for all layers 
+             (mainly derived from `SeKVMProof/constant.v`)
+    /LAYER_NAME/Layer.v
+          -- layer definition (auto-generated)
+    /LAYER_NAME/Spec.v
+          -- high-level specifications of the functions in the layer 
+             (human-provided or auto-generated)
+    /LAYER_NAME/RefineRel.v
+          -- refinement relation between this layer and the layer below 
+            (generated, can be modified manually)
+    /LAYER_NAME/FUNCTION_NAME/LowSpec.v
+          -- low-level specification for the function (auto-generated)
+    /LAYER_NAME/FUNCTION_NAME/CodeProof.v
+          -- identical refinement proof between the source code and the low-level specification 
+             (auto-generated proof with minor manual fix)
+    /LAYER_NAME/FUNCTION_NAME/RefProof.v
+          -- lifting refinement proof between low-level specification and high-level specification 
+             (auto-generated proof and manual proof)
+
+This artifact also includes a completed coq proof for SeKVM, modified from the generated one, at `verification/SeKVMProof/coq_proof/`.
+You can enter this folder and validate the proof by compilation:
+    
+    cd verification/SeKVMProof/coq_proof
+    make -j6
 
 ## Part 2. Performance Evaluation of SeKVM
 
