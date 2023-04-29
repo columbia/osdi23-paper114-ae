@@ -18,7 +18,7 @@ Section SmmuPTTreeOps_init_smmu_pt_RefProof.
 
   Lemma of_nat_S_n:
     forall n, Z.of_nat (S n) = Z.of_nat n + 1.
-  Admitted.
+  Proof. lia. Qed.
 
   Lemma f_init_smmu_pt_refine:
     forall _cbndx _num lst hst hst'

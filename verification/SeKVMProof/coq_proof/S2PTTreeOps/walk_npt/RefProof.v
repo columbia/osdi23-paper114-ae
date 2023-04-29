@@ -38,7 +38,8 @@ Section S2PTTreeOps_walk_npt_RefProof.
     clear Prop1.
     assert(vttbr_eq_pool_start: (e_vttbr ((e_s2pts (shared lst)) @ _vmid)) & 281474976706560 = e_page_pool_start ((e_s2pts (shared lst)) @ _vmid)).
     { rewrite vttbr_rel in Prop0.
-      rewrite vttbr_val; autounfold with proof in *. rewrite pool_val; try lia. rewrite phys_page_exp2_48; try lia. }
+      rewrite vttbr_val; autounfold with proof in *. rewrite pool_val; try lia. rewrite phys_page_exp2_48; try lia.
+      apply phys_page_id_iff. lia. lia. solve_phys_page_mod. }
     assert(pool_start_value: e_page_pool_start ((e_s2pts (shared lst)) @ _vmid) = START + _vmid * 33550336).
     { rewrite pool_val; autounfold with proof in *. lia. lia. }
     rewrite pool_start_value in *.

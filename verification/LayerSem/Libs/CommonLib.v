@@ -460,11 +460,59 @@ Axiom land_leN_if:
 Axiom lor_leN_if:
   forall a b N (Hpa: 0 <= a) (Hpb: 0 <= b)  (Hab: a + b <= N), Z.lor a b <= N.
 
-Axiom shiftl_leN_if:
+Lemma shiftl_leN_if:
   forall a b N (Hpa: 0 <= a) (Ha: a * 281474976710656 <= N) (Hb1: 0 <= b) (Hb2: b <= 48), Z.shiftl a b <= N.
+Proof.
+	intros.
+	assert (a << b = a * 2 ^ b). {
+		apply Z.shiftl_mul_pow2. easy.
+	}
+	rewrite H.
+	assert (2 ^ 48 = 281474976710656) by lia.
+	assert (2 ^ b <= 2 ^ 48).
+	assert (0 < 2 <= 2) by lia.
+	pose proof (Z.pow_le_mono 2 b 2 48 H1 Hb2). easy.
+	rewrite H0 in H1.
+	assert (a * 2^b <= a * 281474976710656). {
+		pose proof (Z.mul_le_mono_nonneg_l (2^b) 281474976710656 a Hpa H1). easy.
+	}
+	lia.
+Qed.
 
-Axiom shiftr_leN_if:
+Lemma shift_n_le :
+	forall a n, 0 <= a -> n > 0 -> a >> n <= a.
+Proof.
+  intros a n Ha Hn.
+  assert (2 ^ n > 0) as H2n by lia.
+  assert (0 <= n) by lia.
+  pose proof (Z.shiftr_div_pow2 a n H).
+  rewrite H0.
+  assert (2 ^ n > 0) by lia.
+
+  assert (a <= (2 ^ n) * a). {
+	assert (1 <= 2 ^ n) by lia.
+	pose proof (Z.mul_le_mono_nonneg_r 1 (2^n) a Ha H2).
+	lia.
+  }
+  assert (0 < 2 ^ n) by lia.
+  pose proof (Z.div_le_mono a (2^n * a) (2^n) H3 H2).
+  assert (2 ^ n * a = a * 2 ^ n) by lia.
+  rewrite H5 in H4.
+  rewrite Z.div_mul in H4.
+  lia.
+  lia.
+Qed.
+
+Lemma shiftr_leN_if:
   forall a b N (Hpa: 0 <= a) (Ha: a <= N) (Hb: 0 <= b), Z.shiftr a b <= N.
+Proof.
+	intros.
+	induction b.
+	-rewrite Z.shiftr_0_r. easy.
+	-assert (Z.pos p > 0) by lia. pose proof (shift_n_le a (Z.pos p) Hpa H).
+	 lia.
+	-now assert (Z.neg p < 0).
+Qed.
 
 Lemma mod_ge0_if:
   forall a b, 0 < b -> 0 <= a mod b.
@@ -1285,7 +1333,7 @@ Ltac destruct_spec H :=
               end;
             repeat (grewrite; reflexivity)
             |
-              reflexivity 
+              reflexivity
             ]
         end
       ]; solve_equality
