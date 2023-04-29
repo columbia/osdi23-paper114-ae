@@ -1,5 +1,5 @@
 Definition PROJ_NAME: string := "SeKVM".
-Definition PROJ_BASE: string := "./coq_proof_gen".
+Definition PROJ_BASE: string := "./ProofGen".
 
 Include "datatypes.v".
 Include "constant.v".

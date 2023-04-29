@@ -63,7 +63,7 @@ Now, we are ready to generate the Coq verification project for SeKVM using AutoV
 
 This command loads the configuration file `SeKVMProof/proof.v` and generates a Coq project. In `SeKVMProof/proof.v`,
 we first define `PROJ_NAME` and `PROJ_BASE`. `PROJ_BASE` is the root path of the Coq project to be generated. It is
-set to `./coq_proof_gen` so you will find the generated Coq project in `verification/SeKVMProof/coq_proof_gen`.
+set to `./ProofGen` so you will find the generated Coq project in `verification/SeKVMProof/ProofGen`.
 Then, the configuration file imports content from other files `datatypes.v`, `constant.v`, and `load_store.v`. They
 all located in `SeKVMProof/` folder. After that, we define a list of "Section"s. Each section corresponds to a layer.
 Noticeably, in each section, `LAYER_CODE` specifies the path to the SeKVM source code (parsed LLVM IR, see (Optionally)
@@ -100,7 +100,7 @@ You may compare and check that the generated `SeKVM.json` is identical with the 
 
 ### Step 3. Check the SeKVM Proof
 
-Once finishing Step 2, you may find the generated Coq project at `verification/SeKVMProof/coq_proof_gen/`.
+Once finishing Step 2, you may find the generated Coq project at `verification/SeKVMProof/ProofGen/`.
 The project is organized as:
 
     /Code.v  
@@ -127,10 +127,10 @@ The project is organized as:
           -- lifting refinement proof between low-level specification and high-level specification 
              (auto-generated proof and manual proof)
 
-This artifact also includes a completed coq proof for SeKVM, modified from the generated one, at `verification/SeKVMProof/coq_proof/`.
+This artifact also includes a completed coq proof for SeKVM, modified from the generated one, at `verification/SeKVMProof/Proof/`.
 You can enter this folder and validate the proof by compilation:
     
-    cd verification/SeKVMProof/coq_proof
+    cd verification/SeKVMProof/Proof
     make -j4
 
 Note: Coq compilation may consume huge memory. Try smaller parallel number if out of memory.
