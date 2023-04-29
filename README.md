@@ -158,7 +158,7 @@ After the test, for each LLVM IR file `**/*.ll`, a converted `**/*.v` will be cr
 
 ## Part 3. Performance Evaluation of SeKVM
 As described in Section 6 in paper 114, we verified an updated version of an
-open-source KVM hypervisor, [SeKVM](https://github.com/verigu/vrm), using Spoq.
+open-source KVM hypervisor, [SeKVM](https://github.com/verigu/vrm), using AutoV.
 The updated version now runs on Raspberry Pi 4B.  We provide the same testbed
 as described in the paper for reviewers to evaluate the performance.  We also
 provide instructions to build and install SeKVM from scratch in case reviewers
