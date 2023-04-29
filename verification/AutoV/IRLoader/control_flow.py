@@ -521,7 +521,7 @@ def control_flow_conversion(blocks):
             if succ: break
 
         if not succ:
-            return []
+            return None
 
     # print("Successful")
     return list(nodes.values())[0]["insts"]
