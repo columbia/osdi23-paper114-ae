@@ -174,8 +174,78 @@ Section Accessors_get_shadow_ctxt_RefProof.
       exists lst', get_shadow_ctxt_spec_low v_vmid v_vcpuid v_index lst = Some (res, lst') /\ refrel hst' lst'.
     Proof.
       intros; inv Hrel.
-      autounfold with spec in *; autounfold with sem in *; simpl in *.
-      destruct_spec Hspec; repeat solve_refproof;
+      autounfold with spec in Hspec; autounfold with sem in Hspec;
+        simpl in Hspec.
+      destruct_spec Hspec; try_solve.
+      - unfold get_shadow_ctxt_spec_low; autounfold with sem.
+        unfold get_el2_data_start_spec. simpl.
+        repeat solve_refproof.
+        unfold load_RData; simpl.
+        unfold el2_data_lock_map; simpl. repeat solve_refproof.
+        autounfold with sem. unfold load_el2_data; simpl.
+        repeat solve_refproof.
+        unfold load_s_shadow_vcpu_context.
+        repeat solve_refproof.
+        repeat eexists; try unfold refrel; solve_equality.
+      - unfold get_shadow_ctxt_spec_low; autounfold with sem.
+        unfold get_el2_data_start_spec. simpl.
+        repeat solve_refproof.
+        unfold load_RData; simpl.
+        unfold el2_data_lock_map; simpl. repeat solve_refproof.
+        autounfold with sem. unfold load_el2_data; simpl.
+        repeat solve_refproof.
+        unfold load_s_shadow_vcpu_context.
+        repeat solve_refproof.
+        repeat eexists; try unfold refrel; solve_equality.
+      - unfold get_shadow_ctxt_spec_low; autounfold with sem.
+        unfold get_el2_data_start_spec. simpl.
+        repeat solve_refproof.
+        unfold load_RData; simpl.
+        unfold el2_data_lock_map; simpl. repeat solve_refproof.
+        autounfold with sem. unfold load_el2_data; simpl.
+        repeat solve_refproof.
+        unfold load_s_shadow_vcpu_context.
+        repeat solve_refproof.
+        repeat eexists; try unfold refrel; solve_equality.
+      - unfold get_shadow_ctxt_spec_low; autounfold with sem.
+        unfold get_el2_data_start_spec. simpl.
+        repeat solve_refproof.
+        unfold load_RData; simpl.
+        unfold el2_data_lock_map; simpl. repeat solve_refproof.
+        autounfold with sem. unfold load_el2_data; simpl.
+        repeat solve_refproof.
+        unfold load_s_shadow_vcpu_context.
+        repeat solve_refproof.
+        repeat eexists; try unfold refrel; solve_equality.
+      - unfold get_shadow_ctxt_spec_low; autounfold with sem.
+        unfold get_el2_data_start_spec. simpl.
+        repeat solve_refproof.
+        unfold load_RData; simpl.
+        unfold el2_data_lock_map; simpl. repeat solve_refproof.
+        autounfold with sem. unfold load_el2_data; simpl.
+        repeat solve_refproof.
+        unfold load_s_shadow_vcpu_context.
+        repeat solve_refproof.
+        repeat eexists; try unfold refrel; solve_equality.
+      - unfold get_shadow_ctxt_spec_low; autounfold with sem.
+        unfold get_el2_data_start_spec. simpl.
+        repeat solve_refproof.
+        unfold load_RData; simpl.
+        unfold el2_data_lock_map; simpl. repeat solve_refproof.
+        autounfold with sem. unfold load_el2_data; simpl.
+        repeat solve_refproof.
+        unfold load_s_shadow_vcpu_context.
+        repeat solve_refproof.
+        repeat eexists; try unfold refrel; solve_equality.
+      - unfold get_shadow_ctxt_spec_low; autounfold with sem.
+        unfold get_el2_data_start_spec. simpl.
+        repeat solve_refproof.
+        unfold load_RData; simpl.
+        unfold el2_data_lock_map; simpl. repeat solve_refproof.
+        autounfold with sem. unfold load_el2_data; simpl.
+        repeat solve_refproof.
+        unfold load_s_shadow_vcpu_context.
+        repeat solve_refproof.
         repeat eexists; try unfold refrel; solve_equality.
     Qed.
 
