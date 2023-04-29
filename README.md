@@ -131,9 +131,7 @@ This artifact also includes a completed coq proof for SeKVM, modified from the g
 You can enter this folder and validate the proof by compilation:
     
     cd verification/SeKVMProof/Proof
-    make -j4
-
-Note: Coq compilation may consume huge memory. Try smaller parallel number if out of memory.
+    make -j6
 
 ## Part 2. Converting LLVM IR to Coq
 
