@@ -181,18 +181,42 @@ benchmarks.
 performance evaluation at a time.  We are sorry for this inconvenience and
 appreciate your understanding.*
 
-We recommend using a terminal mutiplexer to access the serial port while running
-other workloads on the client.
+To simplify the evaluation, there is also a alternative Raspberry Pi running
+the vanilla Linux for the baseline benchmarks. The two Pi's are connected to
+the client via a private network and can be accessed with the following IP
+addresses:
+
+| Host Name | Description          | IP             |
+| --------- | -------------------- | -------------- |
+| sekvm     | SeKVM - host         | 192.168.50.134 |
+| kvm       | Vanilla KVM - host   | 192.168.50.246 |
+| vmsekvm   | SeKVM - VM           | 192.168.50.24  |
+| vmkvm     | Vanilla KVM - VM     | 192.168.50.26  |
+
+We recommend using a terminal mutiplexer to access the Pi while running other
+workloads on the client.
 
 Below is a simple instruction for GNU Screen.  You may refer to the manual page
 for more information.
 If you are familiar with GNU Screen or prefer to use your favorite terminal
-multiplexer, you can go ahead to [TBD](#TBD).
+multiplexer, you can go ahead to the [next section](#run-the-workloads-on-the-VM).
 
-You can create a screen session and access the serial port by
+You can create a screen session by
 
 ```
-screen /dev/ttyUSB0 115200
+screen
+```
+
+and then SSH to the Pi by
+
+```
+ssh root@sekvm
+```
+
+or
+
+```
+ssh root@kvm
 ```
 
 Then you can use `Ctrl-a` `c` to create a new window to continue working on the
@@ -215,18 +239,6 @@ screen -rd
 
 to resume your previous screen session.
 
-To simplify the evaluation, there is also a alternative Raspberry Pi running
-the vanilla Linux for the baseline benchmarks. You can connect the serial port
-of the baseline Pi via `ttyUSB1` by the following steps:
-
-1. Create a new window on your current screen session by `Ctrl-a c`.
-
-2. In the new window:
-
-```
-screen /dev/ttyUSB1 115200
-```
-
 ### Run the Workloads on the VM
 
 We provide the pre-compiled Linux kernel images of the vanilla Raspberry Pi,
@@ -238,19 +250,20 @@ You can compile those binaries following the instructions at [TBD](#TBD).
 
 #### Configure and Run the VM
 
-On the serial port, you need to configure the bridge netwrok by
+On the Pi host, you need to configure the bridge netwrok if it has not been
+created yet:
 
 ```
 ./net
 ```
 
-- If you are on `ttyUSB0`, run:
+- If you are on SeKVM, run:
 
 ```
 ./run-guest-sekvm.sh
 ```
 
-- If you are on `ttyUSB1`, run:
+- If you are on vanilla KVM, run:
 
 ```
 ./run-guest-kvm.sh
@@ -286,19 +299,26 @@ cd scripts
 
 After the benchmark is done, the results are saved in `[app].txt`.
 
+For local application, kernbench, you only can to run
+
+```
+./kern.sh IP
+```
+
 ### Run the Workloads on the Vanilla Linux
 
 To evaluate the baseline performance on the vanilla Linux, the Pi needs to capped
-to the same hardware capcity of the VM. On `ttyUSB1`, Run
+to the same hardware capcity of the VM. On the vanilla KVM host(`ssh root@kvm`),
+Run
 
 ```
 ./reboot-baseline.sh
 ```
 
-The script changes the boot option of the Pi and caps the Pi to two CPUs and 4G
+The script changes the boot option of the Pi, caps the Pi to two CPUs and 4G
 RAM, and reboot the Pi.
 
-When the Pi boots up, following the same instruction on [TBD](TBD)
+When the Pi boots up, following the same instruction on [here](#build-the-sekvm-software-stack)
 to run the benchmarks.
 
 
@@ -350,7 +370,7 @@ The SeKVM kernel will be compiled at `arch/arm64/boot/Image`.
 #### The Guest Kernel with Modified Virtio Driver
 
 A guest kernel with a modified Virtio front-end drvier is required for SeKVM
-guest. You can checkout the details in [this paper](TBD).
+guest. You can checkout the details in [this paper](https://www.usenix.org/system/files/sec21-li-shih-wei.pdf).
 
 Clone the source code:
 
