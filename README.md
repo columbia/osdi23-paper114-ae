@@ -245,7 +245,7 @@ We provide the pre-compiled Linux kernel images of the vanilla Raspberry Pi,
 SeKVM, the guest VM, as well as QEMU to run the VM.  VMs running under
 SeKVM require a guest Linux kernel with modified virtio driver, and a modified
 QEMU to support secure boot.  The source code is also provided in this repo.
-You can compile those binaries following the instructions at [TBD](#TBD).
+You can compile those binaries following the instructions at [Build the SeKVM Software Stack](#build-the-sekvm-software-stack).
 
 
 #### Configure and Run the VM
