@@ -177,9 +177,9 @@ The Raspberry Pi is connected to the machine by a serial port and a private
 network.  The machine is also served as the client for the client-server
 benchmarks.
 
-*Note: Due to hardware resource limitations, only one reviewer can run the
+**Note: Due to hardware resource limitations, only one reviewer can run the
 performance evaluation at a time.  We are sorry for this inconvenience and
-appreciate your understanding.*
+appreciate your understanding.**
 
 To simplify the evaluation, there is also a alternative Raspberry Pi running
 the vanilla Linux for the baseline benchmarks. The two Pi's are connected to
@@ -277,8 +277,8 @@ You can check the ip address of the VM by
 ip addr
 ```
 
-*Note: If only `lo0` shows up, it is most likely you forgot to run `./net.sh`.
-Shutdown the VM(`shutdown -p`), run `./net.sh` and run the VM again.*
+**Note: If only `lo0` shows up, it is most likely you forgot to run `./net.sh`.
+Shutdown the VM(`shutdown -p`), run `./net.sh` and run the VM again.**
 
 #### Run the Workloads
 
@@ -324,9 +324,9 @@ to run the benchmarks.
 
 ### Build the SeKVM Software Stack
 
-*Note: this instruction is for the reviewers to install and test SeKVM on their
+**Note: this instruction is for the reviewers to install and test SeKVM on their
 own Raspberry Pi. Please kindly do NOT update the kernel of the testbed to avoid
-troubles for the artifact evaluation ;).*
+troubles for the artifact evaluation ;).**
 
 #### Prerequisites
 
