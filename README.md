@@ -68,7 +68,7 @@ we first define `PROJ_NAME` and `PROJ_BASE`. `PROJ_BASE` is the root path of the
 set to `./ProofGen` so you will find the generated Coq project in `verification/SeKVMProof/ProofGen`.
 Then, the configuration file imports content from other files `datatypes.v`, `constant.v`, and `load_store.v`. They
 all located in `SeKVMProof/` folder. After that, we define a list of "Section"s. Each section corresponds to a layer.
-Noticeably, in each section, `LAYER_CODE` specifies the path to the SeKVM source code (parsed LLVM IR, see (Optionally)
+Noticeably, in each section, `LAYER_CODE` specifies the path to the SeKVM source code (parsed LLVM IR, see (Optional)
 below for more details).  and `LAYER_PRIMS` defines the functions (primitives) introduced in that layer. 
 We allow users to manually define specifications for primitives. For primitives without specifications, AutoV will 
 generate specifications given the known ones in the configuration file. You can find that we provide specifications 
