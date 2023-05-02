@@ -22,6 +22,8 @@ This part is tested on Ubuntu 22.04 x86_64, with 8 CPU cores and 32GB memory.  W
 
 You may need to add `~/.opam/4.13.1/bin/` to `PATH` manually. Try `coqc -v` to see if Coq is installed properly.
 
+Please also make sure the version of `python3` is 3.10.* or above.
+
 2. Clone the repo and enter `verification/` folder:
 
         git clone git@github.com:columbia/osdi23-paper114-ae.git --recursive
