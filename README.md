@@ -290,7 +290,7 @@ You can then start the server application by
 systemctl start [app]
 ```
 
-where `app` can be `apache`, `memcached` or `mysql`.
+where `app` can be `apache2`, `memcached`, `mongodb` or `mysql`.
 
 Then you can switch to the client window(`Ctrl-a "`) and run the workload by
 
