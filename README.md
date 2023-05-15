@@ -168,6 +168,11 @@ want to test on their own Raspberry Pi.
 
 ### Prelude
 
+| ![Alt text](./ae-topo-overview.png) |
+|:--:|
+| Fig.1 Overview of the Testbed Topology |
+
+Fig.1 shows the overview of the testbed topology.
 The testbed can be accessed through SSH. Please send your public key via HotCRP.
 Once we pulled your key, you can login with
 
@@ -282,7 +287,7 @@ ip addr
 **Note: If only `lo0` shows up, it is most likely you forgot to run `./net.sh`.
 Shutdown the VM(`shutdown -p`), run `./net.sh` and run the VM again.**
 
-#### Run the Workloads
+#### Run the Workloads on the VM
 
 You can then start the server application by
 
@@ -298,6 +303,20 @@ Then you can switch to the client window(`Ctrl-a "`) and run the workload by
 cd scripts
 ./[app].sh IP
 ```
+
+| ![Alt text](./ae-topo-SeKVM.png) |
+|:--:|
+| Fig.2 Topology of the VM on SeKVM |
+
+If you are benchmarking SeKVM performance, the topology is shown in Fig.2 and `IP` is
+192.168.50.24
+
+| ![Alt text](./ae-topo-Vanilla-KVM.png) |
+|:--:|
+| Fig.3 Topology of the VM on KVM |
+
+If you are benchmarking SeKVM performance, the topology is shown in Fig.3 and `IP` is
+192.168.50.26
 
 After the benchmark is done, the results are saved in `[app].txt`.
 
@@ -320,7 +339,13 @@ Run
 The script changes the boot option of the Pi, caps the Pi to two CPUs and 4G
 RAM, and reboot the Pi.
 
-When the Pi boots up, following the same instruction on [here](#build-the-sekvm-software-stack)
+| ![Alt text](./ae-topo-baseline.png) |
+|:--:|
+| Fig.3 Topology of the Baseline Benchmarks |
+
+As shown in Fig.3, the server-side applications run directly on the Raspberry at 192.168.50.246
+
+When the Pi boots up, following the same instruction [here](#build-the-sekvm-software-stack)
 to run the benchmarks.
 
 
