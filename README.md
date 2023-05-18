@@ -166,11 +166,53 @@ as described in the paper for reviewers to evaluate the performance.  We also
 provide instructions to build and install SeKVM from scratch in case reviewers
 want to test on their own Raspberry Pi.
 
-### Prelude
+### TL;DR
 
 | ![Alt text](./ae-topo-overview.png) |
 |:--:|
 | Fig.1 Overview of the Testbed Topology |
+
+We provide an automated script for running the performance evaluation and
+aggregating the normalized results.
+
+To run the benchmarks, SSH to the client
+```
+ssh osdiae@osdi.spoq.dev
+```
+
+The entire benchmarking takes about 2 hours, therefore we suggest using
+a terminal multiplexer(`screen` or `tmux`) to avoid losing the progress
+when the SSH session is accidentally disconnected.
+
+You can launch a screen session easily by
+
+```
+screen
+```
+
+and if you lost the current SSH session, you can login again and run
+
+```
+screen -rd
+```
+
+to resume the previous screen session.
+
+You can run the benchmarking script by
+
+```
+cd script
+./auto-all.sh
+```
+
+The script automatically runs all the benchmarks and displays the raw
+data on the terminal.
+After all the benchmarks are done, a prompt,
+`"Results are shown on the bottom. Press Ctrl-C to exit."`
+will show on the top of the terminal and you can exit the script.
+The normalized data will printed out.
+
+### Prelude
 
 Fig.1 shows the overview of the testbed topology.
 The testbed can be accessed through SSH. Please send your public key via HotCRP.
