@@ -212,6 +212,9 @@ After all the benchmarks are done, a prompt,
 will show on the top of the terminal and you can exit the script.
 The normalized data will printed out.
 
+***NOTE: Please kindly exit the script after the evaluation is done to release
+the machine to other reviewers.***
+
 ### Prelude
 
 Fig.1 shows the overview of the testbed topology.
