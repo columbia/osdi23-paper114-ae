@@ -202,7 +202,7 @@ You can run the benchmarking script by
 
 ```
 cd script
-./auto-all.sh
+./auto-all.py
 ```
 
 The script automatically runs all the benchmarks and displays the raw
