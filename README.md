@@ -1,4 +1,4 @@
-# Spoq: Scaling Machine-Checkable Verification for Large System Software
+# Spoq: Scaling Machine-Checkable Systems Verification in Coq
 
 This artifact consists of three parts. 
 The first part demonstrates how to leverage AutoV framework to generate specifications and proofs for SeKVM. 
